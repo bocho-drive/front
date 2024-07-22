@@ -7,6 +7,8 @@ import ChallengePage from './pages/ChallengePage';
 import TipPage from './pages/TipPage';
 import TipDetailPage from './pages/TipDetailPage';
 import AdminPage from './pages/AdminPage';
+import VideoPage from './pages/VideoPage';
+import MyPage from './pages/MyPage';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/challenge" element={<ChallengePage />} />
         <Route path="/tip" element={<TipPage />} />
         <Route path="/tip/:id" element={<TipDetailPage />} />
+        <Route path="/video" element={<VideoPage />} />
+        <Route path="/my" element={<MyPage />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
