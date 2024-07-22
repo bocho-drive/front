@@ -4,7 +4,7 @@ import * as S from '@/styles/index.style';
 
 const Header = () => {
   return (
-    <S.div.Row style={{ justifyContent: 'space-between', padding: '0px 20px' }}>
+    <S.div.Row style={{ justifyContent: 'space-between', width: '100%' }}>
       <S.div.Row>
         <img src="/icon.png" width={100} alt="logo" />
         <h3>보초운전</h3>
