@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface RowProps {
   $gap?: number;
   $wrap?: boolean;
+  $between?: boolean;
 }
 
 export const Row = styled.div<RowProps>`
@@ -12,6 +13,7 @@ export const Row = styled.div<RowProps>`
 
   ${({ $gap }) => $gap && `gap: ${$gap}px;`}
   ${({ $wrap }) => $wrap && `flex-wrap: wrap;`}
+  ${({ $between }) => $between && `justify-content: space-between;`}
 `;
 
 interface GridProps {
