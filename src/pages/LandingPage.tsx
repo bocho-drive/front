@@ -3,6 +3,7 @@ import PostCard from '@/components/organisms/PostCard';
 import Header from '@/components/organisms/Header';
 import ChallengeCard from '@/components/molecules/ChallengeCard';
 import MatchingCard from '@/components/molecules/MatchingCard';
+import TipCard from '@/components/molecules/TipCard';
 
 const LandingPage = () => {
   return (
@@ -17,7 +18,7 @@ const LandingPage = () => {
         </S.div.Row>
 
         <S.h.h1>운전고수가 되기 위해 도전해봐요</S.h.h1>
-        <S.div.Grid>
+        <S.div.Grid $repeat={3}>
           <ChallengeCard />
           <ChallengeCard />
           <ChallengeCard />
@@ -26,13 +27,21 @@ const LandingPage = () => {
         </S.div.Grid>
 
         <S.h.h1>운전 메이트를 찾아봐요</S.h.h1>
-        <S.div.Row style={{ justifyContent: 'space-between' }}>
+        <S.div.Row $gap={10} style={{ justifyContent: 'space-between' }}>
           <MatchingCard />
           <MatchingCard />
           <MatchingCard />
           <MatchingCard />
         </S.div.Row>
+
         <S.h.h1>인증된 팁을 공유드려요</S.h.h1>
+        <S.div.Grid $repeat={2}>
+          <TipCard />
+          <TipCard />
+          <TipCard />
+          <TipCard />
+        </S.div.Grid>
+
         <S.h.h1>영상으로 운전을 배워봐요</S.h.h1>
       </S.div.Column>
     </S.div.Container>

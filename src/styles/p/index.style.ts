@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { maxLineStyle } from '../css.style';
 
 interface PProps {
   $maxLines?: number;
@@ -9,12 +10,5 @@ export const P = styled.p<PProps>`
   line-height: 1.5;
   margin: 0;
 
-  ${({ $maxLines }) =>
-    $maxLines &&
-    `
-        display: -webkit-box;
-        -webkit-line-clamp: ${$maxLines};
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    `}
+  ${maxLineStyle}
 `;
