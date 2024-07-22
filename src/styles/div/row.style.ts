@@ -4,12 +4,13 @@ interface RowProps {
   $gap?: number;
   $wrap?: boolean;
   $between?: boolean;
+  $align?: 'center' | 'flex-start' | 'flex-end';
 }
 
 export const Row = styled.div<RowProps>`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: ${({ $align }) => $align || 'center'};
 
   ${({ $gap }) => $gap && `gap: ${$gap}px;`}
   ${({ $wrap }) => $wrap && `flex-wrap: wrap;`}

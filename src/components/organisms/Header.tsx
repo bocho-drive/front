@@ -7,7 +7,7 @@ const Header = () => {
     <S.div.Row style={{ justifyContent: 'space-between', width: '100%' }}>
       <S.div.Row>
         <img src="/icon.png" width={100} alt="logo" />
-        <h3>보초운전</h3>
+        <S.h.h2>보초운전</S.h.h2>
       </S.div.Row>
 
       <S.div.Row $gap={20}>

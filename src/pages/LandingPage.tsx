@@ -1,17 +1,14 @@
 import * as S from '@/styles/index.style';
 import PostCard from '@/components/organisms/PostCard';
-import Header from '@/components/organisms/Header';
 import ChallengeCard from '@/components/molecules/ChallengeCard';
 import MatchingCard from '@/components/molecules/MatchingCard';
 import TipCard from '@/components/molecules/TipCard';
 import VideoCard from '@/components/molecules/VideoCard';
-import Footer from '@/components/organisms/Footer';
+import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
 
 const LandingPage = () => {
   return (
-    <S.div.Container>
-      <Header />
-
+    <HeaderFooterLayout>
       <S.div.Column $gap={100} $width={80}>
         <S.div.Column $gap={20}>
           <S.h.h1>커뮤니티에서 만나요</S.h.h1>
@@ -62,9 +59,7 @@ const LandingPage = () => {
           </S.div.Row>
         </S.div.Column>
       </S.div.Column>
-
-      <Footer />
-    </S.div.Container>
+    </HeaderFooterLayout>
   );
 };
 
