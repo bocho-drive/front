@@ -1,11 +1,7 @@
 import * as S from '@/styles/index.style';
 
 const AdminPage = () => {
-  return (
-    <div>
-      <S.div.Container />
-    </div>
-  );
+  return <div></div>;
 };
 
 export default AdminPage;

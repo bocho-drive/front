@@ -1,7 +1,11 @@
-import React from 'react';
+import Header from '@/components/molecules/Header';
 
 const LandingPage = () => {
-  return <div>LandingPage</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 };
 
 export default LandingPage;
