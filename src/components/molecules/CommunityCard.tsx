@@ -4,7 +4,7 @@ const CommunityCard = () => {
   return (
     <S.div.Card>
       <S.div.Column $gap={20}>
-        <S.h.h3>제목</S.h.h3>
+        <S.h.H3>제목</S.h.H3>
         <S.p.P $maxLines={2}>내용</S.p.P>
         <S.div.Row $gap={10} $between>
           <S.div.Row $gap={10}>

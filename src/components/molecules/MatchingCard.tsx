@@ -11,7 +11,7 @@ const MatchingCard = (props: Props) => {
       <img src={imgSrc} />
 
       <S.div.Column $gap={10}>
-        <S.h.h2>운전 메이트 이름</S.h.h2>
+        <S.h.H2>운전 메이트 이름</S.h.H2>
         <S.p.P $maxLines={1}>운전 메이트 소개</S.p.P>
         <S.div.Row $gap={10}>
           <S.span.Badge>운전 메이트 나이</S.span.Badge>
