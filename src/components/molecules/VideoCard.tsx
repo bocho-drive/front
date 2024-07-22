@@ -9,7 +9,7 @@ const VideoCard = (props: Props) => {
   return (
     <S.div.Column $gap={20}>
       <img src={imgSrc} />
-      <S.h.h2 $maxLines={2}>영상 제목</S.h.h2>
+      <S.h.H2 $maxLines={2}>영상 제목</S.h.H2>
     </S.div.Column>
   );
 };

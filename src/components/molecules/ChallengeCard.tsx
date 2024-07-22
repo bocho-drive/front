@@ -12,7 +12,7 @@ const ChallengeCard = (props: Props) => {
       <S.div.Row $gap={10}>
         <img src={imgSrc} />
         <S.div.Column $gap={10}>
-          <S.h.h2>챌린지 이름</S.h.h2>
+          <S.h.H2>챌린지 이름</S.h.H2>
           <S.p.P>챌린지 설명</S.p.P>
           <S.div.Row $gap={10}>
             <S.span.Badge>챌린지 기간</S.span.Badge>
