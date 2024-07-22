@@ -5,18 +5,16 @@ interface RowProps {
   $wrap?: boolean;
   $between?: boolean;
   $align?: 'center' | 'flex-start' | 'flex-end';
-  $justify?: 'center' | 'flex-start' | 'flex-end';
 }
 
 export const Row = styled.div<RowProps>`
   display: flex;
   flex-direction: row;
+  align-items: ${({ $align }) => $align || 'center'};
 
   ${({ $gap }) => $gap && `gap: ${$gap}px;`}
   ${({ $wrap }) => $wrap && `flex-wrap: wrap;`}
   ${({ $between }) => $between && `justify-content: space-between;`}
-  ${({ $justify }) => $justify && `justify-content: ${$justify};`}
-  ${({ $align }) => $align && `align-items: ${$align};`}
 `;
 
 interface GridProps {

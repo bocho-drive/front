@@ -4,5 +4,3 @@ export * as button from './button/index.style';
 export * as h from './heading/index.style';
 export * as span from './span/index.style';
 export * as p from './p/index.style';
-export * as hr from './hr/index.style';
-export * as textarea from './textarea/index.style';

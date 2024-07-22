@@ -10,7 +10,7 @@ const TipCard = (props: Props) => {
     <S.div.Row $gap={20}>
       <img src={imgSrc} />
       <S.div.Column $gap={20} $width={100}>
-        <S.h.H2 $maxLines={2}>팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.</S.h.H2>
+        <S.h.h2 $maxLines={2}>팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.</S.h.h2>
         <S.div.Row style={{ justifyContent: 'space-between' }}>
           <span>2021.09.01</span>
           <S.span.Badge>5mins read</S.span.Badge>

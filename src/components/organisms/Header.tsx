@@ -4,10 +4,10 @@ import * as S from '@/styles/index.style';
 
 const Header = () => {
   return (
-    <S.div.Row style={{ width: '100%' }} $between $align="center">
-      <S.div.Row $align="center">
+    <S.div.Row style={{ justifyContent: 'space-between', width: '100%' }}>
+      <S.div.Row>
         <img src="/icon.png" width={100} alt="logo" />
-        <S.h.H2>보초운전</S.h.H2>
+        <S.h.h2>보초운전</S.h.h2>
       </S.div.Row>
 
       <S.div.Row $gap={20}>
