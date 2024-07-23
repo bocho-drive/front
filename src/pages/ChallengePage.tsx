@@ -1,11 +1,13 @@
+import Portal from '@/components/atoms/Portal/Portal';
 import ChallengeCard from '@/components/molecules/ChallengeCard';
-import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
+import ChallengeModal from '@/components/molecules/ChallengeModal';
+import DriveLayout from '@/components/templates/DriveLayout';
 import * as S from '@/styles/index.style';
 
 const ChallengePage = () => {
   return (
-    <HeaderFooterLayout>
-      <S.div.Column $width={100} $gap={20}>
+    <DriveLayout>
+      <S.div.Column $gap={20}>
         <S.h.H1>운전 챌린지</S.h.H1>
         <S.p.P>차근차근 시도를 통해 운전고수에 도전해보세요.</S.p.P>
 
@@ -35,7 +37,11 @@ const ChallengePage = () => {
         <ChallengeCard />
         <ChallengeCard />
       </S.div.Column>
-    </HeaderFooterLayout>
+
+      <Portal>
+        <ChallengeModal />
+      </Portal>
+    </DriveLayout>
   );
 };
 

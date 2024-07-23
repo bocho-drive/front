@@ -9,7 +9,7 @@ import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
 const LandingPage = () => {
   return (
     <HeaderFooterLayout>
-      <S.div.Column $gap={100} $width={80}>
+      <S.div.Column $gap={100}>
         <S.div.Column $gap={20}>
           <S.h.H1>커뮤니티에서 만나요</S.h.H1>
           <S.div.Row $gap={20}>
