@@ -1,5 +1,6 @@
 export * from './avatar.style';
 export * from './text.style';
+export * from './tab.style';
 
 import styled, { css } from 'styled-components';
 
@@ -39,8 +40,6 @@ export const Button = styled.button<ButtonProps & SizeProps>`
         return mediumStyle;
       case 'large':
         return largeStyle;
-      default:
-        return mediumStyle;
     }
   }}
 
@@ -68,6 +67,7 @@ const smallStyle = css<SizeProps>`
       height: 30px;
     `}
   font-size: 0.8rem;
+  padding: 5px 10px;
 `;
 
 const mediumStyle = css<SizeProps>`
@@ -78,6 +78,7 @@ const mediumStyle = css<SizeProps>`
       height: 40px;
     `}
   font-size: 1rem;
+  padding: 10px 20px;
 `;
 
 const largeStyle = css<SizeProps>`
@@ -88,4 +89,5 @@ const largeStyle = css<SizeProps>`
       height: 50px;
     `}
   font-size: 1.2rem;
+  padding: 15px 30px;
 `;
