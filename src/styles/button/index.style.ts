@@ -1,3 +1,6 @@
+export * from './avatar.style';
+export * from './text.style';
+
 import styled, { css } from 'styled-components';
 
 interface ButtonProps {
@@ -6,6 +9,7 @@ interface ButtonProps {
   $outline?: boolean;
   $padding?: number;
   $height?: number;
+  $fullWidth?: boolean;
 }
 interface SizeProps {
   $size?: 'small' | 'medium' | 'large';
@@ -19,6 +23,7 @@ export const Button = styled.button<ButtonProps & SizeProps>`
   cursor: pointer;
   ${({ $height }) => $height && `height: ${$height}px;`}
   ${({ $padding = 10 }) => $padding && `padding: ${$padding}px;`}
+  ${({ $fullWidth }) => $fullWidth && `width: 100%;`}
 
   ${({ $circle }) =>
     $circle &&

@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-export const Card = styled.div`
-  padding: 16px;
+interface CardProps {
+  $padding?: number;
+}
+
+export const Card = styled.div<CardProps>`
+  ${({ $padding = 16 }) => $padding && `padding: ${$padding}px;`}
   border: 1px solid lightgray;
   border-radius: 8px;
 `;

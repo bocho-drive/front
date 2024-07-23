@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import * as S from '@/styles/index.style';
 import AuthModal from './AuthModal/AuthModal';
 import { useAuthModal } from './AuthModal/useAuthModal';
+import { useAuth } from '@/@features/Auth/useAuth';
+import UserProfile from '../molecules/UserProfile';
 
 const Header = () => {
   const handleOpen = useAuthModal((state) => state.handleOpen);
+  const isAuth = useAuth((state) => state.isAuth);
 
   return (
     <S.div.Row $width={100} $justify="center">
@@ -22,7 +25,7 @@ const Header = () => {
           </S.div.Row>
         </S.div.Row>
 
-        <S.button.Button onClick={handleOpen}>로그인</S.button.Button>
+        {isAuth ? <UserProfile /> : <S.button.Button onClick={handleOpen}>로그인</S.button.Button>}
         <AuthModal />
       </S.div.Row>
     </S.div.Row>

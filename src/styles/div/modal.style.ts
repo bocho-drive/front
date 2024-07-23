@@ -19,3 +19,18 @@ export const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 998;
 `;
+
+interface RelativeModalProps {
+  $top?: number;
+  $left?: number;
+  $right?: number;
+  $bottom?: number;
+}
+export const RelativeModal = styled.div<RelativeModalProps>`
+  position: fixed;
+  z-index: 999;
+  ${({ $top }) => $top !== 0 && `top: ${$top}px;`}
+  ${({ $left }) => $left !== 0 && `left: ${$left}px;`}
+  ${({ $right }) => $right !== 0 && `right: ${$right}px;`}
+  ${({ $bottom }) => $bottom !== 0 && `bottom: ${$bottom}px;`}
+`;
