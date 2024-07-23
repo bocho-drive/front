@@ -7,5 +7,6 @@ interface HrProps {
 export const Hr = styled.hr<HrProps>`
   height: ${({ $height }) => $height || 1}px;
   width: 100%;
-  background-color: lightgray;
+  background-color: #cbd5e1;
+  flex: 1;
 `;

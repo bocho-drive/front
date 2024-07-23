@@ -1,4 +1,3 @@
-import Portal from '@/components/atoms/Portal/Portal';
 import VideoCard from '@/components/molecules/VideoCard';
 import VideoModal from '@/components/molecules/VideoModal';
 import DriveLayout from '@/components/templates/DriveLayout';
@@ -26,9 +25,7 @@ const VideoPage = () => {
         </S.div.Grid>
       </S.div.Column>
 
-      <Portal>
-        <VideoModal />
-      </Portal>
+      <VideoModal />
     </DriveLayout>
   );
 };

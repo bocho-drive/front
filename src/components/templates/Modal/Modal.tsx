@@ -2,24 +2,24 @@ import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 import * as S from '@/styles/index.style';
-import { usePortal } from './usePortal';
+import { useModal } from './useModal';
 
-const rootId = 'portal-target';
+const docId = 'modal-target';
 
 interface Props {
   children: React.ReactNode;
 }
 
-const Portal = ({ children }: Props) => {
-  const isOpen = usePortal((state) => state.isOpen);
-  const handleClose = usePortal((state) => state.handleClose);
+const Modal = ({ children }: Props) => {
+  const isOpen = useModal((state) => state.isOpen);
+  const handleClose = useModal((state) => state.handleClose);
   // portal-root 요소를 찾습니다.
-  const portalRoot = document.getElementById(rootId) as HTMLElement;
-  const portalRef = useRef<HTMLDivElement>(null);
+  const modalRoot = document.getElementById(docId) as HTMLElement;
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
-      if (portalRef.current && !portalRef.current.contains(e.target as Node)) {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         handleClose();
       }
     };
@@ -29,17 +29,17 @@ const Portal = ({ children }: Props) => {
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
-  }, []);
+  }, [handleClose]);
 
   // isOpen이 true일 때만 포털을 렌더링합니다.
   return isOpen
     ? ReactDOM.createPortal(
         <S.div.Overlay>
-          <div ref={portalRef}>{children}</div>
+          <div ref={modalRef}>{children}</div>
         </S.div.Overlay>,
-        portalRoot
+        modalRoot
       )
     : null;
 };
 
-export default Portal;
+export default Modal;

@@ -9,7 +9,7 @@ interface Actions {
   handleClose: () => void;
 }
 
-export const usePortal = create<Props & Actions>((set) => ({
+export const useModal = create<Props & Actions>((set) => ({
   isOpen: false,
   handleOpen: () => set({ isOpen: true }),
   handleClose: () => set({ isOpen: false }),

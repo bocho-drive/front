@@ -1,12 +1,12 @@
 import * as S from '@/styles/index.style';
-import { usePortal } from '../atoms/Portal/usePortal';
+import { useModal } from '../templates/Modal/useModal';
 
 interface Props {
   imgSrc?: string;
 }
 
 const VideoCard = (props: Props) => {
-  const handleOpen = usePortal((state) => state.handleOpen);
+  const handleOpen = useModal((state) => state.handleOpen);
 
   const { imgSrc = 'https://via.placeholder.com/300x400' } = props;
   return (

@@ -1,5 +1,5 @@
 import * as S from '@/styles/index.style';
-import { usePortal } from '../atoms/Portal/usePortal';
+import { useModal } from '../templates/Modal/useModal';
 
 interface Props {
   imgSrc?: string;
@@ -8,7 +8,7 @@ interface Props {
 
 const ChallengeCard = (props: Props) => {
   const { imgSrc = 'https://via.placeholder.com/150', status = 'NOT_STARTED' } = props; // 기본값으로 JSONPlaceholder 이미지 URL 설정
-  const handleOpen = usePortal((state) => state.handleOpen);
+  const handleOpen = useModal((state) => state.handleOpen);
 
   return (
     <S.div.Card onClick={handleOpen}>

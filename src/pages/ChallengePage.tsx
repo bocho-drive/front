@@ -1,4 +1,3 @@
-import Portal from '@/components/atoms/Portal/Portal';
 import ChallengeCard from '@/components/molecules/ChallengeCard';
 import ChallengeModal from '@/components/molecules/ChallengeModal';
 import DriveLayout from '@/components/templates/DriveLayout';
@@ -38,9 +37,7 @@ const ChallengePage = () => {
         <ChallengeCard />
       </S.div.Column>
 
-      <Portal>
-        <ChallengeModal />
-      </Portal>
+      <ChallengeModal />
     </DriveLayout>
   );
 };

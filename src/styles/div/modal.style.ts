@@ -7,6 +7,7 @@ export const FixedModal = styled.div`
   transform: translate(-50%, -50%);
   z-index: 999;
   background-color: white;
+  border-radius: 10px;
 `;
 
 export const Overlay = styled.div`
