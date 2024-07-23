@@ -6,6 +6,7 @@ interface RowProps {
   $between?: boolean;
   $align?: 'center' | 'flex-start' | 'flex-end';
   $justify?: 'center' | 'flex-start' | 'flex-end';
+  $width?: number;
 }
 
 export const Row = styled.div<RowProps>`
@@ -17,6 +18,7 @@ export const Row = styled.div<RowProps>`
   ${({ $between }) => $between && `justify-content: space-between;`}
   ${({ $justify }) => $justify && `justify-content: ${$justify};`}
   ${({ $align }) => $align && `align-items: ${$align};`}
+  ${({ $width }) => $width && `width: ${$width}%;`}
 `;
 
 interface GridProps {
