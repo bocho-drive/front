@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-export const FixedModal = styled.div`
+interface FixedModalProps {
+  $width?: number;
+}
+
+export const FixedModal = styled.div<FixedModalProps>`
+  ${({ $width }) => $width && `width: ${$width}px;`}
   position: fixed;
   top: 50%;
   left: 50%;
