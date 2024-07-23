@@ -3,14 +3,14 @@ import HeaderFooterLayout from './HeaderFooterLayout';
 import { ReactNode } from 'react';
 
 interface CommunityProps {
-  main: ReactNode;
+  children: ReactNode;
 }
 
-const CommunityLayout = ({ main }: CommunityProps) => {
+const CommunityLayout = ({ children }: CommunityProps) => {
   return (
     <HeaderFooterLayout>
       <S.div.Row $gap={50} $width={100}>
-        <S.div.Column $width={80}>{main}</S.div.Column>
+        <S.div.Column $width={80}>{children}</S.div.Column>
 
         <S.div.Column $width={20} $gap={10}>
           <S.button.Button>글쓰기</S.button.Button>

@@ -6,7 +6,11 @@ const CommunityDetailPage = () => {
   const { id } = useParams();
   console.log({ id });
 
-  return <CommunityLayout main={<CommunityDetail />} />;
+  return (
+    <CommunityLayout>
+      <CommunityDetail />
+    </CommunityLayout>
+  );
 };
 
 export default CommunityDetailPage;
