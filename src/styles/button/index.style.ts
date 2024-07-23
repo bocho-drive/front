@@ -25,14 +25,20 @@ export const Button = styled.button<ButtonProps>`
   }}
 `;
 
+export const IconButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
 const smallStyle = css`
-  font-size: 14px;
+  font-size: 0.8rem;
 `;
 
 const mediumStyle = css`
-  font-size: 16px;
+  font-size: 1rem;
 `;
 
 const largeStyle = css`
-  font-size: 18px;
+  font-size: 1.2rem;
 `;
