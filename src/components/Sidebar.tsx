@@ -1,18 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import * as S from '@/styles/index.style';
 
-const SidebarContainer = styled.div`
-  width: 200px;
-  padding: 20px;
-  border-right: 1px solid #ccc;
-`;
-
-const Sidebar: React.FC = () => {
+const Sidebar = () => {
   return (
-    <SidebarContainer>
+    <S.div.SidebarContainer>
       <h2>게시판 1</h2>
       <h2>게시판 2</h2>
-    </SidebarContainer>
+    </S.div.SidebarContainer>
   );
 };
 

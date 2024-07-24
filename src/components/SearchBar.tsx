@@ -1,21 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
+import * as S from '@/styles/index.style';
 
-const SearchBarContainer = styled.div`
-  margin-bottom: 20px;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-`;
-
-const SearchBar: React.FC = () => {
+const SearchBar = () => {
   return (
-    <SearchBarContainer>
-      <Input type="text" placeholder="글 제목 or 내용 검색창" />
-    </SearchBarContainer>
+    <S.div.SearchBarContainer>
+      <S.input.Input type="text" placeholder="글 제목 or 내용 검색창" />
+    </S.div.SearchBarContainer>
   );
 };
 
