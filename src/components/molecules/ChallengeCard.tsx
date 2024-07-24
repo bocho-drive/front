@@ -20,14 +20,18 @@ const ChallengeCard = (props: Props) => {
           </S.div.Gap>
         )}
 
-        <S.div.Column $gap={10}>
-          <S.h.H2>챌린지 이름</S.h.H2>
-          <S.p.P>챌린지 설명</S.p.P>
-          <S.div.Row $gap={10}>
-            <S.span.Badge>챌린지 기간</S.span.Badge>
-            <S.span.Badge>챌린지 기간</S.span.Badge>
-          </S.div.Row>
-          <span>104명 도전완료</span>
+        <S.div.Column $gap={10} $justify="space-between">
+          <S.div.Column>
+            <S.h.H2>챌린지 이름</S.h.H2>
+            <S.p.P $maxLines={2}>챌린지 설명</S.p.P>
+          </S.div.Column>
+          <S.div.Column>
+            <S.div.Row $gap={10}>
+              <S.span.Badge>챌린지 기간</S.span.Badge>
+              <S.span.Badge>챌린지 기간</S.span.Badge>
+            </S.div.Row>
+            <S.p.P>104명 도전완료</S.p.P>
+          </S.div.Column>
         </S.div.Column>
       </S.div.Row>
     </S.div.Card>

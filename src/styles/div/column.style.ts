@@ -4,7 +4,7 @@ interface ColumnProps {
   $gap?: number;
   $width?: number;
   $align?: 'center' | 'flex-start' | 'flex-end';
-  $justify?: 'center' | 'flex-start' | 'flex-end';
+  $justify?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
   $padding?: number;
 }
 
