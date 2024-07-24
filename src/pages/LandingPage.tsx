@@ -1,10 +1,10 @@
 import * as S from '@/styles/index.style';
-import PostCard from '@/components/organisms/PostCard';
 import ChallengeCard from '@/components/molecules/ChallengeCard';
 import MatchingCard from '@/components/molecules/MatchingCard';
 import TipCard from '@/components/molecules/TipCard';
 import VideoCard from '@/components/molecules/VideoCard';
 import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
+import CommunityCommentCard from '@/components/organisms/CommunityCommentCard';
 
 const LandingPage = () => {
   return (
@@ -13,8 +13,8 @@ const LandingPage = () => {
         <S.div.Column $gap={20}>
           <S.h.H1>커뮤니티에서 만나요</S.h.H1>
           <S.div.Row $gap={20}>
-            <PostCard />
-            <PostCard />
+            <CommunityCommentCard />
+            <CommunityCommentCard />
           </S.div.Row>
         </S.div.Column>
 

@@ -2,8 +2,9 @@ import * as S from '@/styles/index.style';
 import CommentIcon from '@/assets/icons/comment.svg?react';
 import LikeIcon from '@/assets/icons/like.svg?react';
 import SimpleComment from '../molecules/SimpleComment';
+import LineText from '../atoms/LineText';
 
-const PostCard = () => {
+const CommunityCommentCard = () => {
   return (
     <S.div.Column $gap={10}>
       <S.div.Card>
@@ -16,15 +17,17 @@ const PostCard = () => {
           </S.p.P>
 
           <S.div.Row $gap={10}>
-            <S.div.Row $gap={5}>
+            <S.div.Row $gap={5} $align="center">
               <CommentIcon />
-              <span>4</span>
+              <S.p.P>4</S.p.P>
             </S.div.Row>
-            <S.div.Row $gap={5}>
+            <S.div.Row $gap={5} $align="center">
               <LikeIcon />
-              <span>4</span>
+              <S.p.P>4</S.p.P>
             </S.div.Row>
           </S.div.Row>
+
+          <LineText />
 
           <S.div.Column $gap={20}>
             <SimpleComment />
@@ -36,4 +39,4 @@ const PostCard = () => {
   );
 };
 
-export default PostCard;
+export default CommunityCommentCard;

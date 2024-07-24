@@ -11,13 +11,15 @@ const Header = () => {
   const isAuth = useAuth((state) => state.isAuth);
 
   return (
-    <S.div.Row $width={100} $justify="center">
+    <S.div.Row $width={100} $justify="center" style={{ height: '100px' }}>
       <S.div.Row $width={90} $align="center" $between>
         <S.div.Row $gap={100} $align="center">
-          <S.div.Row $align="center">
-            <img src="/icon.png" width={100} alt="logo" />
-            <S.h.H2>보초운전</S.h.H2>
-          </S.div.Row>
+          <Link to="/">
+            <S.div.Row $align="center" $gap={20}>
+              <img src="/icon.png" alt="logo" width="70" />
+              <S.h.H2>보초운전</S.h.H2>
+            </S.div.Row>
+          </Link>
 
           <S.div.Row $gap={20}>
             <Link to="/community">커뮤니티</Link>

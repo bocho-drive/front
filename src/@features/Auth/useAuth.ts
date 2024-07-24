@@ -7,5 +7,5 @@ interface Props {
 interface Actions {}
 
 export const useAuth = create<Props & Actions>(() => ({
-  isAuth: true,
+  isAuth: false,
 }));
