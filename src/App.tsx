@@ -6,11 +6,11 @@ import DrivePage from './pages/DrivePage';
 import ChallengePage from './pages/ChallengePage';
 import TipPage from './pages/TipPage';
 import TipDetailPage from './pages/TipDetailPage';
-import AdminPage from './pages/AdminPage';
 import VideoPage from './pages/VideoPage';
 import MyPage from './pages/MyPage';
 import Provider from './config/Provider';
 import MatchingPage from './pages/MatchingPage';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
