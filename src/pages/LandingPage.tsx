@@ -20,7 +20,7 @@ const LandingPage = () => {
 
         <S.div.Column $gap={20}>
           <S.h.H1>운전고수가 되기 위해 도전해봐요</S.h.H1>
-          <S.div.Row $gap={10} $itemMinWidth={400} $wrap>
+          <S.div.Row $gap={10} $itemMinWidth={400} $itemMaxWidth={150} $wrap>
             <ChallengeCard />
             <ChallengeCard />
             <ChallengeCard />
@@ -32,7 +32,7 @@ const LandingPage = () => {
 
         <S.div.Column $gap={20}>
           <S.h.H1>운전 메이트를 찾아봐요</S.h.H1>
-          <S.div.Row $gap={10} $overflow="scroll">
+          <S.div.Row $gap={10} $overflow="scroll" $itemMaxWidth={300}>
             <MatchingCard />
             <MatchingCard />
             <MatchingCard />
@@ -52,7 +52,7 @@ const LandingPage = () => {
 
         <S.div.Column $gap={20}>
           <S.h.H1>영상으로 운전을 배워봐요</S.h.H1>
-          <S.div.Row $gap={20} $overflow="scroll">
+          <S.div.Row $gap={20} $overflow="scroll" $itemMaxWidth={300}>
             <VideoCard />
             <VideoCard />
             <VideoCard />
