@@ -4,11 +4,11 @@ import CommunityCard from '../molecules/CommunityCard';
 const CommunityCardList = () => {
   return (
     <S.div.Column $gap={20}>
-      <CommunityCard />
-      <CommunityCard />
-      <CommunityCard />
-      <CommunityCard />
-      <CommunityCard />
+      <CommunityCard id={1} />
+      <CommunityCard id={1} />
+      <CommunityCard id={1} />
+      <CommunityCard id={1} />
+      <CommunityCard id={1} />
     </S.div.Column>
   );
 };

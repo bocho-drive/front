@@ -1,6 +1,7 @@
 import * as S from '@/styles/index.style';
 import CommentForm from '../molecules/CommentForm';
 import Comment from '../molecules/Comment';
+import { Link } from 'react-router-dom';
 
 const CommunityDetail = () => {
   return (
@@ -37,7 +38,9 @@ const CommunityDetail = () => {
       <S.div.Row $gap={10} $justify="flex-start">
         <S.button.Button>이전글</S.button.Button>
         <S.button.Button>다음글</S.button.Button>
-        <S.button.Button>목록으로</S.button.Button>
+        <Link to="/community">
+          <S.button.Button>목록으로</S.button.Button>
+        </Link>
       </S.div.Row>
 
       <S.hr.Hr />
