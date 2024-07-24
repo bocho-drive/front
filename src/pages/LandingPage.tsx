@@ -12,7 +12,7 @@ const LandingPage = () => {
       <S.div.Column $gap={100}>
         <S.div.Column $gap={20}>
           <S.h.H1>커뮤니티에서 만나요</S.h.H1>
-          <S.div.Row $gap={20}>
+          <S.div.Row $gap={20} $itemMaxWidth={600} $wrap>
             <CommunityCommentCard />
             <CommunityCommentCard />
           </S.div.Row>
@@ -20,18 +20,19 @@ const LandingPage = () => {
 
         <S.div.Column $gap={20}>
           <S.h.H1>운전고수가 되기 위해 도전해봐요</S.h.H1>
-          <S.div.Grid $repeat={3}>
+          <S.div.Row $gap={10} $itemMinWidth={400} $wrap>
             <ChallengeCard />
             <ChallengeCard />
             <ChallengeCard />
             <ChallengeCard />
             <ChallengeCard />
-          </S.div.Grid>
+            <ChallengeCard />
+          </S.div.Row>
         </S.div.Column>
 
         <S.div.Column $gap={20}>
           <S.h.H1>운전 메이트를 찾아봐요</S.h.H1>
-          <S.div.Row $gap={10}>
+          <S.div.Row $gap={10} $overflow="scroll">
             <MatchingCard />
             <MatchingCard />
             <MatchingCard />
@@ -41,17 +42,19 @@ const LandingPage = () => {
 
         <S.div.Column $gap={20}>
           <S.h.H1>인증된 팁을 공유드려요</S.h.H1>
-          <S.div.Grid $repeat={2}>
+          <S.div.Row $gap={10} $itemMaxWidth={600} $wrap>
             <TipCard />
             <TipCard />
             <TipCard />
             <TipCard />
-          </S.div.Grid>
+          </S.div.Row>
         </S.div.Column>
 
         <S.div.Column $gap={20}>
           <S.h.H1>영상으로 운전을 배워봐요</S.h.H1>
-          <S.div.Row $gap={20} $between>
+          <S.div.Row $gap={20} $overflow="scroll">
+            <VideoCard />
+            <VideoCard />
             <VideoCard />
             <VideoCard />
             <VideoCard />

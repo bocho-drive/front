@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components';
+import { maxLineStyle, MaxLineStyleProps } from '../css.style';
 
 interface BadgeProps {
   $color?: 'primary' | 'secondary' | 'warning';
   $size?: 'small' | 'medium' | 'large';
 }
 
-export const Badge = styled.span<BadgeProps>`
+export const Badge = styled.span<BadgeProps & MaxLineStyleProps>`
   width: fit-content;
   display: inline-block;
 
@@ -14,6 +15,7 @@ export const Badge = styled.span<BadgeProps>`
   font-size: 12px;
   font-weight: bold;
 
+  ${maxLineStyle}
   background-color: ${({ theme, $color }) => theme.colors[$color || 'primary']};
   ${({ $size = 'medium' }) => {
     switch ($size) {

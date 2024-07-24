@@ -26,9 +26,9 @@ const ChallengeCard = (props: Props) => {
             <S.p.P $maxLines={2}>챌린지 설명</S.p.P>
           </S.div.Column>
           <S.div.Column>
-            <S.div.Row $gap={10}>
-              <S.span.Badge>챌린지 기간</S.span.Badge>
-              <S.span.Badge>챌린지 기간</S.span.Badge>
+            <S.div.Row $gap={10} $overflow="hidden">
+              <S.span.Badge $maxLines={1}>챌린지 기간</S.span.Badge>
+              <S.span.Badge $maxLines={1}>챌린지 기간</S.span.Badge>
             </S.div.Row>
             <S.p.P>104명 도전완료</S.p.P>
           </S.div.Column>
