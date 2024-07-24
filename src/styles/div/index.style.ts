@@ -8,9 +8,9 @@ export * from './modal.style';
 
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-`;
+// export const Container = styled.div`
+//   display: flex;
+// `;
 
 export const MainContent = styled.div`
   flex: 1;
