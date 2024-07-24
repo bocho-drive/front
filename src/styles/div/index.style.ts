@@ -26,3 +26,23 @@ export const SidebarContainer = styled.div`
   padding: 20px;
   border-right: 1px solid #ccc;
 `;
+
+export const PostListContainer = styled.div`
+  border: 1px solid #ccc;
+`;
+
+export const PostItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+`;
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+`;

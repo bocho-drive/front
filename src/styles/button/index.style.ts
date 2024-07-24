@@ -91,3 +91,7 @@ const largeStyle = css<SizeProps>`
   font-size: 1.2rem;
   padding: 15px 30px;
 `;
+
+export const AdminButton = styled.button`
+  margin-left: 10px;
+`;

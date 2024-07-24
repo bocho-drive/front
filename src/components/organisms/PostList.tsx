@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import PostListHeader from './PostListHeader';
+import { useState } from 'react';
+import PostListHeader from '../molecules/PostListHeader';
+
+import * as S from '@/styles/index.style';
 
 interface Post {
   id: number;
@@ -10,23 +11,7 @@ interface Post {
   isChecked: boolean;
 }
 
-const PostListContainer = styled.div`
-  border: 1px solid #ccc;
-`;
-
-const PostItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-`;
-
-const Checkbox = styled.input`
-  margin-right: 10px;
-`;
-
-const PostList: React.FC = () => {
+const PostList = () => {
   const [posts, setPosts] = useState<Post[]>([
     { id: 1, title: 'Post 1', likes: 10, comments: 2, isChecked: false },
     { id: 2, title: 'Post 2', likes: 5, comments: 4, isChecked: false },
@@ -47,44 +32,34 @@ const PostList: React.FC = () => {
   };
 
   const handleDelete = () => {
-    const remainingPosts = posts.filter(post => !post.isChecked);
+    const remainingPosts = posts.filter((post) => !post.isChecked);
     setPosts(remainingPosts);
   };
 
   const handleToggleAll = (checked: boolean) => {
-    const updatedPosts = posts.map(post => ({ ...post, isChecked: checked }));
+    const updatedPosts = posts.map((post) => ({ ...post, isChecked: checked }));
     setPosts(updatedPosts);
   };
 
   const handleToggle = (id: number) => {
-    const updatedPosts = posts.map(post => 
-      post.id === id ? { ...post, isChecked: !post.isChecked } : post
-    );
+    const updatedPosts = posts.map((post) => (post.id === id ? { ...post, isChecked: !post.isChecked } : post));
     setPosts(updatedPosts);
   };
 
   return (
-    <PostListContainer>
-      <PostListHeader 
-        onSort={handleSort}
-        onDelete={handleDelete}
-        onToggleAll={handleToggleAll}
-      />
-      {posts.map(post => (
-        <PostItem key={post.id}>
+    <S.div.PostListContainer>
+      <PostListHeader onSort={handleSort} onDelete={handleDelete} onToggleAll={handleToggleAll} />
+      {posts.map((post) => (
+        <S.div.PostItem key={post.id}>
           <div>
-            <Checkbox
-              type="checkbox"
-              checked={post.isChecked}
-              onChange={() => handleToggle(post.id)}
-            />
+            <S.input.Checkbox type="checkbox" checked={post.isChecked} onChange={() => handleToggle(post.id)} />
             {post.title}
           </div>
           <div>추천수: {post.likes}</div>
           <div>댓글수: {post.comments}</div>
-        </PostItem>
+        </S.div.PostItem>
       ))}
-    </PostListContainer>
+    </S.div.PostListContainer>
   );
 };
 

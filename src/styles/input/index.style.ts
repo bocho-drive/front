@@ -39,3 +39,7 @@ const largeStyle = css`
   height: 50px;
   font-size: 18px;
 `;
+
+export const Checkbox = styled.input`
+  margin-right: 10px;
+`;
