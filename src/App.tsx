@@ -11,6 +11,7 @@ import VideoPage from './pages/VideoPage';
 import MyPage from './pages/MyPage';
 import Provider from './config/Provider';
 import MatchingPage from './pages/MatchingPage';
+import CommunityNewPage from './pages/CommunityNewPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/community/:id" element={<CommunityDetailPage />} />
+          <Route path="/community/new" element={<CommunityNewPage />} />
           <Route path="/drive" element={<DrivePage />} />
           <Route path="/challenge" element={<ChallengePage />} />
           <Route path="/matching" element={<MatchingPage />} />
