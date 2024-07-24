@@ -31,7 +31,7 @@ const LandingPage = () => {
 
         <S.div.Column $gap={20}>
           <S.h.H1>운전 메이트를 찾아봐요</S.h.H1>
-          <S.div.Row $gap={10} $between>
+          <S.div.Row $gap={10}>
             <MatchingCard />
             <MatchingCard />
             <MatchingCard />
