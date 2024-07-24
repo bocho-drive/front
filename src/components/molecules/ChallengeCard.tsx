@@ -1,17 +1,21 @@
 import * as S from '@/styles/index.style';
 import { useModal } from '../templates/Modal/useModal';
+import ChallengeModal from './ChallengeModal';
 
 interface Props {
   imgSrc?: string;
   status?: 'CLEAR' | 'CHALLENGING' | 'NOT_STARTED';
+
+  id: number;
 }
 
 const ChallengeCard = (props: Props) => {
-  const { imgSrc = 'https://via.placeholder.com/150', status = 'NOT_STARTED' } = props; // 기본값으로 JSONPlaceholder 이미지 URL 설정
+  const { imgSrc = 'https://via.placeholder.com/150', status = 'NOT_STARTED', id } = props; // 기본값으로 JSONPlaceholder 이미지 URL 설정
+
   const handleOpen = useModal((state) => state.handleOpen);
 
   return (
-    <S.div.Card onClick={handleOpen}>
+    <S.div.Card onClick={() => handleOpen(id, 'challenge')}>
       <S.div.Row $gap={10}>
         <img src={imgSrc} />
         {status !== 'NOT_STARTED' && (
@@ -34,6 +38,8 @@ const ChallengeCard = (props: Props) => {
           </S.div.Column>
         </S.div.Column>
       </S.div.Row>
+
+      <ChallengeModal id={id} />
     </S.div.Card>
   );
 };

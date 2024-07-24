@@ -1,16 +1,23 @@
 import { create } from 'zustand';
 
-interface Props {
+interface States {
   isOpen: boolean;
+  openId: number | null;
+  type: 'video' | 'challenge' | null;
 }
 
 interface Actions {
-  handleOpen: () => void;
+  handleOpen: (openId: States['openId'], type: States['type']) => void;
   handleClose: () => void;
+  isShow: (id: number, type: States['type']) => boolean;
 }
 
-export const useModal = create<Props & Actions>((set) => ({
+export const useModal = create<States & Actions>((set, get) => ({
   isOpen: false,
-  handleOpen: () => set({ isOpen: true }),
-  handleClose: () => set({ isOpen: false }),
+  openId: null,
+  type: null,
+
+  handleOpen: (openId, type) => set({ isOpen: true, openId, type }),
+  handleClose: () => set({ isOpen: false, openId: null }),
+  isShow: (id, type) => get().type === type && get().openId === id,
 }));
