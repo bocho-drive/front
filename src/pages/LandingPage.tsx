@@ -46,7 +46,7 @@ const LandingPage = () => {
         </S.div.Column>
 
         <S.div.Column $gap={20}>
-          <S.h.H1>인증된 팁을 공유드려요</S.h.H1>
+          <S.h.H1>인증된 팁을 공유드려요 📌</S.h.H1>
 
           <S.div.Row $gap={10} $itemMaxWidth={600} $wrap>
             <TipCard id={1} />
@@ -57,7 +57,7 @@ const LandingPage = () => {
         </S.div.Column>
 
         <S.div.Column $gap={20}>
-          <S.h.H1>영상으로 운전을 배워봐요</S.h.H1>
+          <S.h.H1>영상으로 운전을 배워봐요 🎥</S.h.H1>
           <S.div.Row $gap={20} $overflow="scroll" $itemMaxWidth={300}>
             <VideoCard id={11} />
             <VideoCard id={12} />
