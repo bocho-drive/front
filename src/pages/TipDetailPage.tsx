@@ -1,7 +1,12 @@
-import React from 'react';
+import CommunityDetail from '@/components/organisms/CommunityDetail';
+import DriveLayout from '@/components/templates/DriveLayout';
 
 const TipDetailPage = () => {
-  return <div>TipDetailPage</div>;
+  return (
+    <DriveLayout>
+      <CommunityDetail />
+    </DriveLayout>
+  );
 };
 
 export default TipDetailPage;

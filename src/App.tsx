@@ -9,22 +9,27 @@ import TipDetailPage from './pages/TipDetailPage';
 import AdminPage from './pages/AdminPage';
 import VideoPage from './pages/VideoPage';
 import MyPage from './pages/MyPage';
+import Provider from './config/Provider';
+import MatchingPage from './pages/MatchingPage';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/community" element={<CommunityPage />} />
-        <Route path="/community/:id" element={<CommunityDetailPage />} />
-        <Route path="/drive" element={<DrivePage />} />
-        <Route path="/challenge" element={<ChallengePage />} />
-        <Route path="/tip" element={<TipPage />} />
-        <Route path="/tip/:id" element={<TipDetailPage />} />
-        <Route path="/video" element={<VideoPage />} />
-        <Route path="/my" element={<MyPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-      </Routes>
+      <Provider>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/community" element={<CommunityPage />} />
+          <Route path="/community/:id" element={<CommunityDetailPage />} />
+          <Route path="/drive" element={<DrivePage />} />
+          <Route path="/challenge" element={<ChallengePage />} />
+          <Route path="/matching" element={<MatchingPage />} />
+          <Route path="/tip" element={<TipPage />} />
+          <Route path="/tip/:id" element={<TipDetailPage />} />
+          <Route path="/video" element={<VideoPage />} />
+          <Route path="/my" element={<MyPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+        </Routes>
+      </Provider>
     </BrowserRouter>
   );
 }
