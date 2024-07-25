@@ -12,6 +12,7 @@ import Provider from './config/Provider';
 import MatchingPage from './pages/MatchingPage';
 import AdminPage from './pages/AdminPage';
 import CommunityNewPage from './pages/CommunityNewPage';
+import MatchingDetailPage from './pages/MatchingDetailPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/drive" element={<DrivePage />} />
           <Route path="/challenge" element={<ChallengePage />} />
           <Route path="/matching" element={<MatchingPage />} />
+          <Route path="/matching/:id" element={<MatchingDetailPage />} />
           <Route path="/tip" element={<TipPage />} />
           <Route path="/tip/:id" element={<TipDetailPage />} />
           <Route path="/video" element={<VideoPage />} />
