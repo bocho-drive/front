@@ -1,5 +1,4 @@
 import ChallengeCard from '@/components/molecules/ChallengeCard';
-import ChallengeModal from '@/components/molecules/ChallengeModal';
 import DriveLayout from '@/components/templates/DriveLayout';
 import * as S from '@/styles/index.style';
 
@@ -19,25 +18,23 @@ const ChallengePage = () => {
           <S.h.H2>1️⃣ 초급</S.h.H2>
           <S.p.P>✅ 5개 중 2개 완료</S.p.P>
         </S.div.Column>
-        <ChallengeCard status="CHALLENGING" />
-        <ChallengeCard status="CLEAR" />
+        <ChallengeCard id={1} status="CHALLENGING" />
+        <ChallengeCard id={2} status="CLEAR" />
 
         <S.div.Column $gap={10}>
           <S.h.H2>2️⃣ 중급</S.h.H2>
           <S.p.P>✅ 5개 중 2개 완료</S.p.P>
         </S.div.Column>
-        <ChallengeCard />
-        <ChallengeCard />
+        <ChallengeCard id={3} />
+        <ChallengeCard id={4} />
 
         <S.div.Column $gap={10}>
           <S.h.H2>3️⃣ 고급</S.h.H2>
           <S.p.P>✅ 5개 중 2개 완료</S.p.P>
         </S.div.Column>
-        <ChallengeCard />
-        <ChallengeCard />
+        <ChallengeCard id={5} />
+        <ChallengeCard id={6} />
       </S.div.Column>
-
-      <ChallengeModal />
     </DriveLayout>
   );
 };

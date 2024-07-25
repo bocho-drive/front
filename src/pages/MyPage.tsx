@@ -9,15 +9,13 @@ const MyPage = () => {
   return (
     <HeaderFooterLayout>
       <S.div.Column $width={50} $gap={100}>
-        <S.div.Row $align="center" $between $width={100}>
-          <S.div.Column $align="center" $gap={20}>
-            <S.div.Avatar $size="large" />
-            <S.h.H1>회원이름</S.h.H1>
-          </S.div.Column>
-          <S.button.Button $colors="primary" $outline $size="large" onClick={handleOpen}>
-            편집
+        <S.div.Column $align="center" $gap={20}>
+          <S.div.Avatar $size="large" />
+          <S.h.H1>회원이름</S.h.H1>
+          <S.button.Button $colors="primary" $outline $size="large" onClick={() => handleOpen(1, 'profile')}>
+            <S.h.H5>편집</S.h.H5>
           </S.button.Button>
-        </S.div.Row>
+        </S.div.Column>
 
         <Tab />
       </S.div.Column>

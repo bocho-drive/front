@@ -12,36 +12,36 @@ const DrivePage = () => {
         <S.div.Column $gap={10}>
           <S.h.H2>운전 챌린지</S.h.H2>
           <S.div.Row $gap={10} $wrap>
-            <ChallengeCard />
-            <ChallengeCard />
-            <ChallengeCard />
-            <ChallengeCard />
+            <ChallengeCard id={1} />
+            <ChallengeCard id={2} />
+            <ChallengeCard id={3} />
+            <ChallengeCard id={4} />
           </S.div.Row>
         </S.div.Column>
 
         <S.div.Column $gap={10}>
           <S.h.H2>운전 연수 매칭</S.h.H2>
-          <S.div.Row $gap={10} $wrap>
-            <MatchingCard />
-            <MatchingCard />
-            <MatchingCard />
+          <S.div.Row $gap={10} $wrap $itemMaxWidth={300}>
+            <MatchingCard id={1} />
+            <MatchingCard id={2} />
+            <MatchingCard id={31} />
           </S.div.Row>
         </S.div.Column>
 
         <S.div.Column $gap={10}>
           <S.h.H2>운전 팁 공유</S.h.H2>
-          <S.div.Row $gap={10} $wrap>
-            <TipCard />
-            <TipCard />
+          <S.div.Row $gap={10} $wrap $itemMaxWidth={500}>
+            <TipCard id={1} />
+            <TipCard id={2} />
           </S.div.Row>
         </S.div.Column>
 
         <S.div.Column $gap={10}>
           <S.h.H2>운전 Shorts</S.h.H2>
-          <S.div.Row $gap={10} $wrap>
-            <VideoCard />
-            <VideoCard />
-            <VideoCard />
+          <S.div.Row $gap={10} $wrap $itemMaxWidth={300}>
+            <VideoCard id={1} />
+            <VideoCard id={2} />
+            <VideoCard id={3} />
           </S.div.Row>
         </S.div.Column>
       </S.div.Column>

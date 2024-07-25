@@ -2,10 +2,21 @@ import * as S from '@/styles/index.style';
 import LineText from '../atoms/LineText';
 import GoogleButton from '../atoms/GoogleButton';
 import KakaoButton from '../atoms/KakaoButton';
+import { FormEvent } from 'react';
+import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthModal } from '../organisms/AuthModal/useAuthModal';
 
 const LoginForm = () => {
+  const handleLogin = useAuth((state) => state.handleLogin);
+  const handleClose = useAuthModal((state) => state.handleClose);
+
+  const handleSubmitLogin = (e: FormEvent) => {
+    e.preventDefault();
+    handleLogin();
+    handleClose();
+  };
   return (
-    <form>
+    <form onSubmit={handleSubmitLogin}>
       <S.div.Column $gap={10} style={{ minWidth: '400px' }}>
         <S.div.Row $justify="center">
           <S.h.H1>로그인</S.h.H1>
