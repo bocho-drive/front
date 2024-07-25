@@ -21,7 +21,7 @@ const DrivePage = () => {
 
         <S.div.Column $gap={10}>
           <S.h.H2>운전 연수 매칭</S.h.H2>
-          <S.div.Row $gap={10} $wrap>
+          <S.div.Row $gap={10} $wrap $itemMaxWidth={300}>
             <MatchingCard />
             <MatchingCard />
             <MatchingCard />
@@ -30,7 +30,7 @@ const DrivePage = () => {
 
         <S.div.Column $gap={10}>
           <S.h.H2>운전 팁 공유</S.h.H2>
-          <S.div.Row $gap={10} $wrap>
+          <S.div.Row $gap={10} $wrap $itemMaxWidth={500}>
             <TipCard />
             <TipCard />
           </S.div.Row>
@@ -38,7 +38,7 @@ const DrivePage = () => {
 
         <S.div.Column $gap={10}>
           <S.h.H2>운전 Shorts</S.h.H2>
-          <S.div.Row $gap={10} $wrap>
+          <S.div.Row $gap={10} $wrap $itemMaxWidth={300}>
             <VideoCard />
             <VideoCard />
             <VideoCard />

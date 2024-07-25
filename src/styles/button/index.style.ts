@@ -22,6 +22,7 @@ export const Button = styled.button<ButtonProps & SizeProps>`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+
   ${({ $height }) => $height && `height: ${$height}px;`}
   ${({ $padding = 10 }) => $padding && `padding: ${$padding}px;`}
   ${({ $fullWidth }) => $fullWidth && `width: 100%;`}

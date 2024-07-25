@@ -3,13 +3,18 @@ import ThumbUpIcon from '@/assets/icons/thumb_up.svg?react';
 import ShareIcon from '@/assets/icons/share.svg?react';
 import CommentIcon from '@/assets/icons/comment.svg?react';
 import Modal from '../templates/Modal/Modal';
+import { useModal } from '../templates/Modal/useModal';
 
 interface Props {
   imgSrc?: string;
+  id: number;
 }
 
 const VideoModal = (props: Props) => {
-  const { imgSrc = 'https://via.placeholder.com/300x400' } = props;
+  const { id, imgSrc = 'https://via.placeholder.com/300x400' } = props;
+  const { isShow } = useModal((state) => state);
+
+  if (!isShow(id, 'video')) return null;
   return (
     <Modal>
       <S.div.FixedModal style={{ padding: '20px' }}>
