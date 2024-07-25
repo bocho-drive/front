@@ -1,7 +1,6 @@
 import GlobalStyle from '@/styles/global.style';
 import theme from '@/styles/theme.style';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { RecoilRoot } from 'recoil';
 
 import { ThemeProvider } from 'styled-components';
 
@@ -15,7 +14,7 @@ const Provider = ({ children }: Props) => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <RecoilRoot>{children}</RecoilRoot>
+        {children}
       </ThemeProvider>
     </QueryClientProvider>
   );

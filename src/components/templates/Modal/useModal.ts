@@ -3,7 +3,7 @@ import { create } from 'zustand';
 interface States {
   isOpen: boolean;
   openId: number | null;
-  type: 'video' | 'challenge' | null;
+  type: 'video' | 'challenge' | 'profile' | null;
 }
 
 interface Actions {

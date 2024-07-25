@@ -12,7 +12,7 @@ const MyPage = () => {
         <S.div.Column $align="center" $gap={20}>
           <S.div.Avatar $size="large" />
           <S.h.H1>회원이름</S.h.H1>
-          <S.button.Button $colors="primary" $outline $size="large" onClick={handleOpen}>
+          <S.button.Button $colors="primary" $outline $size="large" onClick={() => handleOpen(1, 'profile')}>
             <S.h.H5>편집</S.h.H5>
           </S.button.Button>
         </S.div.Column>
