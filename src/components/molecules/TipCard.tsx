@@ -17,7 +17,6 @@ const TipCard = (props: Props) => {
             <S.h.H2 $maxLines={2}>팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.팁 제목입니다.</S.h.H2>
             <S.div.Row $align="center" $between>
               <S.p.P>2021.09.01</S.p.P>
-              <S.span.Badge>5mins read</S.span.Badge>
             </S.div.Row>
           </S.div.Column>
         </S.div.Row>

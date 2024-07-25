@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const TextButton = styled.button`
+export const TextButtonStyle = css`
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -11,4 +11,8 @@ export const TextButton = styled.button`
   &:hover {
     background-color: #f0f0f0;
   }
+`;
+
+export const TextButton = styled.button`
+  ${TextButtonStyle}
 `;

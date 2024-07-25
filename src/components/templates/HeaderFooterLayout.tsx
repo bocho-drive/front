@@ -9,7 +9,7 @@ interface Props {
 const HeaderFooterLayout = ({ children }: Props) => {
   return (
     <S.div.Container>
-      <div style={{ position: 'sticky', top: 0, width: '100%', backgroundColor: 'white', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+      <div style={{ position: 'sticky', top: 0, width: '100%', zIndex: 100, backgroundColor: 'white', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
         <Header />
       </div>
       <S.div.Gap $height={70} />

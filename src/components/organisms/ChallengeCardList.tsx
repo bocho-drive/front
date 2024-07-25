@@ -4,14 +4,14 @@ import ChallengeCard from '../molecules/ChallengeCard';
 const ChallengeCardList = () => {
   return (
     <S.div.Column $gap={20}>
-      <ChallengeCard status="CHALLENGING" />
-      <ChallengeCard status="CLEAR" />
-      <ChallengeCard />
-      <ChallengeCard />
-      <ChallengeCard />
-      <ChallengeCard />
-      <ChallengeCard />
-      <ChallengeCard />
+      <ChallengeCard id={1} status="CHALLENGING" />
+      <ChallengeCard id={1} status="CLEAR" />
+      <ChallengeCard id={1} />
+      <ChallengeCard id={1} />
+      <ChallengeCard id={1} />
+      <ChallengeCard id={1} />
+      <ChallengeCard id={1} />
+      <ChallengeCard id={1} />
     </S.div.Column>
   );
 };

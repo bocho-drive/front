@@ -7,15 +7,15 @@ const TipPage = () => {
     <DriveLayout>
       <S.div.Column $gap={20}>
         <S.div.Row $between $align="center">
-          <S.div.Column $gap={10}>
+          <S.div.Column $gap={10} style={{ flex: 1 }}>
             <S.h.H1>운전 팁</S.h.H1>
             <S.p.P>운전에 도움이 되는 정보를 공유해보세요</S.p.P>
           </S.div.Column>
-          <S.button.Button>내 TIP공유</S.button.Button>
+          <S.button.Button $colors="primary">내 TIP공유</S.button.Button>
         </S.div.Row>
 
-        <TipCard />
-        <TipCard />
+        <TipCard id={1} />
+        <TipCard id={1} />
       </S.div.Column>
     </DriveLayout>
   );

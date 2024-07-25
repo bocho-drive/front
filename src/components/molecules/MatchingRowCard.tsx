@@ -4,6 +4,11 @@ interface Props {
   imgSrc?: string;
 }
 
+/**
+ * @deprecated
+ * @param props
+ * @returns
+ */
 const MatchingRowCard = (props: Props) => {
   const { imgSrc = 'https://via.placeholder.com/300x200' } = props; // 기본값으로 JSONPlaceholder
   return (

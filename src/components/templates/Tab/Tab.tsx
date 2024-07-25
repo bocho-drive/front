@@ -14,7 +14,7 @@ const Tab = () => {
     <S.div.Column $gap={20}>
       <S.div.Row $width={100}>
         {tabHeaders.map((header, index) => (
-          <S.button.TabButton key={index} $active={index === tabIndex} onClick={() => setTabIndex(index)}>
+          <S.button.TabButton key={index} $active={index === tabIndex} $direction="bottom" onClick={() => setTabIndex(index)}>
             <S.h.H2>{header}</S.h.H2>
           </S.button.TabButton>
         ))}

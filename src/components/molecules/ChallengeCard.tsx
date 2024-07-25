@@ -16,7 +16,7 @@ const ChallengeCard = (props: Props) => {
 
   return (
     <S.div.Card onClick={() => handleOpen(id, 'challenge')}>
-      <S.div.Row $gap={10}>
+      <S.div.Row $gap={10} style={{ position: 'relative', zIndex: 1 }}>
         <img src={imgSrc} />
         {status !== 'NOT_STARTED' && (
           <S.div.Gap $height={150} $width={150} style={{ position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center', rotate: '-35deg' }}>
