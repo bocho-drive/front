@@ -10,9 +10,8 @@ const HeaderMenu = () => {
 
   const relativeModal = useRelativeModal({
     targetRef: menuRef,
-    modalRef: modalRef,
     openType: 'mouseover',
-    closeType: 'outside-click',
+    closeType: 'anywhere-click',
   });
   const { setRelativePosition, isOpen } = relativeModal;
 
@@ -32,17 +31,23 @@ const HeaderMenu = () => {
 
   return (
     <Fragment>
-      <S.div.Row $gap={20} ref={menuRef}>
+      <S.div.Row $gap={20}>
         <Link to="/community">커뮤니티</Link>
-        <Link to="/drive">운전하기</Link>
+        <div ref={menuRef}>
+          <Link to="/drive">운전하기</Link>
+        </div>
       </S.div.Row>
 
       {isOpen && (
         <RelativeModal relativeModal={relativeModal}>
           <S.div.Card $padding={10} style={{ backgroundColor: 'white' }} ref={modalRef}>
-            <S.div.Column style={{ width: '200px' }}>
-              <S.button.TextButton>dasdsa</S.button.TextButton>
-            </S.div.Column>
+            <S.div.Row $itemMinWidth={100}>
+              <S.a.Link to="/drive">홈</S.a.Link>
+              <S.a.Link to="/challenge">챌린지</S.a.Link>
+              <S.a.Link to="/matching">연수 매칭</S.a.Link>
+              <S.a.Link to="/tip">운전 팁</S.a.Link>
+              <S.a.Link to="/video">운전 영상</S.a.Link>
+            </S.div.Row>
           </S.div.Card>
         </RelativeModal>
       )}

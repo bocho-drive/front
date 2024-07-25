@@ -9,9 +9,9 @@ interface Position {
 
 interface RelativeModalProps {
   openType?: 'mouseover';
-  closeType?: 'outside-click';
+  closeType?: 'outside-click' | 'anywhere-click';
   targetRef: RefObject<HTMLElement>;
-  modalRef: RefObject<HTMLElement>;
+  modalRef?: RefObject<HTMLElement>;
 }
 
 export const useRelativeModal = ({ openType, closeType, targetRef, modalRef }: RelativeModalProps) => {
@@ -33,9 +33,8 @@ export const useRelativeModal = ({ openType, closeType, targetRef, modalRef }: R
   /** 모달창 열기/닫기 이벤트 */
   useEffect(() => {
     const handleOutsideClickClose = (e: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      if (modalRef?.current && !modalRef.current.contains(e.target as Node)) {
         handleClose();
-        console.log('handleClose();');
       }
     };
 
@@ -43,10 +42,12 @@ export const useRelativeModal = ({ openType, closeType, targetRef, modalRef }: R
 
     openType && currentTarget?.addEventListener(openType, handleOpen);
     closeType === 'outside-click' && document.addEventListener('mousedown', handleOutsideClickClose);
+    closeType === 'anywhere-click' && document.addEventListener('click', handleClose);
 
     return () => {
       openType && currentTarget?.removeEventListener(openType, handleOpen);
       closeType === 'outside-click' && document.removeEventListener('mousedown', handleOutsideClickClose);
+      closeType === 'anywhere-click' && document.removeEventListener('click', handleClose);
     };
   }, [openType, closeType, modalRef, targetRef]);
 
