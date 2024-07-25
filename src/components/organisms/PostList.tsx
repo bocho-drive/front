@@ -1,20 +1,18 @@
-import { useState } from 'react';
 import PostListHeader from '../molecules/PostListHeader';
 
 import * as S from '@/styles/index.style';
-import { usePost } from "@/@features/Admin/Post/usePost"
+import { usePost } from '@/@features/Admin/Post/usePost';
 
-interface Post {
-  id: number;
-  title: string;
-  likes: number;
-  comments: number;
-  isChecked: boolean;
-}
-
+// interface Post {
+//   id: number;
+//   title: string;
+//   likes: number;
+//   comments: number;
+//   isChecked: boolean;
+// }
 
 const PostList = () => {
-  const {posts, handleToggle} = usePost()
+  const { posts, handleToggle } = usePost();
   // const [posts, setPosts] = useState<Post[]>([
   //   { id: 1, title: 'Post 1', likes: 10, comments: 2, isChecked: false },
   //   { id: 2, title: 'Post 2', likes: 5, comments: 4, isChecked: false },
