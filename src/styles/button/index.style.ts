@@ -95,3 +95,17 @@ const largeStyle = css<SizeProps>`
 export const AdminButton = styled.button`
   margin-left: 10px;
 `;
+
+export const AdminLoginButton = styled.button`
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #555;
+  }
+`;

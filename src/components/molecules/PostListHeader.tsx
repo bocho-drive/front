@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { usePost } from '@/@features/Admin/Post/usePost';
 
 import * as S from '@/styles/index.style';

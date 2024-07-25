@@ -43,3 +43,12 @@ const largeStyle = css`
 export const Checkbox = styled.input`
   margin-right: 10px;
 `;
+
+export const AdminInput = styled.input`
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* 너비 계산 방식 변경 */ 
+`;

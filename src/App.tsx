@@ -11,6 +11,7 @@ import MyPage from './pages/MyPage';
 import Provider from './config/Provider';
 import MatchingPage from './pages/MatchingPage';
 import AdminPage from './pages/AdminPage';
+import AdminLogin from './pages/AdminLogin';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/video" element={<VideoPage />} />
           <Route path="/my" element={<MyPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/adminlogin" element={<AdminLogin />} />
         </Routes>
       </Provider>
     </BrowserRouter>

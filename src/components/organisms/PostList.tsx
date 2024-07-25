@@ -1,16 +1,16 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import PostListHeader from '../molecules/PostListHeader';
 
 import * as S from '@/styles/index.style';
 import { usePost } from "@/@features/Admin/Post/usePost"
 
-interface Post {
-  id: number;
-  title: string;
-  likes: number;
-  comments: number;
-  isChecked: boolean;
-}
+// interface Post {
+//   id: number;
+//   title: string;
+//   likes: number;
+//   comments: number;
+//   isChecked: boolean;
+// }
 
 
 const PostList = () => {
