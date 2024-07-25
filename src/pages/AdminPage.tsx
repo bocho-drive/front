@@ -1,7 +1,6 @@
 import SearchBar from '@/components/atoms/SearchBar';
 import Sidebar from '@/components/atoms/Sidebar';
 import PostList from '@/components/organisms/PostList';
-import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
 
 import * as S from '@/styles/index.style';
 
