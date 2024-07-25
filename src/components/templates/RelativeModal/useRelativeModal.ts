@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { RefObject, useCallback, useEffect, useState } from 'react';
 
 interface Position {
   top: number;
@@ -7,24 +7,55 @@ interface Position {
   bottom: number;
 }
 
-interface Props {
-  isOpen: boolean;
-  relativeRef: React.RefObject<HTMLElement>;
-  position: Position;
+interface RelativeModalProps {
+  openType?: 'mouseover';
+  closeType?: 'outside-click';
+  targetRef: RefObject<HTMLElement>;
+  modalRef: RefObject<HTMLElement>;
 }
 
-interface Actions {
-  handleOpen: () => void;
-  handleClose: () => void;
-  setRelativePosition: (position: Position) => void;
-}
+export const useRelativeModal = ({ openType, closeType, targetRef, modalRef }: RelativeModalProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [position, setPosition] = useState<Position>({ top: 0, left: 0, right: 0, bottom: 0 });
 
-export const useRelativeModal = create<Props & Actions>((set) => ({
-  isOpen: false,
-  relativeRef: { current: null },
-  position: { top: 0, left: 0, bottom: 0, right: 0 },
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
 
-  handleOpen: () => set({ isOpen: true }),
-  handleClose: () => set({ isOpen: false }),
-  setRelativePosition: (position) => set({ position }),
-}));
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  const setRelativePosition = useCallback((position: Position) => {
+    setPosition(position);
+  }, []);
+
+  /** 모달창 열기/닫기 이벤트 */
+  useEffect(() => {
+    const handleOutsideClickClose = (e: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+        handleClose();
+        console.log('handleClose();');
+      }
+    };
+
+    const currentTarget = targetRef.current;
+
+    openType && currentTarget?.addEventListener(openType, handleOpen);
+    closeType === 'outside-click' && document.addEventListener('mousedown', handleOutsideClickClose);
+
+    return () => {
+      openType && currentTarget?.removeEventListener(openType, handleOpen);
+      closeType === 'outside-click' && document.removeEventListener('mousedown', handleOutsideClickClose);
+    };
+  }, [openType, closeType, modalRef, targetRef]);
+
+  return {
+    isOpen,
+    handleOpen,
+    handleClose,
+    setRelativePosition,
+    position,
+  };
+};
+export type RelativeModalType = ReturnType<typeof useRelativeModal>;

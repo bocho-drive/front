@@ -5,9 +5,10 @@ import AuthModal from './AuthModal/AuthModal';
 import { useAuthModal } from './AuthModal/useAuthModal';
 import { useAuth } from '@/@features/Auth/useAuth';
 import UserProfile from '../molecules/UserProfile';
+import HeaderMenu from '../molecules/HeaderMenu';
 
 const Header = () => {
-  const handleOpen = useAuthModal((state) => state.handleOpen);
+  const handleOpenAuthModal = useAuthModal((state) => state.handleOpen);
   const isAuth = useAuth((state) => state.isAuth);
 
   return (
@@ -21,13 +22,10 @@ const Header = () => {
             </S.div.Row>
           </Link>
 
-          <S.div.Row $gap={20}>
-            <Link to="/community">커뮤니티</Link>
-            <Link to="/drive">운전하기</Link>
-          </S.div.Row>
+          <HeaderMenu />
         </S.div.Row>
 
-        {isAuth ? <UserProfile /> : <S.button.Button onClick={handleOpen}>로그인</S.button.Button>}
+        {isAuth ? <UserProfile /> : <S.button.Button onClick={handleOpenAuthModal}>로그인</S.button.Button>}
         <AuthModal />
       </S.div.Row>
     </S.div.Row>

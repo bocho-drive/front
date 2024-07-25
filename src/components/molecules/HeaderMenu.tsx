@@ -1,28 +1,29 @@
+import { useRef, useEffect, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import * as S from '@/styles/index.style';
-import { Fragment } from 'react/jsx-runtime';
 import { useRelativeModal } from '../templates/RelativeModal/useRelativeModal';
 import RelativeModal from '../templates/RelativeModal/RelativeModal';
-import { useEffect, useRef } from 'react';
 
-const UserProfile = () => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+const HeaderMenu = () => {
+  const menuRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
   const relativeModal = useRelativeModal({
-    modalRef,
-    targetRef: buttonRef,
+    targetRef: menuRef,
+    modalRef: modalRef,
+    openType: 'mouseover',
     closeType: 'outside-click',
   });
-  const { setRelativePosition, handleOpen, isOpen } = relativeModal;
+  const { setRelativePosition, isOpen } = relativeModal;
 
   useEffect(() => {
-    if (buttonRef && buttonRef.current) {
-      const { top, left, right, bottom, height, width } = buttonRef.current.getBoundingClientRect();
+    if (menuRef && menuRef.current) {
+      const { top, left, right, bottom, height, width } = menuRef.current.getBoundingClientRect();
       console.log({ top, left, right, bottom, height, width });
 
       setRelativePosition({
         top: top + height + 10,
-        left: left - width - 100,
+        left: left,
         bottom: 0,
         right: 0,
       });
@@ -31,14 +32,16 @@ const UserProfile = () => {
 
   return (
     <Fragment>
-      <S.button.Avatar onClick={handleOpen} ref={buttonRef} />
+      <S.div.Row $gap={20} ref={menuRef}>
+        <Link to="/community">커뮤니티</Link>
+        <Link to="/drive">운전하기</Link>
+      </S.div.Row>
 
       {isOpen && (
         <RelativeModal relativeModal={relativeModal}>
           <S.div.Card $padding={10} style={{ backgroundColor: 'white' }} ref={modalRef}>
             <S.div.Column style={{ width: '200px' }}>
-              <S.button.TextButton>마이페이지</S.button.TextButton>
-              <S.button.TextButton>로그아웃</S.button.TextButton>
+              <S.button.TextButton>dasdsa</S.button.TextButton>
             </S.div.Column>
           </S.div.Card>
         </RelativeModal>
@@ -47,4 +50,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default HeaderMenu;
