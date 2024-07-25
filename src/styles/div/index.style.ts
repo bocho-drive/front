@@ -8,10 +8,6 @@ export * from './modal.style';
 
 import styled from 'styled-components';
 
-// export const Container = styled.div`
-//   display: flex;
-// `;
-
 export const MainContent = styled.div`
   flex: 1;
   padding: 20px;
@@ -35,7 +31,7 @@ export const PostItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 20px;
   border-bottom: 1px solid #ccc;
 `;
 

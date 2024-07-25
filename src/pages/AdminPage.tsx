@@ -7,15 +7,17 @@ import * as S from '@/styles/index.style';
 
 const AdminPage = () => {
   return (
-    <HeaderFooterLayout>
-      <S.div.Container>
+    <S.div.Container $width={100}>
+      <S.div.Row $width={90} $justify="center">
         <Sidebar />
         <S.div.MainContent>
-          <SearchBar />
-          <PostList />
+          <S.div.Column $gap={20}>
+            <SearchBar />
+            <PostList />
+          </S.div.Column>
         </S.div.MainContent>
-      </S.div.Container>
-    </HeaderFooterLayout>
+      </S.div.Row>
+    </S.div.Container>
   );
 };
 
