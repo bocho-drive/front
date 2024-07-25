@@ -1,13 +1,14 @@
 import * as S from '@/styles/index.style';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 interface Props {
   id: number;
 }
 
 const CommunityCard = ({ id }: Props) => {
+  const location = useLocation();
   return (
-    <Link to={`/community/${id}`}>
+    <Link to={`/community/${id}${location.search}`}>
       <S.div.Card>
         <S.div.Column $gap={20}>
           <S.h.H2>제목</S.h.H2>

@@ -27,7 +27,7 @@ const CommunityLayout = ({ children }: CommunityProps) => {
             글쓰기
           </S.button.Button>
 
-          <S.button.TabButton $direction="left" $active={tab === null || tab === 'newest'} onClick={() => handleNavigate('newest')}>
+          <S.button.TabButton $direction="left" $active={tab === 'newest'} onClick={() => handleNavigate('newest')}>
             최신 게시글
           </S.button.TabButton>
           <S.button.TabButton $direction="left" $active={tab === 'popluar'} onClick={() => handleNavigate('popluar')}>
