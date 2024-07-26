@@ -17,7 +17,7 @@ const Header = () => {
         <S.div.Row $gap={100} $align="center">
           <Link to="/">
             <S.div.Row $align="center" $gap={20}>
-              <img src="/icon.png" alt="logo" width="70" />
+              <img src="/icon-60x60.png" alt="logo" />
               <S.h.H2>보초운전</S.h.H2>
             </S.div.Row>
           </Link>
