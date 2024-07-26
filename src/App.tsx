@@ -15,6 +15,7 @@ import AdminLogin from './pages/AdminLogin';
 import CommunityNewPage from './pages/CommunityNewPage';
 import MatchingDetailPage from './pages/MatchingDetailPage';
 import PrivateRoute from './config/PrivateRoute';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -43,6 +44,8 @@ function App() {
             <Route path="/community/new" element={<CommunityNewPage />} />
             <Route path="/my" element={<MyPage />} />
           </Route>
+
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Provider>
     </BrowserRouter>
