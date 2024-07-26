@@ -1,6 +1,7 @@
 import * as S from '@/styles/index.style';
 import Modal from '../templates/Modal/Modal';
 import { useModal } from '../templates/Modal/useModal';
+import KakaoShareButton from '../atoms/KakaoShareButton';
 
 interface Props {
   imgSrc?: string;
@@ -29,6 +30,7 @@ const ChallengeModal = (props: Props) => {
             {status === 'NOT_STARTED' && <S.button.Button>도전하기</S.button.Button>}
             {status === 'CHALLENGING' && <S.button.Button>인증하기</S.button.Button>}
             {status === 'CLEAR' && <S.button.Button>내 인증글 보기</S.button.Button>}
+            <KakaoShareButton title="T자 주차하기 챌린지" displayIcon={true} />
           </S.div.Column>
         </S.div.Card>
       </S.div.FixedModal>

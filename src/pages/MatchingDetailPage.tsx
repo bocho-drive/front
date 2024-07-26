@@ -2,6 +2,7 @@ import * as S from '@/styles/index.style';
 import PostDetail from '@/components/molecules/PostDetail';
 import DriveLayout from '@/components/templates/DriveLayout';
 import { useNavigate } from 'react-router-dom';
+import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 
 const MatchingDetailPage = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const MatchingDetailPage = () => {
         <PostDetail />
 
         <S.div.Row $gap={10} $justify="center">
-          <S.button.Button>공유하기</S.button.Button>
+          <KakaoShareButton title="매칭 상세 페이지" displayIcon={true} />
           <S.button.Button>매칭 신청하기</S.button.Button>
         </S.div.Row>
 

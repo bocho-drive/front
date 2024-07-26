@@ -3,6 +3,7 @@ import * as S from '@/styles/index.style';
 const PostDetail = () => {
   return (
     <S.div.Column $gap={20}>
+      <S.h.H1>제목</S.h.H1>
       <S.div.Row $gap={10} $align="center">
         <S.div.Avatar />
         <S.h.H5>작성자</S.h.H5>

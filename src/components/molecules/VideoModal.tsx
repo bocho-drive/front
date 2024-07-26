@@ -1,9 +1,9 @@
 import * as S from '@/styles/index.style';
 import ThumbUpIcon from '@/assets/icons/thumb_up.svg?react';
-import ShareIcon from '@/assets/icons/share.svg?react';
 import CommentIcon from '@/assets/icons/comment.svg?react';
 import Modal from '../templates/Modal/Modal';
 import { useModal } from '../templates/Modal/useModal';
+import KakaoShareButton from '../atoms/KakaoShareButton';
 
 interface Props {
   imgSrc?: string;
@@ -40,7 +40,7 @@ const VideoModal = (props: Props) => {
               </S.div.Row>
             </S.div.Row>
 
-            <ShareIcon />
+            <KakaoShareButton title="영상 제목1" displayIcon />
           </S.div.Row>
         </S.div.Column>
       </S.div.FixedModal>

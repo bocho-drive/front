@@ -3,6 +3,7 @@ import CommentForm from '../molecules/CommentForm';
 import Comment from '../molecules/Comment';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PostDetail from '../molecules/PostDetail';
+import KakaoShareButton from '../atoms/KakaoShareButton';
 
 const CommunityDetail = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const CommunityDetail = () => {
       <S.div.Gap $height={20} />
 
       <S.div.Row $gap={10} $justify="center">
-        <S.button.Button>공유하기</S.button.Button>
+        <KakaoShareButton title="제목" />
         <S.button.Button>글 추천</S.button.Button>
       </S.div.Row>
 
