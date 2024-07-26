@@ -16,11 +16,13 @@ import CommunityNewPage from './pages/CommunityNewPage';
 import MatchingDetailPage from './pages/MatchingDetailPage';
 import PrivateRoute from './config/PrivateRoute';
 import NotFoundPage from './pages/NotFoundPage';
+import Toast from './components/atoms/Toast/Toast';
 
 function App() {
   return (
     <BrowserRouter>
       <Provider>
+        <Toast />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/community" element={<CommunityPage />} />

@@ -9,7 +9,7 @@ interface CommunityProps {
 }
 
 const CommunityLayout = ({ children }: CommunityProps) => {
-  const isAuth = useAuth((state) => state.isAuth);
+  const confirmAuth = useAuth((state) => state.confirmAuth);
   const navigate = useNavigate();
   const { search } = useLocation();
 
@@ -20,9 +20,7 @@ const CommunityLayout = ({ children }: CommunityProps) => {
   };
 
   const redirectToNewPage = () => {
-    if (!isAuth) {
-      alert('로그인이 필요합니다.');
-    } else {
+    if (confirmAuth()) {
       navigate('/community/new');
     }
   };
