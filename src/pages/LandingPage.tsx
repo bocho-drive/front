@@ -31,14 +31,14 @@ const LandingPage = () => {
               사람들을 위한 커뮤니티
             </S.h.H2>
 
-            <S.div.Row $wrap $gap={20} $width={50}>
+            <S.div.Row $wrap $gap={20}>
               <S.a.Link $outline $align="left" to="/community">
                 💬 커뮤니티
               </S.a.Link>
-              <S.a.Link $outline $align="left" to="">
+              <S.a.Link $outline $align="left" to="/challenge">
                 🏆 운전 챌린지
               </S.a.Link>
-              <S.a.Link $outline $align="left" to="">
+              <S.a.Link $outline $align="left" to="/matching">
                 🚘 운전 메이트
               </S.a.Link>
             </S.div.Row>

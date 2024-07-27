@@ -11,7 +11,7 @@ const DriveLayout = ({ children }: Props) => {
       <S.div.Row $gap={50} $width={100}>
         <S.div.Column $width={70}>{children}</S.div.Column>
 
-        <S.div.Column $width={25} $gap={10} style={{ position: 'fixed', right: '5%' }}>
+        <S.div.Column $width={30} $gap={10}>
           <S.div.Card>
             <S.div.Column $gap={20}>
               <S.div.Row $align="center" $gap={10}>

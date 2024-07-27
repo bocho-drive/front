@@ -10,8 +10,8 @@ const DrivePage = () => {
     <DriveLayout>
       <S.div.Column $gap={50}>
         <S.div.Column $gap={10}>
-          <S.h.H2>운전 챌린지</S.h.H2>
-          <S.div.Row $gap={10} $wrap>
+          <S.h.LayoutTitle>운전 챌린지</S.h.LayoutTitle>
+          <S.div.Row $gap={20} $overflow="scroll" $itemMinWidth={400}>
             <ChallengeCard id={1} />
             <ChallengeCard id={2} />
             <ChallengeCard id={3} />
@@ -20,8 +20,8 @@ const DrivePage = () => {
         </S.div.Column>
 
         <S.div.Column $gap={10}>
-          <S.h.H2>운전 연수 매칭</S.h.H2>
-          <S.div.Row $gap={10} $wrap $itemMaxWidth={300}>
+          <S.h.LayoutTitle>운전 연수 매칭</S.h.LayoutTitle>
+          <S.div.Row $gap={20} $overflow="scroll">
             <MatchingCard id={1} />
             <MatchingCard id={2} />
             <MatchingCard id={31} />
@@ -29,16 +29,16 @@ const DrivePage = () => {
         </S.div.Column>
 
         <S.div.Column $gap={10}>
-          <S.h.H2>운전 팁 공유</S.h.H2>
-          <S.div.Row $gap={10} $wrap $itemMaxWidth={500}>
+          <S.h.LayoutTitle>운전 팁 공유</S.h.LayoutTitle>
+          <S.div.Grid $repeat={1}>
             <TipCard id={1} />
             <TipCard id={2} />
-          </S.div.Row>
+          </S.div.Grid>
         </S.div.Column>
 
         <S.div.Column $gap={10}>
-          <S.h.H2>운전 Shorts</S.h.H2>
-          <S.div.Row $gap={10} $wrap $itemMaxWidth={300}>
+          <S.h.LayoutTitle>운전 Shorts</S.h.LayoutTitle>
+          <S.div.Row $gap={10} $overflow="scroll">
             <VideoCard id={1} />
             <VideoCard id={2} />
             <VideoCard id={3} />
