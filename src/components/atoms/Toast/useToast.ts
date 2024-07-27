@@ -4,10 +4,10 @@ import { toast } from 'react-toastify';
  * @see https://fkhadra.github.io/react-toastify/positioning-toast
  */
 
-const defaultToast = (message: string) =>
-  toast(message, {
-    position: 'top-center',
-  });
+// const defaultToast = (message: string) =>
+//   toast(message, {
+//     position: 'top-center',
+//   });
 const successToast = (message: string) =>
   toast.success(message, {
     position: 'bottom-right',

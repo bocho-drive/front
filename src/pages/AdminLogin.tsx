@@ -57,11 +57,11 @@ import * as S from '@/styles/index.style';
 // `;
 
 const LoginForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit } = useForm();
   const [rememberMe, setRememberMe] = useState(false);
 
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = () => {
+    // console.log(data);
     // 로그인 연결할 위치
   };
 
@@ -73,28 +73,19 @@ const LoginForm = () => {
           type="text" // email로 하면 이상한 말풍선 튀어나옴
           placeholder="이메일 형식으로 입력하세요"
           $size="medium"
-          {...register("email", {
-            required: "이메일을 입력하세요",
+          {...register('email', {
+            required: '이메일을 입력하세요',
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "올바른 이메일 형식을 입력하세요"
-            }
+              message: '올바른 이메일 형식을 입력하세요',
+            },
           })}
         />
-        {errors.email && <p>{errors.email.message}</p>}
-        <S.input.Input
-          type="password"
-          placeholder="비밀번호"
-          $size="medium"
-          {...register("password", { required: "비밀번호를 입력하세요" })}
-        />
-        {errors.password && <p>{errors.password.message}</p>}
+        {/* {errors.email && <p>{errors.email.message}</p>} */}
+        <S.input.Input type="password" placeholder="비밀번호" $size="medium" {...register('password', { required: '비밀번호를 입력하세요' })} />
+        {/* {errors.password && <p>{errors.password.message}</p>} */}
         <S.div.CheckboxContainer>
-          <input
-            type="checkbox"
-            checked={rememberMe}
-            onChange={() => setRememberMe(!rememberMe)}
-          />
+          <input type="checkbox" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
           <label>Remember me</label>
         </S.div.CheckboxContainer>
         <S.button.Button $colors="primary" $height={50} type="submit">
