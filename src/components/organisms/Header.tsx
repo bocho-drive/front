@@ -12,7 +12,7 @@ const Header = () => {
   const isAuth = useAuth((state) => state.isAuth);
 
   return (
-    <S.div.Row $width={100} $justify="center" style={{ height: '100px' }}>
+    <S.div.Container style={{ height: '100px', justifyContent: 'center' }}>
       <S.div.Row $width={90} $align="center" $between>
         <S.div.Row $gap={100} $align="center">
           <Link to="/">
@@ -28,7 +28,7 @@ const Header = () => {
         {isAuth ? <UserProfile /> : <S.button.Button onClick={handleOpenAuthModal}>로그인</S.button.Button>}
         <AuthModal />
       </S.div.Row>
-    </S.div.Row>
+    </S.div.Container>
   );
 };
 

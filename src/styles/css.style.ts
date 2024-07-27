@@ -13,3 +13,26 @@ export const maxLineStyle = css<MaxLineStyleProps>`
       overflow: hidden;
     `}
 `;
+
+export interface FontWeightStyleProps {
+  $fontWeight?: number;
+}
+export const fontWeightStyle = css<FontWeightStyleProps>`
+  ${({ $fontWeight }) =>
+    $fontWeight &&
+    css`
+      font-weight: ${$fontWeight};
+    `}
+`;
+
+export interface HighLightStyleProps {
+  $highlight?: number;
+}
+
+export const HighLightStyle = css<HighLightStyleProps>`
+  ${({ theme, $highlight }) =>
+    $highlight &&
+    css`
+      box-shadow: inset 0 -${$highlight}px ${theme.colors.primary};
+    `}
+`;
