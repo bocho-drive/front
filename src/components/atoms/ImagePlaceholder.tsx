@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 import styled, { css } from 'styled-components';
+import Loading from './Loading';
 
 interface Props {
   children: ReactElement<HTMLImageElement>;
@@ -14,7 +15,7 @@ const ImagePlaceholder = ({ children }: Props) => {
     <Fragment>
       {isLoading && (
         <Placeholder width={width} height={height}>
-          Loading...
+          <Loading />
         </Placeholder>
       )}
 

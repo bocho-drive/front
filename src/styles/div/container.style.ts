@@ -13,3 +13,10 @@ export const Container = styled.div<ContainerProps>`
   max-width: 1440px;
   margin: 0 auto;
 `;
+
+export const AbsCenterContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
