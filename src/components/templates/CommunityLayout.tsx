@@ -13,10 +13,10 @@ const CommunityLayout = ({ children }: CommunityProps) => {
   const navigate = useNavigate();
   const { search } = useLocation();
 
-  const tab = new URLSearchParams(search).get('tab');
+  const category = new URLSearchParams(search).get('category');
 
-  const handleNavigate = (tab: 'newest' | 'popluar' | 'vote') => {
-    navigate(`/community?tab=${tab}`);
+  const handleNavigate = (category: 'NEWEST' | 'POPULAR' | 'VOTE') => {
+    navigate(`/community?category=${category}`);
   };
 
   const redirectToNewPage = () => {
@@ -35,13 +35,13 @@ const CommunityLayout = ({ children }: CommunityProps) => {
             글쓰기
           </S.button.Button>
 
-          <S.button.TabButton $direction="left" $active={tab === 'newest'} onClick={() => handleNavigate('newest')}>
+          <S.button.TabButton $direction="left" $active={category === 'newest'} onClick={() => handleNavigate('NEWEST')}>
             최신 게시글
           </S.button.TabButton>
-          <S.button.TabButton $direction="left" $active={tab === 'popluar'} onClick={() => handleNavigate('popluar')}>
+          <S.button.TabButton $direction="left" $active={category === 'popluar'} onClick={() => handleNavigate('POPULAR')}>
             인기 게시글
           </S.button.TabButton>
-          <S.button.TabButton $direction="left" $active={tab === 'vote'} onClick={() => handleNavigate('vote')}>
+          <S.button.TabButton $direction="left" $active={category === 'vote'} onClick={() => handleNavigate('VOTE')}>
             투표 게시글
           </S.button.TabButton>
         </S.div.Column>
