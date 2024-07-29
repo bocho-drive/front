@@ -5,6 +5,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import PostDetail from '../molecules/PostDetail';
 import KakaoShareButton from '../atoms/KakaoShareButton';
 
+/**
+ * @deprecated
+ */
 const CommunityDetail = () => {
   const navigate = useNavigate();
   const { search } = useLocation();

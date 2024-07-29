@@ -36,3 +36,8 @@ export const HighLightStyle = css<HighLightStyleProps>`
       box-shadow: inset 0 -${$highlight}px ${theme.colors.primary};
     `}
 `;
+
+export const CardStyle = css`
+  border: 1px solid lightgray;
+  border-radius: 8px;
+`;
