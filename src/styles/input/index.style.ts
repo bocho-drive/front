@@ -1,3 +1,5 @@
+export * from './radio.style';
+
 import styled, { css } from 'styled-components';
 
 interface InputProps {
