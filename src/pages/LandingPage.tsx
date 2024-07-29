@@ -7,6 +7,8 @@ import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
 import CommunityCommentCard from '@/components/organisms/CommunityCommentCard';
 import MoreLayout from '@/components/templates/MoreLayout';
 import ImagePlaceholder from '@/components/atoms/ImagePlaceholder';
+import { useAuthModal } from '@/components/organisms/AuthModal/useAuthModal';
+import { useAuth } from '@/@features/Auth/useAuth';
 
 const GIFS = [
   'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXdxd290NmNtejNzb3QzbjN5Zms4MXVtbHZodXpndjRwanJybWRxciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mlqXcoNp0zpiyFRztL/giphy.gif',
@@ -19,6 +21,9 @@ const GIFS = [
 
 const LandingPage = () => {
   const randomGif = GIFS[Math.floor(Math.random() * GIFS.length)];
+
+  const isAuth = useAuth((state) => state.isAuth);
+  const handleOpenAuthModal = useAuthModal((state) => state.handleOpen);
 
   return (
     <HeaderFooterLayout>
@@ -43,9 +48,11 @@ const LandingPage = () => {
               </S.a.Link>
             </S.div.Row>
 
-            <S.button.TextButton $outline $align="left" style={{ width: 'fit-content' }}>
-              🛞 로그인하고 시작하기
-            </S.button.TextButton>
+            {!isAuth && (
+              <S.button.TextButton $outline $align="left" style={{ width: 'fit-content' }} onClick={handleOpenAuthModal}>
+                🛞 로그인하고 시작하기
+              </S.button.TextButton>
+            )}
           </S.div.Column>
           <ImagePlaceholder>
             <S.img.Img src={randomGif} width={500} height={300} alt="hero-image" $borderRadius={20} />
