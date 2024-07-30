@@ -5,7 +5,7 @@ import KakaoButton from '../atoms/KakaoButton';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterSchema, registerSchema } from '@/@features/Auth/yup';
-import { registerNewUser } from '@/@features/Auth/api';
+import { signUp } from '@/@features/Auth/api';
 import { useAuthModal } from '@/@features/Auth/components/AuthModal/useAuthModal';
 import { successToast } from '../atoms/Toast/useToast';
 
@@ -20,7 +20,7 @@ const RegisterForm = () => {
   } = useForm<RegisterSchema>({ resolver: yupResolver(registerSchema) });
 
   const handleRegister = (data: RegisterSchema) => {
-    registerNewUser(data).then(() => {
+    signUp(data).then(() => {
       successToast('회원가입이 완료되었습니다.');
       setIsLoginModal(true);
     });

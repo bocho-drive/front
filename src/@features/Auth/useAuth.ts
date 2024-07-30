@@ -1,31 +1,39 @@
 import { loginToast, logoutToast, needLoginToast } from '@/components/atoms/Toast/useToast';
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface Props {
   isAuth: boolean;
+  token: string | null;
 }
 
 interface Actions {
-  handleLogin: () => void;
+  handleLogin: (token: string) => void;
   handleLogout: () => void;
   confirmAuth: () => boolean;
 }
 
-export const useAuth = create<Props & Actions>((set, get) => ({
-  isAuth: false,
+export const useAuth = create(
+  persist<Props & Actions>(
+    (set, get) => ({
+      isAuth: false,
+      token: null,
 
-  handleLogin: () => {
-    set({ isAuth: true });
-    loginToast();
-  },
-  handleLogout: () => {
-    set({ isAuth: false });
-    logoutToast();
-  },
+      handleLogin: (token) => {
+        set({ isAuth: true, token });
+        loginToast();
+      },
+      handleLogout: () => {
+        set({ isAuth: false, token: null });
+        logoutToast();
+      },
 
-  confirmAuth: () => {
-    const { isAuth } = get();
-    if (!isAuth) needLoginToast();
-    return isAuth;
-  },
-}));
+      confirmAuth: () => {
+        const { isAuth } = get();
+        if (!isAuth) needLoginToast();
+        return isAuth;
+      },
+    }),
+    { name: 'auth' }
+  )
+);

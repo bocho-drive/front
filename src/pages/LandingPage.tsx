@@ -7,8 +7,8 @@ import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
 import CommunityCommentCard from '@/components/organisms/CommunityCommentCard';
 import MoreLayout from '@/components/templates/MoreLayout';
 import ImagePlaceholder from '@/components/atoms/ImagePlaceholder';
-import { useAuthModal } from '@/components/organisms/AuthModal/useAuthModal';
 import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthModal } from '@/@features/Auth/components/AuthModal/useAuthModal';
 
 const GIFS = [
   'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXdxd290NmNtejNzb3QzbjN5Zms4MXVtbHZodXpndjRwanJybWRxciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mlqXcoNp0zpiyFRztL/giphy.gif',
