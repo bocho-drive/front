@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@tanstack/react-query": "^5.51.11",
     "@tanstack/react-query-devtools": "^5.51.15",
     "@toast-ui/react-editor": "^3.2.3",
@@ -22,6 +23,7 @@
     "react-router-dom": "^6.25.1",
     "react-toastify": "^10.0.5",
     "styled-components": "^6.1.12",
+    "yup": "^1.4.0",
     "zustand": "^4.5.4"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 import * as S from '@/styles/index.style';
@@ -9,10 +9,13 @@ import RegisterForm from '@/components/molecules/RegisterForm';
 const docId = 'login-modal-target';
 
 const AuthModal = () => {
-  const [isLoginModal, setIsLoginModal] = useState(true);
+  const { handleClose, isLoginModal, isOpen, toggleIsLoginModal } = useAuthModal((state) => ({
+    isOpen: state.isOpen,
+    isLoginModal: state.isLoginModal,
+    handleClose: state.handleClose,
+    toggleIsLoginModal: state.toggleIsLoginModal,
+  }));
 
-  const isOpen = useAuthModal((state) => state.isOpen);
-  const handleClose = useAuthModal((state) => state.handleClose);
   // portal-root 요소를 찾습니다.
   const modalRoot = document.getElementById(docId) as HTMLElement;
   const modalRef = useRef<HTMLDivElement>(null);
@@ -38,7 +41,7 @@ const AuthModal = () => {
           <S.div.FixedModal ref={modalRef} style={{ padding: '30px' }}>
             {isLoginModal ? <LoginForm /> : <RegisterForm />}
             <S.div.Row $justify="center" style={{ marginTop: '20px' }}>
-              <S.button.IconButton onClick={() => setIsLoginModal(!isLoginModal)}>
+              <S.button.IconButton onClick={toggleIsLoginModal}>
                 <S.h.H4>{isLoginModal ? '회원가입' : '로그인'}</S.h.H4>
               </S.button.IconButton>
             </S.div.Row>

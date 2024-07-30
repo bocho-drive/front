@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
 import * as S from '@/styles/index.style';
-import AuthModal from './AuthModal/AuthModal';
-import { useAuthModal } from './AuthModal/useAuthModal';
+import AuthModal from '../../@features/Auth/components/AuthModal/AuthModal';
+import { useAuthModal } from '../../@features/Auth/components/AuthModal/useAuthModal';
 import { useAuth } from '@/@features/Auth/useAuth';
 import UserProfile from '../molecules/UserProfile';
 import HeaderMenu from '../molecules/HeaderMenu';

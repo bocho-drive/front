@@ -1,10 +1,11 @@
-import * as S from '@/styles/index.style';
-import LineText from '../atoms/LineText';
-import GoogleButton from '../atoms/GoogleButton';
-import KakaoButton from '../atoms/KakaoButton';
 import { FormEvent } from 'react';
+
+import * as S from '@/styles/index.style';
 import { useAuth } from '@/@features/Auth/useAuth';
-import { useAuthModal } from '../organisms/AuthModal/useAuthModal';
+import { useAuthModal } from '@/@features/Auth/components/AuthModal/useAuthModal';
+import LineText from '@/components/atoms/LineText';
+import GoogleButton from '@/components/atoms/GoogleButton';
+import KakaoButton from '@/components/atoms/KakaoButton';
 
 const LoginForm = () => {
   const handleLogin = useAuth((state) => state.handleLogin);
