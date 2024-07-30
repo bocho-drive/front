@@ -34,3 +34,15 @@ export const postCommunity = async (data: CommunityPostReq): Promise<void> => {
   const res = await apiWithToken.post<Response<null>>(BASEURL, data);
   console.log({ res });
 };
+
+/** 게시글 삭제 */
+export const deleteCommunity = async (id: number): Promise<void> => {
+  const res = await apiWithToken.delete<Response<null>>(`${BASEURL}/${id}`);
+  console.log({ res });
+};
+
+/** 게시글 수정 */
+export const putCommunity = async (id: number, data: CommunityPostReq): Promise<void> => {
+  const res = await apiWithToken.put<Response<null>>(`${BASEURL}/${id}`, data);
+  console.log({ res });
+};
