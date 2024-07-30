@@ -35,13 +35,13 @@ const CommunityLayout = ({ children }: CommunityProps) => {
             글쓰기
           </S.button.Button>
 
-          <S.button.TabButton $direction="left" $active={category === 'newest'} onClick={() => handleNavigate('NEWEST')}>
+          <S.button.TabButton $direction="left" $active={category === 'NEWEST'} onClick={() => handleNavigate('NEWEST')}>
             최신 게시글
           </S.button.TabButton>
-          <S.button.TabButton $direction="left" $active={category === 'popluar'} onClick={() => handleNavigate('POPULAR')}>
+          <S.button.TabButton $direction="left" $active={category === 'POPULAR'} onClick={() => handleNavigate('POPULAR')}>
             인기 게시글
           </S.button.TabButton>
-          <S.button.TabButton $direction="left" $active={category === 'vote'} onClick={() => handleNavigate('VOTE')}>
+          <S.button.TabButton $direction="left" $active={category === 'VOTE'} onClick={() => handleNavigate('VOTE')}>
             투표 게시글
           </S.button.TabButton>
         </S.div.Column>

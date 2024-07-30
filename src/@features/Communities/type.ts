@@ -39,3 +39,10 @@ export interface CommunityRes {
 export interface CommunityDetailRes extends CommunityRes {
   content: string;
 }
+
+export interface CommunityPostReq {
+  title: string;
+  content: string;
+  category: 'GENERAL' | 'VOTE' | 'TIP' | 'CHALLENGE_CERTIFICATION';
+  author?: 'test';
+}

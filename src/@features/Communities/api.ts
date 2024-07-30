@@ -1,5 +1,5 @@
-import { api, Response } from '@/config/axios';
-import { CommunityListRes, CommunityDetailRes } from './type';
+import { api, apiWithToken, Response } from '@/config/axios';
+import { CommunityListRes, CommunityDetailRes, CommunityPostReq } from './type';
 
 const BASEURL = 'communities';
 
@@ -27,4 +27,10 @@ export const getCommunityDetail = async (id: number): Promise<CommunityDetailRes
   const res = await api.get<Response<CommunityDetailRes>>(url);
 
   return res.data.data;
+};
+
+/** 게시글 작성 */
+export const postCommunity = async (data: CommunityPostReq): Promise<void> => {
+  const res = await apiWithToken.post<Response<null>>(BASEURL, data);
+  console.log({ res });
 };

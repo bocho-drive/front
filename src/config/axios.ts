@@ -12,11 +12,11 @@ export interface ErrorResponse {
   msg: string;
 }
 
-const CommRes = (response: AxiosResponse<Response<unknown>>) => {
+const ResFulfilled = (response: AxiosResponse<Response<unknown>>) => {
   successToast(response.data.message);
   return response;
 };
-const CommErr = (error: AxiosError<ErrorResponse>) => {
+const ResRejected = (error: AxiosError<ErrorResponse>) => {
   console.log({ error });
 
   // * 서버 오류
@@ -34,7 +34,7 @@ const CommErr = (error: AxiosError<ErrorResponse>) => {
   return Promise.reject(error);
 };
 
-// * 인가 없는 api 요청
+// * 인가 없는 api
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL as string,
   headers: {
@@ -43,6 +43,34 @@ export const api = axios.create({
   },
   withCredentials: true, // cors
 });
-api.interceptors.response.use(CommRes, CommErr);
+api.interceptors.response.use(ResFulfilled, ResRejected);
 
-// 'Access-Control-Allow-Origin': '*',
+// * 인가 필요 api
+export const apiWithToken = axios.create({
+  baseURL: import.meta.env.VITE_API_TOKEN_URL as string,
+  headers: {
+    'content-type': 'application/json;charset=UTF-8',
+    accept: 'application/json,',
+  },
+  withCredentials: true, // cors
+});
+
+apiWithToken.interceptors.request.use(
+  (config) => {
+    const ls = localStorage.getItem('auth');
+    if (!ls) return config;
+
+    const json = JSON.parse(ls);
+    const token = json?.state?.token;
+    console.log({ token });
+    if (token) {
+      config.headers.Authorization = token;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+apiWithToken.interceptors.response.use(ResFulfilled, ResRejected);
