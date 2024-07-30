@@ -1,3 +1,5 @@
+type Category = 'GENERAL' | 'VOTE' | 'TIP' | 'CHALLENGE_CERTIFICATION';
+
 export interface CommunityListReq {}
 
 export interface CommunityListRes {
@@ -32,16 +34,22 @@ export interface CommunityRes {
   id: number;
   title: string;
   viewCount: number;
-  verifiedYn: boolean;
+  verifiedYN: boolean;
   createdAt: string;
 }
 
-export interface CommunityDetailRes extends CommunityRes {
+export interface CommunityDetailRes {
+  id: number;
+  title: string;
   content: string;
+  author: string;
+  category: Category;
+  viewCount: number;
+  createdAt: string;
 }
 
 export interface CommunityPostReq {
   title: string;
   content: string;
-  category: 'GENERAL' | 'VOTE' | 'TIP' | 'CHALLENGE_CERTIFICATION';
+  category: Category;
 }

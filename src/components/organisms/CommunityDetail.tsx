@@ -2,7 +2,7 @@ import * as S from '@/styles/index.style';
 import CommentForm from '../molecules/CommentForm';
 import Comment from '../molecules/Comment';
 import { useLocation, useNavigate } from 'react-router-dom';
-import PostDetail from '../molecules/PostDetail';
+import PostDetail from '../molecules/Post/PostDetail';
 import KakaoShareButton from '../atoms/KakaoShareButton';
 
 /**
