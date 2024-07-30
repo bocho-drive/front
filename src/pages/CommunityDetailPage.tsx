@@ -6,6 +6,10 @@ import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import CommentForm from '@/components/molecules/CommentForm';
 import Comment from '@/components/molecules/Comment';
 import VoteForm from '@/components/organisms/VoteForm';
+import { Suspense } from 'react';
+import Loading from '@/components/atoms/Loading';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 
 const CommunityDetailPage = () => {
   const { id } = useParams();
@@ -16,29 +20,32 @@ const CommunityDetailPage = () => {
 
   return (
     <CommunityLayout>
-      <S.div.Column $gap={40}>
-        <PostDetail />
+      <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
+        <S.div.Column $gap={40}>
+          <Suspense fallback={<Loading />}>
+            <PostDetail id={Number(id)} />
+            <VoteForm />
 
-        <VoteForm />
+            <S.div.Row $gap={10} $justify="center">
+              <KakaoShareButton title="제목" />
+              <S.button.Button>글 추천</S.button.Button>
+            </S.div.Row>
 
-        <S.div.Row $gap={10} $justify="center">
-          <KakaoShareButton title="제목" />
-          <S.button.Button>글 추천</S.button.Button>
-        </S.div.Row>
+            <S.div.Row $gap={10} $justify="flex-start">
+              <S.button.Button>이전글</S.button.Button>
+              <S.button.Button>다음글</S.button.Button>
+              <S.button.Button onClick={handleToList}>목록으로</S.button.Button>
+            </S.div.Row>
 
-        <S.div.Row $gap={10} $justify="flex-start">
-          <S.button.Button>이전글</S.button.Button>
-          <S.button.Button>다음글</S.button.Button>
-          <S.button.Button onClick={handleToList}>목록으로</S.button.Button>
-        </S.div.Row>
+            <S.hr.Hr />
+          </Suspense>
 
-        <S.hr.Hr />
+          <S.h.H3>댓글</S.h.H3>
+          <CommentForm />
 
-        <S.h.H3>댓글</S.h.H3>
-        <CommentForm />
-
-        <Comment />
-      </S.div.Column>
+          <Comment />
+        </S.div.Column>
+      </ErrorBoundary>
     </CommunityLayout>
   );
 };

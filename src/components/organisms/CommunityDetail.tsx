@@ -16,7 +16,7 @@ const CommunityDetail = () => {
 
   return (
     <S.div.Column $gap={20}>
-      <PostDetail />
+      {/* <PostDetail /> */}
       <S.div.Gap $height={20} />
 
       <S.div.Row $gap={10} $justify="center">

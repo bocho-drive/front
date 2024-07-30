@@ -4,18 +4,20 @@ import { toast } from 'react-toastify';
  * @see https://fkhadra.github.io/react-toastify/positioning-toast
  */
 
-const defaultToast = (message: string) =>
+export const defaultToast = (message: string) =>
   toast(message, {
     position: 'top-center',
   });
-const successToast = (message: string) =>
+export const successToast = (message: string) =>
   toast.success(message, {
     position: 'bottom-right',
+    autoClose: 1000,
   });
 
-const errorToast = (message: string) =>
+export const errorToast = (message: string) =>
   toast.error(message, {
     position: 'top-center',
+    autoClose: 1000,
   });
 
 export const logoutToast = () => successToast('로그아웃 되었습니다.');
