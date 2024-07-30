@@ -94,20 +94,12 @@ const largeStyle = css<SizeProps>`
   padding: 15px 30px;
 `;
 
-export const AdminButton = styled.button`
-  margin-left: 10px;
-`;
-
-export const AdminLoginButton = styled.button`
-  width: 100%;
-  padding: 0.5rem;
-  background-color: #333;
-  color: white;
+export const PageButton = styled.button<{ active: boolean }>`
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: ${({ active }) => (active ? '#F0F0F0' : '#ffffff')};
+  color: #000000;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-
-  &:hover {
-    background-color: #555;
-  }
 `;

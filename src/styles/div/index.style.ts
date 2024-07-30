@@ -80,3 +80,9 @@ export const CheckboxContainer = styled.div`
     margin-right: 0.5rem;
   }
 `;
+
+export const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+`;

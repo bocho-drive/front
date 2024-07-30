@@ -6,6 +6,7 @@ const theme: DefaultTheme = {
     primary: '#eb9e34',
     secondary: '#34eb3a',
     warning: '#eb3434',
+    default: '#F0F0F0',
   },
 };
 
