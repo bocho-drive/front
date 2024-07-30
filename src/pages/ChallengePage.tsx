@@ -6,7 +6,7 @@ const ChallengePage = () => {
   return (
     <DriveLayout>
       <S.div.Column $gap={20}>
-        <S.h.H1>운전 챌린지</S.h.H1>
+        <S.h.LayoutTitle>운전 챌린지 🏆</S.h.LayoutTitle>
         <S.p.P>차근차근 시도를 통해 운전고수에 도전해보세요.</S.p.P>
 
         <S.div.Row $gap={5}>

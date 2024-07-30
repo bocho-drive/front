@@ -1,6 +1,6 @@
 import * as S from '@/styles/index.style';
-import { useModal } from '../templates/Modal/useModal';
 import ChallengeModal from './ChallengeModal';
+import { useModal } from '../templates/Modal/useModal';
 
 interface Props {
   imgSrc?: string;

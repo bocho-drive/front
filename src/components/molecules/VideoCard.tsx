@@ -10,7 +10,7 @@ interface Props {
 const VideoCard = (props: Props) => {
   const handleOpen = useModal((state) => state.handleOpen);
 
-  const { imgSrc = 'https://via.placeholder.com/300x400', id } = props;
+  const { imgSrc = 'https://via.placeholder.com/200x300', id } = props;
   return (
     <S.div.Card onClick={() => handleOpen(id, 'video')}>
       <S.div.Column $gap={20}>

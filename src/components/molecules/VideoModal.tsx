@@ -1,9 +1,9 @@
 import * as S from '@/styles/index.style';
 import ThumbUpIcon from '@/assets/icons/thumb_up.svg?react';
-import ShareIcon from '@/assets/icons/share.svg?react';
 import CommentIcon from '@/assets/icons/comment.svg?react';
 import Modal from '../templates/Modal/Modal';
-import { useModal } from '../templates/Modal/useModal';
+import KakaoShareButton from '../atoms/KakaoShareButton';
+import { getModalShareUrl } from '@/util/util';
 
 interface Props {
   imgSrc?: string;
@@ -12,11 +12,9 @@ interface Props {
 
 const VideoModal = (props: Props) => {
   const { id, imgSrc = 'https://via.placeholder.com/300x400' } = props;
-  const { isShow } = useModal((state) => state);
 
-  if (!isShow(id, 'video')) return null;
   return (
-    <Modal>
+    <Modal type="video" id={id}>
       <S.div.FixedModal style={{ padding: '20px' }}>
         <S.div.Column $gap={20}>
           <S.div.Row $align="center" $gap={10}>
@@ -40,7 +38,7 @@ const VideoModal = (props: Props) => {
               </S.div.Row>
             </S.div.Row>
 
-            <ShareIcon />
+            <KakaoShareButton title="영상 제목1" displayIcon url={getModalShareUrl('video', id)} />
           </S.div.Row>
         </S.div.Column>
       </S.div.FixedModal>

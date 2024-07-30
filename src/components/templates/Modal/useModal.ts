@@ -1,9 +1,11 @@
 import { create } from 'zustand';
 
+export type ModalType = 'video' | 'challenge' | 'profile';
+
 interface States {
   isOpen: boolean;
   openId: number | null;
-  type: 'video' | 'challenge' | 'profile' | null;
+  type: ModalType | null;
 }
 
 interface Actions {

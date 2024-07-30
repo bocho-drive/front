@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const TextButtonStyle = css`
+export const TextButtonStyle = css<TextButtonProps>`
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -11,8 +11,23 @@ export const TextButtonStyle = css`
   &:hover {
     background-color: #f0f0f0;
   }
+
+  ${({ $outline, theme }) =>
+    $outline &&
+    css`
+      background-color: transparent;
+      border: 2px solid ${theme.colors.default};
+      border-radius: 10px;
+    `}
+
+  ${({ $align = 'center' }) => $align && `text-align: ${$align};`}
 `;
 
-export const TextButton = styled.button`
+export interface TextButtonProps {
+  $outline?: boolean;
+  $align?: 'left' | 'center' | 'right';
+}
+
+export const TextButton = styled.button<TextButtonProps>`
   ${TextButtonStyle}
 `;

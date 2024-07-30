@@ -14,26 +14,40 @@ import AdminPage from './pages/AdminPage';
 import AdminLogin from './pages/AdminLogin';
 import CommunityNewPage from './pages/CommunityNewPage';
 import MatchingDetailPage from './pages/MatchingDetailPage';
+import PrivateRoute from './config/PrivateRoute';
+import NotFoundPage from './pages/NotFoundPage';
+import GlobalComponents from './config/GlobalComponents';
 
 function App() {
   return (
     <BrowserRouter>
       <Provider>
+        <GlobalComponents />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/community/:id" element={<CommunityDetailPage />} />
-          <Route path="/community/new" element={<CommunityNewPage />} />
+
           <Route path="/drive" element={<DrivePage />} />
           <Route path="/challenge" element={<ChallengePage />} />
           <Route path="/matching" element={<MatchingPage />} />
           <Route path="/matching/:id" element={<MatchingDetailPage />} />
+
           <Route path="/tip" element={<TipPage />} />
           <Route path="/tip/:id" element={<TipDetailPage />} />
+
           <Route path="/video" element={<VideoPage />} />
-          <Route path="/my" element={<MyPage />} />
+
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
+
+          {/* 인증 필요 페이지 */}
+          <Route element={<PrivateRoute isNeedAuth={true} />}>
+            <Route path="/community/new" element={<CommunityNewPage />} />
+            <Route path="/my" element={<MyPage />} />
+          </Route>
+
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Provider>
     </BrowserRouter>
