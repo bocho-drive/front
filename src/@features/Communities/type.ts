@@ -44,5 +44,4 @@ export interface CommunityPostReq {
   title: string;
   content: string;
   category: 'GENERAL' | 'VOTE' | 'TIP' | 'CHALLENGE_CERTIFICATION';
-  author?: 'test';
 }
