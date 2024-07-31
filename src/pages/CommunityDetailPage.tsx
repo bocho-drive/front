@@ -19,6 +19,7 @@ const CommunityDetailPage = () => {
   const handleToList = () => navigate('/community' + search);
   const isEditMode = usePost((state) => state.isEditMode);
 
+  console.log('CommunityDetailPage render');
   return (
     <CommunityLayout>
       <ErrorBoundary FallbackComponent={ErrorFallbackUI}>

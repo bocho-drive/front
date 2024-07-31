@@ -62,7 +62,6 @@ apiWithToken.interceptors.request.use(
 
     const json = JSON.parse(ls);
     const token = json?.state?.token;
-    console.log({ token });
     if (token) {
       config.headers.Authorization = token;
     }

@@ -1,13 +1,30 @@
 import { CommentRes } from '@/@features/Comment/type';
 import * as S from '@/styles/index.style';
 import { getDateString } from '@/util/util';
-import { UseMutateFunction } from '@tanstack/react-query';
+import { Fragment, useState } from 'react';
+import CommentForm from './CommentForm';
+import { useCommentQuery } from '@/@features/Comment/useCommentQuery';
+import { CommentSchema } from '@/@features/Comment/yup';
 
 interface Props {
   comment: CommentRes;
-  deleteMutate: UseMutateFunction<void, unknown, number, unknown>;
+  communityId: number;
 }
-const Comment = ({ comment, deleteMutate }: Props) => {
+const Comment = ({ comment, communityId }: Props) => {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const { deleteMutate, putMutate } = useCommentQuery(communityId);
+
+  const putComment = (data: CommentSchema) => {
+    putMutate({
+      id: comment.id,
+      data: {
+        communityId,
+        content: data.content,
+      },
+    });
+    setIsEditMode(false);
+  };
+
   return (
     <S.div.Row $gap={20} $align="flex-start">
       <S.div.Avatar />
@@ -18,14 +35,29 @@ const Comment = ({ comment, deleteMutate }: Props) => {
             <S.small.Small>{getDateString(comment.createdAt)}</S.small.Small>
           </S.div.Row>
           <S.div.Row $gap={10}>
-            <S.button.Button onClick={() => deleteMutate(comment.id)}>삭제</S.button.Button>
-            <S.button.Button>수정</S.button.Button>
+            {!isEditMode ? (
+              <Fragment>
+                <S.button.Button $size="small" onClick={() => deleteMutate(comment.id)}>
+                  삭제
+                </S.button.Button>
+                <S.button.Button $size="small" onClick={() => setIsEditMode(true)}>
+                  수정
+                </S.button.Button>
+              </Fragment>
+            ) : (
+              <S.button.Button $size="small" onClick={() => setIsEditMode(false)}>
+                취소
+              </S.button.Button>
+            )}
           </S.div.Row>
         </S.div.Row>
 
-        <S.div.Card>
-          <S.p.P>{comment.content}</S.p.P>
-        </S.div.Card>
+        {!isEditMode && (
+          <S.div.Card>
+            <S.p.P>{comment.content}</S.p.P>
+          </S.div.Card>
+        )}
+        {isEditMode && <CommentForm type="edit" comment={comment} communityId={communityId} putFn={putComment} />}
       </S.div.Column>
     </S.div.Row>
   );
