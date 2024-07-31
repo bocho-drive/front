@@ -4,13 +4,13 @@ import PostDetail from '@/components/molecules/Post/PostDetail';
 import * as S from '@/styles/index.style';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import CommentForm from '@/components/molecules/CommentForm';
-import Comment from '@/components/molecules/Comment';
-import { Fragment, Suspense } from 'react';
+import { Suspense } from 'react';
 import Loading from '@/components/atoms/Loading';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import { deleteCommunity, getCommunityDetail, putCommunity } from '@/@features/Communities/api';
 import { usePost } from '@/components/molecules/Post/usePost';
+import CommentList from '@/components/organisms/CommentList';
 
 const CommunityDetailPage = () => {
   const navigate = useNavigate();
@@ -24,11 +24,10 @@ const CommunityDetailPage = () => {
   return (
     <CommunityLayout>
       <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
-        <S.div.Column $gap={40}>
-          <Suspense fallback={<Loading />}>
+        <Suspense fallback={<Loading />}>
+          <S.div.Column $gap={40}>
             <PostDetail id={Number(id)} queryFn={getCommunityDetail} deleteFn={deleteCommunity} updateFn={putCommunity}>
               <S.div.Row $gap={10} $justify="center">
-                <KakaoShareButton title="제목" />
                 <S.button.Button>글 추천</S.button.Button>
               </S.div.Row>
 
@@ -40,16 +39,16 @@ const CommunityDetailPage = () => {
 
               <S.hr.Hr />
             </PostDetail>
-          </Suspense>
-          {!isEditMode && (
-            <Fragment>
-              <S.h.H3>댓글</S.h.H3>
-              <CommentForm />
+            {!isEditMode && (
+              <>
+                <S.h.H3>댓글</S.h.H3>
+                <CommentForm />
 
-              <Comment />
-            </Fragment>
-          )}
-        </S.div.Column>
+                <CommentList communityId={Number(id)} />
+              </>
+            )}
+          </S.div.Column>
+        </Suspense>
       </ErrorBoundary>
     </CommunityLayout>
   );

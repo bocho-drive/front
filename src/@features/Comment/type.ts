@@ -6,5 +6,5 @@ export interface CommentPostReq {
 export interface CommentRes {
   id: number;
   content: string;
-  createAt: string;
+  createdAt: string;
 }

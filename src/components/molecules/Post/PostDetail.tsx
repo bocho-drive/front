@@ -6,6 +6,8 @@ import { usePost } from './usePost';
 import { CommunityDetailRes, CommunityPostReq } from '@/@features/Communities/type';
 import { useLayoutEffect } from 'react';
 import PostForm from './PostForm';
+import KakaoShareButton from '@/components/atoms/KakaoShareButton';
+import { getDateString } from '@/util/util';
 
 interface Props {
   /** 게시글 ID */
@@ -71,9 +73,12 @@ const PostDetail = ({ id, queryFn, deleteFn, updateFn, children }: Props) => {
 
   return (
     <S.div.Column $gap={20}>
-      <S.div.Row $gap={10}>
-        <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
-        <S.button.Button onClick={toggleEditMode}>수정</S.button.Button>
+      <S.div.Row $between>
+        <S.div.Row $gap={10}>
+          <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
+          <S.button.Button onClick={toggleEditMode}>수정</S.button.Button>
+        </S.div.Row>
+        <KakaoShareButton title={data.title} />
       </S.div.Row>
       <S.h.H1>{data.title}</S.h.H1>
 
@@ -82,7 +87,7 @@ const PostDetail = ({ id, queryFn, deleteFn, updateFn, children }: Props) => {
         <S.h.H5>작성자</S.h.H5>
       </S.div.Row>
       <S.div.Row $between>
-        <S.p.P>{data.createdAt}</S.p.P>
+        <S.small.Small>{getDateString(data.createdAt)}</S.small.Small>
         <S.div.Row $gap={10}>
           <S.p.P>댓글 1</S.p.P>
           <S.p.P>추천 10</S.p.P>
