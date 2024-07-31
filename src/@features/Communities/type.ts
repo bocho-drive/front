@@ -1,6 +1,12 @@
 type Category = 'GENERAL' | 'VOTE' | 'TIP' | 'CHALLENGE_CERTIFICATION';
 
-export interface CommunityListReq {}
+export interface CommunityListReq {
+  category?: string | null;
+  page?: number;
+  size?: number;
+  sortBy?: 'createdAt';
+  isAsc?: boolean;
+}
 
 export interface CommunityListRes {
   totalPages: number;

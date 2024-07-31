@@ -1,19 +1,19 @@
 import { apiWithoutToken, apiWithToken, Response } from '@/config/axios';
-import { CommunityListRes, CommunityDetailRes, CommunityPostReq } from './type';
+import { CommunityListRes, CommunityDetailRes, CommunityPostReq, CommunityListReq } from './type';
 
 const BASEURL = 'communities';
 
 /** 게시글 목록 조회 */
 const CommunityCategory = ['GENERAL', 'VOTE', 'TIP', 'CHALLENGE_CERTIFICATION'] as string[];
-export const getCommunityList = async (category: string | null): Promise<CommunityListRes> => {
+export const getCommunityList = async (props: CommunityListReq): Promise<CommunityListRes> => {
   let url = BASEURL;
 
-  if (category && CommunityCategory.includes(category)) {
-    const searchParams = new URLSearchParams();
-    searchParams.append('category', category);
+  const searchParams = new URLSearchParams();
+  if (props.category && CommunityCategory.includes(props.category)) searchParams.append('category', props.category);
+  if (props.page) searchParams.append('page', String(props.page));
+  if (props.size) searchParams.append('size', String(props.size));
 
-    url = `${BASEURL}?${searchParams.toString()}`;
-  }
+  url = `${BASEURL}?${searchParams.toString()}`;
 
   const res = await apiWithoutToken.get<Response<CommunityListRes>>(url);
 

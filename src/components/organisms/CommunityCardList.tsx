@@ -1,25 +1,43 @@
 import * as S from '@/styles/index.style';
 import CommunityCard from '../molecules/CommunityCard';
 import { getCommunityList } from '@/@features/Communities/api';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
+import useScroll from '@/hooks/useScroll';
+import Loading from '../atoms/Loading';
 
 const CommunityCardList = () => {
   const { search } = useLocation();
   const category = new URLSearchParams(search).get('category');
 
-  const { data: communityList } = useSuspenseQuery({
+  const {
+    data: communityList,
+    fetchNextPage,
+    hasNextPage,
+    isLoading,
+  } = useSuspenseInfiniteQuery({
     queryKey: ['communityList', category],
-    queryFn: () => getCommunityList(category),
+    initialPageParam: 0,
+    queryFn: ({ pageParam = 0 }) => getCommunityList({ category, page: pageParam, size: 10 }),
+
+    getNextPageParam: (lastPage) => {
+      if (lastPage.last) return undefined;
+      return lastPage.number + 1;
+    },
   });
+  useScroll({ length: communityList.pages.length, fetchNextPage, hasNextPage });
+
+  if (communityList.pages.length === 0) return <S.h.H3>게시글이 없어요.</S.h.H3>;
 
   return (
     <S.div.Column $gap={20}>
-      {communityList.content.length === 0 && <S.h.H3>게시글이 없어요.</S.h.H3>}
+      {communityList.pages.map((page) => page.content.map((community) => <CommunityCard key={community.id} id={community.id} community={community} />))}
 
-      {communityList.content.map((community) => (
-        <CommunityCard key={community.id} id={community.id} community={community} />
-      ))}
+      {hasNextPage && (
+        <S.button.Button onClick={() => fetchNextPage()} disabled={isLoading}>
+          {isLoading ? <Loading /> : '더보기'}
+        </S.button.Button>
+      )}
     </S.div.Column>
   );
 };
