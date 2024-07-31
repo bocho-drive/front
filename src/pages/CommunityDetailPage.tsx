@@ -8,7 +8,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import { deleteCommunity, getCommunityDetail, putCommunity } from '@/@features/Communities/api';
 import { usePost } from '@/components/molecules/Post/usePost';
-import CommentList from '@/components/organisms/CommentList';
+import CommentList from '@/@features/Comment/components/CommentList';
 
 const CommunityDetailPage = () => {
   const navigate = useNavigate();
@@ -40,7 +40,6 @@ const CommunityDetailPage = () => {
             {!isEditMode && (
               <>
                 <S.h.H3>댓글</S.h.H3>
-
                 <CommentList communityId={Number(id)} />
               </>
             )}

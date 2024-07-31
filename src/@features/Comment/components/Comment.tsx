@@ -2,9 +2,8 @@ import { CommentRes } from '@/@features/Comment/type';
 import * as S from '@/styles/index.style';
 import { getDateString } from '@/util/util';
 import { Fragment, useState } from 'react';
-import CommentForm from './CommentForm';
 import { useCommentQuery } from '@/@features/Comment/useCommentQuery';
-import { CommentSchema } from '@/@features/Comment/yup';
+import CommentEditForm from './CommentEditForm';
 
 interface Props {
   comment: CommentRes;
@@ -12,18 +11,7 @@ interface Props {
 }
 const Comment = ({ comment, communityId }: Props) => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const { deleteMutate, putMutate } = useCommentQuery(communityId);
-
-  const putComment = (data: CommentSchema) => {
-    putMutate({
-      id: comment.id,
-      data: {
-        communityId,
-        content: data.content,
-      },
-    });
-    setIsEditMode(false);
-  };
+  const { deleteMutate } = useCommentQuery(communityId);
 
   return (
     <S.div.Row $gap={20} $align="flex-start">
@@ -57,7 +45,7 @@ const Comment = ({ comment, communityId }: Props) => {
             <S.p.P>{comment.content}</S.p.P>
           </S.div.Card>
         )}
-        {isEditMode && <CommentForm type="edit" comment={comment} communityId={communityId} putFn={putComment} />}
+        {isEditMode && <CommentEditForm comment={comment} communityId={communityId} setIsEditMode={setIsEditMode} />}
       </S.div.Column>
     </S.div.Row>
   );
