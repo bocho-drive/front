@@ -11,8 +11,6 @@ import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import { deleteCommunity, getCommunityDetail, putCommunity } from '@/@features/Communities/api';
 import { usePost } from '@/components/molecules/Post/usePost';
-import PostForm from '@/components/molecules/Post/PostForm';
-import { useMutation } from '@tanstack/react-query';
 
 const CommunityDetailPage = () => {
   const navigate = useNavigate();

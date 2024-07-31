@@ -19,8 +19,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (buttonRef && buttonRef.current) {
-      const { top, left, right, bottom, height, width } = buttonRef.current.getBoundingClientRect();
-      console.log({ top, left, right, bottom, height, width });
+      const { top, left, height, width } = buttonRef.current.getBoundingClientRect();
 
       setRelativePosition({
         top: top + height + 10,
