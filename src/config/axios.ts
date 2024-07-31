@@ -1,5 +1,5 @@
 import { errorToast, successToast } from '@/components/atoms/Toast/useToast';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
 export interface Response<T> {
   statusCode: 200 | 201;
@@ -12,10 +12,29 @@ export interface ErrorResponse {
   msg: string;
 }
 
+/** 공통 요청 성공 */
+const ReqFulfilled = (config: InternalAxiosRequestConfig) => {
+  const ls = localStorage.getItem('auth');
+  if (!ls) return config;
+
+  const json = JSON.parse(ls);
+  const token = json?.state?.token;
+  if (token) {
+    config.headers.Authorization = token;
+  }
+  return config;
+};
+/** 공통 요청 실패 */
+const ReqRejected = (error: AxiosError) => {
+  return Promise.reject(error);
+};
+
+/** 공통 응답 성공 */
 const ResFulfilled = (response: AxiosResponse<Response<unknown>>) => {
   successToast(response.data.message);
   return response;
 };
+/** 공통 응답 실패 */
 const ResRejected = (error: AxiosError<ErrorResponse>) => {
   console.log({ error });
 
@@ -43,6 +62,7 @@ export const apiWithoutToken = axios.create({
   },
   withCredentials: true, // cors
 });
+apiWithoutToken.interceptors.request.use(ReqFulfilled, ReqRejected);
 apiWithoutToken.interceptors.response.use(ResFulfilled, ResRejected);
 
 // * 인가 필요 api
@@ -55,21 +75,5 @@ export const apiWithToken = axios.create({
   withCredentials: true, // cors
 });
 
-apiWithToken.interceptors.request.use(
-  (config) => {
-    const ls = localStorage.getItem('auth');
-    if (!ls) return config;
-
-    const json = JSON.parse(ls);
-    const token = json?.state?.token;
-    if (token) {
-      config.headers.Authorization = token;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
+apiWithToken.interceptors.request.use(ReqFulfilled, ReqRejected);
 apiWithToken.interceptors.response.use(ResFulfilled, ResRejected);

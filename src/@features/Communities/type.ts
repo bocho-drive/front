@@ -51,7 +51,9 @@ export interface CommunityDetailRes {
   author: string;
   category: Category;
   viewCount: number;
+  likesCount: number;
   createdAt: string;
+  isAuthor: boolean;
 }
 
 export interface CommunityPostReq {

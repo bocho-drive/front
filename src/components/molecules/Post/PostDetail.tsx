@@ -4,7 +4,7 @@ import VoteForm from '../../organisms/VoteForm';
 import { useNavigate } from 'react-router-dom';
 import { usePost } from './usePost';
 import { CommunityDetailRes, CommunityPostReq } from '@/@features/Communities/type';
-import { useLayoutEffect } from 'react';
+import { Fragment, useLayoutEffect } from 'react';
 import PostForm from './PostForm';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import { getDateString } from '@/util/util';
@@ -53,7 +53,9 @@ const PostDetail = ({ id, queryFn, deleteFn, updateFn, children }: Props) => {
   });
 
   const handleDelete = () => {
-    mutationDelete.mutate();
+    if (data.isAuthor && window.confirm('정말 삭제하시겠습니까?')) {
+      mutationDelete.mutate();
+    }
   };
 
   const mutationPut = useMutation({
@@ -65,8 +67,8 @@ const PostDetail = ({ id, queryFn, deleteFn, updateFn, children }: Props) => {
     },
   });
 
-  const handlePut = (data: CommunityPostReq) => {
-    mutationPut.mutate(data);
+  const handlePut = (putData: CommunityPostReq) => {
+    data.isAuthor && mutationPut.mutate(putData);
   };
 
   if (isEditMode) return <PostForm type="update" handlePost={handlePut} />;
@@ -75,8 +77,12 @@ const PostDetail = ({ id, queryFn, deleteFn, updateFn, children }: Props) => {
     <S.div.Column $gap={20}>
       <S.div.Row $between>
         <S.div.Row $gap={10}>
-          <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
-          <S.button.Button onClick={toggleEditMode}>수정</S.button.Button>
+          {data.isAuthor && (
+            <Fragment>
+              <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
+              <S.button.Button onClick={toggleEditMode}>수정</S.button.Button>
+            </Fragment>
+          )}
         </S.div.Row>
         <KakaoShareButton title={data.title} />
       </S.div.Row>
@@ -84,14 +90,13 @@ const PostDetail = ({ id, queryFn, deleteFn, updateFn, children }: Props) => {
 
       <S.div.Row $gap={10} $align="center">
         <S.div.Avatar />
-        <S.h.H5>작성자</S.h.H5>
+        <S.h.H5>{data.author}</S.h.H5>
       </S.div.Row>
       <S.div.Row $between>
         <S.small.Small>{getDateString(data.createdAt)}</S.small.Small>
         <S.div.Row $gap={10}>
-          <S.p.P>댓글 1</S.p.P>
-          <S.p.P>추천 10</S.p.P>
-          <S.p.P>조회 100</S.p.P>
+          <S.p.P>추천 {data.likesCount}</S.p.P>
+          <S.p.P>조회 {data.viewCount}</S.p.P>
         </S.div.Row>
       </S.div.Row>
       <S.hr.Hr />
