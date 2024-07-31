@@ -1,4 +1,4 @@
-import { api, apiWithToken, Response } from '@/config/axios';
+import { apiWithoutToken, apiWithToken, Response } from '@/config/axios';
 import { CommunityListRes, CommunityDetailRes, CommunityPostReq } from './type';
 
 const BASEURL = 'communities';
@@ -15,7 +15,7 @@ export const getCommunityList = async (category: string | null): Promise<Communi
     url = `${BASEURL}?${searchParams.toString()}`;
   }
 
-  const res = await api.get<Response<CommunityListRes>>(url);
+  const res = await apiWithoutToken.get<Response<CommunityListRes>>(url);
 
   return res.data.data;
 };
@@ -24,7 +24,7 @@ export const getCommunityList = async (category: string | null): Promise<Communi
 export const getCommunityDetail = async (id: number): Promise<CommunityDetailRes> => {
   const url = `${BASEURL}/${id}`;
 
-  const res = await api.get<Response<CommunityDetailRes>>(url);
+  const res = await apiWithoutToken.get<Response<CommunityDetailRes>>(url);
 
   return res.data.data;
 };

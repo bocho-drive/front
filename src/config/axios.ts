@@ -35,7 +35,7 @@ const ResRejected = (error: AxiosError<ErrorResponse>) => {
 };
 
 // * 인가 없는 api
-export const api = axios.create({
+export const apiWithoutToken = axios.create({
   baseURL: import.meta.env.VITE_API_URL as string,
   headers: {
     'content-type': 'application/json;charset=UTF-8',
@@ -43,7 +43,7 @@ export const api = axios.create({
   },
   withCredentials: true, // cors
 });
-api.interceptors.response.use(ResFulfilled, ResRejected);
+apiWithoutToken.interceptors.response.use(ResFulfilled, ResRejected);
 
 // * 인가 필요 api
 export const apiWithToken = axios.create({
