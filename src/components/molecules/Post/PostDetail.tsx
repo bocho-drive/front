@@ -4,7 +4,7 @@ import VoteForm from '../../organisms/VoteForm';
 import { useNavigate } from 'react-router-dom';
 import { usePost } from './usePost';
 import { CommunityDetailRes, CommunityPostReq } from '@/@features/Communities/type';
-import { useEffect, useLayoutEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import PostForm from './PostForm';
 
 interface Props {
@@ -38,8 +38,9 @@ const PostDetail = ({ id, queryFn, deleteFn, updateFn, children }: Props) => {
 
     return () => {
       setCurrentPost(null);
+      closeEditMode();
     };
-  }, [data, setCurrentPost]);
+  }, [data, setCurrentPost, closeEditMode]);
 
   const mutationDelete = useMutation({
     mutationKey: ['deletePost', id],
