@@ -9,10 +9,11 @@ import { CommunityPostReq } from '@/@features/Communities/type';
 import { usePost } from './usePost';
 
 interface Props {
+  type: 'create' | 'update';
   handlePost: (data: CommunityPostReq) => void;
 }
 
-const PostForm = ({ handlePost }: Props) => {
+const PostForm = ({ handlePost, type }: Props) => {
   const currentPost = usePost((state) => state.currentPost);
 
   const {
@@ -20,7 +21,7 @@ const PostForm = ({ handlePost }: Props) => {
     formState: { errors },
     handleSubmit,
   } = useForm<CommunitySchema>({
-    defaultValues: { title: currentPost?.title ?? '', isVote: false },
+    defaultValues: { title: (type === 'update' && currentPost?.title) || '', isVote: false },
     resolver: yupResolver(communitySchema),
   });
   const editorRef = useRef<Editor | null>(null);
@@ -36,10 +37,10 @@ const PostForm = ({ handlePost }: Props) => {
   };
 
   useEffect(() => {
-    if (currentPost) {
+    if (type === 'update' && currentPost) {
       editorRef.current?.getInstance().setMarkdown(currentPost.content);
     }
-  }, []);
+  }, [type, currentPost]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -49,7 +50,7 @@ const PostForm = ({ handlePost }: Props) => {
           {errors.title && <S.span.ErrorSpan>{errors.title.message}</S.span.ErrorSpan>}
         </S.div.Column>
 
-        <ToastEditor ref={editorRef} initialValue={' '} />
+        <ToastEditor ref={editorRef} />
 
         <S.div.Card style={{ width: 'fit-content' }}>
           <S.input.Checkbox id="isVote" type="checkbox" {...register('isVote')} />

@@ -23,7 +23,7 @@ const CommunityNewPage = () => {
 
   return (
     <CommunityLayout>
-      <PostForm handlePost={handleNewPost} />
+      <PostForm type="create" handlePost={handleNewPost} />
     </CommunityLayout>
   );
 };

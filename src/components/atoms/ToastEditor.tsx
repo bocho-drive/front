@@ -15,7 +15,7 @@ interface EditorProps {
  */
 const ToastEditor = forwardRef<Editor, EditorProps>((props, editorRef) => {
   const { initialValue = ' ' } = props;
-  return <Editor height="500px" ref={editorRef} initialValue={initialValue} toolbarItems={toolbar} />;
+  return <Editor height="500px" ref={editorRef} initialValue={initialValue} toolbarItems={toolbar} autofocus={false} />;
 });
 
 export default ToastEditor;

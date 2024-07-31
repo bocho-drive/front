@@ -4,7 +4,7 @@ import VoteForm from '../../organisms/VoteForm';
 import { useNavigate } from 'react-router-dom';
 import { usePost } from './usePost';
 import { CommunityDetailRes, CommunityPostReq } from '@/@features/Communities/type';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import PostForm from './PostForm';
 
 interface Props {
@@ -32,8 +32,13 @@ const PostDetail = ({ id, queryFn, deleteFn, updateFn, children }: Props) => {
     queryFn: () => queryFn(id),
     retry: 1,
   });
-  useEffect(() => {
+
+  useLayoutEffect(() => {
     setCurrentPost(data);
+
+    return () => {
+      setCurrentPost(null);
+    };
   }, [data, setCurrentPost]);
 
   const mutationDelete = useMutation({
@@ -61,7 +66,7 @@ const PostDetail = ({ id, queryFn, deleteFn, updateFn, children }: Props) => {
     mutationPut.mutate(data);
   };
 
-  if (isEditMode) return <PostForm handlePost={handlePut} />;
+  if (isEditMode) return <PostForm type="update" handlePost={handlePut} />;
 
   return (
     <S.div.Column $gap={20}>
