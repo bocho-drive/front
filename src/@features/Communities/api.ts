@@ -30,19 +30,18 @@ export const getCommunityDetail = async (id: number): Promise<CommunityDetailRes
 };
 
 /** 게시글 작성 */
-export const postCommunity = async (data: CommunityPostReq): Promise<void> => {
-  const res = await apiWithToken.post<Response<null>>(BASEURL, data);
-  console.log({ res });
+export const postCommunity = async (data: CommunityPostReq): Promise<number> => {
+  const res = await apiWithToken.post<Response<number>>(BASEURL, data);
+  return res.data.data;
 };
 
 /** 게시글 삭제 */
 export const deleteCommunity = async (id: number): Promise<void> => {
-  const res = await apiWithToken.delete<Response<null>>(`${BASEURL}/${id}`);
-  console.log({ res });
+  await apiWithToken.delete<Response<null>>(`${BASEURL}/${id}`);
 };
 
 /** 게시글 수정 */
-export const putCommunity = async (id: number, data: CommunityPostReq): Promise<void> => {
-  const res = await apiWithToken.put<Response<null>>(`${BASEURL}/${id}`, data);
-  console.log({ res });
+export const putCommunity = async (id: number, data: CommunityPostReq): Promise<number> => {
+  const res = await apiWithToken.put<Response<number>>(`${BASEURL}/${id}`, data);
+  return res.data.data;
 };
