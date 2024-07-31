@@ -19,13 +19,13 @@ export const Row = styled.div<RowProps>`
 
   ${({ $gap }) => $gap && `gap: ${$gap}px;`}
   ${({ $wrap }) => $wrap && `flex-wrap: wrap;`}
-  ${({ $between }) => $between && `justify-content: space-between;`}
-  ${({ $justify }) => $justify && `justify-content: ${$justify};`}
-  ${({ $align }) => $align && `align-items: ${$align};`}
-  ${({ $width }) => $width && `width: ${$width}%;`}
-  ${({ $overflow }) => $overflow && `overflow: ${$overflow};`}
-
-  & > * {
+    ${({ $between }) => $between && `justify-content: space-between;`}
+    ${({ $justify }) => $justify && `justify-content: ${$justify};`}
+    ${({ $align }) => $align && `align-items: ${$align};`}
+    ${({ $width }) => $width && `width: ${$width}%;`}
+    ${({ $overflow }) => $overflow && `overflow: ${$overflow};`}
+    &
+    > * {
     ${({ $itemMinWidth }) => $itemMinWidth && `min-width: ${$itemMinWidth}px;`}
     ${({ $itemMaxWidth }) => $itemMaxWidth && `max-width: ${$itemMaxWidth}px;`}
   }

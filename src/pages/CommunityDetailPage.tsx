@@ -2,8 +2,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import CommunityLayout from '@/components/templates/CommunityLayout';
 import PostDetail from '@/components/molecules/Post/PostDetail';
 import * as S from '@/styles/index.style';
-import KakaoShareButton from '@/components/atoms/KakaoShareButton';
-import CommentForm from '@/components/molecules/CommentForm';
 import { Suspense } from 'react';
 import Loading from '@/components/atoms/Loading';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -42,7 +40,6 @@ const CommunityDetailPage = () => {
             {!isEditMode && (
               <>
                 <S.h.H3>댓글</S.h.H3>
-                <CommentForm />
 
                 <CommentList communityId={Number(id)} />
               </>
