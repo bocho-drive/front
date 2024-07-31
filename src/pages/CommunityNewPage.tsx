@@ -11,9 +11,8 @@ const CommunityNewPage = () => {
   const mutation = useMutation({
     mutationKey: ['postCommunity'],
     mutationFn: (data: CommunityPostReq) => postCommunity(data),
-    onSuccess: () => {
-      // queryClient.setQueryData(["postDetail"], ) // postDetail 캐시 업데이트
-      navigate('/community');
+    onSuccess: (id) => {
+      navigate(`/community/${id}`);
     },
   });
 
