@@ -1,6 +1,5 @@
 import { commentSchema, CommentSchema } from '@/@features/Comment/yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as S from '@/styles/index.style';
 

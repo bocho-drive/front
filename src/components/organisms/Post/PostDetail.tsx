@@ -6,7 +6,7 @@ import { getDateString } from '@/util/util';
 
 interface Props {
   data: CommunityDetailRes;
-  authorActionComp: ReactNode;
+  authorActionComp?: ReactNode;
 }
 
 const PostDetail = ({ data, authorActionComp }: Props) => {

@@ -17,7 +17,7 @@ const HeaderMenu = () => {
 
   useEffect(() => {
     if (menuRef && menuRef.current) {
-      const { top, left, right, bottom, height, width } = menuRef.current.getBoundingClientRect();
+      const { top, left, height } = menuRef.current.getBoundingClientRect();
       // console.log({ top, left, right, bottom, height, width });
 
       setRelativePosition({

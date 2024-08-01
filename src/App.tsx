@@ -46,7 +46,7 @@ function App() {
 
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
-          <Route path="/admin/detail" element={<AdminDetail />} />
+          <Route path="/admin/detail/:id" element={<AdminDetail />} />
           <Route path="/admin/challenge/new" element={<AdminChallengeNew />} />
           <Route path="/admin/challenge/detail" element={<AdminChallengeDetail />} />
           <Route path="/admin/challenge/verified" element={<AdminChallengeVerifiedDetail />} />
