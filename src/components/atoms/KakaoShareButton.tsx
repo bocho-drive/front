@@ -13,7 +13,7 @@ const KakaoShareButton = (props: Props) => {
   const { title, url = window.location.href, displayIcon = false, text = '공유하기' } = props;
   const shareKakaoLink = () => shareKakao({ title, url });
 
-  console.log({ url });
+  // console.log({ url });
 
   return (
     <S.button.Button onClick={shareKakaoLink}>
