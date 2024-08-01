@@ -1,9 +1,9 @@
-import React from 'react';
 import PostListHeader from '../molecules/PostListHeader';
 import * as S from '@/styles/index.style';
 import { usePost } from '@/@features/Admin/Post/usePost';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const PostList: React.FC = () => {
+const PostList = () => {
   const { posts, currentPage, postsPerPage, totalPages, handleToggle, setCurrentPage } = usePost();
 
   const indexOfLastPost = currentPage * postsPerPage;
@@ -13,6 +13,11 @@ const PostList: React.FC = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  const navigate = useNavigate();
+  const { search } = useLocation();
+
+  const handleToAdminDetail = () => navigate('/admin/detail' + search);
 
   return (
     <S.div.PostListContainer>
@@ -26,7 +31,9 @@ const PostList: React.FC = () => {
               checked={post.isChecked}
               onChange={() => handleToggle(post.id)}
             />
-            <label htmlFor={`post-${post.id}`}>{post.title}</label>
+            <label onClick={() => handleToAdminDetail()} style={{ cursor: 'pointer' }}>
+              {post.title}
+            </label>
           </div>
           <div>추천: {post.likes}</div>
           <div>댓글: {post.comments}</div>

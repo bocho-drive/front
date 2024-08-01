@@ -3,7 +3,12 @@ import { useForm } from 'react-hook-form';
 import * as S from '@/styles/index.style';
 
 const LoginForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm( {
+    defaultValues: {
+      email: '',
+      password: ''
+    }
+  });
   const [rememberMe, setRememberMe] = useState(false);
 
   const onSubmit = data => {
