@@ -4,7 +4,7 @@ export interface CommunityListReq {
   category?: string | null;
   page?: number;
   size?: number;
-  sortBy?: 'createdAt';
+  sortBy?: 'createdAt' | 'viewCount';
   isAsc?: boolean;
 }
 
@@ -51,7 +51,9 @@ export interface CommunityDetailRes {
   author: string;
   category: Category;
   viewCount: number;
+  likesCount: number;
   createdAt: string;
+  isAuthor: boolean;
 }
 
 export interface CommunityPostReq {

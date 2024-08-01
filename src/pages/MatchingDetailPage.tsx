@@ -1,5 +1,4 @@
 import * as S from '@/styles/index.style';
-import PostDetail from '@/components/molecules/Post/PostDetail';
 import DriveLayout from '@/components/templates/DriveLayout';
 import { useNavigate } from 'react-router-dom';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
@@ -12,7 +11,7 @@ const MatchingDetailPage = () => {
   return (
     <DriveLayout>
       <S.div.Column $gap={20}>
-        <PostDetail />
+        {/* <PostDetail /> */}
 
         <S.div.Row $gap={10} $justify="center">
           <KakaoShareButton title="매칭 상세 페이지" displayIcon={true} />

@@ -1,6 +1,6 @@
 import * as S from '@/styles/index.style';
 import CommunityCard from '../molecules/CommunityCard';
-import { getCommunityList } from '@/@features/Communities/api';
+import { getCommunityList } from '@/@features/Community/api';
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
 import useScroll from '@/hooks/useScroll';
@@ -31,7 +31,7 @@ const CommunityCardList = () => {
 
   return (
     <S.div.Column $gap={20}>
-      {communityList.pages.map((page) => page.content.map((community) => <CommunityCard key={community.id} id={community.id} community={community} />))}
+      {communityList.pages.map((page) => page.content.map((community) => <CommunityCard key={community.id} id={community.id} data={community} />))}
 
       {hasNextPage && (
         <S.button.Button onClick={() => fetchNextPage()} disabled={isLoading}>

@@ -2,9 +2,8 @@ import { CommentRes } from '@/@features/Comment/type';
 import * as S from '@/styles/index.style';
 import { getDateString } from '@/util/util';
 import { Fragment, useState } from 'react';
-import CommentForm from './CommentForm';
 import { useCommentQuery } from '@/@features/Comment/useCommentQuery';
-import { CommentSchema } from '@/@features/Comment/yup';
+import CommentEdit from './CommentEdit';
 
 interface Props {
   comment: CommentRes;
@@ -12,26 +11,14 @@ interface Props {
 }
 const Comment = ({ comment, communityId }: Props) => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const { deleteMutate, putMutate } = useCommentQuery(communityId);
-
-  const putComment = (data: CommentSchema) => {
-    putMutate({
-      id: comment.id,
-      data: {
-        communityId,
-        content: data.content,
-      },
-    });
-    setIsEditMode(false);
-  };
+  const { deleteMutate } = useCommentQuery(communityId);
 
   return (
     <S.div.Row $gap={20} $align="flex-start">
-      <S.div.Avatar />
       <S.div.Column $gap={10} style={{ flex: 1 }}>
         <S.div.Row $between>
           <S.div.Row $gap={10} $align="center">
-            <S.p.P>작성자</S.p.P>
+            <S.h.H4>작성자</S.h.H4>
             <S.small.Small>{getDateString(comment.createdAt)}</S.small.Small>
           </S.div.Row>
           <S.div.Row $gap={10}>
@@ -57,7 +44,7 @@ const Comment = ({ comment, communityId }: Props) => {
             <S.p.P>{comment.content}</S.p.P>
           </S.div.Card>
         )}
-        {isEditMode && <CommentForm type="edit" comment={comment} communityId={communityId} putFn={putComment} />}
+        {isEditMode && <CommentEdit comment={comment} communityId={communityId} setIsEditMode={setIsEditMode} />}
       </S.div.Column>
     </S.div.Row>
   );

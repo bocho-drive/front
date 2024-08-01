@@ -1,29 +1,32 @@
-import { postCommunity } from '@/@features/Communities/api';
-import { CommunityPostReq } from '@/@features/Communities/type';
-import PostForm from '@/components/molecules/Post/PostForm';
+import * as S from '@/styles/index.style';
+import { useCommunityPost } from '@/@features/Community/useCommunityQuery';
 import CommunityLayout from '@/components/templates/CommunityLayout';
-import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import PostForm, { PostReturnType } from '@/components/organisms/Post/PostForm';
+import { useRef } from 'react';
 
 const CommunityNewPage = () => {
-  const navigate = useNavigate();
+  const isVoteRef = useRef<HTMLInputElement>(null);
+  const { mutationPost } = useCommunityPost();
 
-  const mutation = useMutation({
-    mutationKey: ['postCommunity'],
-    mutationFn: (data: CommunityPostReq) => postCommunity(data),
-    onSuccess: () => {
-      // queryClient.setQueryData(["postDetail"], ) // postDetail 캐시 업데이트
-      navigate('/community');
-    },
-  });
+  const handleNewPost = (data: PostReturnType) => {
+    const category = isVoteRef.current?.checked ? 'VOTE' : 'GENERAL';
 
-  const handleNewPost = (data: CommunityPostReq) => {
-    mutation.mutate(data);
+    mutationPost.mutate({
+      title: data.title,
+      content: data.content,
+      category,
+    });
   };
 
   return (
     <CommunityLayout>
-      <PostForm type="create" handlePost={handleNewPost} />
+      <S.div.Column $gap={20}>
+        <S.div.Card style={{ width: 'fit-content' }}>
+          <S.input.Checkbox id="isVote" type="checkbox" ref={isVoteRef} />
+          <S.label.Label htmlFor="isVote">투표 게시글로 만들기</S.label.Label>
+        </S.div.Card>
+        <PostForm handlePost={handleNewPost} />
+      </S.div.Column>
     </CommunityLayout>
   );
 };

@@ -19,15 +19,15 @@ const LoginForm = () => {
     handleSubmit,
   } = useForm<LoginSchema>({
     defaultValues: {
-      email: 'test@gmail.com',
-      password: 'qwer',
+      email: '',
+      password: '',
     },
     resolver: yupResolver(loginSchema),
   });
 
   const handleLogin = (data: LoginSchema) => {
-    signIn(data).then((token) => {
-      handleLoginState(token);
+    signIn(data).then((res) => {
+      handleLoginState(res);
       handleClose();
     });
   };

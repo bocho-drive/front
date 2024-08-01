@@ -1,14 +1,14 @@
 import * as S from '@/styles/index.style';
-import CommentForm from '../molecules/CommentForm';
-import Comment from '../molecules/Comment';
+// import CommentForm from '../molecules/CommentForm';
+// import Comment from '../molecules/Comment';
 import { useLocation, useNavigate } from 'react-router-dom';
-import PostDetail from '../molecules/Post/PostDetail';
+// import PostDetail from '../molecules/Post/PostDetail';
 import KakaoShareButton from '../atoms/KakaoShareButton';
 
 /**
  * @deprecated
  */
-const CommunityDetail = () => {
+const __CommunityDetail = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
 
@@ -37,11 +37,11 @@ const CommunityDetail = () => {
       <S.div.Gap $height={10} />
 
       <S.h.H3>댓글</S.h.H3>
-      <CommentForm />
+      {/* <CommentForm /> */}
 
-      <Comment />
+      {/* <Comment /> */}
     </S.div.Column>
   );
 };
 
-export default CommunityDetail;
+export default __CommunityDetail;
