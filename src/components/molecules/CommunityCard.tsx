@@ -1,4 +1,4 @@
-import { CommunityRes } from '@/@features/Communities/type';
+import { CommunityRes } from '@/@features/Community/type';
 import * as S from '@/styles/index.style';
 import { Link, useLocation } from 'react-router-dom';
 

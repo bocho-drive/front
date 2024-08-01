@@ -1,6 +1,6 @@
 import * as S from '@/styles/index.style';
 import CommunityCard from '../molecules/CommunityCard';
-import { getCommunityList } from '@/@features/Communities/api';
+import { getCommunityList } from '@/@features/Community/api';
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
 import useScroll from '@/hooks/useScroll';

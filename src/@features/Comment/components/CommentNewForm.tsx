@@ -16,7 +16,6 @@ const CommentNewForm = ({ communityId }: Props) => {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm<CommentSchema>({
     defaultValues: {
       content: '',
@@ -24,16 +23,15 @@ const CommentNewForm = ({ communityId }: Props) => {
     resolver: yupResolver(commentSchema),
   });
 
-  const handlePostComment = (data: CommentSchema) => {
+  const handlePutComment = (data: CommentSchema) => {
     postMutate({
       communityId,
       content: data.content,
     });
-    reset();
   };
 
   return (
-    <form onSubmit={handleSubmit(handlePostComment)}>
+    <form onSubmit={handleSubmit(handlePutComment)}>
       <S.div.Column $gap={10}>
         <S.div.Column>
           <S.textarea.Textarea placeholder="댓글을 입력해주세요" {...register('content')} />
@@ -42,7 +40,7 @@ const CommentNewForm = ({ communityId }: Props) => {
 
         <S.div.Row $justify="flex-end">
           <S.button.Button type="submit" $size="small" $colors="primary">
-            저장
+            수정
           </S.button.Button>
         </S.div.Row>
       </S.div.Column>

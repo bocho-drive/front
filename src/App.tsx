@@ -17,6 +17,7 @@ import MatchingDetailPage from './pages/MatchingDetailPage';
 import PrivateRoute from './config/PrivateRoute';
 import NotFoundPage from './pages/NotFoundPage';
 import GlobalComponents from './config/GlobalComponents';
+import CommunityEditPage from './pages/CommunityEditPage';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           {/* 인증 필요 페이지 */}
           <Route element={<PrivateRoute isNeedAuth={true} />}>
             <Route path="/community/new" element={<CommunityNewPage />} />
+            <Route path="/community/edit/:id" element={<CommunityEditPage />} />
             <Route path="/my" element={<MyPage />} />
           </Route>
 
