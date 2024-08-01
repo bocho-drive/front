@@ -18,7 +18,13 @@ interface SizeProps {
 }
 
 export const Button = styled.button<ButtonProps & SizeProps>`
-  background-color: ${({ theme, $colors }) => $colors && theme.colors[$colors]};
+  ${({ $colors, theme }) =>
+    $colors &&
+    css`
+      background-color: ${theme.colors[$colors]};
+      color: #fff;
+    `}
+  /* background-color: ${({ theme, $colors }) => $colors && theme.colors[$colors]}; */
   border: none;
   border-radius: 5px;
   cursor: pointer;

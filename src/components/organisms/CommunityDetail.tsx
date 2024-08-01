@@ -8,7 +8,7 @@ import KakaoShareButton from '../atoms/KakaoShareButton';
 /**
  * @deprecated
  */
-const CommunityDetail = () => {
+const __CommunityDetail = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
 
@@ -44,4 +44,4 @@ const CommunityDetail = () => {
   );
 };
 
-export default CommunityDetail;
+export default __CommunityDetail;

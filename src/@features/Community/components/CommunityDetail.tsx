@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
 import { useCommunityQuery } from '../useCommunityQuery';
 import * as S from '@/styles/index.style';
-import VoteForm from '@/components/organisms/VoteForm';
 import PostDetail from '@/components/organisms/Post/PostDetail';
 import { useLocation, useNavigate } from 'react-router-dom';
+import VoteForm from '@/@features/Vote/components/VoteForm';
 
 interface Props {
   communityId: number;
@@ -36,10 +36,18 @@ const CommunityDetail = ({ communityId }: Props) => {
           </Fragment>
         }
       />
-      {data.category === 'VOTE' && <VoteForm />}
+
+      {data.category === 'VOTE' && (
+        <Fragment>
+          <S.div.Gap $height={50} />
+          <VoteForm voteList={[]} />
+        </Fragment>
+      )}
 
       <S.div.Row $gap={10} $justify="center">
-        <S.button.Button onClick={handleLike}>글 추천</S.button.Button>
+        <S.button.Button $colors="secondary" onClick={handleLike}>
+          🎉 글 추천
+        </S.button.Button>
       </S.div.Row>
 
       <S.div.Row $gap={10} $justify="flex-start">

@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface Props {
+  /** 인가 유효 여부 */
   isAuth: boolean;
   token: string | null;
 }
