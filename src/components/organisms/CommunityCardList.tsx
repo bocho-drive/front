@@ -31,7 +31,7 @@ const CommunityCardList = () => {
 
   return (
     <S.div.Column $gap={20}>
-      {communityList.pages.map((page) => page.content.map((community) => <CommunityCard key={community.id} id={community.id} community={community} />))}
+      {communityList.pages.map((page) => page.content.map((community) => <CommunityCard key={community.id} id={community.id} data={community} />))}
 
       {hasNextPage && (
         <S.button.Button onClick={() => fetchNextPage()} disabled={isLoading}>
