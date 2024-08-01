@@ -1,7 +1,7 @@
 import PostListHeader from '../molecules/PostListHeader';
 import * as S from '@/styles/index.style';
 import { usePost } from '@/@features/Admin/Post/usePost';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const PostList = () => {
   const { posts, currentPage, postsPerPage, totalPages, handleToggle, setCurrentPage } = usePost();
@@ -15,9 +15,8 @@ const PostList = () => {
   };
 
   const navigate = useNavigate();
-  const { search } = useLocation();
 
-  const handleToAdminDetail = () => navigate('/admin/detail' + search);
+  const handleToAdminDetail = (id: number) => navigate(`/admin/detail/${id}`);
 
   return (
     <S.div.PostListContainer>
@@ -25,13 +24,8 @@ const PostList = () => {
       {currentPosts.map((post) => (
         <S.div.PostItem key={post.id}>
           <div>
-            <S.input.Checkbox
-              id={`post-${post.id}`}
-              type="checkbox"
-              checked={post.isChecked}
-              onChange={() => handleToggle(post.id)}
-            />
-            <label onClick={() => handleToAdminDetail()} style={{ cursor: 'pointer' }}>
+            <S.input.Checkbox id={`post-${post.id}`} type="checkbox" checked={post.isChecked} onChange={() => handleToggle(post.id)} />
+            <label onClick={() => handleToAdminDetail(post.id)} style={{ cursor: 'pointer' }}>
               {post.title}
             </label>
           </div>
@@ -41,11 +35,7 @@ const PostList = () => {
       ))}
       <S.div.Pagination>
         {Array.from({ length: totalPages }, (_, index) => (
-          <S.button.PageButton
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            active={index + 1 === currentPage}
-          >
+          <S.button.PageButton key={index + 1} onClick={() => handlePageChange(index + 1)} active={index + 1 === currentPage}>
             {index + 1}
           </S.button.PageButton>
         ))}
