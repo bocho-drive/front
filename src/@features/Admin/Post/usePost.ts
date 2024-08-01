@@ -42,7 +42,7 @@ interface Actions {
 
 export const usePost = create<Props & Actions>((set, get) => ({
   posts: [],
-  currentPage: 0,
+  currentPage: 1,
   postsPerPage: 10,
   totalPages: 0,
   allChecked: false,

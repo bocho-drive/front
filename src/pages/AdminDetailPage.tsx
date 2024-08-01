@@ -7,7 +7,8 @@ import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import Sidebar from '@/components/atoms/Sidebar';
 import PostDetail from '@/components/organisms/Post/PostDetail';
 import { CommunityDetailRes } from '@/@features/Community/type';
-import { getCommunityDetail } from '@/@features/Community/api';
+import { deleteCommunity, getCommunityDetail } from '@/@features/Community/api';
+import CommentList from '@/@features/Comment/components/CommentList';
 
 const AdminDetailPage = () => {
   const { id } = useParams();
@@ -17,10 +18,26 @@ const AdminDetailPage = () => {
   const handleToList = () => navigate('/admin');
 
   const fetchData = async () => {
+    // api 호출
     const data = await getCommunityDetail(Number(id));
     console.log({ data });
     setCommunityData(data);
+
+    // if(data.category === "GENERAL") {}
   };
+
+  // id  : category
+  // 10번 : 일반
+  // 11번 : 일반
+  // 12번 : 일반
+
+  // 22번 : TIP
+  // 23번 : TIP
+  // 24번 : TIP
+
+  // 33번 : 챌린지인증
+  // 34번 : 챌린지인증
+  // 35번 : 챌린지인증
 
   useEffect(() => {
     if (id === undefined || !Number(id)) {
@@ -28,6 +45,10 @@ const AdminDetailPage = () => {
     }
     fetchData();
   }, []);
+
+  const handleDelete = () => {
+    deleteCommunity(Number(id));
+  };
 
   if (id === undefined || !Number(id)) return null;
 
@@ -42,8 +63,10 @@ const AdminDetailPage = () => {
 
               <S.div.Row $gap={10} $justify="flex-start">
                 <S.button.Button onClick={handleToList}>목록으로</S.button.Button>
-                <S.button.Button onClick={handleToList}>삭제</S.button.Button>
+                <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
               </S.div.Row>
+
+              <CommentList communityId={Number(id)} />
             </S.div.Column>
           </Suspense>
         </ErrorBoundary>
