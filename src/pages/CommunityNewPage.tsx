@@ -6,7 +6,7 @@ import { useRef } from 'react';
 
 const CommunityNewPage = () => {
   const isVoteRef = useRef<HTMLInputElement>(null);
-  const mutationPost = useCommunityPost();
+  const { mutationPost } = useCommunityPost();
 
   const handleNewPost = (data: PostReturnType) => {
     const category = isVoteRef.current?.checked ? 'VOTE' : 'GENERAL';

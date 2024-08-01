@@ -6,6 +6,7 @@ import { postLike } from '../Like/api';
 
 export const useCommunityPost = () => {
   const navigate = useNavigate();
+
   const mutationPost = useMutation({
     mutationKey: ['postCommunity'],
     mutationFn: (data: CommunityPostReq) => postCommunity(data),
@@ -13,7 +14,7 @@ export const useCommunityPost = () => {
       navigate(`/community/${id}`);
     },
   });
-  return mutationPost;
+  return { mutationPost };
 };
 
 export const useCommunityQuery = (communityId: number) => {

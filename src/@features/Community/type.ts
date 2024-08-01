@@ -4,7 +4,7 @@ export interface CommunityListReq {
   category?: string | null;
   page?: number;
   size?: number;
-  sortBy?: 'createdAt';
+  sortBy?: 'createdAt' | 'viewCount';
   isAsc?: boolean;
 }
 
