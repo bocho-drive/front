@@ -3,7 +3,7 @@ import * as S from '@/styles/index.style';
 import { getDateString } from '@/util/util';
 import { Fragment, useState } from 'react';
 import { useCommentQuery } from '@/@features/Comment/useCommentQuery';
-import CommentEditForm from './CommentEditForm';
+import CommentEdit from './CommentEdit';
 
 interface Props {
   comment: CommentRes;
@@ -15,11 +15,10 @@ const Comment = ({ comment, communityId }: Props) => {
 
   return (
     <S.div.Row $gap={20} $align="flex-start">
-      <S.div.Avatar />
       <S.div.Column $gap={10} style={{ flex: 1 }}>
         <S.div.Row $between>
           <S.div.Row $gap={10} $align="center">
-            <S.p.P>작성자</S.p.P>
+            <S.h.H4>작성자</S.h.H4>
             <S.small.Small>{getDateString(comment.createdAt)}</S.small.Small>
           </S.div.Row>
           <S.div.Row $gap={10}>
@@ -45,7 +44,7 @@ const Comment = ({ comment, communityId }: Props) => {
             <S.p.P>{comment.content}</S.p.P>
           </S.div.Card>
         )}
-        {isEditMode && <CommentEditForm comment={comment} communityId={communityId} setIsEditMode={setIsEditMode} />}
+        {isEditMode && <CommentEdit comment={comment} communityId={communityId} setIsEditMode={setIsEditMode} />}
       </S.div.Column>
     </S.div.Row>
   );
