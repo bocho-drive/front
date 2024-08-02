@@ -1,5 +1,4 @@
 import * as S from '@/styles/index.style';
-import ChallengeCard from '@/components/molecules/ChallengeCard';
 import MatchingCard from '@/components/molecules/MatchingCard';
 import TipCard from '@/components/molecules/TipCard';
 import VideoCard from '@/components/molecules/VideoCard';
@@ -74,12 +73,12 @@ const LandingPage = () => {
           <S.h.LayoutTitle>운전고수가 되기 위해 도전해봐요 🏆</S.h.LayoutTitle>
           <MoreLayout to="/challenge">
             <S.div.Grid $repeat={3}>
-              <ChallengeCard id={1} />
+              {/* <ChallengeCard id={1} />
               <ChallengeCard id={2} />
               <ChallengeCard id={3} />
               <ChallengeCard id={4} />
               <ChallengeCard id={5} />
-              <ChallengeCard id={6} />
+              <ChallengeCard id={6} /> */}
             </S.div.Grid>
           </MoreLayout>
         </S.div.Column>

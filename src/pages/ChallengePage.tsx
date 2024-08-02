@@ -1,6 +1,8 @@
-import ChallengeCard from '@/components/molecules/ChallengeCard';
+import ChallengeCardList from '@/@features/Challenge/components/ChallengeCardList';
+import Loading from '@/components/atoms/Loading';
 import DriveLayout from '@/components/templates/DriveLayout';
 import * as S from '@/styles/index.style';
+import { Suspense } from 'react';
 
 const ChallengePage = () => {
   return (
@@ -14,7 +16,11 @@ const ChallengePage = () => {
           <label htmlFor="checkClear">클리어한 도전</label>
         </S.div.Row>
 
-        <S.div.Column $gap={10}>
+        <Suspense fallback={<Loading />}>
+          <ChallengeCardList />
+        </Suspense>
+
+        {/* <S.div.Column $gap={10}>
           <S.h.H2>1️⃣ 초급</S.h.H2>
           <S.p.P>✅ 5개 중 2개 완료</S.p.P>
         </S.div.Column>
@@ -33,7 +39,7 @@ const ChallengePage = () => {
           <S.p.P>✅ 5개 중 2개 완료</S.p.P>
         </S.div.Column>
         <ChallengeCard id={5} />
-        <ChallengeCard id={6} />
+        <ChallengeCard id={6} /> */}
       </S.div.Column>
     </DriveLayout>
   );

@@ -1,4 +1,4 @@
-import ChallengeCard from '@/components/molecules/ChallengeCard';
+import ChallengeCard from '@/@features/Challenge/components/ChallengeCard';
 import MatchingCard from '@/components/molecules/MatchingCard';
 import TipCard from '@/components/molecules/TipCard';
 import VideoCard from '@/components/molecules/VideoCard';
@@ -11,12 +11,7 @@ const DrivePage = () => {
       <S.div.Column $gap={50}>
         <S.div.Column $gap={10}>
           <S.h.LayoutTitle>운전 챌린지 🏆</S.h.LayoutTitle>
-          <S.div.Row $gap={20} $overflow="scroll" $itemMinWidth={400}>
-            <ChallengeCard id={1} />
-            <ChallengeCard id={2} />
-            <ChallengeCard id={3} />
-            <ChallengeCard id={4} />
-          </S.div.Row>
+          <S.div.Row $gap={20} $overflow="scroll" $itemMinWidth={400}></S.div.Row>
         </S.div.Column>
 
         <S.div.Column $gap={10}>

@@ -1,4 +1,4 @@
-export interface Pagination<T> {
+export interface PaginationRes<T> {
   totalPages: number;
   totalElements: number;
   number: number;
@@ -24,4 +24,10 @@ export interface Pagination<T> {
     unpaged: boolean;
     paged: boolean;
   };
+}
+
+export interface PaginationReq {
+  page?: number;
+  size?: number;
+  isAsc?: boolean;
 }

@@ -1,16 +1,13 @@
-import { Pagination } from '@/config/type';
+import { PaginationReq, PaginationRes } from '@/config/type';
 
 type Category = 'GENERAL' | 'VOTE' | 'TIP' | 'CHALLENGE_CERTIFICATION';
 
-export interface CommunityListReq {
+export interface CommunityListReq extends PaginationReq {
   category?: string | null;
-  page?: number;
-  size?: number;
   sortBy?: 'createdAt' | 'viewCount';
-  isAsc?: boolean;
 }
 
-export type CommunityListRes = Pagination<CommunityRes[]>;
+export type CommunityListRes = PaginationRes<CommunityRes[]>;
 
 export interface CommunityRes {
   id: number;

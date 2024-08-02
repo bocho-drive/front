@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import * as S from '@/styles/index.style';
 import CommunityCardList from '@/components/organisms/CommunityCardList';
-import CommentList from '@/@features/Comment/components/CommentList';
-import ChallengeCardList from '@/components/organisms/ChallengeCardList';
 
 const tabHeaders = ['게시글', '댓글', '챌린지'] as const;
-const tabBodys = [<CommunityCardList />, <CommentList />, <ChallengeCardList />];
+const tabBodys = [<CommunityCardList />, <Fragment />, <Fragment />];
 
 const Tab = () => {
   const [tabIndex, setTabIndex] = React.useState(0);

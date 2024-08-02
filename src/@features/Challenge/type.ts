@@ -1,5 +1,6 @@
-import { Pagination } from '@/config/type';
+import { PaginationRes } from '@/config/type';
 
+// API
 export interface Challenge {
   id: string;
   title: string;
@@ -7,4 +8,4 @@ export interface Challenge {
   createdAt: string;
 }
 
-export type ChallengeList = Pagination<Challenge[]>;
+export type ChallengeList = PaginationRes<Challenge[]>;
