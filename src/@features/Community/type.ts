@@ -1,6 +1,6 @@
 import { PaginationReq, PaginationRes } from '@/config/type';
 
-type Category = 'GENERAL' | 'VOTE' | 'TIP' | 'CHALLENGE_CERTIFICATION';
+type Category = 'GENERAL' | 'VOTE' | 'TIP' | 'CHALLENGE_VERIFIES';
 
 export interface CommunityListReq extends PaginationReq {
   category?: string | null;
