@@ -1,3 +1,5 @@
+import { Pagination } from '@/config/type';
+
 type Category = 'GENERAL' | 'VOTE' | 'TIP' | 'CHALLENGE_CERTIFICATION';
 
 export interface CommunityListReq {
@@ -8,33 +10,7 @@ export interface CommunityListReq {
   isAsc?: boolean;
 }
 
-export interface CommunityListRes {
-  totalPages: number;
-  totalElements: number;
-  number: number;
-  size: number;
-  content: CommunityRes[];
-  sort: {
-    empty: boolean;
-    unsorted: boolean;
-    sorted: boolean;
-  };
-  first: boolean;
-  last: boolean;
-  numberOfElements: number;
-  pageable: {
-    pageNumber: number;
-    pageSize: number;
-    sort: {
-      empty: boolean;
-      unsorted: boolean;
-      sorted: boolean;
-    };
-    offset: number;
-    unpaged: boolean;
-    paged: boolean;
-  };
-}
+export type CommunityListRes = Pagination<CommunityRes[]>;
 
 export interface CommunityRes {
   id: number;
