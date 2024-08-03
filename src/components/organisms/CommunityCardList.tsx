@@ -4,13 +4,15 @@ import useScroll from '@/hooks/useScroll';
 import { Category } from '@/@features/Community/type';
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { getCommunityList } from '@/@features/Community/api';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 interface Props {
   category: Category;
 }
 
 const CommunityCardList = ({ category }: Props) => {
+  const { pathname } = useLocation();
+
   const { data, fetchNextPage, hasNextPage } = useSuspenseInfiniteQuery({
     queryKey: ['communityList', category],
     initialPageParam: 0,
@@ -31,7 +33,7 @@ const CommunityCardList = ({ category }: Props) => {
       {data.pages.map((page) =>
         page.content.map((community) => {
           return (
-            <Link to={`/community/${community.id}`} key={community.id}>
+            <Link to={`${pathname}/${community.id}`} key={community.id}>
               <CommunityCard data={community} />
             </Link>
           );

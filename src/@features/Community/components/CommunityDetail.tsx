@@ -14,7 +14,7 @@ interface Props {
 
 const CommunityDetail = ({ communityId }: Props) => {
   const navigate = useNavigate();
-  const { search } = useLocation();
+  const { search, pathname } = useLocation();
 
   const { data, mutationDelete, mutationLike } = useCommunityQueryWithId(communityId);
 
@@ -25,8 +25,8 @@ const CommunityDetail = ({ communityId }: Props) => {
   };
 
   const handleLike = () => mutationLike.mutate();
-  const handleToList = () => navigate('/community' + search);
-  const handleToEdit = () => navigate(`/community/edit/${communityId}`);
+  const handleToList = () => navigate('/' + pathname.split('/')[1] + search);
+  const handleToEdit = () => navigate(`/${pathname.split('/')[1]}/edit/${communityId}`);
 
   return (
     <S.div.Column $gap={20}>

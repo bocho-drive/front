@@ -25,6 +25,8 @@ import GlobalComponents from './config/GlobalComponents';
 import CommunityEditPage from './pages/CommunityEditPage';
 import ChallengeVerifiesDetailPage from './pages/ChallengeVerifiesDetailPage';
 import ChallengeVerifiesNewPage from './pages/ChallengeVerifiesNewPage';
+import TipNewPage from './pages/TipNewPage';
+import TipEditPage from './pages/TipEditPage';
 
 export const URLS = {
   LANDING: '/',
@@ -43,7 +45,7 @@ export const URLS = {
   ADMIN_CHALLENGE_VERIFIED_DETAIL: '/admin/challenge/verified',
   ADMIN_TIP_DETAIL: '/admin/tip/detail',
   COMMUNITY_NEW: '/community/new',
-};
+} as const;
 
 function App() {
   return (
@@ -80,6 +82,9 @@ function App() {
           <Route element={<PrivateRoute isNeedAuth={true} />}>
             <Route path={`${URLS.COMMUNITY}/new`} element={<CommunityNewPage />} />
             <Route path={`${URLS.COMMUNITY}/edit/:id`} element={<CommunityEditPage />} />
+
+            <Route path={`${URLS.TIP}/new`} element={<TipNewPage />} />
+            <Route path={`${URLS.TIP}/edit/:id`} element={<TipEditPage />} />
 
             {/* 챌린지 인증 상세 페이지 */}
             <Route path={`${URLS.CHALLENGE_VERIFIES}/:id`} element={<ChallengeVerifiesDetailPage />} />
