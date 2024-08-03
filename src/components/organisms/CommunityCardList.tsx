@@ -21,8 +21,10 @@ const CommunityCardList = () => {
     queryFn: ({ pageParam = 0 }) => getCommunityList({ category, page: pageParam, size: 10 }),
 
     getNextPageParam: (lastPage) => {
-      if (lastPage.last) return undefined;
-      return lastPage.number + 1;
+      const { size, number, totalElements } = lastPage.page;
+      if (size * (number + 1) >= totalElements) return undefined;
+
+      return lastPage.page.number + 1;
     },
   });
   useScroll({ length: communityList.pages.length, fetchNextPage, hasNextPage });

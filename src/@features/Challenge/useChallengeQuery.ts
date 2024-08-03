@@ -12,8 +12,9 @@ export const useChallengeQuery = () => {
     initialPageParam: 0,
     queryFn: ({ pageParam = 0 }) => getChallengeList({ page: pageParam, size: 6 }),
     getNextPageParam: (lastPage) => {
-      if (lastPage.last) return undefined;
-      return lastPage.number + 1;
+      const { size, number, totalElements } = lastPage.page;
+      if (size * (number + 1) >= totalElements) return undefined;
+      return lastPage.page.number + 1;
     },
   });
 

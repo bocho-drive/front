@@ -8,4 +8,7 @@ export interface Challenge {
   createdAt: string;
 }
 
-export type ChallengeList = PaginationRes<Challenge[]>;
+export interface ChallengeList {
+  content: Challenge[];
+  page: PaginationRes;
+}

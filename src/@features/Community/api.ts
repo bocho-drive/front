@@ -10,7 +10,7 @@ export const getCommunityList = async (props: CommunityListReq): Promise<Communi
 
   const searchParams = new URLSearchParams();
   if (props.category && CommunityCategory.includes(props.category)) searchParams.append('category', props.category);
-  if (props.page) searchParams.append('page', String(props.page));
+  if (props.page !== undefined) searchParams.append('page', String(props.page));
   if (props.size) searchParams.append('size', String(props.size));
 
   url = `${BASEURL}?${searchParams.toString()}`;

@@ -5,7 +5,12 @@ import CommunityCardList from '@/components/organisms/CommunityCardList';
 const tabHeaders = ['게시글', '댓글', '챌린지'] as const;
 const tabBodys = [<CommunityCardList />, <Fragment />, <Fragment />];
 
-const Tab = () => {
+interface Props {
+  tabHeaders: string[];
+  tabBodys: React.ReactNode[];
+}
+
+const Tab = ({ tabBodys, tabHeaders }: Props) => {
   const [tabIndex, setTabIndex] = React.useState(0);
 
   return (

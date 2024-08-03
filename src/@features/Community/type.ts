@@ -7,7 +7,10 @@ export interface CommunityListReq extends PaginationReq {
   sortBy?: 'createdAt' | 'viewCount';
 }
 
-export type CommunityListRes = PaginationRes<CommunityRes[]>;
+export interface CommunityListRes {
+  content: CommunityRes[];
+  page: PaginationRes;
+}
 
 export interface CommunityRes {
   id: number;

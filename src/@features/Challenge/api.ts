@@ -1,15 +1,17 @@
 import { Response, apiWithoutToken } from '@/config/axios';
 import { Challenge, ChallengeList } from './type';
 import { PaginationReq } from '@/config/type';
+import { isNumber } from 'lodash';
 
 const BASEURL = 'challenges';
 
 /** 챌린지 목록 조회 */
 export const getChallengeList = async (props: PaginationReq): Promise<ChallengeList> => {
+  console.log({ props });
   let url = BASEURL;
 
   const searchParams = new URLSearchParams();
-  if (props.page) searchParams.append('page', String(props.page));
+  if (isNumber(props.page)) searchParams.append('page', String(props.page));
   if (props.size) searchParams.append('size', String(props.size));
   url = `${BASEURL}?${searchParams.toString()}`;
 
