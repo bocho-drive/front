@@ -1,9 +1,12 @@
-import { Fragment } from 'react';
+import { Fragment, Suspense } from 'react';
 import { useCommunityQuery } from '../useCommunityQuery';
 import * as S from '@/styles/index.style';
 import PostDetail from '@/components/organisms/Post/PostDetail';
 import { useLocation, useNavigate } from 'react-router-dom';
 import VoteForm from '@/@features/Vote/components/VoteForm';
+import Loading from '@/components/atoms/Loading';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 
 interface Props {
   communityId: number;
@@ -38,10 +41,12 @@ const CommunityDetail = ({ communityId }: Props) => {
       />
 
       {data.category === 'VOTE' && (
-        <Fragment>
-          <S.div.Gap $height={50} />
-          <VoteForm voteList={[]} />
-        </Fragment>
+        <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
+          <Suspense fallback={<Loading />}>
+            <S.div.Gap $height={50} />
+            <VoteForm communityId={communityId} />
+          </Suspense>
+        </ErrorBoundary>
       )}
 
       <S.div.Row $gap={10} $justify="center">

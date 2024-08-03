@@ -4,6 +4,6 @@ export interface VotePostReq {
 }
 
 export interface Vote {
-  usersId: number;
+  userId: number;
   agreeYn: boolean;
 }
