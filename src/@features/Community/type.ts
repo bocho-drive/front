@@ -15,7 +15,9 @@ export interface CommunityListRes {
 export interface CommunityRes {
   id: number;
   title: string;
+  author: string;
   viewCount: number;
+  likeCount: number;
   verifiedYN: boolean;
   createdAt: string;
 }
