@@ -1,5 +1,5 @@
 import { Fragment, Suspense } from 'react';
-import { useCommunityQuery } from '../useCommunityQuery';
+import { useCommunityQueryWithId } from '../useCommunityQuery';
 import * as S from '@/styles/index.style';
 import PostDetail from '@/components/organisms/Post/PostDetail';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -16,7 +16,7 @@ const CommunityDetail = ({ communityId }: Props) => {
   const navigate = useNavigate();
   const { search } = useLocation();
 
-  const { data, mutationDelete, mutationLike } = useCommunityQuery(communityId);
+  const { data, mutationDelete, mutationLike } = useCommunityQueryWithId(communityId);
 
   const handleDelete = () => {
     if (data.isAuthor && window.confirm('정말 삭제하시겠습니까?')) {

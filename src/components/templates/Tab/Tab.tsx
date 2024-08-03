@@ -3,7 +3,7 @@ import * as S from '@/styles/index.style';
 import CommunityCardList from '@/components/organisms/CommunityCardList';
 
 const tabHeaders = ['게시글', '댓글', '챌린지'] as const;
-const tabBodys = [<CommunityCardList />, <Fragment />, <Fragment />];
+const tabBodys = [<CommunityCardList category="GENERAL" />, <Fragment />, <Fragment />];
 
 interface Props {
   tabHeaders: string[];

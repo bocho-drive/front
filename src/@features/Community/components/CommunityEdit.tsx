@@ -1,5 +1,5 @@
 import * as S from '@/styles/index.style';
-import { useCommunityQuery } from '../useCommunityQuery';
+import { useCommunityQueryWithId } from '../useCommunityQuery';
 import PostForm, { PostReturnType } from '@/components/organisms/Post/PostForm';
 import { useRef } from 'react';
 import ImageS3Button from '../ImageS3/components/ImageS3Button';
@@ -10,7 +10,7 @@ interface Props {
 
 const CommunityEdit = ({ communityId }: Props) => {
   const isVoteRef = useRef<HTMLInputElement>(null);
-  const { data, mutationPut } = useCommunityQuery(communityId);
+  const { data, mutationPut } = useCommunityQueryWithId(communityId);
 
   const handlePutCommunity = (data: PostReturnType) => {
     const category = isVoteRef.current?.checked ? 'VOTE' : 'GENERAL';

@@ -4,12 +4,11 @@ import { CommunityListRes, CommunityDetailRes, CommunityPostReq, CommunityListRe
 const BASEURL = 'communities';
 
 /** 게시글 목록 조회 */
-const CommunityCategory = ['GENERAL', 'VOTE', 'TIP', 'CHALLENGE_CERTIFICATION'] as string[];
 export const getCommunityList = async (props: CommunityListReq): Promise<CommunityListRes> => {
   let url = BASEURL;
 
   const searchParams = new URLSearchParams();
-  if (props.category && CommunityCategory.includes(props.category)) searchParams.append('category', props.category);
+  if (props.category) searchParams.append('category', props.category);
   if (props.page !== undefined) searchParams.append('page', String(props.page));
   if (props.size) searchParams.append('size', String(props.size));
 

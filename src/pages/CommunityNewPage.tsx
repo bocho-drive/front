@@ -1,12 +1,12 @@
 import * as S from '@/styles/index.style';
-import { useCommunityPost } from '@/@features/Community/useCommunityQuery';
-import CommunityLayout from '@/components/templates/CommunityLayout';
+import { useCommunityWithoutId } from '@/@features/Community/useCommunityQuery';
+import CommunityLayout from '@/components/templates/CommunityLayout/CommunityLayout';
 import PostForm, { PostReturnType } from '@/components/organisms/Post/PostForm';
 import { useRef } from 'react';
 
 const CommunityNewPage = () => {
   const isVoteRef = useRef<HTMLInputElement>(null);
-  const { mutationPost } = useCommunityPost();
+  const { mutationPost } = useCommunityWithoutId();
 
   const handleNewPost = async (data: PostReturnType) => {
     const category = isVoteRef.current?.checked ? 'VOTE' : 'GENERAL';

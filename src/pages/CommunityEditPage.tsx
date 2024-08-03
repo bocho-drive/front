@@ -1,4 +1,4 @@
-import CommunityLayout from '@/components/templates/CommunityLayout';
+import CommunityLayout from '@/components/templates/CommunityLayout/CommunityLayout';
 import { useParams } from 'react-router-dom';
 import { Suspense } from 'react';
 import CommunityEdit from '@/@features/Community/components/CommunityEdit';

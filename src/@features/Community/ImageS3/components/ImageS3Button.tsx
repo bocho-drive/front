@@ -1,5 +1,5 @@
 import * as S from '@/styles/index.style';
-import { useCommunityQuery } from '@/@features/Community/useCommunityQuery';
+import { useCommunityQueryWithId } from '@/@features/Community/useCommunityQuery';
 
 interface Props {
   url: string;
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const ImageS3Button = ({ url, communityId }: Props) => {
-  const { mutationDeleteImage } = useCommunityQuery(communityId);
+  const { mutationDeleteImage } = useCommunityQueryWithId(communityId);
 
   const handleDelete = () => {
     if (confirm('정말 삭제하시겠습니까?')) mutationDeleteImage.mutate(url);

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import CommunityLayout from '@/components/templates/CommunityLayout';
+import CommunityLayout from '@/components/templates/CommunityLayout/CommunityLayout';
 import * as S from '@/styles/index.style';
 import { Suspense } from 'react';
 import Loading from '@/components/atoms/Loading';
