@@ -23,6 +23,7 @@ import PrivateRoute from './config/PrivateRoute';
 import NotFoundPage from './pages/NotFoundPage';
 import GlobalComponents from './config/GlobalComponents';
 import CommunityEditPage from './pages/CommunityEditPage';
+import ChallengeVerifiesDetailPage from './pages/ChallengeVerifiesDetailPage';
 
 function App() {
   return (
@@ -35,7 +36,9 @@ function App() {
           <Route path="/community/:id" element={<CommunityDetailPage />} />
 
           <Route path="/drive" element={<DrivePage />} />
+
           <Route path="/challenge" element={<ChallengePage />} />
+
           <Route path="/matching" element={<MatchingPage />} />
           <Route path="/matching/:id" element={<MatchingDetailPage />} />
 
@@ -44,6 +47,7 @@ function App() {
 
           <Route path="/video" element={<VideoPage />} />
 
+          {/* 어드민 */}
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
           <Route path="/admin/detail/:id" element={<AdminDetail />} />
@@ -56,6 +60,10 @@ function App() {
           <Route element={<PrivateRoute isNeedAuth={true} />}>
             <Route path="/community/new" element={<CommunityNewPage />} />
             <Route path="/community/edit/:id" element={<CommunityEditPage />} />
+
+            {/* 챌린지 인증 상세 페이지 */}
+            <Route path="/challenge_verifies/:id" element={<ChallengeVerifiesDetailPage />} />
+
             <Route path="/my" element={<MyPage />} />
           </Route>
 

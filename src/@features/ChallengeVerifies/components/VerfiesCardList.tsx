@@ -1,20 +1,15 @@
 import * as S from '@/styles/index.style';
-import CommunityCard from '../molecules/CommunityCard';
-import useScroll from '@/hooks/useScroll';
-import { Category } from '@/@features/Community/type';
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
-import { getCommunityList } from '@/@features/Community/api';
+import { getChallengeVerifiesList } from '../api';
+import useScroll from '@/hooks/useScroll';
+import CommunityCard from '@/components/molecules/CommunityCard';
 import { Link } from 'react-router-dom';
 
-interface Props {
-  category: Category;
-}
-
-const CommunityCardList = ({ category }: Props) => {
+const VerfiesCardList = () => {
   const { data, fetchNextPage, hasNextPage } = useSuspenseInfiniteQuery({
-    queryKey: ['communityList', category],
+    queryKey: ['chellengeVerifies'],
     initialPageParam: 0,
-    queryFn: ({ pageParam = 0 }) => getCommunityList({ category, page: pageParam, size: 10 }),
+    queryFn: ({ pageParam = 0 }) => getChallengeVerifiesList({ page: pageParam, size: 10 }),
 
     getNextPageParam: (lastPage) => {
       const { size, number, totalElements } = lastPage.page;
@@ -29,10 +24,10 @@ const CommunityCardList = ({ category }: Props) => {
   return (
     <S.div.Column $gap={20}>
       {data.pages.map((page) =>
-        page.content.map((community) => {
+        page.content.map((verifies) => {
           return (
-            <Link to={`/community/${community.id}`} key={community.id}>
-              <CommunityCard data={community} />
+            <Link to={`/challenge_verifies/${verifies.id}`} key={verifies.id}>
+              <CommunityCard key={verifies.id} data={verifies} />
             </Link>
           );
         })
@@ -41,4 +36,4 @@ const CommunityCardList = ({ category }: Props) => {
   );
 };
 
-export default CommunityCardList;
+export default VerfiesCardList;

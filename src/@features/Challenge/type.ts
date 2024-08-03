@@ -1,4 +1,4 @@
-import { PaginationRes } from '@/config/type';
+import { Pagination } from '@/config/type';
 
 // API
 export interface Challenge {
@@ -10,5 +10,5 @@ export interface Challenge {
 
 export interface ChallengeList {
   content: Challenge[];
-  page: PaginationRes;
+  page: Pagination;
 }

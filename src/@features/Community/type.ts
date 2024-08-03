@@ -1,6 +1,6 @@
 import { PaginationReq, PaginationRes } from '@/config/type';
 
-export const categoryList = ['GENERAL', 'VOTE', 'TIP', 'CHALLENGE_VERIFIES'] as const;
+export const categoryList = ['GENERAL', 'VOTE', 'TIP', 'CHALLENGE_VERIFY'] as const;
 export type Category = (typeof categoryList)[number];
 
 export interface CommunityListReq extends PaginationReq {
@@ -8,10 +8,7 @@ export interface CommunityListReq extends PaginationReq {
   sortBy?: 'createdAt' | 'viewCount';
 }
 
-export interface CommunityListRes {
-  content: CommunityRes[];
-  page: PaginationRes;
-}
+export type CommunityListRes = PaginationRes<CommunityRes[]>;
 
 export interface CommunityRes {
   id: number;
