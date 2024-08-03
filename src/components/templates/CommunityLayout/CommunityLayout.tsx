@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/@features/Auth/useAuth';
 import { useCommunityCategory } from './useCommunityCategory';
-import { Category } from '@/@features/Community/type';
+import { CATEGORY, Category } from '@/@features/Community/type';
 
 interface CommunityProps {
   children: ReactNode;
@@ -37,13 +37,13 @@ const CommunityLayout = ({ children }: CommunityProps) => {
             글쓰기
           </S.button.Button>
 
-          <S.button.TabButton $direction="left" $active={category === 'GENERAL'} onClick={() => handleCategory('GENERAL')}>
+          <S.button.TabButton $direction="left" $active={category === CATEGORY.GENERAL} onClick={() => handleCategory(CATEGORY.GENERAL)}>
             최신 게시글
           </S.button.TabButton>
           {/* <S.button.TabButton $direction="left" $active={category === 'GENERAL'} onClick={() => setCategory('GENERAL')}>
             인기 게시글
           </S.button.TabButton> */}
-          <S.button.TabButton $direction="left" $active={category === 'VOTE'} onClick={() => handleCategory('VOTE')}>
+          <S.button.TabButton $direction="left" $active={category === CATEGORY.VOTE} onClick={() => handleCategory(CATEGORY.VOTE)}>
             투표 게시글
           </S.button.TabButton>
         </S.div.Column>

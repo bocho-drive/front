@@ -5,7 +5,7 @@ export const CATEGORY = {
   VOTE: 'VOTE',
   TIP: 'TIP',
   CHALLENGE_VERIFY: 'CHALLENGE_VERIFY',
-};
+} as const;
 export type Category = (typeof CATEGORY)[keyof typeof CATEGORY];
 
 export interface CommunityListReq extends PaginationReq {

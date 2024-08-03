@@ -43,7 +43,7 @@ export const URLS = {
   ADMIN_CHALLENGE_VERIFIED_DETAIL: '/admin/challenge/verified',
   ADMIN_TIP_DETAIL: '/admin/tip/detail',
   COMMUNITY_NEW: '/community/new',
-};
+} as const;
 
 function App() {
   return (

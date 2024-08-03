@@ -1,5 +1,7 @@
-import TipCard from '@/components/molecules/TipCard';
+import { CATEGORY } from '@/@features/Community/type';
+import CommunityCardList from '@/components/organisms/CommunityCardList';
 import DriveLayout from '@/components/templates/DriveLayout';
+import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import * as S from '@/styles/index.style';
 
 const TipPage = () => {
@@ -14,8 +16,9 @@ const TipPage = () => {
           <S.button.Button $colors="primary">내 TIP공유</S.button.Button>
         </S.div.Row>
 
-        <TipCard id={1} />
-        <TipCard id={1} />
+        <ErrorSuspenseLayout>
+          <CommunityCardList category={CATEGORY.TIP} />
+        </ErrorSuspenseLayout>
       </S.div.Column>
     </DriveLayout>
   );
