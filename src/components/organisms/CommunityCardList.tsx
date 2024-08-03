@@ -2,14 +2,26 @@ import * as S from '@/styles/index.style';
 import CommunityCard from '../molecules/CommunityCard';
 import useScroll from '@/hooks/useScroll';
 import { Category } from '@/@features/Community/type';
-import { useCommunityWithoutId } from '@/@features/Community/useCommunityQuery';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { getCommunityList } from '@/@features/Community/api';
 
 interface Props {
   category: Category;
 }
 
 const CommunityCardList = ({ category }: Props) => {
-  const { data, fetchNextPage, hasNextPage } = useCommunityWithoutId(category).communityListQuery;
+  const { data, fetchNextPage, hasNextPage } = useSuspenseInfiniteQuery({
+    queryKey: ['communityList', category],
+    initialPageParam: 0,
+    queryFn: ({ pageParam = 0 }) => getCommunityList({ category, page: pageParam, size: 10 }),
+
+    getNextPageParam: (lastPage) => {
+      const { size, number, totalElements } = lastPage.page;
+      if (size * (number + 1) >= totalElements) return undefined;
+
+      return lastPage.page.number + 1;
+    },
+  });
   useScroll({ length: data.pages.length, fetchNextPage, hasNextPage });
 
   if (data.pages.length === 0) return <S.h.H3>게시글이 없어요.</S.h.H3>;

@@ -1,7 +1,7 @@
 import ProfileModal from '@/components/organisms/ProfileModal';
 import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
 import { useModal } from '@/components/templates/Modal/useModal';
-import Tab from '@/components/templates/Tab/Tab';
+// import Tab from '@/components/templates/Tab/Tab';
 import * as S from '@/styles/index.style';
 
 const MyPage = () => {
@@ -17,7 +17,7 @@ const MyPage = () => {
           </S.button.Button>
         </S.div.Column>
 
-        <Tab />
+        {/* <Tab /> */}
       </S.div.Column>
 
       <ProfileModal />

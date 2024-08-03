@@ -2,7 +2,7 @@ import * as S from '@/styles/index.style';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import ToastEditor from '../../atoms/ToastEditor';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Editor } from '@toast-ui/react-editor';
 import { postSchema, PostSchema } from './yup';
 

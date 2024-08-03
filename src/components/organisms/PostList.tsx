@@ -3,7 +3,7 @@ import * as S from '@/styles/index.style';
 import { usePost } from '@/@features/Admin/Post/usePost';
 import { useNavigate } from 'react-router-dom';
 import { getCommunityList } from '@/@features/Community/api';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 const PostList = () => {
   const { posts, setPosts, currentPage, handleToggle, setCurrentPage, totalPages, setTotalPages } = usePost();
@@ -15,13 +15,13 @@ const PostList = () => {
 
   const handleToAdminDetail = (id: number) => navigate(`/admin/detail/${id}`);
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     const data = await getCommunityList({
       category: 'GENERAL',
       page: currentPage - 1,
     });
     if (data) {
-      setTotalPages(data.totalPages);
+      setTotalPages(data.page.totalPages);
       const posts = data.content.map((post) => ({
         id: post.id,
         title: post.title,
@@ -34,11 +34,11 @@ const PostList = () => {
       }));
       setPosts(posts);
     }
-  };
+  }, [currentPage, setPosts, setTotalPages]);
 
   useEffect(() => {
     fetchPosts();
-  }, [currentPage]);
+  }, [currentPage, fetchPosts]);
 
   return (
     <S.div.PostListContainer>

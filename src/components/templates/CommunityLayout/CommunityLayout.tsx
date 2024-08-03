@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/@features/Auth/useAuth';
 import { useCommunityCategory } from './useCommunityCategory';
+import { Category } from '@/@features/Community/type';
 
 interface CommunityProps {
   children: ReactNode;
@@ -21,6 +22,11 @@ const CommunityLayout = ({ children }: CommunityProps) => {
     }
   };
 
+  const handleCategory = (category: Category) => {
+    navigate(`/community?category=${category}`);
+    setCategory(category);
+  };
+
   return (
     <HeaderFooterLayout>
       <S.div.Row $gap={50} $width={100}>
@@ -31,13 +37,13 @@ const CommunityLayout = ({ children }: CommunityProps) => {
             글쓰기
           </S.button.Button>
 
-          <S.button.TabButton $direction="left" $active={category === 'GENERAL'} onClick={() => setCategory('GENERAL')}>
+          <S.button.TabButton $direction="left" $active={category === 'GENERAL'} onClick={() => handleCategory('GENERAL')}>
             최신 게시글
           </S.button.TabButton>
           {/* <S.button.TabButton $direction="left" $active={category === 'GENERAL'} onClick={() => setCategory('GENERAL')}>
             인기 게시글
           </S.button.TabButton> */}
-          <S.button.TabButton $direction="left" $active={category === 'VOTE'} onClick={() => setCategory('VOTE')}>
+          <S.button.TabButton $direction="left" $active={category === 'VOTE'} onClick={() => handleCategory('VOTE')}>
             투표 게시글
           </S.button.TabButton>
         </S.div.Column>
