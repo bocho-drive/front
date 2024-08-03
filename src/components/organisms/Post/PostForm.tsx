@@ -12,11 +12,17 @@ export interface PostReturnType {
   image: File[];
 }
 
+interface PostDefaultValues {
+  title: string;
+  content: string;
+  imgUrls: string[];
+}
+
 interface Props {
   /** submit시, 실행할 함수 */
   handlePost: (data: PostReturnType) => void;
   /** form에 들어갈 기본값 */
-  defaultValues?: PostReturnType;
+  defaultValues?: PostDefaultValues;
 }
 
 const PostForm = ({ handlePost, defaultValues }: Props) => {
