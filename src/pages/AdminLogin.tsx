@@ -3,11 +3,7 @@ import { useForm } from 'react-hook-form';
 import * as S from '@/styles/index.style';
 
 const LoginForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: {
       email: '',
       password: '',

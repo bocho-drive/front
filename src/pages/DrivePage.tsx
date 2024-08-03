@@ -1,4 +1,3 @@
-import ChallengeCard from '@/@features/Challenge/components/ChallengeCard';
 import MatchingCard from '@/components/molecules/MatchingCard';
 import TipCard from '@/components/molecules/TipCard';
 import VideoCard from '@/components/molecules/VideoCard';

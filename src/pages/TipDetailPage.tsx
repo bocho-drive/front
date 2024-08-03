@@ -1,5 +1,5 @@
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
-import PostDetail from '@/components/organisms/Post/PostDetail';
+
 import DriveLayout from '@/components/templates/DriveLayout';
 import * as S from '@/styles/index.style';
 import { useNavigate } from 'react-router-dom';
