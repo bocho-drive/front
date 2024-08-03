@@ -1,7 +1,9 @@
+import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import GlobalStyle from '@/styles/global.style';
 import theme from '@/styles/theme.style';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { ThemeProvider } from 'styled-components';
 
@@ -17,7 +19,8 @@ const Provider = ({ children }: Props) => {
 
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        {children}
+
+        <ErrorBoundary FallbackComponent={ErrorFallbackUI}>{children}</ErrorBoundary>
       </ThemeProvider>
     </QueryClientProvider>
   );

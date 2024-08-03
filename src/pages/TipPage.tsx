@@ -3,6 +3,7 @@ import CommunityCardList from '@/components/organisms/CommunityCardList';
 import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import * as S from '@/styles/index.style';
+import { Link } from 'react-router-dom';
 
 const TipPage = () => {
   return (
@@ -13,7 +14,9 @@ const TipPage = () => {
             <S.h.LayoutTitle>운전 팁 📌</S.h.LayoutTitle>
             <S.p.P>운전에 도움이 되는 정보를 공유해보세요</S.p.P>
           </S.div.Column>
-          <S.button.Button $colors="primary">내 TIP공유</S.button.Button>
+          <Link to="/tip/new">
+            <S.button.Button $colors="primary">내 TIP공유</S.button.Button>
+          </Link>
         </S.div.Row>
 
         <ErrorSuspenseLayout>
