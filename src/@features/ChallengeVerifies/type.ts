@@ -1,7 +1,5 @@
 import { PaginationRes } from '@/config/type';
-import { CommunityDetailRes, CommunityListReq, CommunityRes } from '../Community/type';
-
-export const VerifyCategory = 'CHALLENGE_VERIFY';
+import { CATEGORY, CommunityDetailRes, CommunityListReq, CommunityRes } from '../Community/type';
 
 export interface ChallengeVerifiesListReq extends CommunityListReq {}
 
@@ -13,7 +11,7 @@ export interface ChallengeVerifiesRes extends CommunityRes {
 
 // 챌린지 인증 상세 조회
 export interface ChallengeVerifiesDetailRes extends CommunityDetailRes {
-  category: typeof VerifyCategory;
+  category: typeof CATEGORY.CHALLENGE_VERIFY;
   challengeId: number;
 }
 

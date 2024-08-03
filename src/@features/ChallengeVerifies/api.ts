@@ -1,5 +1,6 @@
 import { apiWithToken, apiWithTokenFormData, Response } from '@/config/axios';
-import { ChallengeVerifiesDetailRes, ChallengeVerifiesListReq, ChallengeVerifiesListRes, ChallengeVerifiesPostReq, VerifyCategory as verifyCategory } from './type';
+import { ChallengeVerifiesDetailRes, ChallengeVerifiesListReq, ChallengeVerifiesListRes, ChallengeVerifiesPostReq } from './type';
+import { CATEGORY } from '../Community/type';
 
 const BASEURL = 'challenge_verifies';
 
@@ -25,6 +26,7 @@ export const postChallengeVerifies = async (challengeId: number, data: Challenge
   const formData = new FormData();
   formData.append('title', data.title);
   formData.append('content', data.content);
+  formData.append('category', CATEGORY.CHALLENGE_VERIFY);
   data.image.forEach((img) => {
     formData.append('image', img);
   });
@@ -38,7 +40,7 @@ export const putChallengeVerifies = async (id: number, data: ChallengeVerifiesPo
   const formData = new FormData();
   formData.append('title', data.title);
   formData.append('content', data.content);
-  formData.append('category', verifyCategory);
+  formData.append('category', CATEGORY.CHALLENGE_VERIFY);
   data.image.forEach((img) => {
     formData.append('image', img);
   });

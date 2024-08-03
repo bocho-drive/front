@@ -1,5 +1,4 @@
 import * as S from '@/styles/index.style';
-import CommentList from '@/@features/Comment/components/CommentList';
 import Loading from '@/components/atoms/Loading';
 import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import { Suspense } from 'react';
@@ -7,6 +6,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { useParams } from 'react-router-dom';
 import VerifiesDetail from '@/@features/ChallengeVerifies/components/VerfiesDetail';
 import DriveLayout from '@/components/templates/DriveLayout';
+import CommentList from '@/@features/Comment/components/CommentList';
 
 const ChallengeVerifiesDetailPage = () => {
   const { id } = useParams();

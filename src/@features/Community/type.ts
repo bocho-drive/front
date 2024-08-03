@@ -1,7 +1,12 @@
 import { PaginationReq, PaginationRes } from '@/config/type';
 
-export const categoryList = ['GENERAL', 'VOTE', 'TIP', 'CHALLENGE_VERIFY'] as const;
-export type Category = (typeof categoryList)[number];
+export const CATEGORY = {
+  GENERAL: 'GENERAL',
+  VOTE: 'VOTE',
+  TIP: 'TIP',
+  CHALLENGE_VERIFY: 'CHALLENGE_VERIFY',
+};
+export type Category = (typeof CATEGORY)[keyof typeof CATEGORY];
 
 export interface CommunityListReq extends PaginationReq {
   category?: Category | null;

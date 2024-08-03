@@ -24,6 +24,26 @@ import NotFoundPage from './pages/NotFoundPage';
 import GlobalComponents from './config/GlobalComponents';
 import CommunityEditPage from './pages/CommunityEditPage';
 import ChallengeVerifiesDetailPage from './pages/ChallengeVerifiesDetailPage';
+import ChallengeVerifiesNewPage from './pages/ChallengeVerifiesNewPage';
+
+export const URLS = {
+  LANDING: '/',
+  COMMUNITY: '/community',
+  DRIVE: '/drive',
+  CHALLENGE: '/challenge',
+  CHALLENGE_VERIFIES: '/challenge_verifies',
+  TIP: '/tip',
+  VIDEO: '/video',
+  MY: '/my',
+  MATCHING: '/matching',
+  ADMIN: '/admin',
+  ADMIN_LOGIN: '/adminlogin',
+  ADMIN_CHALLENGE_NEW: '/admin/challenge/new',
+  ADMIN_CHALLENGE_DETAIL: '/admin/challenge/detail',
+  ADMIN_CHALLENGE_VERIFIED_DETAIL: '/admin/challenge/verified',
+  ADMIN_TIP_DETAIL: '/admin/tip/detail',
+  COMMUNITY_NEW: '/community/new',
+};
 
 function App() {
   return (
@@ -31,21 +51,21 @@ function App() {
       <Provider>
         <GlobalComponents />
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/community" element={<CommunityPage />} />
-          <Route path="/community/:id" element={<CommunityDetailPage />} />
+          <Route path={URLS.LANDING} element={<LandingPage />} />
+          <Route path={URLS.COMMUNITY} element={<CommunityPage />} />
+          <Route path={`${URLS.COMMUNITY}/:id`} element={<CommunityDetailPage />} />
 
-          <Route path="/drive" element={<DrivePage />} />
+          <Route path={URLS.DRIVE} element={<DrivePage />} />
 
-          <Route path="/challenge" element={<ChallengePage />} />
+          <Route path={URLS.CHALLENGE} element={<ChallengePage />} />
 
-          <Route path="/matching" element={<MatchingPage />} />
-          <Route path="/matching/:id" element={<MatchingDetailPage />} />
+          <Route path={URLS.MATCHING} element={<MatchingPage />} />
+          <Route path={`${URLS.MATCHING}/:id`} element={<MatchingDetailPage />} />
 
-          <Route path="/tip" element={<TipPage />} />
-          <Route path="/tip/:id" element={<TipDetailPage />} />
+          <Route path={URLS.TIP} element={<TipPage />} />
+          <Route path={`${URLS.TIP}/:id`} element={<TipDetailPage />} />
 
-          <Route path="/video" element={<VideoPage />} />
+          <Route path={URLS.VIDEO} element={<VideoPage />} />
 
           {/* 어드민 */}
           <Route path="/admin" element={<AdminPage />} />
@@ -58,13 +78,14 @@ function App() {
 
           {/* 인증 필요 페이지 */}
           <Route element={<PrivateRoute isNeedAuth={true} />}>
-            <Route path="/community/new" element={<CommunityNewPage />} />
-            <Route path="/community/edit/:id" element={<CommunityEditPage />} />
+            <Route path={`${URLS.COMMUNITY}/new`} element={<CommunityNewPage />} />
+            <Route path={`${URLS.COMMUNITY}/edit/:id`} element={<CommunityEditPage />} />
 
             {/* 챌린지 인증 상세 페이지 */}
-            <Route path="/challenge_verifies/:id" element={<ChallengeVerifiesDetailPage />} />
+            <Route path={`${URLS.CHALLENGE_VERIFIES}/:id`} element={<ChallengeVerifiesDetailPage />} />
+            <Route path={`${URLS.CHALLENGE_VERIFIES}/new/:challengeId`} element={<ChallengeVerifiesNewPage />} />
 
-            <Route path="/my" element={<MyPage />} />
+            <Route path={URLS.MY} element={<MyPage />} />
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />

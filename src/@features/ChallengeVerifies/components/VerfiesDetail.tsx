@@ -2,8 +2,8 @@ import { Fragment } from 'react';
 import * as S from '@/styles/index.style';
 import PostDetail from '@/components/organisms/Post/PostDetail';
 import { useNavigate } from 'react-router-dom';
-import { useCommunityQueryWithId } from '@/@features/Community/useCommunityQuery';
 import { useVerifiesQuery } from '../useVerifiesQuery';
+import { URLS } from '@/App';
 
 interface Props {
   communityId: number;
@@ -12,8 +12,7 @@ interface Props {
 const VerifiesDetail = ({ communityId }: Props) => {
   const navigate = useNavigate();
 
-  const { verifySuspenseQuery, deleteMutation } = useVerifiesQuery(communityId);
-  const { mutationLike } = useCommunityQueryWithId(communityId);
+  const { verifySuspenseQuery, deleteMutation, mutationLike } = useVerifiesQuery(communityId);
 
   const handleDelete = () => {
     if (verifySuspenseQuery.data.isAuthor && window.confirm('정말 삭제하시겠습니까?')) {
@@ -22,8 +21,8 @@ const VerifiesDetail = ({ communityId }: Props) => {
   };
 
   const handleLike = () => mutationLike.mutate();
-  const handleToList = () => navigate('/challenge');
-  const handleToEdit = () => navigate(`/challenge_verifies/edit/${communityId}`);
+  const handleToList = () => navigate(URLS.CHALLENGE);
+  const handleToEdit = () => navigate(`${URLS.CHALLENGE_VERIFIES}/edit/${communityId}`);
 
   return (
     <S.div.Column $gap={20}>
