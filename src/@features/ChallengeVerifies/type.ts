@@ -1,20 +1,12 @@
-export interface ChallengeVerifies {
-  id: number;
-  challengeId: number;
-  title: string;
-  content: string;
-  category: 'CHALLENGE_VERIFIES';
-  author: string;
-  viewCount: number;
-  likeCount: number;
-  imgUrls: string[];
-  createdAt: string;
+import { CommunityDetailRes, CommunityListReq } from '../Community/type';
+
+type Category = 'CHALLENGE_VERIFIES';
+
+export interface ChallengeVerifiesListReq extends CommunityListReq {
+  category?: Category | null;
 }
 
-export interface ChallengeVerifiesPostReq {
-  title: string;
-  content: string;
-  category: ChallengeVerifies['category'];
-  images: string[];
+export interface ChallengeVerifiesRes extends CommunityDetailRes {
+  category: Category;
   challengeId: number;
 }

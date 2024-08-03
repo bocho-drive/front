@@ -3,7 +3,7 @@ import { PaginationReq, PaginationRes } from '@/config/type';
 type Category = 'GENERAL' | 'VOTE' | 'TIP' | 'CHALLENGE_VERIFIES';
 
 export interface CommunityListReq extends PaginationReq {
-  category?: string | null;
+  category?: Category | null;
   sortBy?: 'createdAt' | 'viewCount';
 }
 
@@ -25,14 +25,14 @@ export interface CommunityRes {
 export interface CommunityDetailRes {
   id: number;
   title: string;
+  category: Category;
   content: string;
   author: string;
-  category: Category;
   viewCount: number;
   likesCount: number;
-  createdAt: string;
   isAuthor: boolean;
   imgUrls: string[];
+  createdAt: string;
 }
 
 export interface CommunityPostReq {

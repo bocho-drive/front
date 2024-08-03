@@ -13,8 +13,11 @@ const ChallengePage = () => {
         <S.p.P>차근차근 시도를 통해 운전고수에 도전해보세요.</S.p.P>
 
         <Tab
-          tabHeaders={['챌린지']}
+          tabHeaders={['챌린지', '챌린지 인증']}
           tabBodys={[
+            <Suspense fallback={<Loading />}>
+              <ChallengeCardList />
+            </Suspense>,
             <Suspense fallback={<Loading />}>
               <ChallengeCardList />
             </Suspense>,
