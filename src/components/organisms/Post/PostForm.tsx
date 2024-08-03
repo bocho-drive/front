@@ -12,11 +12,17 @@ export interface PostReturnType {
   image: File[];
 }
 
+interface PostDefaultValues {
+  title: string;
+  content: string;
+  imgUrls: string[];
+}
+
 interface Props {
   /** submit시, 실행할 함수 */
   handlePost: (data: PostReturnType) => void;
   /** form에 들어갈 기본값 */
-  defaultValues?: PostReturnType;
+  defaultValues?: PostDefaultValues;
 }
 
 const PostForm = ({ handlePost, defaultValues }: Props) => {
@@ -50,6 +56,12 @@ const PostForm = ({ handlePost, defaultValues }: Props) => {
         </S.div.Column>
 
         <ToastEditor ref={editorRef} initialValue={defaultValues?.content} />
+
+        <S.div.Row $gap={10} $wrap>
+          {defaultValues?.imgUrls.map((url, index) => (
+            <S.img.Img key={index} src={url} alt="이미지" width={100} />
+          ))}
+        </S.div.Row>
 
         <S.input.Input type="file" multiple accept="image/png, image/jpg" ref={imageRef} />
 

@@ -15,7 +15,9 @@ const CommunityEdit = ({ communityId }: Props) => {
     const category = isVoteRef.current?.checked ? 'VOTE' : 'GENERAL';
 
     mutationPut.mutate({
-      ...data,
+      content: data.content,
+      title: data.title,
+      image: data.image,
       category,
     });
   };
