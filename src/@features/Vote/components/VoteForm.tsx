@@ -35,6 +35,16 @@ const VoteForm = ({ communityId }: Props) => {
     postVoteMutation.mutate({ communityId, agreeYn: voteState.isUp });
   };
 
+  const handleVoteSelect = (agreeYn: boolean) => {
+    if (!isAuth) {
+      errorToast('투표 권한이 없습니다.');
+      return;
+    }
+    if (voteState.isVoteAble) {
+      voteDispatch({ type: 'SELECT_VOTE', payload: { agreeYn } });
+    }
+  };
+
   const handleCancelVote = () => {
     if (!voteState.voteInfo) return;
 
@@ -59,10 +69,10 @@ const VoteForm = ({ communityId }: Props) => {
           <S.p.P>{voteList.length}명 참여</S.p.P>
         </S.div.Column>
         <S.div.Row $gap={20}>
-          <VoteCard $isActive={voteState.isUp} onClick={() => voteDispatch({ type: 'SELECT_VOTE', payload: { agreeYn: true } })}>
+          <VoteCard $isActive={voteState.isUp} onClick={() => handleVoteSelect(true)}>
             <VoteButton type="up" count={up} />
           </VoteCard>
-          <VoteCard $isActive={voteState.isDown} onClick={() => voteDispatch({ type: 'SELECT_VOTE', payload: { agreeYn: false } })}>
+          <VoteCard $isActive={voteState.isDown} onClick={() => handleVoteSelect(false)}>
             <VoteButton type="down" count={down} />
           </VoteCard>
         </S.div.Row>
@@ -104,10 +114,6 @@ interface ResetAction {
 const voteReducer = (state: VoteState, action: VoteAction | VotedAction | ResetAction) => {
   switch (action.type) {
     case 'SELECT_VOTE':
-      if (!state.isVoteAble) {
-        errorToast('투표 권한이 없습니다.');
-        return state;
-      }
       return {
         ...state,
         isUp: action.payload.agreeYn,
