@@ -18,7 +18,7 @@ const CommunityDetailPage = () => {
           <S.div.Column $gap={20}>
             <CommunityDetail communityId={Number(id)} />
             <S.h.H3>댓글</S.h.H3>
-            <CommentList communityId={Number(id)} />
+            <CommentList communityId={Number(id)} isNeedNewForm />
           </S.div.Column>
         </Suspense>
       </ErrorBoundary>

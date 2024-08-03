@@ -1,5 +1,6 @@
-import { apiWithoutToken, apiWithToken, Response } from '@/config/axios';
+import { apiWithoutToken, apiWithToken, apiWithTokenFormData, Response } from '@/config/axios';
 import { CommunityListRes, CommunityDetailRes, CommunityPostReq, CommunityListReq } from './type';
+import { jsonToFormData } from '@/util/util';
 
 const BASEURL = 'communities';
 
@@ -31,7 +32,7 @@ export const getCommunityDetail = async (id: number): Promise<CommunityDetailRes
 
 /** 게시글 작성 */
 export const postCommunity = async (data: CommunityPostReq): Promise<number> => {
-  const res = await apiWithToken.post<Response<number>>(BASEURL, data);
+  const res = await apiWithTokenFormData.post<Response<number>>(BASEURL, jsonToFormData(data));
   return res.data.data;
 };
 
@@ -42,6 +43,6 @@ export const deleteCommunity = async (id: number): Promise<void> => {
 
 /** 게시글 수정 */
 export const putCommunity = async (id: number, data: CommunityPostReq): Promise<number> => {
-  const res = await apiWithToken.put<Response<number>>(`${BASEURL}/${id}`, data);
+  const res = await apiWithTokenFormData.put<Response<number>>(`${BASEURL}/${id}`, jsonToFormData(data));
   return res.data.data;
 };

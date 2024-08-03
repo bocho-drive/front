@@ -77,3 +77,16 @@ export const apiWithToken = axios.create({
 
 apiWithToken.interceptors.request.use(ReqFulfilled, ReqRejected);
 apiWithToken.interceptors.response.use(ResFulfilled, ResRejected);
+
+// * 인가 필요 api(FormData)
+export const apiWithTokenFormData = axios.create({
+  baseURL: import.meta.env.VITE_API_TOKEN_URL as string,
+  headers: {
+    'content-type': 'multipart/form-data',
+    accept: 'application/json,',
+  },
+  withCredentials: true, // cors
+});
+
+apiWithTokenFormData.interceptors.request.use(ReqFulfilled, ReqRejected);
+apiWithTokenFormData.interceptors.response.use(ResFulfilled, ResRejected);
