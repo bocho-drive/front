@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteCommunity, getCommunityDetail, postCommunity, putCommunity } from './api';
 import { CommunityPostReq } from './type';
 import { postLike } from '../Like/api';
+import { deleteImage } from './ImageS3/api';
 
 export const useCommunityPost = () => {
   const navigate = useNavigate();
@@ -51,10 +52,19 @@ export const useCommunityQuery = (communityId: number) => {
     },
   });
 
+  const mutationDeleteImage = useMutation({
+    mutationKey: ['deleteImage'],
+    mutationFn: (url: string) => deleteImage(url),
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
   return {
     data,
     mutationDelete,
     mutationPut,
     mutationLike,
+    mutationDeleteImage,
   };
 };

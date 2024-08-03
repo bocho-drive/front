@@ -57,12 +57,6 @@ const PostForm = ({ handlePost, defaultValues }: Props) => {
 
         <ToastEditor ref={editorRef} initialValue={defaultValues?.content} />
 
-        <S.div.Row $gap={10} $wrap>
-          {defaultValues?.imgUrls.map((url, index) => (
-            <S.img.Img key={index} src={url} alt="이미지" width={100} />
-          ))}
-        </S.div.Row>
-
         <S.input.Input type="file" multiple accept="image/png, image/jpg" ref={imageRef} />
 
         <S.button.Button $size="large" type="submit">
