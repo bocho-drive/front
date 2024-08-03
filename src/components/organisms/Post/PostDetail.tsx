@@ -31,6 +31,12 @@ const PostDetail = ({ data, authorActionComp }: Props) => {
       <S.hr.Hr />
 
       <S.span.Span>{data.content}</S.span.Span>
+
+      <S.div.Row $gap={10} $wrap>
+        {data.imgUrls.map((url, idx) => (
+          <S.img.Img key={idx} src={url} width={100} />
+        ))}
+      </S.div.Row>
     </S.div.Column>
   );
 };

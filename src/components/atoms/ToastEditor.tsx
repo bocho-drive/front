@@ -2,7 +2,10 @@ import { Editor } from '@toast-ui/react-editor';
 import { forwardRef } from 'react';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
-const toolbar = [['heading', 'bold', 'italic', 'strike'], ['hr', 'quote', 'ul', 'ol'], ['image']];
+const toolbar = [
+  ['heading', 'bold', 'italic', 'strike'],
+  ['hr', 'quote', 'ul', 'ol'],
+];
 
 interface EditorProps {
   initialValue?: string;

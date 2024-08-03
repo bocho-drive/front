@@ -8,13 +8,14 @@ const CommunityNewPage = () => {
   const isVoteRef = useRef<HTMLInputElement>(null);
   const { mutationPost } = useCommunityPost();
 
-  const handleNewPost = (data: PostReturnType) => {
+  const handleNewPost = async (data: PostReturnType) => {
     const category = isVoteRef.current?.checked ? 'VOTE' : 'GENERAL';
 
     mutationPost.mutate({
       title: data.title,
       content: data.content,
       category,
+      image: data.image,
     });
   };
 

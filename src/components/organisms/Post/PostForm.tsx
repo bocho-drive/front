@@ -9,6 +9,7 @@ import { postSchema, PostSchema } from './yup';
 export interface PostReturnType {
   title: string;
   content: string;
+  image: File[];
 }
 
 interface Props {
@@ -29,12 +30,14 @@ const PostForm = ({ handlePost, defaultValues }: Props) => {
   });
 
   const editorRef = useRef<Editor | null>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
 
   const onSubmit = (data: PostSchema) => {
     const content = editorRef.current?.getInstance().getMarkdown();
     handlePost({
       title: data.title,
       content,
+      image: imageRef.current?.files ? Array.from(imageRef.current.files) : [],
     });
   };
 
@@ -47,6 +50,8 @@ const PostForm = ({ handlePost, defaultValues }: Props) => {
         </S.div.Column>
 
         <ToastEditor ref={editorRef} initialValue={defaultValues?.content} />
+
+        <S.input.Input type="file" multiple accept="image/png, image/jpg" ref={imageRef} />
 
         <S.button.Button $size="large" type="submit">
           저장

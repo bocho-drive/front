@@ -32,10 +32,12 @@ export interface CommunityDetailRes {
   likesCount: number;
   createdAt: string;
   isAuthor: boolean;
+  imgUrls: string[];
 }
 
 export interface CommunityPostReq {
   title: string;
   content: string;
   category: Category;
+  image: File[];
 }

@@ -38,17 +38,3 @@ export const getDateString = (dateString: string) => {
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${ampm} ${hour}시 ${minutes}분`;
   }
 };
-
-/**
- * JSON 객체를 FormData로 변환하는 함수
- * @param json JSON 객체
- * @returns FormData 객체
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const jsonToFormData = (json: Record<string, any>): FormData => {
-  const formData = new FormData();
-  Object.keys(json).forEach((key) => {
-    formData.append(key, json[key]);
-  });
-  return formData;
-};
