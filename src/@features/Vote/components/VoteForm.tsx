@@ -5,13 +5,14 @@ import { useEffect, useReducer } from 'react';
 import { useAuth } from '@/@features/Auth/useAuth';
 import { errorToast } from '@/components/atoms/Toast/useToast';
 import { useVoteQuery } from '../useVoteQuery';
+import { Vote } from '../type';
 
 interface Props {
   communityId: number;
 }
 
 const VoteForm = ({ communityId }: Props) => {
-  const { voteList, postVoteMutation } = useVoteQuery(communityId);
+  const { voteList, postVoteMutation, deleteVoteMutation } = useVoteQuery(communityId);
 
   const up = voteList.filter((vote) => vote.agreeYn).length;
   const down = voteList.length - up;
@@ -23,6 +24,7 @@ const VoteForm = ({ communityId }: Props) => {
     isVoteAble: true,
     isUp: false,
     isDown: false,
+    voteInfo: null,
   });
 
   const handleVote = () => {
@@ -33,16 +35,20 @@ const VoteForm = ({ communityId }: Props) => {
     postVoteMutation.mutate({ communityId, agreeYn: voteState.isUp });
   };
 
-  // const handleCancelVote = () => {
-  //   deleteVoteMutation.mutate();
-  // }
+  const handleCancelVote = () => {
+    if (!voteState.voteInfo) return;
+
+    deleteVoteMutation.mutate(voteState.voteInfo.id);
+  };
 
   useEffect(() => {
-    voteList.forEach((vote) => {
-      if (isAuth && vote.userId === userId) {
-        voteDispatch({ type: 'VOTED', payload: { agreeYn: vote.agreeYn } });
-      }
-    });
+    const voteInfo: Vote | null = voteList.find((vote) => vote.userId === userId) || null;
+
+    if (voteInfo) {
+      voteDispatch({ type: 'VOTED', payload: { voteInfo } });
+    } else {
+      voteDispatch({ type: 'RESET_VOTE' });
+    }
   }, [isAuth, userId, voteList]);
 
   return (
@@ -65,11 +71,11 @@ const VoteForm = ({ communityId }: Props) => {
             투표하기
           </S.button.Button>
         )}
-        {/* {isAuth && !voteState.isVoteAble && (
-          <S.button.Button $size="small" $colors="primary" onClick={handleVote}>
+        {isAuth && !voteState.isVoteAble && (
+          <S.button.Button $size="small" $colors="primary" onClick={handleCancelVote}>
             투표취소하기
           </S.button.Button>
-        )} */}
+        )}
       </S.div.Column>
     </S.div.Card>
   );
@@ -81,15 +87,21 @@ interface VoteState {
   isVoteAble: boolean;
   isUp: boolean;
   isDown: boolean;
+  voteInfo: Vote | null;
 }
 interface VoteAction {
-  type: 'VOTED' | 'SELECT_VOTE';
-  payload: {
-    agreeYn: boolean;
-  };
+  type: 'SELECT_VOTE';
+  payload: { agreeYn: boolean };
+}
+interface VotedAction {
+  type: 'VOTED';
+  payload: { voteInfo: Vote };
+}
+interface ResetAction {
+  type: 'RESET_VOTE';
 }
 
-const voteReducer = (state: VoteState, action: VoteAction) => {
+const voteReducer = (state: VoteState, action: VoteAction | VotedAction | ResetAction) => {
   switch (action.type) {
     case 'SELECT_VOTE':
       if (!state.isVoteAble) {
@@ -103,8 +115,21 @@ const voteReducer = (state: VoteState, action: VoteAction) => {
       };
 
     case 'VOTED':
-      return { isVoteAble: false, isUp: action.payload.agreeYn, isDown: !action.payload.agreeYn };
+      return {
+        ...state,
+        isVoteAble: false,
+        isUp: action.payload.voteInfo.agreeYn,
+        isDown: !action.payload.voteInfo.agreeYn,
+        voteInfo: action.payload.voteInfo,
+      };
 
+    case 'RESET_VOTE':
+      return {
+        isVoteAble: true,
+        isUp: false,
+        isDown: false,
+        voteInfo: null,
+      };
     default:
       return state;
   }
