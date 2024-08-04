@@ -4,35 +4,42 @@ import styled from 'styled-components';
 import { useEffect, useReducer } from 'react';
 import { useAuth } from '@/@features/Auth/useAuth';
 import { errorToast } from '@/components/atoms/Toast/useToast';
-import { useVoteQuery } from '../useVoteQuery';
+import { useVoteDeleteMutation, useVotePostMutation, useVoteSuspenseQuery } from '../useVoteQuery';
 import { Vote } from '../type';
+import { voteInitialState, voteReducer } from '../reducer';
 
 interface Props {
   communityId: number;
 }
 
 const VoteForm = ({ communityId }: Props) => {
-  const { voteList, postVoteMutation, deleteVoteMutation } = useVoteQuery(communityId);
+  // const { voteList, postVoteMutation, deleteVoteMutation } = useVoteQuery(communityId);
+  const voteQuery = useVoteSuspenseQuery(communityId);
+  const postVoteMutation = useVotePostMutation();
+  const deleteVoteMutation = useVoteDeleteMutation();
 
-  const up = voteList.filter((vote) => vote.agreeYn).length;
-  const down = voteList.length - up;
+  const up = voteQuery.data.filter((vote) => vote.agreeYn).length;
+  const down = voteQuery.data.length - up;
 
   const isAuth = useAuth((state) => state.isAuth);
   const userId = useAuth((state) => state.userId);
 
-  const [voteState, voteDispatch] = useReducer(voteReducer, {
-    isVoteAble: true,
-    isUp: false,
-    isDown: false,
-    voteInfo: null,
-  });
+  const [voteState, voteDispatch] = useReducer(voteReducer, voteInitialState);
 
-  const handleVote = () => {
+  const handleVote = async () => {
     if (!voteState.isUp && !voteState.isDown) {
       errorToast('투표를 선택해주세요.');
       return;
     }
-    postVoteMutation.mutate({ communityId, agreeYn: voteState.isUp });
+    await postVoteMutation.mutateAsync({ communityId, agreeYn: voteState.isUp });
+    voteQuery.refetch();
+  };
+
+  const handleCancelVote = async () => {
+    if (!voteState.voteInfo) return;
+
+    await deleteVoteMutation.mutateAsync(voteState.voteInfo.id);
+    voteQuery.refetch();
   };
 
   const handleVoteSelect = (agreeYn: boolean) => {
@@ -45,28 +52,22 @@ const VoteForm = ({ communityId }: Props) => {
     }
   };
 
-  const handleCancelVote = () => {
-    if (!voteState.voteInfo) return;
-
-    deleteVoteMutation.mutate(voteState.voteInfo.id);
-  };
-
   useEffect(() => {
-    const voteInfo: Vote | null = voteList.find((vote) => vote.userId === userId) || null;
+    const voteInfo: Vote | null = voteQuery.data.find((vote) => vote.userId === userId) || null;
 
     if (voteInfo) {
       voteDispatch({ type: 'VOTED', payload: { voteInfo } });
     } else {
       voteDispatch({ type: 'RESET_VOTE' });
     }
-  }, [isAuth, userId, voteList]);
+  }, [voteQuery.data, userId]);
 
   return (
     <S.div.Card>
       <S.div.Column $gap={20} $align="center">
         <S.div.Column $align="center">
           <S.h.H3>투표</S.h.H3>
-          <S.p.P>{voteList.length}명 참여</S.p.P>
+          <S.p.P>{voteQuery.data.length}명 참여</S.p.P>
         </S.div.Column>
         <S.div.Row $gap={20}>
           <VoteCard $isActive={voteState.isUp} onClick={() => handleVoteSelect(true)}>
@@ -92,54 +93,6 @@ const VoteForm = ({ communityId }: Props) => {
 };
 
 export default VoteForm;
-
-interface VoteState {
-  isVoteAble: boolean;
-  isUp: boolean;
-  isDown: boolean;
-  voteInfo: Vote | null;
-}
-interface VoteAction {
-  type: 'SELECT_VOTE';
-  payload: { agreeYn: boolean };
-}
-interface VotedAction {
-  type: 'VOTED';
-  payload: { voteInfo: Vote };
-}
-interface ResetAction {
-  type: 'RESET_VOTE';
-}
-
-const voteReducer = (state: VoteState, action: VoteAction | VotedAction | ResetAction) => {
-  switch (action.type) {
-    case 'SELECT_VOTE':
-      return {
-        ...state,
-        isUp: action.payload.agreeYn,
-        isDown: !action.payload.agreeYn,
-      };
-
-    case 'VOTED':
-      return {
-        ...state,
-        isVoteAble: false,
-        isUp: action.payload.voteInfo.agreeYn,
-        isDown: !action.payload.voteInfo.agreeYn,
-        voteInfo: action.payload.voteInfo,
-      };
-
-    case 'RESET_VOTE':
-      return {
-        isVoteAble: true,
-        isUp: false,
-        isDown: false,
-        voteInfo: null,
-      };
-    default:
-      return state;
-  }
-};
 
 interface VoteCardProps {
   $isActive: boolean;
