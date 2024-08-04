@@ -14,7 +14,7 @@ const CommunityCommentCardList = () => {
   });
 
   const commentList = useSuspenseQueries({
-    queries: [0, 1].map((_, index) => ({
+    queries: [0, 1].map((index) => ({
       queryKey: ['commentList', index],
       queryFn: () => getCommentList(communityListlimitTwo.content[index].id),
       retry: 1,

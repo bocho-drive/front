@@ -16,10 +16,10 @@ const CommunityDetail = ({ communityId }: Props) => {
   const navigate = useNavigate();
   const { search, pathname } = useLocation();
 
-  const { data, mutationDelete, mutationLike } = useCommunityQueryWithId(communityId);
+  const { getDetailQuery, mutationDelete, mutationLike } = useCommunityQueryWithId(communityId);
 
   const handleDelete = () => {
-    if (data.isAuthor && window.confirm('정말 삭제하시겠습니까?')) {
+    if (getDetailQuery.data.isAuthor && window.confirm('정말 삭제하시겠습니까?')) {
       mutationDelete.mutate();
     }
   };
@@ -31,7 +31,7 @@ const CommunityDetail = ({ communityId }: Props) => {
   return (
     <S.div.Column $gap={20}>
       <PostDetail
-        data={data}
+        data={getDetailQuery.data}
         authorActionComp={
           <Fragment>
             <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
@@ -40,7 +40,7 @@ const CommunityDetail = ({ communityId }: Props) => {
         }
       />
 
-      {data.category === 'VOTE' && (
+      {getDetailQuery.data.category === 'VOTE' && (
         <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
           <Suspense fallback={<Loading />}>
             <S.div.Gap $height={50} />

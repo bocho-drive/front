@@ -17,7 +17,15 @@ const ChallengeCardList = () => {
   });
   useScroll({ fetchNextPage, hasNextPage, length: data.pages.length });
 
-  return <S.div.Column $gap={20}>{data.pages.map((page) => page.content.map((challenge) => <ChallengeCard key={challenge.id} challenge={challenge} />))}</S.div.Column>;
+  return (
+    <S.div.Column $gap={20}>
+      {data.pages.map((page) =>
+        page.content.map((challenge) => {
+          return <ChallengeCard key={challenge.id} challenge={challenge} />;
+        })
+      )}
+    </S.div.Column>
+  );
 };
 
 export default ChallengeCardList;

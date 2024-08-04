@@ -8,7 +8,7 @@ import { deleteImage } from './ImageS3/api';
 export const useCommunityQueryWithId = (communityId: number) => {
   const navigate = useNavigate();
 
-  const { data, refetch } = useSuspenseQuery({
+  const getDetailQuery = useSuspenseQuery({
     queryKey: ['postDetail', communityId],
     queryFn: () => getCommunityDetail(communityId),
     retry: 1,
@@ -27,7 +27,7 @@ export const useCommunityQueryWithId = (communityId: number) => {
     mutationFn: (data: CommunityPostReq) => putCommunity(communityId, data),
     onSuccess: () => {
       navigate(`/community/${communityId}`);
-      refetch();
+      getDetailQuery.refetch();
     },
   });
 
@@ -35,7 +35,7 @@ export const useCommunityQueryWithId = (communityId: number) => {
     mutationKey: ['likePost', communityId],
     mutationFn: () => postLike({ communityId }),
     onSuccess: () => {
-      refetch();
+      getDetailQuery.refetch();
     },
   });
 
@@ -43,12 +43,12 @@ export const useCommunityQueryWithId = (communityId: number) => {
     mutationKey: ['deleteImage'],
     mutationFn: (url: string) => deleteImage(url),
     onSuccess: () => {
-      refetch();
+      getDetailQuery.refetch();
     },
   });
 
   return {
-    data,
+    getDetailQuery,
     mutationDelete,
     mutationPut,
     mutationLike,

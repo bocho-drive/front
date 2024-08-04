@@ -9,7 +9,7 @@ import { CATEGORY } from '@/@features/Community/type';
 const TipEditPage = () => {
   const { id } = useParams();
 
-  const { data, mutationPut } = useCommunityQueryWithId(Number(id));
+  const { getDetailQuery, mutationPut } = useCommunityQueryWithId(Number(id));
 
   const handlePutCommunity = (data: PostReturnType) => {
     mutationPut.mutate({
@@ -23,10 +23,10 @@ const TipEditPage = () => {
   return (
     <DriveLayout>
       <S.div.Column $gap={20}>
-        <PostForm handlePost={handlePutCommunity} defaultValues={data} />
+        <PostForm handlePost={handlePutCommunity} defaultValues={getDetailQuery.data} />
 
         <S.div.Row $gap={10} $wrap>
-          {data?.imgUrls.map((url) => (
+          {getDetailQuery.data?.imgUrls.map((url) => (
             <ImageS3Button key={url} url={url} communityId={Number(id)} />
           ))}
         </S.div.Row>
