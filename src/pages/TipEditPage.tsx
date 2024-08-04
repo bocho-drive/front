@@ -1,36 +1,45 @@
 import * as S from '@/styles/index.style';
-import { useCommunityQueryWithId } from '@/@features/Community/useCommunityQuery';
+import { useCommunityPutMutation, useCommunityQuery } from '@/@features/Community/useCommunityQuery';
 import PostForm, { PostReturnType } from '@/components/organisms/Post/PostForm';
 import DriveLayout from '@/components/templates/DriveLayout';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ImageS3Button from '@/@features/Community/ImageS3/components/ImageS3Button';
 import { CATEGORY } from '@/@features/Community/type';
+import Loading from '@/components/atoms/Loading';
 
 const TipEditPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const communityId = Number(id);
 
-  const { getDetailQuery, mutationPut } = useCommunityQueryWithId(Number(id));
+  const { data, isLoading, refetch } = useCommunityQuery(communityId);
+  const putMutation = useCommunityPutMutation(communityId);
 
-  const handlePutCommunity = (data: PostReturnType) => {
-    mutationPut.mutate({
+  const handlePutCommunity = async (data: PostReturnType) => {
+    await putMutation.mutateAsync({
       content: data.content,
       title: data.title,
       image: data.image,
       category: CATEGORY.TIP,
     });
+
+    navigate(`/tip/${communityId}`);
   };
 
   return (
     <DriveLayout>
-      <S.div.Column $gap={20}>
-        <PostForm handlePost={handlePutCommunity} defaultValues={getDetailQuery.data} />
+      {isLoading && <Loading />}
+      {data && (
+        <S.div.Column $gap={20}>
+          <PostForm handlePost={handlePutCommunity} defaultValues={data} />
 
-        <S.div.Row $gap={10} $wrap>
-          {getDetailQuery.data?.imgUrls.map((url) => (
-            <ImageS3Button key={url} url={url} refetchFn={getDetailQuery.refetch} />
-          ))}
-        </S.div.Row>
-      </S.div.Column>
+          <S.div.Row $gap={10} $wrap>
+            {data.imgUrls.map((url) => (
+              <ImageS3Button key={url} url={url} refetchFn={refetch} />
+            ))}
+          </S.div.Row>
+        </S.div.Column>
+      )}
     </DriveLayout>
   );
 };

@@ -1,5 +1,4 @@
 import { Fragment, Suspense } from 'react';
-import { useCommunityQueryWithId } from '../useCommunityQuery';
 import * as S from '@/styles/index.style';
 import PostDetail from '@/components/organisms/Post/PostDetail';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -7,6 +6,7 @@ import VoteForm from '@/@features/Vote/components/VoteForm';
 import Loading from '@/components/atoms/Loading';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackUI from '@/components/templates/ErrorFallback';
+import { useCommunityDeleteMutation, useCommunityLikeMutation, useCommunitySuspenseQuery } from '../useCommunityQuery';
 
 interface Props {
   communityId: number;
@@ -16,15 +16,18 @@ const CommunityDetail = ({ communityId }: Props) => {
   const navigate = useNavigate();
   const { search, pathname } = useLocation();
 
-  const { getDetailQuery, mutationDelete, mutationLike } = useCommunityQueryWithId(communityId);
+  const getDetailQuery = useCommunitySuspenseQuery(communityId);
+  const mutationDelete = useCommunityDeleteMutation(communityId);
+  const mutationLike = useCommunityLikeMutation(communityId);
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (getDetailQuery.data.isAuthor && window.confirm('정말 삭제하시겠습니까?')) {
-      mutationDelete.mutate();
+      await mutationDelete.mutateAsync();
+      handleToList();
     }
   };
 
-  const handleLike = () => mutationLike.mutate();
+  const handleLike = () => mutationLike.mutateAsync().then(() => getDetailQuery.refetch());
   const handleToList = () => navigate('/' + pathname.split('/')[1] + search);
   const handleToEdit = () => navigate(`/${pathname.split('/')[1]}/edit/${communityId}`);
 
