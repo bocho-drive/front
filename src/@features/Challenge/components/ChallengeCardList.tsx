@@ -6,7 +6,7 @@ import { getChallengeList } from '../api';
 
 const ChallengeCardList = () => {
   const { data, hasNextPage, fetchNextPage } = useSuspenseInfiniteQuery({
-    queryKey: ['challenges'],
+    queryKey: ['challengeList'],
     initialPageParam: 0,
     queryFn: ({ pageParam = 0 }) => getChallengeList({ page: pageParam, size: 6 }),
     getNextPageParam: (lastPage) => {
@@ -17,6 +17,7 @@ const ChallengeCardList = () => {
   });
   useScroll({ fetchNextPage, hasNextPage, length: data.pages.length });
 
+  if (data.pages.length === 0) return <S.h.H3>게시글이 없어요.</S.h.H3>;
   return (
     <S.div.Column $gap={20}>
       {data.pages.map((page) =>

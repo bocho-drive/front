@@ -32,7 +32,7 @@ export interface CommunityDetailRes {
   content: string;
   author: string;
   viewCount: number;
-  likesCount: number;
+  likeCount: number;
   isAuthor: boolean;
   imgUrls: string[];
   createdAt: string;

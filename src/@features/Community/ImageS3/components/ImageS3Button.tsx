@@ -1,13 +1,18 @@
 import * as S from '@/styles/index.style';
-import { useCommunityQueryWithId } from '@/@features/Community/useCommunityQuery';
+import { deleteImage } from '../api';
+import { useMutation } from '@tanstack/react-query';
 
 interface Props {
   url: string;
-  communityId: number;
+  refetchFn?: () => void;
 }
 
-const ImageS3Button = ({ url, communityId }: Props) => {
-  const { mutationDeleteImage } = useCommunityQueryWithId(communityId);
+const ImageS3Button = ({ url, refetchFn }: Props) => {
+  const mutationDeleteImage = useMutation({
+    mutationKey: ['deleteImage'],
+    mutationFn: (url: string) => deleteImage(url),
+    onSuccess: () => refetchFn && refetchFn(),
+  });
 
   const handleDelete = () => {
     if (confirm('정말 삭제하시겠습니까?')) mutationDeleteImage.mutate(url);

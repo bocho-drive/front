@@ -9,8 +9,10 @@ interface Props {
 const ChallengeDetail = ({ challengeId, children }: Props) => {
   const { challengeQuery } = useChallengeQuery(challengeId);
   return (
-    <S.div.Column>
-      <S.h.H1>{challengeQuery.data.title}</S.h.H1>
+    <S.div.Column $gap={20}>
+      <S.div.Card>
+        <S.h.H2>🏆 {challengeQuery.data?.title}</S.h.H2>
+      </S.div.Card>
       {children}
     </S.div.Column>
   );

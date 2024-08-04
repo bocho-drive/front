@@ -33,7 +33,7 @@ const CommunityEdit = ({ communityId }: Props) => {
 
       <S.div.Row $gap={10} $wrap>
         {getDetailQuery.data?.imgUrls.map((url) => (
-          <ImageS3Button key={url} url={url} communityId={communityId} />
+          <ImageS3Button key={url} url={url} refetchFn={getDetailQuery.refetch} />
         ))}
       </S.div.Row>
     </S.div.Column>

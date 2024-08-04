@@ -8,7 +8,6 @@ import TipPage from './pages/TipPage';
 import TipDetailPage from './pages/TipDetailPage';
 import VideoPage from './pages/VideoPage';
 import MyPage from './pages/MyPage';
-import Provider from './config/Provider';
 import MatchingPage from './pages/MatchingPage';
 import AdminPage from './pages/AdminPage';
 import AdminLogin from './pages/AdminLogin';
@@ -27,6 +26,8 @@ import ChallengeVerifiesDetailPage from './pages/ChallengeVerifiesDetailPage';
 import ChallengeVerifiesNewPage from './pages/ChallengeVerifiesNewPage';
 import TipNewPage from './pages/TipNewPage';
 import TipEditPage from './pages/TipEditPage';
+import Provider from './config/Provider';
+import ChallengeVerifiesEditPage from './pages/ChallengeVerifiesEditPage';
 
 export const URLS = {
   LANDING: '/',
@@ -88,6 +89,7 @@ function App() {
 
             {/* 챌린지 인증 상세 페이지 */}
             <Route path={`${URLS.CHALLENGE_VERIFIES}/:id`} element={<ChallengeVerifiesDetailPage />} />
+            <Route path={`${URLS.CHALLENGE_VERIFIES}/edit/:id`} element={<ChallengeVerifiesEditPage />} />
             <Route path={`${URLS.CHALLENGE_VERIFIES}/new/:challengeId`} element={<ChallengeVerifiesNewPage />} />
 
             <Route path={URLS.MY} element={<MyPage />} />

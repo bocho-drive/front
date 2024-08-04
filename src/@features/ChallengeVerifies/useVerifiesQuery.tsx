@@ -1,11 +1,11 @@
-import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { ChallengeVerifiesPostReq } from './type';
 import { deleteChallengeVerifies, getChallengeVerifiesDetail, putChallengeVerifies } from './api';
 import { CATEGORY } from '../Community/type';
 import { postLike } from '../Like/api';
 
 export const useVerifiesQuery = (id: number) => {
-  const verifySuspenseQuery = useSuspenseQuery({
+  const verifyQuery = useQuery({
     queryKey: [CATEGORY.CHALLENGE_VERIFY, id],
     queryFn: () => getChallengeVerifiesDetail(id),
   });
@@ -14,7 +14,7 @@ export const useVerifiesQuery = (id: number) => {
     mutationKey: [CATEGORY.CHALLENGE_VERIFY, id],
     mutationFn: () => deleteChallengeVerifies(id),
     onSuccess: () => {
-      verifySuspenseQuery.refetch();
+      verifyQuery.refetch();
     },
   });
 
@@ -22,17 +22,17 @@ export const useVerifiesQuery = (id: number) => {
     mutationKey: [CATEGORY.CHALLENGE_VERIFY, id],
     mutationFn: ({ id, data }: { id: number; data: ChallengeVerifiesPostReq }) => putChallengeVerifies(id, data),
     onSuccess: () => {
-      verifySuspenseQuery.refetch();
+      verifyQuery.refetch();
     },
   });
 
-  const mutationLike = useMutation({
+  const likeMutation = useMutation({
     mutationKey: ['likePost', id],
     mutationFn: () => postLike({ communityId: id }),
     onSuccess: () => {
-      verifySuspenseQuery.refetch();
+      verifyQuery.refetch();
     },
   });
 
-  return { verifySuspenseQuery, deleteMutation, putMutation, mutationLike };
+  return { verifyQuery, deleteMutation, putMutation, likeMutation };
 };

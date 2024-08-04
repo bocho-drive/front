@@ -3,7 +3,7 @@ import { getChallenge } from './api';
 
 export const useChallengeQuery = (id: number) => {
   const challengeQuery = useSuspenseQuery({
-    queryKey: ['challenges'],
+    queryKey: ['challenges', id],
     queryFn: () => getChallenge(id),
   });
 

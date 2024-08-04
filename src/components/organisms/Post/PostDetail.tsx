@@ -24,7 +24,7 @@ const PostDetail = ({ data, authorActionComp }: Props) => {
       <S.div.Row $between>
         <S.small.Small>{getDateString(data.createdAt)}</S.small.Small>
         <S.div.Row $gap={10}>
-          <S.p.P>추천 {data.likesCount}</S.p.P>
+          <S.p.P>추천 {data.likeCount}</S.p.P>
           <S.p.P>조회 {data.viewCount}</S.p.P>
         </S.div.Row>
       </S.div.Row>
