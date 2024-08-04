@@ -4,28 +4,34 @@ import { useNavigate, useParams } from 'react-router-dom';
 import DriveLayout from '@/components/templates/DriveLayout';
 import CommentList from '@/@features/Comment/components/CommentList';
 import PostDetail from '@/components/organisms/Post/PostDetail';
-import { useVerifiesQuery } from '@/@features/ChallengeVerifies/useVerifiesQuery';
+import { useVerifiesDeleteMutation, useVerifiesLikeMutation, useVerifiesQuery } from '@/@features/ChallengeVerifies/useVerifiesQuery';
 import { URLS } from '@/App';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
+import Loading from '@/components/atoms/Loading';
 
 const ChallengeVerifiesDetailPage = () => {
   const { id } = useParams();
+  const commnuityId = Number(id);
   const navigate = useNavigate();
 
-  const { verifyQuery, deleteMutation, likeMutation } = useVerifiesQuery(Number(id));
+  const verifyQuery = useVerifiesQuery(commnuityId);
+  const deleteMutation = useVerifiesDeleteMutation();
+  const likeMutation = useVerifiesLikeMutation();
 
   const handleDelete = () => {
     if (verifyQuery.data?.isAuthor && window.confirm('정말 삭제하시겠습니까?')) {
-      deleteMutation.mutate();
+      deleteMutation.mutate(commnuityId);
+      handleToList();
     }
   };
 
-  const handleLike = () => likeMutation.mutate();
+  const handleLike = () => likeMutation.mutate(commnuityId);
   const handleToList = () => navigate(URLS.CHALLENGE);
-  const handleToEdit = () => navigate(`${URLS.CHALLENGE_VERIFIES}/edit/${Number(id)}`);
+  const handleToEdit = () => navigate(`${URLS.CHALLENGE_VERIFIES}/edit/${commnuityId}`);
 
   return (
     <DriveLayout>
+      {verifyQuery.isLoading && <Loading />}
       {verifyQuery.isSuccess && (
         <S.div.Column $gap={20}>
           <PostDetail
