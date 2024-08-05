@@ -28,6 +28,8 @@ import TipNewPage from './pages/TipNewPage';
 import TipEditPage from './pages/TipEditPage';
 import Provider from './config/Provider';
 import ChallengeVerifiesEditPage from './pages/ChallengeVerifiesEditPage';
+import MatchingNewPage from './pages/MatchingNewPage';
+import MatchingEditPage from './pages/MatchingEditPage';
 
 export const URLS = {
   LANDING: '/',
@@ -91,6 +93,9 @@ function App() {
             <Route path={`${URLS.CHALLENGE_VERIFIES}/:id`} element={<ChallengeVerifiesDetailPage />} />
             <Route path={`${URLS.CHALLENGE_VERIFIES}/edit/:id`} element={<ChallengeVerifiesEditPage />} />
             <Route path={`${URLS.CHALLENGE_VERIFIES}/new/:challengeId`} element={<ChallengeVerifiesNewPage />} />
+
+            <Route path={`${URLS.MATCHING}/new`} element={<MatchingNewPage />} />
+            <Route path={`${URLS.MATCHING}/edit/:id`} element={<MatchingEditPage />} />
 
             <Route path={URLS.MY} element={<MyPage />} />
           </Route>

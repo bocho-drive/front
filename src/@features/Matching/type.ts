@@ -17,6 +17,13 @@ export interface Matching {
   createdAt: string;
 }
 
+export interface MatchingDetail extends Matching {
+  userId: number;
+  studentId: number;
+  studentName: string;
+  teacherId: number;
+}
+
 export interface MatchingPostReq {
   title: string;
   content: string;
