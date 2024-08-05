@@ -1,6 +1,6 @@
 import MatchingCard from '@/components/molecules/MatchingCard';
 import TipCard from '@/components/molecules/TipCard';
-import VideoCard from '@/components/molecules/VideoCard';
+import VideoCard from '@/@features/Video/components/VideoCard';
 import DriveLayout from '@/components/templates/DriveLayout';
 import * as S from '@/styles/index.style';
 

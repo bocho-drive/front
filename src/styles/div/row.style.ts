@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface RowProps {
   $gap?: number;
@@ -8,12 +8,21 @@ interface RowProps {
   $justify?: 'center' | 'flex-start' | 'flex-end';
   $width?: number;
   $overflow?: 'hidden' | 'visible' | 'scroll' | 'auto';
+}
 
+interface ItemProps {
   $itemMinWidth?: number;
   $itemMaxWidth?: number;
 }
 
-export const Row = styled.div<RowProps>`
+const itemStyle = css<ItemProps>`
+  & > * {
+    ${({ $itemMinWidth }) => $itemMinWidth && `min-width: ${$itemMinWidth}px;`}
+    ${({ $itemMaxWidth }) => $itemMaxWidth && `max-width: ${$itemMaxWidth}px;`}
+  }
+`;
+
+export const Row = styled.div<RowProps & ItemProps>`
   display: flex;
   flex-direction: row;
 
@@ -24,20 +33,19 @@ export const Row = styled.div<RowProps>`
     ${({ $align }) => $align && `align-items: ${$align};`}
     ${({ $width }) => $width && `width: ${$width}%;`}
     ${({ $overflow }) => $overflow && `overflow: ${$overflow};`}
-    &
-    > * {
-    ${({ $itemMinWidth }) => $itemMinWidth && `min-width: ${$itemMinWidth}px;`}
-    ${({ $itemMaxWidth }) => $itemMaxWidth && `max-width: ${$itemMaxWidth}px;`}
-  }
+    
+  ${itemStyle}
 `;
 
 interface GridProps {
   $repeat: number;
 }
-export const Grid = styled.div<GridProps>`
+export const Grid = styled.div<GridProps & ItemProps>`
   display: grid;
   grid-template-columns: repeat(${({ $repeat = 1 }: GridProps) => $repeat}, 1fr);
   gap: 20px;
+
+  ${itemStyle}
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);

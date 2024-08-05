@@ -12,4 +12,5 @@ export interface LoginReq {
 export interface LoginRes {
   accessToken: string;
   userId: number;
+  userRole: 'USER' | 'ADMIN' | 'TEACHER';
 }
