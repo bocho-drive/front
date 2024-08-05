@@ -1,17 +1,24 @@
 import * as S from '@/styles/index.style';
-import Modal from '../../../components/templates/Modal/Modal';
 import KakaoShareButton from '../../../components/atoms/KakaoShareButton';
 import { getModalShareUrl, getYoutubeId } from '@/util/util';
 import { Video } from '../type';
+import { useAuth } from '@/@features/Auth/useAuth';
+import { useVideoQuery } from '../useVideoQuery';
+import Loading from '@/components/atoms/Loading';
 
 interface Props {
-  data: Video;
+  video: Video;
 }
 
-const VideoInfoModal = ({ data }: Props) => {
+const VideoInfoModal = ({ video }: Props) => {
+  const userId = useAuth((state) => state.userId);
+
+  const { data } = useVideoQuery(video.id);
+
   return (
-    <Modal type="video" id={data.id}>
-      <S.div.FixedModal style={{ padding: '20px' }} $width={500}>
+    <S.div.FixedModal style={{ padding: '20px' }} $width={500}>
+      {data === undefined && <Loading />}
+      {data && (
         <S.div.Column $gap={20}>
           <S.h.H2 $maxLines={2}>{data.title}</S.h.H2>
           <iframe
@@ -24,10 +31,11 @@ const VideoInfoModal = ({ data }: Props) => {
           <S.small.Small>작성자 : {data.nickName}</S.small.Small>
           <S.div.Row $justify="center">
             <KakaoShareButton title={data.title} displayIcon url={getModalShareUrl('video', data.id)} />
+            {data.userId == userId && <S.button.Button $colors="warning">삭제하기</S.button.Button>}
           </S.div.Row>
         </S.div.Column>
-      </S.div.FixedModal>
-    </Modal>
+      )}
+    </S.div.FixedModal>
   );
 };
 

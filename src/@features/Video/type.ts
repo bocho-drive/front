@@ -7,6 +7,13 @@ export interface VideoList {
 
 export interface Video {
   id: number;
+  title: string;
+  url: string;
+}
+
+export interface VideoDetail {
+  id: number;
+  userId: number;
   nickName: string;
   title: string;
   url: string;

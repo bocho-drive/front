@@ -1,5 +1,5 @@
 import { PaginationReq } from '@/config/type';
-import { Video, VideoList, VideoPostReq } from './type';
+import { Video, VideoDetail, VideoList, VideoPostReq } from './type';
 import { apiWithToken, Response } from '@/config/axios';
 
 const BASEURL = 'videos';
@@ -11,9 +11,16 @@ export const getVideos = async (params: PaginationReq): Promise<VideoList> => {
   return res.data.data;
 };
 
+/** 영상 상세 조회 */
+export const getVideo = async (id: number): Promise<VideoDetail> => {
+  const res = await apiWithToken.get<Response<VideoDetail>>(`${BASEURL}/${id}`);
+
+  return res.data.data;
+};
+
 /** 영상 등록 */
 export const postVideo = async (req: VideoPostReq): Promise<Video> => {
-  const res = await apiWithToken.post<Response<Video>>(`${BASEURL}`, req);
+  const res = await apiWithToken.post<Response<VideoDetail>>(`${BASEURL}`, req);
 
   return res.data.data;
 };

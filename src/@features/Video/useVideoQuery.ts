@@ -1,6 +1,6 @@
-import { useMutation, useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { VideoPostReq } from './type';
-import { getVideos, postVideo } from './api';
+import { getVideo, getVideos, postVideo } from './api';
 
 export const useVideoSuspenseInfiniteQuery = () => {
   return useSuspenseInfiniteQuery({
@@ -12,6 +12,13 @@ export const useVideoSuspenseInfiniteQuery = () => {
       if (size * (number + 1) >= totalElements) return undefined;
       return lastPage.page.number + 1;
     },
+  });
+};
+
+export const useVideoQuery = (id: number) => {
+  return useQuery({
+    queryKey: ['video', id],
+    queryFn: () => getVideo(id),
   });
 };
 
