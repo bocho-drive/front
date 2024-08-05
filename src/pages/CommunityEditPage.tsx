@@ -1,7 +1,7 @@
 import * as S from '@/styles/index.style';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCommunityPutMutation, useCommunityQuery } from '@/@features/Community/useCommunityQuery';
-import PostForm, { PostReturnType } from '@/components/organisms/Post/PostForm';
+import CommunityForm, { PostReturnType } from '@/components/organisms/Community/CommunityForm';
 import ImageS3Button from '@/@features/Community/ImageS3/components/ImageS3Button';
 import { useRef } from 'react';
 import CommunityLayout from '@/components/templates/CommunityLayout/CommunityLayout';
@@ -39,7 +39,7 @@ const CommunityEditPage = () => {
             <S.input.Checkbox id="isVote" type="checkbox" ref={isVoteRef} defaultChecked={data?.category === 'VOTE'} />
             <S.label.Label htmlFor="isVote">투표 게시글로 만들기</S.label.Label>
           </S.div.Card>
-          <PostForm handlePost={handlePutCommunity} defaultValues={data} />
+          <CommunityForm handlePost={handlePutCommunity} defaultValues={data} />
 
           <S.div.Row $gap={10} $wrap>
             {data.imgUrls.map((url) => (

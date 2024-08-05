@@ -3,7 +3,7 @@ import Loading from '@/components/atoms/Loading';
 import { useNavigate, useParams } from 'react-router-dom';
 import DriveLayout from '@/components/templates/DriveLayout';
 import { useVerifiesPutMutation, useVerifiesQuery } from '@/@features/ChallengeVerifies/useVerifiesQuery';
-import PostForm, { PostReturnType } from '@/components/organisms/Post/PostForm';
+import CommunityForm, { PostReturnType } from '@/components/organisms/Community/CommunityForm';
 import ImageS3Button from '@/@features/Community/ImageS3/components/ImageS3Button';
 
 const ChallengeVerifiesEditPage = () => {
@@ -32,7 +32,7 @@ const ChallengeVerifiesEditPage = () => {
       {verifyQuery.isLoading && <Loading />}
       {!verifyQuery.isLoading && (
         <S.div.Column $gap={20}>
-          <PostForm handlePost={handlePutCommunity} defaultValues={verifyQuery.data} />
+          <CommunityForm handlePost={handlePutCommunity} defaultValues={verifyQuery.data} />
 
           <S.div.Row $gap={10} $wrap>
             {verifyQuery.data?.imgUrls.map((url) => (

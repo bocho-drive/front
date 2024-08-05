@@ -1,6 +1,6 @@
 import * as S from '@/styles/index.style';
 import CommunityLayout from '@/components/templates/CommunityLayout/CommunityLayout';
-import PostForm, { PostReturnType } from '@/components/organisms/Post/PostForm';
+import CommunityForm, { PostReturnType } from '@/components/organisms/Community/CommunityForm';
 import { useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { CommunityPostReq } from '@/@features/Community/type';
@@ -39,7 +39,7 @@ const CommunityNewPage = () => {
           <S.input.Checkbox id="isVote" type="checkbox" ref={isVoteRef} defaultChecked={category === 'VOTE'} />
           <S.label.Label htmlFor="isVote">투표 게시글로 만들기</S.label.Label>
         </S.div.Card>
-        <PostForm handlePost={handleNewPost} />
+        <CommunityForm handlePost={handleNewPost} />
       </S.div.Column>
     </CommunityLayout>
   );

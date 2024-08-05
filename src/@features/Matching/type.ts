@@ -29,5 +29,5 @@ export interface MatchingPostReq {
   content: string;
   type: MatchingType;
   status: MatchingStatus;
-  deleteYN: false;
+  deleteYN: boolean;
 }

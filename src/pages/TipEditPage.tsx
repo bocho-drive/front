@@ -1,6 +1,6 @@
 import * as S from '@/styles/index.style';
 import { useCommunityPutMutation, useCommunityQuery } from '@/@features/Community/useCommunityQuery';
-import PostForm, { PostReturnType } from '@/components/organisms/Post/PostForm';
+import CommunityForm, { PostReturnType } from '@/components/organisms/Community/CommunityForm';
 import DriveLayout from '@/components/templates/DriveLayout';
 import { useNavigate, useParams } from 'react-router-dom';
 import ImageS3Button from '@/@features/Community/ImageS3/components/ImageS3Button';
@@ -31,7 +31,7 @@ const TipEditPage = () => {
       {isLoading && <Loading />}
       {data && (
         <S.div.Column $gap={20}>
-          <PostForm handlePost={handlePutCommunity} defaultValues={data} />
+          <CommunityForm handlePost={handlePutCommunity} defaultValues={data} />
 
           <S.div.Row $gap={10} $wrap>
             {data.imgUrls.map((url) => (
