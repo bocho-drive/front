@@ -10,9 +10,9 @@ import { ThemeProvider } from 'styled-components';
 interface Props {
   children: React.ReactNode;
 }
+const queryClient = new QueryClient();
 
 const Provider = ({ children }: Props) => {
-  const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={true} />

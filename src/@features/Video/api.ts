@@ -24,3 +24,8 @@ export const postVideo = async (req: VideoPostReq): Promise<Video> => {
 
   return res.data.data;
 };
+
+/** 영상 삭제 */
+export const deleteVideo = async (id: number): Promise<void> => {
+  await apiWithToken.delete<Response<void>>(`${BASEURL}/${id}`);
+};

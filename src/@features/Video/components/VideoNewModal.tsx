@@ -10,6 +10,7 @@ import { useAuth } from '@/@features/Auth/useAuth';
 const VideoNewModal = () => {
   const userId = useAuth((state) => state.userId);
   const handleClose = useModal((state) => state.handleClose);
+
   const postMutation = useVideoPostMutation();
 
   const titleRef = useRef<HTMLInputElement>(null);

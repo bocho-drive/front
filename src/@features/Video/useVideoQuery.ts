@@ -1,6 +1,6 @@
-import { useMutation, useQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { VideoPostReq } from './type';
-import { getVideo, getVideos, postVideo } from './api';
+import { deleteVideo, getVideo, getVideos, postVideo } from './api';
 
 export const useVideoSuspenseInfiniteQuery = () => {
   return useSuspenseInfiniteQuery({
@@ -23,8 +23,23 @@ export const useVideoQuery = (id: number) => {
 };
 
 export const useVideoPostMutation = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ['postVideo'],
     mutationFn: (data: VideoPostReq) => postVideo(data),
+    onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: ['videos'] });
+    },
+  });
+};
+
+export const useVideoDeleteMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ['deleteVideo'],
+    mutationFn: (id: number) => deleteVideo(id),
+    onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: ['videos'] });
+    },
   });
 };
