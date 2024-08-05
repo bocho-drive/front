@@ -1,7 +1,7 @@
 import * as S from '@/styles/index.style';
 import MatchingCard from '@/components/molecules/MatchingCard';
 import TipCard from '@/components/molecules/TipCard';
-import VideoCard from '@/components/molecules/VideoCard';
+import VideoCard from '@/@features/Video/components/VideoCard';
 import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
 import CommunityCommentCardList from '@/components/organisms/CommunityCommentCardList';
 import MoreLayout from '@/components/templates/MoreLayout';
