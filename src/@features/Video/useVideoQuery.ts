@@ -1,15 +1,18 @@
-import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
-import { Video, VideoPostReq } from './type';
-import { postVideo } from './api';
+import { useMutation, useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { VideoPostReq } from './type';
+import { getVideos, postVideo } from './api';
 
-export const useVideoInfiniteQuery = () => {
-  // return useInfiniteQuery({
-  //     queryKey: ['videos'],
-  //     queryFn: async ({ pageParam = 0 }) => {
-  //         const res = await apiWithToken.get<Response<Video[]>>(`${BASEURL}`, { params: { page: pageParam, size: 2 } });
-  //         return res.data.data;
-  //     },
-  // })
+export const useVideoSuspenseInfiniteQuery = () => {
+  return useSuspenseInfiniteQuery({
+    queryKey: ['videos'],
+    initialPageParam: 0,
+    queryFn: ({ pageParam = 0 }) => getVideos({ page: pageParam, size: 10 }),
+    getNextPageParam: (lastPage) => {
+      const { size, number, totalElements } = lastPage.page;
+      if (size * (number + 1) >= totalElements) return undefined;
+      return lastPage.page.number + 1;
+    },
+  });
 };
 
 export const useVideoPostMutation = () => {

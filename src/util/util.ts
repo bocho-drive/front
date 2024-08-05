@@ -38,3 +38,13 @@ export const getDateString = (dateString: string) => {
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${ampm} ${hour}시 ${minutes}분`;
   }
 };
+
+export const getYoutubeThumbnailUrl = (url: string) => {
+  const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  return videoIdMatch ? `https://img.youtube.com/vi/${videoIdMatch[1]}/hqdefault.jpg` : 'https://via.placeholder.com/300';
+};
+
+export const getYoutubeId = (url: string) => {
+  const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  return videoIdMatch ? videoIdMatch[1] : '';
+};

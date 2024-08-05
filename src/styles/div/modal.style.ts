@@ -2,10 +2,13 @@ import styled from 'styled-components';
 
 interface FixedModalProps {
   $width?: number;
+  $height?: number;
 }
 
 export const FixedModal = styled.div<FixedModalProps>`
   ${({ $width }) => $width && `width: ${$width}px;`}
+  ${({ $height }) => $height && `height: ${$height}px;`}
+
   position: fixed;
   top: 50%;
   left: 50%;

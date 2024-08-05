@@ -1,16 +1,13 @@
-import { getVideos } from '@/@features/Video/api';
+import VideoCardList from '@/@features/Video/components/VideoCardList';
 import VideoNewModal from '@/@features/Video/components/VideoNewModal';
 import DriveLayout from '@/components/templates/DriveLayout';
+import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import { useModal } from '@/components/templates/Modal/useModal';
 import * as S from '@/styles/index.style';
-import { useEffect } from 'react';
 
 const VideoPage = () => {
   const handleOpen = useModal((state) => state.handleOpen);
 
-  useEffect(() => {
-    getVideos({ page: 0, size: 2 });
-  }, []);
   return (
     <DriveLayout>
       <S.div.Column $gap={20}>
@@ -24,7 +21,9 @@ const VideoPage = () => {
           </S.button.Button>
         </S.div.Row>
 
-        <S.div.Grid $repeat={3}></S.div.Grid>
+        <ErrorSuspenseLayout>
+          <VideoCardList />
+        </ErrorSuspenseLayout>
       </S.div.Column>
 
       <VideoNewModal />

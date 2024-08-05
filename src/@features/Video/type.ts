@@ -1,6 +1,13 @@
+import { Pagination } from '@/config/type';
+
+export interface VideoList {
+  content: Video[];
+  page: Pagination;
+}
+
 export interface Video {
   id: number;
-  nickname: string;
+  nickName: string;
   title: string;
   url: string;
   createdAt: string;
