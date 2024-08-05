@@ -13,7 +13,9 @@ export const Badge = styled.span<BadgeProps & MaxLineStyleProps>`
   padding: 4px 8px;
   border-radius: 8px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 300;
+
+  color: white;
 
   ${maxLineStyle}
   background-color: ${({ theme, $color }) => theme.colors[$color || 'primary']};

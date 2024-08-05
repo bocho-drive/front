@@ -9,7 +9,7 @@ interface Props {
   authorActionComp?: ReactNode;
 }
 
-const PostDetail = ({ data, authorActionComp }: Props) => {
+const CommunityDetail = ({ data, authorActionComp }: Props) => {
   return (
     <S.div.Column $gap={20}>
       <S.div.Row $between>
@@ -41,4 +41,4 @@ const PostDetail = ({ data, authorActionComp }: Props) => {
   );
 };
 
-export default PostDetail;
+export default CommunityDetail;

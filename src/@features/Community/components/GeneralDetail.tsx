@@ -1,18 +1,18 @@
 import { Fragment, Suspense } from 'react';
 import * as S from '@/styles/index.style';
-import PostDetail from '@/components/organisms/Post/PostDetail';
 import { useLocation, useNavigate } from 'react-router-dom';
 import VoteForm from '@/@features/Vote/components/VoteForm';
 import Loading from '@/components/atoms/Loading';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import { useCommunityDeleteMutation, useCommunityLikeMutation, useCommunitySuspenseQuery } from '../useCommunityQuery';
+import CommunityDetail from '@/components/organisms/Community/CommunityDetail';
 
 interface Props {
   communityId: number;
 }
 
-const CommunityDetail = ({ communityId }: Props) => {
+const GeneralDetail = ({ communityId }: Props) => {
   const navigate = useNavigate();
   const { search, pathname } = useLocation();
 
@@ -33,7 +33,7 @@ const CommunityDetail = ({ communityId }: Props) => {
 
   return (
     <S.div.Column $gap={20}>
-      <PostDetail
+      <CommunityDetail
         data={getDetailQuery.data}
         authorActionComp={
           <Fragment>
@@ -67,4 +67,4 @@ const CommunityDetail = ({ communityId }: Props) => {
   );
 };
 
-export default CommunityDetail;
+export default GeneralDetail;

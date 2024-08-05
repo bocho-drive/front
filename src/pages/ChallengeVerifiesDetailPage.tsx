@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import DriveLayout from '@/components/templates/DriveLayout';
 import CommentList from '@/@features/Comment/components/CommentList';
-import PostDetail from '@/components/organisms/Post/PostDetail';
+import CommunityDetail from '@/components/organisms/Community/CommunityDetail';
 import { useVerifiesDeleteMutation, useVerifiesLikeMutation, useVerifiesQuery } from '@/@features/ChallengeVerifies/useVerifiesQuery';
 import { URLS } from '@/App';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
@@ -34,7 +34,7 @@ const ChallengeVerifiesDetailPage = () => {
       {verifyQuery.isLoading && <Loading />}
       {verifyQuery.isSuccess && (
         <S.div.Column $gap={20}>
-          <PostDetail
+          <CommunityDetail
             data={verifyQuery.data}
             authorActionComp={
               <Fragment>

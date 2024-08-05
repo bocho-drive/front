@@ -1,31 +1,29 @@
+import ToastEditor from '@/components/atoms/ToastEditor';
+import { postSchema, PostSchema } from '@/components/organisms/Community/yup';
 import * as S from '@/styles/index.style';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import ToastEditor from '../../atoms/ToastEditor';
-import { useRef } from 'react';
 import { Editor } from '@toast-ui/react-editor';
-import { postSchema, PostSchema } from './yup';
+import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
 
-export interface PostReturnType {
+export interface MatchingReturnType {
   title: string;
   content: string;
-  image: File[];
 }
 
 interface PostDefaultValues {
   title: string;
   content: string;
-  imgUrls: string[];
 }
 
 interface Props {
   /** submit시, 실행할 함수 */
-  handlePost: (data: PostReturnType) => void;
+  handlePost: (data: MatchingReturnType) => void;
   /** form에 들어갈 기본값 */
   defaultValues?: PostDefaultValues;
 }
 
-const PostForm = ({ handlePost, defaultValues }: Props) => {
+const MatchingForm = ({ handlePost, defaultValues }: Props) => {
   const {
     register,
     formState: { errors },
@@ -36,14 +34,12 @@ const PostForm = ({ handlePost, defaultValues }: Props) => {
   });
 
   const editorRef = useRef<Editor | null>(null);
-  const imageRef = useRef<HTMLInputElement>(null);
 
   const onSubmit = (data: PostSchema) => {
     const content = editorRef.current?.getInstance().getMarkdown();
     handlePost({
       title: data.title,
       content,
-      image: imageRef.current?.files ? Array.from(imageRef.current.files) : [],
     });
   };
 
@@ -57,8 +53,6 @@ const PostForm = ({ handlePost, defaultValues }: Props) => {
 
         <ToastEditor ref={editorRef} initialValue={defaultValues?.content} />
 
-        <S.input.Input type="file" multiple accept="image/png, image/jpg" ref={imageRef} />
-
         <S.button.Button $size="large" type="submit">
           저장
         </S.button.Button>
@@ -67,4 +61,4 @@ const PostForm = ({ handlePost, defaultValues }: Props) => {
   );
 };
 
-export default PostForm;
+export default MatchingForm;

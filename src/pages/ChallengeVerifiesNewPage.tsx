@@ -1,6 +1,6 @@
 import * as S from '@/styles/index.style';
 import CommunityLayout from '@/components/templates/CommunityLayout/CommunityLayout';
-import PostForm, { PostReturnType } from '@/components/organisms/Post/PostForm';
+import CommunityForm, { PostReturnType } from '@/components/organisms/Community/CommunityForm';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { URLS } from '@/App';
@@ -33,7 +33,7 @@ const ChallengeVerifiesNewPage = () => {
       <S.div.Column $gap={20}>
         <ErrorSuspenseLayout>
           <ChallengeDetail challengeId={Number(challengeId)}>
-            <PostForm handlePost={handleNewPost} />
+            <CommunityForm handlePost={handleNewPost} />
           </ChallengeDetail>
         </ErrorSuspenseLayout>
       </S.div.Column>

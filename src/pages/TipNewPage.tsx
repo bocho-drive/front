@@ -1,5 +1,5 @@
 import * as S from '@/styles/index.style';
-import PostForm, { PostReturnType } from '@/components/organisms/Post/PostForm';
+import CommunityForm, { PostReturnType } from '@/components/organisms/Community/CommunityForm';
 import { useMutation } from '@tanstack/react-query';
 import { CommunityPostReq } from '@/@features/Community/type';
 import { postCommunity } from '@/@features/Community/api';
@@ -29,7 +29,7 @@ const TipNewPage = () => {
   return (
     <DriveLayout>
       <S.div.Column $gap={20}>
-        <PostForm handlePost={handleNewPost} />
+        <CommunityForm handlePost={handleNewPost} />
       </S.div.Column>
     </DriveLayout>
   );
