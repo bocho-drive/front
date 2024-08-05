@@ -20,7 +20,7 @@ const MatchingDetailPage = () => {
   const handleToList = () => {
     navigate('/matching');
   };
-  const handleToEditPage = () => [navigate(`/matching/${id}/edit`)];
+  const handleToEditPage = () => [navigate(`/matching/edit/${id}`)];
   const handleToDelete = () => {
     if (confirm('정말 삭제하시겠습니까?'))
       deleteMutation.mutate(Number(id), {

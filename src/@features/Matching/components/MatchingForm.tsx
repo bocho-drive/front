@@ -1,10 +1,10 @@
+import ToastEditor from '@/components/atoms/ToastEditor';
+import { postSchema, PostSchema } from '@/components/organisms/Community/yup';
 import * as S from '@/styles/index.style';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import { useRef } from 'react';
 import { Editor } from '@toast-ui/react-editor';
-import { postSchema, PostSchema } from '@/components/organisms/Community/yup';
-import ToastEditor from '@/components/atoms/ToastEditor';
+import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
 
 export interface MatchingReturnType {
   title: string;

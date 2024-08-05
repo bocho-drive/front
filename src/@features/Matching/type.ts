@@ -28,6 +28,6 @@ export interface MatchingPostReq {
   title: string;
   content: string;
   type: MatchingType;
-  status: MatchingStatus;
-  deleteYN: boolean;
+  // status: MatchingStatus;
+  // deleteYN: boolean;
 }

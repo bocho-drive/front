@@ -1,7 +1,5 @@
 import * as S from '@/styles/index.style';
-import MatchingCard from '@/@features/Matching/components/MatchingCard';
 import TipCard from '@/components/molecules/TipCard';
-import VideoCard from '@/@features/Video/components/VideoCard';
 import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
 import CommunityCommentCardList from '@/components/organisms/CommunityCommentCardList';
 import MoreLayout from '@/components/templates/MoreLayout';
@@ -12,6 +10,8 @@ import { Suspense } from 'react';
 import Loading from '@/components/atoms/Loading';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackUI from '@/components/templates/ErrorFallback';
+import MatchingCardList from '@/@features/Matching/components/MatchingCardList';
+import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 
 const GIFS = [
   'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXdxd290NmNtejNzb3QzbjN5Zms4MXVtbHZodXpndjRwanJybWRxciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mlqXcoNp0zpiyFRztL/giphy.gif',
@@ -91,10 +91,9 @@ const LandingPage = () => {
           <S.h.LayoutTitle>운전 메이트를 찾아봐요 🚘</S.h.LayoutTitle>
           <MoreLayout to="/matching">
             <S.div.Row $gap={20} $overflow="scroll" $itemMaxWidth={300}>
-              <MatchingCard id={1} />
-              <MatchingCard id={2} />
-              <MatchingCard id={3} />
-              <MatchingCard id={1} />
+              <ErrorSuspenseLayout>
+                <MatchingCardList />
+              </ErrorSuspenseLayout>
             </S.div.Row>
           </MoreLayout>
         </S.div.Column>

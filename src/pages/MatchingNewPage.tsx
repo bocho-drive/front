@@ -12,8 +12,6 @@ const MatchingNewPage = () => {
       {
         title: data.title,
         content: data.content,
-        deleteYN: false,
-        status: 'WAITING',
         type: 'STUDENT',
       },
       {

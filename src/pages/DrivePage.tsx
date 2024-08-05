@@ -1,6 +1,5 @@
-import MatchingCard from '@/@features/Matching/components/MatchingCard';
+import MatchingCardList from '@/@features/Matching/components/MatchingCardList';
 import TipCard from '@/components/molecules/TipCard';
-import VideoCard from '@/@features/Video/components/VideoCard';
 import DriveLayout from '@/components/templates/DriveLayout';
 import * as S from '@/styles/index.style';
 
@@ -16,9 +15,7 @@ const DrivePage = () => {
         <S.div.Column $gap={10}>
           <S.h.LayoutTitle>운전 메이트 매칭 🚘</S.h.LayoutTitle>
           <S.div.Row $gap={20} $overflow="scroll">
-            <MatchingCard id={1} />
-            <MatchingCard id={2} />
-            <MatchingCard id={31} />
+            <MatchingCardList />
           </S.div.Row>
         </S.div.Column>
 
