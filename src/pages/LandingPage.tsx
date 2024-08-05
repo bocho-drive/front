@@ -1,5 +1,5 @@
 import * as S from '@/styles/index.style';
-import MatchingCard from '@/components/molecules/MatchingCard';
+import MatchingCard from '@/@features/Matching/components/MatchingCard';
 import TipCard from '@/components/molecules/TipCard';
 import VideoCard from '@/@features/Video/components/VideoCard';
 import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
@@ -113,12 +113,12 @@ const LandingPage = () => {
         <S.div.Column $gap={20}>
           <S.h.LayoutTitle>영상으로 운전을 배워봐요 🎥</S.h.LayoutTitle>
           <S.div.Row $gap={20} $overflow="scroll" $itemMaxWidth={300}>
-            <VideoCard id={11} />
+            {/* <VideoCard id={11} />
             <VideoCard id={12} />
             <VideoCard id={13} />
             <VideoCard id={14} />
             <VideoCard id={15} />
-            <VideoCard id={16} />
+            <VideoCard id={16} /> */}
           </S.div.Row>
         </S.div.Column>
       </S.div.Column>

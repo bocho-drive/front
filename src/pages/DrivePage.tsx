@@ -1,4 +1,4 @@
-import MatchingCard from '@/components/molecules/MatchingCard';
+import MatchingCard from '@/@features/Matching/components/MatchingCard';
 import TipCard from '@/components/molecules/TipCard';
 import VideoCard from '@/@features/Video/components/VideoCard';
 import DriveLayout from '@/components/templates/DriveLayout';
@@ -33,9 +33,9 @@ const DrivePage = () => {
         <S.div.Column $gap={10}>
           <S.h.LayoutTitle>운전 Shorts 🎥</S.h.LayoutTitle>
           <S.div.Row $gap={10} $overflow="scroll">
-            <VideoCard id={1} />
+            {/* <VideoCard id={1} />
             <VideoCard id={2} />
-            <VideoCard id={3} />
+            <VideoCard id={3} /> */}
           </S.div.Row>
         </S.div.Column>
       </S.div.Column>
