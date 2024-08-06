@@ -16,7 +16,15 @@
 
 - `yarn install`
 
-4. React APP실행
+4. .env파일 작성
+
+```
+VITE_SHARE_KAKAO_LINK_KEY=
+VITE_API_URL=
+VITE_API_TOKEN_URL=
+```
+
+5. React APP실행
 
 - `yarn dev`
 - 포트번호(5173) 확인하여, 브라우저 실행
