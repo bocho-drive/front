@@ -1,7 +1,7 @@
 import * as S from '@/styles/index.style';
-import LineText from '../atoms/LineText';
-import GoogleButton from '../atoms/GoogleButton';
-import KakaoButton from '../atoms/KakaoButton';
+import LineText from '../../../components/atoms/LineText';
+import GoogleButton from '../../../components/atoms/GoogleButton';
+import KakaoButton from '../../../components/atoms/KakaoButton';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RegisterSchema, registerSchema } from '@/@features/Auth/yup';
@@ -19,7 +19,12 @@ const RegisterForm = () => {
   } = useForm<RegisterSchema>({ resolver: yupResolver(registerSchema) });
 
   const handleRegister = (data: RegisterSchema) => {
-    signUp(data).then(() => {
+    signUp({
+      email: data.email,
+      nickname: data.nickname,
+      password: data.password,
+      userRole: data.isTeacher ? 'TEACHER' : 'USER',
+    }).then(() => {
       setIsLoginModal(true);
     });
   };
@@ -39,6 +44,11 @@ const RegisterForm = () => {
 
         <S.input.Input type="password" placeholder="비밀번호" $size="medium" {...register('password')} />
         {errors.password && <S.span.ErrorSpan>{errors.password.message}</S.span.ErrorSpan>}
+
+        <S.div.Row>
+          <S.input.Checkbox id="is-teacher" type="checkbox" {...register('isTeacher')} />
+          <S.label.Label htmlFor="is-teacher">선생님 계정으로 가입하기</S.label.Label>
+        </S.div.Row>
 
         <S.button.Button $colors="primary" $height={50}>
           <S.h.H5>이메일로 회원가입</S.h.H5>
