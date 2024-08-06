@@ -22,7 +22,7 @@ const ApplyList = ({ matchingId }: Props) => {
 
   return (
     <S.div.Column $gap={10}>
-      {data && data.length === 0 && <S.h.H5>신청자가 없습니다.</S.h.H5>}
+      {data.length === 0 && <S.h.H5>신청자가 없습니다.</S.h.H5>}
       {data.map((apply: MatchingApply) => {
         return (
           <S.div.Card>

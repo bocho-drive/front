@@ -4,27 +4,15 @@ import { CommunityListRes, CommunityDetailRes, CommunityPostReq, CommunityListRe
 const BASEURL = 'communities';
 
 /** 게시글 목록 조회 */
-export const getCommunityList = async (props: CommunityListReq): Promise<CommunityListRes> => {
-  let url = BASEURL;
-
-  const searchParams = new URLSearchParams();
-  if (props.category) searchParams.append('category', props.category);
-  if (props.page !== undefined) searchParams.append('page', String(props.page));
-  if (props.size) searchParams.append('size', String(props.size));
-
-  url = `${BASEURL}?${searchParams.toString()}`;
-
-  const res = await apiWithoutToken.get<Response<CommunityListRes>>(url);
-
+export const getCommunityList = async (params: CommunityListReq): Promise<CommunityListRes> => {
+  const res = await apiWithoutToken.get<Response<CommunityListRes>>(BASEURL, { params });
   return res.data.data;
 };
 
 /** 게시글 상세조회 */
 export const getCommunityDetail = async (id: number): Promise<CommunityDetailRes> => {
   const url = `${BASEURL}/${id}`;
-
   const res = await apiWithoutToken.get<Response<CommunityDetailRes>>(url);
-
   return res.data.data;
 };
 

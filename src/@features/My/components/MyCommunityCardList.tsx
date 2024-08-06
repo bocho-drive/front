@@ -4,6 +4,7 @@ import NotExistsLayout from '@/components/templates/NotExistsLayout';
 import CommunityCard from '@/components/molecules/CommunityCard';
 import useScroll from '@/hooks/useScroll';
 
+// TODO : 게시글 링크 연결 필요
 const MyCommunityCardList = () => {
   const userId = useAuth((state) => state.loginInfo?.userId);
   const { data, fetchNextPage, hasNextPage } = useMyCommunityListInfiniteQuery(userId!);

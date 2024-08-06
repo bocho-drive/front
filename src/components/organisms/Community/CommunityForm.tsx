@@ -1,9 +1,9 @@
+import ToastEditor from '@/components/atoms/ToastEditor';
 import * as S from '@/styles/index.style';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import ToastEditor from '../../atoms/ToastEditor';
-import { useRef } from 'react';
 import { Editor } from '@toast-ui/react-editor';
+import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import { postSchema, PostSchema } from './yup';
 
 export interface PostReturnType {

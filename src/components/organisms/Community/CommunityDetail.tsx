@@ -1,10 +1,10 @@
-import * as S from '@/styles/index.style';
-import { CommunityDetailRes } from '@/@features/Community/type';
-import { ReactNode } from 'react';
-import KakaoShareButton from '@/components/atoms/KakaoShareButton';
-import { getDateString } from '@/util/util';
-import ToastViewer from '@/components/atoms/ToastViewer';
 import { useAuth } from '@/@features/Auth/useAuth';
+import { CommunityDetailRes } from '@/@features/Community/type';
+import KakaoShareButton from '@/components/atoms/KakaoShareButton';
+import ToastViewer from '@/components/atoms/ToastViewer';
+import * as S from '@/styles/index.style';
+import { getDateString } from '@/util/util';
+import { ReactNode } from 'react';
 
 interface Props {
   data: CommunityDetailRes;

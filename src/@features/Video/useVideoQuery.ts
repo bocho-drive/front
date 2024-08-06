@@ -1,23 +1,22 @@
 import { useMutation, useQuery, useQueryClient, useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { VideoPostReq } from './type';
 import { deleteVideo, getVideo, getVideos, postVideo } from './api';
+import { nextPageParam } from '@/util/util';
+
+const key = 'videos';
 
 export const useVideoListSuspenseInfiniteQuery = () => {
   return useSuspenseInfiniteQuery({
-    queryKey: ['infinite', 'videos'],
+    queryKey: ['infinite', key],
     initialPageParam: 0,
     queryFn: ({ pageParam = 0 }) => getVideos({ page: pageParam, size: 10 }),
-    getNextPageParam: (lastPage) => {
-      const { size, number, totalElements } = lastPage.page;
-      if (size * (number + 1) >= totalElements) return undefined;
-      return lastPage.page.number + 1;
-    },
+    getNextPageParam: (lastPage) => nextPageParam(lastPage.page),
   });
 };
 
 export const useVideoListSuspenseQuery = () => {
   return useSuspenseQuery({
-    queryKey: ['videos'],
+    queryKey: [key],
     queryFn: () => getVideos({ page: 0, size: 6 }),
   });
 };
@@ -35,7 +34,7 @@ export const useVideoPostMutation = () => {
     mutationKey: ['postVideo'],
     mutationFn: (data: VideoPostReq) => postVideo(data),
     onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: ['videos'] });
+      queryClient.refetchQueries({ queryKey: [key] });
     },
   });
 };
@@ -46,7 +45,7 @@ export const useVideoDeleteMutation = () => {
     mutationKey: ['deleteVideo'],
     mutationFn: (id: number) => deleteVideo(id),
     onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: ['videos'] });
+      queryClient.refetchQueries({ queryKey: [key] });
     },
   });
 };

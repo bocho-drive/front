@@ -2,23 +2,25 @@ import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 import { deleteVote, getVoteList, postVote } from './api';
 import { VotePostReq } from './type';
 
+const key = 'vote';
+
 export const useVoteSuspenseQuery = (communityId: number) => {
   return useSuspenseQuery({
-    queryKey: ['vote', communityId],
+    queryKey: [key, communityId],
     queryFn: () => getVoteList(communityId),
   });
 };
 
 export const useVotePostMutation = () => {
   return useMutation({
-    mutationKey: ['vote'],
+    mutationKey: [key],
     mutationFn: (data: VotePostReq) => postVote(data),
   });
 };
 
 export const useVoteDeleteMutation = () => {
   return useMutation({
-    mutationKey: ['vote'],
+    mutationKey: [key],
     mutationFn: (id: number) => deleteVote(id),
   });
 };

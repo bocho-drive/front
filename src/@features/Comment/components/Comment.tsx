@@ -12,9 +12,9 @@ interface Props {
 }
 const Comment = ({ comment, communityId }: Props) => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const { deleteMutation } = useCommentQuery(communityId);
-
   const [isEditable, setIsEditable] = useState(false);
+
+  const { deleteMutation } = useCommentQuery(communityId);
   const userId = useAuth((state) => state.loginInfo?.userId);
 
   const handleDelete = () => {
@@ -54,12 +54,13 @@ const Comment = ({ comment, communityId }: Props) => {
           </S.div.Row>
         </S.div.Row>
 
-        {!isEditMode && (
+        {!isEditMode ? (
           <S.div.Card>
             <S.p.P>{comment.content}</S.p.P>
           </S.div.Card>
+        ) : (
+          <CommentEdit comment={comment} communityId={communityId} setIsEditMode={setIsEditMode} />
         )}
-        {isEditMode && <CommentEdit comment={comment} communityId={communityId} setIsEditMode={setIsEditMode} />}
       </S.div.Column>
     </S.div.Row>
   );

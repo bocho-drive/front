@@ -1,9 +1,9 @@
-import * as S from '@/styles/index.style';
-import { useModal } from '../../../components/templates/Modal/useModal';
-import VideoInfoModal from './VideoInfoModal';
-import { getYoutubeThumbnailUrl } from '@/util/util';
 import Modal from '@/components/templates/Modal/Modal';
+import { useModal } from '@/components/templates/Modal/useModal';
+import * as S from '@/styles/index.style';
+import { getYoutubeThumbnailUrl } from '@/util/util';
 import { Video } from '../type';
+import VideoInfoModal from './VideoInfoModal';
 
 interface Props {
   video: Video;

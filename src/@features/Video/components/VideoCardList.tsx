@@ -1,8 +1,8 @@
+import useScroll from '@/hooks/useScroll';
 import * as S from '@/styles/index.style';
 import { useVideoListSuspenseInfiniteQuery, useVideoListSuspenseQuery } from '../useVideoQuery';
-import useScroll from '@/hooks/useScroll';
 import VideoCard from './VideoCard';
-import { Fragment } from 'react/jsx-runtime';
+import NotExistsLayout from '@/components/templates/NotExistsLayout';
 
 export const VideoCardInfiniteList = () => {
   const { data, fetchNextPage, hasNextPage } = useVideoListSuspenseInfiniteQuery();
@@ -10,11 +10,13 @@ export const VideoCardInfiniteList = () => {
 
   return (
     <S.div.Grid $repeat={3}>
-      {data.pages.map((page) =>
-        page.content.map((video) => {
-          return <VideoCard key={video.id} video={video} />;
-        })
-      )}
+      <NotExistsLayout isExists={data.pages.length > 0}>
+        {data.pages.map((page) =>
+          page.content.map((video) => {
+            return <VideoCard key={video.id} video={video} />;
+          })
+        )}
+      </NotExistsLayout>
     </S.div.Grid>
   );
 };
@@ -24,12 +26,11 @@ export default VideoCardInfiniteList;
 export const VideoCardList = () => {
   const { data } = useVideoListSuspenseQuery();
 
-  if (data.content.length === 0) return <S.h.H3>게시글이 없어요.</S.h.H3>;
   return (
-    <Fragment>
+    <NotExistsLayout isExists={data.content.length > 0}>
       {data.content.map((video) => {
         return <VideoCard key={video.id} video={video} />;
       })}
-    </Fragment>
+    </NotExistsLayout>
   );
 };

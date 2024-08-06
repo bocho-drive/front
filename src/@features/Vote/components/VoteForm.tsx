@@ -1,66 +1,23 @@
-import * as S from '@/styles/index.style';
-import VoteButton from './VoteButton';
-import styled from 'styled-components';
-import { useEffect, useReducer } from 'react';
 import { useAuth } from '@/@features/Auth/useAuth';
-import { errorToast } from '@/components/atoms/Toast/useToast';
-import { useVoteDeleteMutation, useVotePostMutation, useVoteSuspenseQuery } from '../useVoteQuery';
-import { Vote } from '../type';
-import { voteInitialState, voteReducer } from '../reducer';
+import * as S from '@/styles/index.style';
+import styled from 'styled-components';
+import { useVoteForm } from '../useVoteForm';
+import { useVoteSuspenseQuery } from '../useVoteQuery';
+import VoteButton from './VoteButton';
 
 interface Props {
   communityId: number;
 }
 
 const VoteForm = ({ communityId }: Props) => {
-  // const { voteList, postVoteMutation, deleteVoteMutation } = useVoteQuery(communityId);
   const voteQuery = useVoteSuspenseQuery(communityId);
-  const postVoteMutation = useVotePostMutation();
-  const deleteVoteMutation = useVoteDeleteMutation();
 
   const up = voteQuery.data.filter((vote) => vote.agreeYn).length;
   const down = voteQuery.data.length - up;
 
   const isAuth = useAuth((state) => state.isAuth);
-  const userId = useAuth((state) => state.loginInfo?.userId);
 
-  const [voteState, voteDispatch] = useReducer(voteReducer, voteInitialState);
-
-  const handleVote = async () => {
-    if (!voteState.isUp && !voteState.isDown) {
-      errorToast('투표를 선택해주세요.');
-      return;
-    }
-    await postVoteMutation.mutateAsync({ communityId, agreeYn: voteState.isUp });
-    voteQuery.refetch();
-  };
-
-  const handleCancelVote = async () => {
-    if (!voteState.voteInfo) return;
-
-    await deleteVoteMutation.mutateAsync(voteState.voteInfo.id);
-    voteQuery.refetch();
-  };
-
-  const handleVoteSelect = (agreeYn: boolean) => {
-    if (!isAuth) {
-      errorToast('투표 권한이 없습니다.');
-      return;
-    }
-    if (voteState.isVoteAble) {
-      voteDispatch({ type: 'SELECT_VOTE', payload: { agreeYn } });
-    }
-  };
-
-  useEffect(() => {
-    const voteInfo: Vote | null = voteQuery.data.find((vote) => vote.userId === userId) || null;
-
-    if (voteInfo) {
-      voteDispatch({ type: 'VOTED', payload: { voteInfo } });
-    } else {
-      voteDispatch({ type: 'RESET_VOTE' });
-    }
-  }, [voteQuery.data, userId]);
+  const { handleCancelVote, handleVote, handleVoteSelect, voteState } = useVoteForm({ communityId, voteQuery });
 
   return (
     <S.div.Card>

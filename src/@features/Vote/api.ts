@@ -4,16 +4,8 @@ import { Vote, VotePostReq } from './type';
 const BASEURL = '/votes';
 
 /** 투표 목록 조회 */
-export const getVoteList = async (id: number): Promise<Vote[]> => {
-  let url = BASEURL;
-
-  const searchParams = new URLSearchParams();
-  searchParams.append('communityId', id.toString());
-
-  url = `${BASEURL}?${searchParams.toString()}`;
-
-  const res = await apiWithToken.get<Response<Vote[]>>(url);
-
+export const getVoteList = async (communityId: number): Promise<Vote[]> => {
+  const res = await apiWithToken.get<Response<Vote[]>>(BASEURL, { params: { communityId } });
   return res.data.data;
 };
 

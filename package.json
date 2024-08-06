@@ -12,7 +12,6 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@tanstack/react-query": "^5.51.11",
-    "@tanstack/react-query-devtools": "^5.51.15",
     "@toast-ui/react-editor": "^3.2.3",
     "axios": "^1.7.2",
     "immer": "^10.1.1",
@@ -28,6 +27,7 @@
     "zustand": "^4.5.4"
   },
   "devDependencies": {
+    "@tanstack/react-query-devtools": "^5.51.21",
     "@types/lodash": "^4.17.7",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

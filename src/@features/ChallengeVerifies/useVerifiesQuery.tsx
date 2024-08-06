@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { ChallengeVerifiesPostReq } from './type';
-import { deleteChallengeVerifies, getChallengeVerifiesDetail, getChallengeVerifiesList, putChallengeVerifies } from './api';
+import { deleteChallengeVerifies, getChallengeVerifiesDetail, getChallengeVerifiesList, postChallengeVerifies, putChallengeVerifies } from './api';
 import { postLike } from '../Like/api';
 import { nextPageParam } from '@/util/util';
 
@@ -24,18 +24,28 @@ export const useVerifiesQuery = (id: number) => {
 
 export const useVerifiesDeleteMutation = () => {
   return useMutation({
+    mutationKey: [key, 'delete'],
     mutationFn: (id: number) => deleteChallengeVerifies(id),
   });
 };
 
 export const useVerifiesPutMutation = () => {
   return useMutation({
+    mutationKey: [key, 'put'],
     mutationFn: ({ id, data }: { id: number; data: ChallengeVerifiesPostReq }) => putChallengeVerifies(id, data),
   });
 };
 
 export const useVerifiesLikeMutation = () => {
   return useMutation({
+    mutationKey: [key, 'like'],
     mutationFn: (id: number) => postLike({ communityId: id }),
+  });
+};
+
+export const useVerifiesPostMutation = () => {
+  return useMutation({
+    mutationKey: [key, 'post'],
+    mutationFn: ({ challengeId, data }: { challengeId: number; data: ChallengeVerifiesPostReq }) => postChallengeVerifies(challengeId, data),
   });
 };

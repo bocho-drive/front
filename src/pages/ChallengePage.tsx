@@ -7,12 +7,6 @@ import Tab from '@/components/templates/Tab/Tab';
 import * as S from '@/styles/index.style';
 
 const ChallengePage = () => {
-  const isAuth = useAuth((state) => state.isAuth);
-
-  const Verifies = () => {
-    if (!isAuth) return <S.h.H3>로그인이 필요한 페이지입니다.</S.h.H3>;
-    return <VerfiesCardList />;
-  };
   return (
     <DriveLayout>
       <S.div.Column $gap={20}>
@@ -26,5 +20,10 @@ const ChallengePage = () => {
     </DriveLayout>
   );
 };
-
 export default ChallengePage;
+
+const Verifies = () => {
+  const isAuth = useAuth((state) => state.isAuth);
+  if (!isAuth) return <S.h.H3>로그인이 필요한 페이지입니다.</S.h.H3>;
+  return <VerfiesCardList />;
+};

@@ -1,16 +1,16 @@
-import * as S from '@/styles/index.style';
-import DriveLayout from '@/components/templates/DriveLayout';
-import { useNavigate, useParams } from 'react-router-dom';
-import KakaoShareButton from '@/components/atoms/KakaoShareButton';
-import { useMatchingDeleteMutation, useMatchingQuery } from '@/@features/Matching/useMatchingQuery';
-import Loading from '@/components/atoms/Loading';
-import { getDateString } from '@/util/util';
 import { useAuth } from '@/@features/Auth/useAuth';
-import { Fragment } from 'react/jsx-runtime';
+import { MatchingStatus, MatchingType } from '@/@features/Matching/components/MatchingCard';
+import { useMatchingDeleteMutation, useMatchingQuery } from '@/@features/Matching/useMatchingQuery';
 import ApplyButton from '@/@features/MatchingApply/components/ApplyButton';
 import ApplyList from '@/@features/MatchingApply/components/ApplyList';
+import KakaoShareButton from '@/components/atoms/KakaoShareButton';
+import Loading from '@/components/atoms/Loading';
+import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
-import { MatchingStatus, MatchingType } from '@/@features/Matching/components/MatchingCard';
+import * as S from '@/styles/index.style';
+import { getDateString } from '@/util/util';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Fragment } from 'react/jsx-runtime';
 
 const MatchingDetailPage = () => {
   const { id } = useParams();
