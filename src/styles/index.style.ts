@@ -7,3 +7,7 @@ export * as p from './p/index.style';
 export * as hr from './hr/index.style';
 export * as textarea from './textarea/index.style';
 export * as a from './a/index.style';
+export * as select from './select/index.style';
+export * as img from './img/index.style';
+export * as label from './label/index.style';
+export * as small from './small/index.style';

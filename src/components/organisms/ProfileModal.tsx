@@ -3,7 +3,7 @@ import * as S from '@/styles/index.style';
 
 const ProfileModal = () => {
   return (
-    <Modal>
+    <Modal type="profile" id={0}>
       <S.div.FixedModal $width={500}>
         <S.div.Card>
           <S.div.Column $gap={20} $align="center">

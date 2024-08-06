@@ -18,7 +18,13 @@ interface SizeProps {
 }
 
 export const Button = styled.button<ButtonProps & SizeProps>`
-  background-color: ${({ theme, $colors }) => $colors && theme.colors[$colors]};
+  ${({ $colors, theme }) =>
+    $colors &&
+    css`
+      background-color: ${theme.colors[$colors]};
+      color: #fff;
+    `}
+  /* background-color: ${({ theme, $colors }) => $colors && theme.colors[$colors]}; */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -94,6 +100,12 @@ const largeStyle = css<SizeProps>`
   padding: 15px 30px;
 `;
 
-export const AdminButton = styled.button`
-  margin-left: 10px;
+export const PageButton = styled.button<{ active: boolean }>`
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: ${({ active }) => (active ? '#F0F0F0' : '#ffffff')};
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 `;

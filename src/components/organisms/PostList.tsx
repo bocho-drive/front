@@ -1,53 +1,44 @@
-import { useState } from 'react';
 import PostListHeader from '../molecules/PostListHeader';
-
 import * as S from '@/styles/index.style';
-import { usePost } from "@/@features/Admin/Post/usePost"
-
-interface Post {
-  id: number;
-  title: string;
-  likes: number;
-  comments: number;
-  isChecked: boolean;
-}
-
+import { usePost } from '@/@features/Admin/Post/usePost';
+import { useNavigate } from 'react-router-dom';
+import { getCommunityList } from '@/@features/Community/api';
+import { useCallback, useEffect } from 'react';
 
 const PostList = () => {
-  const {posts, handleToggle} = usePost()
-  // const [posts, setPosts] = useState<Post[]>([
-  //   { id: 1, title: 'Post 1', likes: 10, comments: 2, isChecked: false },
-  //   { id: 2, title: 'Post 2', likes: 5, comments: 4, isChecked: false },
-  //   { id: 3, title: 'Post 3', likes: 8, comments: 1, isChecked: false },
-  //   // 예시
-  // ]);
+  const { posts, setPosts, currentPage, handleToggle, setCurrentPage, totalPages, setTotalPages } = usePost();
+  const navigate = useNavigate();
 
-  // const handleSort = (criteria: string) => {
-  //   const sortedPosts = [...posts].sort((a, b) => {
-  //     if (criteria === 'likes') {
-  //       return b.likes - a.likes;
-  //     } else if (criteria === 'comments') {
-  //       return b.comments - a.comments;
-  //     }
-  //     return 0;
-  //   });
-  //   setPosts(sortedPosts);
-  // };
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
-  // const handleDelete = () => {
-  //   const remainingPosts = posts.filter((post) => !post.isChecked);
-  //   setPosts(remainingPosts);
-  // };
+  const handleToAdminDetail = (id: number) => navigate(`/admin/detail/${id}`);
 
-  // const handleToggleAll = (checked: boolean) => {
-  //   const updatedPosts = posts.map((post) => ({ ...post, isChecked: checked }));
-  //   setPosts(updatedPosts);
-  // };
+  const fetchPosts = useCallback(async () => {
+    const data = await getCommunityList({
+      category: 'GENERAL',
+      page: currentPage - 1,
+    });
+    if (data) {
+      setTotalPages(data.page.totalPages);
+      const posts = data.content.map((post) => ({
+        id: post.id,
+        title: post.title,
+        viewCount: post.viewCount,
+        verifiedYN: post.verifiedYN,
+        createdAt: post.createdAt,
+        isChecked: false,
+        likes: 0,
+        comments: 0,
+      }));
+      setPosts(posts);
+    }
+  }, [currentPage, setPosts, setTotalPages]);
 
-  // const handleToggle = (id: number) => {
-  //   const updatedPosts = posts.map((post) => (post.id === id ? { ...post, isChecked: !post.isChecked } : post));
-  //   setPosts(updatedPosts);
-  // };
+  useEffect(() => {
+    fetchPosts();
+  }, [currentPage, fetchPosts]);
 
   return (
     <S.div.PostListContainer>
@@ -55,13 +46,22 @@ const PostList = () => {
       {posts.map((post) => (
         <S.div.PostItem key={post.id}>
           <div>
-            <S.input.Checkbox type="checkbox" checked={post.isChecked} onChange={() => handleToggle(post.id)} />
-            {post.title}
+            <S.input.Checkbox id={`post-${post.id}`} type="checkbox" checked={post.isChecked} onChange={() => handleToggle(post.id)} />
+            <label onClick={() => handleToAdminDetail(post.id)} style={{ cursor: 'pointer' }}>
+              {post.title}
+            </label>
           </div>
-          <div>추천수: {post.likes}</div>
-          <div>댓글수: {post.comments}</div>
+          <div>조회: {post.viewCount}</div>
+          <div>댓글: {post.comments}</div>
         </S.div.PostItem>
       ))}
+      <S.div.Pagination>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <S.button.PageButton key={index + 1} onClick={() => handlePageChange(index + 1)} active={index + 1 === currentPage}>
+            {index + 1}
+          </S.button.PageButton>
+        ))}
+      </S.div.Pagination>
     </S.div.PostListContainer>
   );
 };

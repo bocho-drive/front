@@ -6,12 +6,16 @@ import * as S from '@/styles/index.style';
 
 const AdminPage = () => {
   return (
-    <S.div.Container>
-      <Sidebar />
-      <S.div.MainContent>
-        <SearchBar />
-        <PostList />
-      </S.div.MainContent>
+    <S.div.Container $width={100}>
+      <S.div.Row $width={90} $justify="center">
+        <Sidebar />
+        <S.div.MainContent>
+          <S.div.Column $gap={20}>
+            <SearchBar />
+            <PostList />
+          </S.div.Column>
+        </S.div.MainContent>
+      </S.div.Row>
     </S.div.Container>
   );
 };
