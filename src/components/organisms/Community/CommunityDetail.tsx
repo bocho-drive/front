@@ -3,6 +3,7 @@ import { CommunityDetailRes } from '@/@features/Community/type';
 import { ReactNode } from 'react';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import { getDateString } from '@/util/util';
+import ToastViewer from '@/components/atoms/ToastViewer';
 
 interface Props {
   data: CommunityDetailRes;
@@ -30,7 +31,7 @@ const CommunityDetail = ({ data, authorActionComp }: Props) => {
       </S.div.Row>
       <S.hr.Hr />
 
-      <S.span.Span>{data.content}</S.span.Span>
+      <ToastViewer initialValue={data.content} />
 
       <S.div.Row $gap={10} $wrap>
         {data.imgUrls.map((url, idx) => (
