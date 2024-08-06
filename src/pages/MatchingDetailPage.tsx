@@ -10,6 +10,7 @@ import { Fragment } from 'react/jsx-runtime';
 import ApplyButton from '@/@features/MatchingApply/components/ApplyButton';
 import ApplyList from '@/@features/MatchingApply/components/ApplyList';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
+import { MatchingStatus, MatchingType } from '@/@features/Matching/components/MatchingCard';
 
 const MatchingDetailPage = () => {
   const { id } = useParams();
@@ -53,6 +54,11 @@ const MatchingDetailPage = () => {
                 )}
               </S.div.Row>
               <KakaoShareButton title={data.title} />
+            </S.div.Row>
+
+            <S.div.Row $gap={10}>
+              <MatchingStatus status={data.status} />
+              <MatchingType type={data.type} />
             </S.div.Row>
             <S.h.H1>{data.title}</S.h.H1>
 
