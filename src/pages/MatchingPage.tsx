@@ -1,3 +1,4 @@
+import { useAuth } from '@/@features/Auth/useAuth';
 import MatchingCardList from '@/@features/Matching/components/MatchingCardList';
 import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
@@ -5,6 +6,7 @@ import * as S from '@/styles/index.style';
 import { Link } from 'react-router-dom';
 
 const MatchingPage = () => {
+  const userRole = useAuth((state) => state.userRole);
   return (
     <DriveLayout>
       <S.div.Column $gap={20}>
@@ -13,9 +15,11 @@ const MatchingPage = () => {
             <S.h.LayoutTitle>운전메이트 매칭 🚘</S.h.LayoutTitle>
             <S.p.P>연수에 도움을 줄 사람들을 찾아보세요</S.p.P>
           </S.div.Column>
-          <Link to="/matching/new">
-            <S.button.Button $colors="primary">매칭 글 작성</S.button.Button>
-          </Link>
+          {userRole === 'USER' && (
+            <Link to="/matching/new">
+              <S.button.Button $colors="primary">매칭 글 작성</S.button.Button>
+            </Link>
+          )}
         </S.div.Row>
 
         <S.div.Column $gap={20}>

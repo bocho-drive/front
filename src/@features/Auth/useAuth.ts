@@ -29,7 +29,7 @@ export const useAuth = create(
         set({ isAuth: true, token: loginInfo.accessToken, userId: loginInfo.userId, userRole: loginInfo.userRole });
       },
       handleLogout: () => {
-        set({ isAuth: false, token: null, userId: null });
+        set({ isAuth: false, token: null, userId: null, userRole: null });
         logoutToast();
       },
 
