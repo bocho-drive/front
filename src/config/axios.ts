@@ -1,3 +1,4 @@
+import { LoginRes } from '@/@features/Auth/type';
 import { errorToast, successToast } from '@/components/atoms/Toast/useToast';
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
@@ -18,7 +19,8 @@ const ReqFulfilled = (config: InternalAxiosRequestConfig) => {
   if (!ls) return config;
 
   const json = JSON.parse(ls);
-  const token = json?.state?.token;
+  const loginState = json?.state?.loginInfo as LoginRes | null;
+  const token = loginState?.accessToken;
   if (token) {
     config.headers.Authorization = token;
   }

@@ -1,14 +1,12 @@
 import { logoutToast, needLoginToast } from '@/components/atoms/Toast/useToast';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { LoginRes, UserRole } from './type';
+import { LoginRes } from './type';
 
 interface Props {
   /** 인가 유효 여부 */
   isAuth: boolean;
-  token: string | null;
-  userId: number | null;
-  userRole: UserRole | null;
+  loginInfo: LoginRes | null;
 }
 
 interface Actions {
@@ -21,15 +19,13 @@ export const useAuth = create(
   persist<Props & Actions>(
     (set, get) => ({
       isAuth: false,
-      token: null,
-      userId: null,
-      userRole: null,
+      loginInfo: null,
 
       handleLogin: (loginInfo) => {
-        set({ isAuth: true, token: loginInfo.accessToken, userId: loginInfo.userId, userRole: loginInfo.userRole });
+        set({ isAuth: true, loginInfo });
       },
       handleLogout: () => {
-        set({ isAuth: false, token: null, userId: null, userRole: null });
+        set({ isAuth: false, loginInfo: null });
         logoutToast();
       },
 

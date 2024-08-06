@@ -5,7 +5,7 @@ import useScroll from '@/hooks/useScroll';
 import CommunityCard from '@/components/molecules/CommunityCard';
 
 const MyChallengeVerifyCardList = () => {
-  const userId = useAuth((state) => state.userId);
+  const userId = useAuth((state) => state.loginInfo?.userId);
   const { data, fetchNextPage, hasNextPage } = useMyChallengeVerifyListInfiniteQuery(userId!);
   useScroll({ length: data.pages.length, fetchNextPage, hasNextPage });
 

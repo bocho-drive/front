@@ -6,7 +6,7 @@ import * as S from '@/styles/index.style';
 import { Link } from 'react-router-dom';
 
 const MatchingPage = () => {
-  const userRole = useAuth((state) => state.userRole);
+  const userRole = useAuth((state) => state.loginInfo?.userRole);
   return (
     <DriveLayout>
       <S.div.Column $gap={20}>

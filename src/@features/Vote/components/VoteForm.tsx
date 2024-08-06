@@ -22,7 +22,7 @@ const VoteForm = ({ communityId }: Props) => {
   const down = voteQuery.data.length - up;
 
   const isAuth = useAuth((state) => state.isAuth);
-  const userId = useAuth((state) => state.userId);
+  const userId = useAuth((state) => state.loginInfo?.userId);
 
   const [voteState, voteDispatch] = useReducer(voteReducer, voteInitialState);
 

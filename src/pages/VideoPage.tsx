@@ -5,7 +5,6 @@ import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import { useModal } from '@/components/templates/Modal/useModal';
 import * as S from '@/styles/index.style';
-import { useNavigate } from 'react-router-dom';
 
 const VideoPage = () => {
   const handleOpen = useModal((state) => state.handleOpen);

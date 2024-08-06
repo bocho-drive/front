@@ -8,7 +8,7 @@ interface Props {
 }
 
 const ApplyList = ({ matchingId }: Props) => {
-  const userId = useAuth((state) => state.userId);
+  const userId = useAuth((state) => state.loginInfo?.userId);
 
   const { data } = useMatchingApplySuspenseQuery(matchingId);
 

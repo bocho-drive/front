@@ -5,7 +5,7 @@ import CommunityCard from '@/components/molecules/CommunityCard';
 import useScroll from '@/hooks/useScroll';
 
 const MyCommunityCardList = () => {
-  const userId = useAuth((state) => state.userId);
+  const userId = useAuth((state) => state.loginInfo?.userId);
   const { data, fetchNextPage, hasNextPage } = useMyCommunityListInfiniteQuery(userId!);
   useScroll({ length: data.pages.length, fetchNextPage, hasNextPage });
 

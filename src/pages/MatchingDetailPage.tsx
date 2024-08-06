@@ -15,12 +15,11 @@ import { MatchingStatus, MatchingType } from '@/@features/Matching/components/Ma
 const MatchingDetailPage = () => {
   const { id } = useParams();
   const { data, isLoading } = useMatchingQuery(Number(id));
-  const { userId, userRole, isAuth } = useAuth((state) => ({
-    userId: state.userId,
-    userRole: state.userRole,
+  const { loginInfo, isAuth } = useAuth((state) => ({
+    loginInfo: state.loginInfo,
     isAuth: state.isAuth,
   }));
-  const isAuthor = data?.userId === userId;
+  const isAuthor = loginInfo && data?.userId === loginInfo.userId;
 
   const navigate = useNavigate();
   const deleteMutation = useMatchingDeleteMutation();
@@ -73,7 +72,7 @@ const MatchingDetailPage = () => {
             <S.span.Span>{data.content}</S.span.Span>
           </S.div.Column>
 
-          {userRole === 'TEACHER' && <ApplyButton matchingId={Number(id)} />}
+          {loginInfo?.userRole === 'TEACHER' && <ApplyButton matchingId={Number(id)} />}
 
           <S.div.Gap $height={20} />
 

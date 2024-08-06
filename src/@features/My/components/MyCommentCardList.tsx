@@ -7,7 +7,7 @@ import NotExistsLayout from '@/components/templates/NotExistsLayout';
 import { getDateString } from '@/util/util';
 
 const MyCommentCardList = () => {
-  const userId = useAuth((state) => state.userId);
+  const userId = useAuth((state) => state.loginInfo?.userId);
   const { data, fetchNextPage, hasNextPage } = useMyCommentListInfiniteQuery(userId!);
   useScroll({ length: data.pages.length, fetchNextPage, hasNextPage });
 

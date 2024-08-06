@@ -8,7 +8,7 @@ import { useVideoPostMutation } from '../useVideoQuery';
 import { useAuth } from '@/@features/Auth/useAuth';
 
 const VideoNewModal = () => {
-  const userId = useAuth((state) => state.userId);
+  const userId = useAuth((state) => state.loginInfo?.userId);
   const handleClose = useModal((state) => state.handleClose);
 
   const postMutation = useVideoPostMutation();
@@ -26,7 +26,7 @@ const VideoNewModal = () => {
       return;
     }
 
-    if (userId === null) return;
+    if (userId === undefined) return;
 
     await postMutation.mutateAsync({ title, url: link, userId });
     successToast('영상이 등록되었습니다');
