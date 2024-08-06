@@ -1,12 +1,12 @@
 import * as S from '@/styles/index.style';
-import Modal from '../../../components/templates/Modal/Modal';
-import KakaoShareButton from '../../../components/atoms/KakaoShareButton';
 
 import { getModalShareUrl } from '@/util/util';
 import { Challenge } from '@/@features/Challenge/type';
 import { URLS } from '@/App';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/@features/Auth/useAuth';
+import Modal from '@/components/templates/Modal/Modal';
+import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 
 interface Props {
   challenge: Challenge;
@@ -31,7 +31,6 @@ const ChallengeModal = ({ challenge }: Props) => {
             <S.p.P>{challenge.content}</S.p.P>
 
             <S.button.Button onClick={handleToNewVerify}>인증하기</S.button.Button>
-            {/* {status === 'CLEAR' && <S.button.Button>내 인증글 보기</S.button.Button>} */}
             <KakaoShareButton title={challenge.title} displayIcon={true} url={getModalShareUrl('challenge', Number(challenge.id))} />
           </S.div.Column>
         </S.div.Card>

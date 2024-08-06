@@ -1,6 +1,5 @@
 import { Pagination } from '@/config/type';
 
-// API
 export interface Challenge {
   id: string;
   title: string;

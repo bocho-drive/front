@@ -1,13 +1,13 @@
-import * as S from '@/styles/index.style';
-import { useAuth } from '@/@features/Auth/useAuth';
+import { signIn } from '@/@features/Auth/api';
 import { useAuthModal } from '@/@features/Auth/components/AuthModal/useAuthModal';
-import LineText from '@/components/atoms/LineText';
+import { useAuth } from '@/@features/Auth/useAuth';
+import { LoginSchema, loginSchema } from '@/@features/Auth/yup';
 import GoogleButton from '@/components/atoms/GoogleButton';
 import KakaoButton from '@/components/atoms/KakaoButton';
-import { useForm } from 'react-hook-form';
+import LineText from '@/components/atoms/LineText';
+import * as S from '@/styles/index.style';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LoginSchema, loginSchema } from '@/@features/Auth/yup';
-import { signIn } from '@/@features/Auth/api';
+import { useForm } from 'react-hook-form';
 
 const LoginForm = () => {
   const handleLoginState = useAuth((state) => state.handleLogin);
@@ -18,10 +18,6 @@ const LoginForm = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<LoginSchema>({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
     resolver: yupResolver(loginSchema),
   });
 
@@ -45,7 +41,7 @@ const LoginForm = () => {
         <S.input.Input type="password" placeholder="비밀번호" $size="medium" {...register('password')} />
         {errors.password && <S.span.ErrorSpan>{errors.password.message}</S.span.ErrorSpan>}
 
-        <S.button.Button $colors="primary" $height={50}>
+        <S.button.Button $colors="primary" $height={50} type="submit">
           <S.h.H5>이메일로 로그인</S.h.H5>
         </S.button.Button>
 

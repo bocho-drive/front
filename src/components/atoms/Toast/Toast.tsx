@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
  * @see https://fkhadra.github.io/react-toastify/positioning-toast
  */
 const Toast = () => {
-  return <ToastContainer limit={3} />;
+  return <ToastContainer />;
 };
 
 export default Toast;

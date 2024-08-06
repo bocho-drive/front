@@ -1,12 +1,12 @@
-import * as S from '@/styles/index.style';
-import LineText from '../../../components/atoms/LineText';
-import GoogleButton from '../../../components/atoms/GoogleButton';
-import KakaoButton from '../../../components/atoms/KakaoButton';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { RegisterSchema, registerSchema } from '@/@features/Auth/yup';
 import { signUp } from '@/@features/Auth/api';
 import { useAuthModal } from '@/@features/Auth/components/AuthModal/useAuthModal';
+import { RegisterSchema, registerSchema } from '@/@features/Auth/yup';
+import GoogleButton from '@/components/atoms/GoogleButton';
+import KakaoButton from '@/components/atoms/KakaoButton';
+import LineText from '@/components/atoms/LineText';
+import * as S from '@/styles/index.style';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 
 const RegisterForm = () => {
   const { setIsLoginModal } = useAuthModal((state) => ({

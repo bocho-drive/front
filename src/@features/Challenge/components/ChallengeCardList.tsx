@@ -1,8 +1,8 @@
+import NotExistsLayout from '@/components/templates/NotExistsLayout';
 import useScroll from '@/hooks/useScroll';
 import { ReactNode } from 'react';
-import ChallengeCard from './ChallengeCard';
 import { useChallengeListSuspenseInfiniteQuery, useChallengeListSuspenseQuery } from '../useChallengeQuery';
-import NotExistsLayout from '@/components/templates/NotExistsLayout';
+import ChallengeCard from './ChallengeCard';
 
 export const ChallengeInfiniteCardList = (): ReactNode => {
   const { fetchNextPage, hasNextPage, data } = useChallengeListSuspenseInfiniteQuery();
