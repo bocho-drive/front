@@ -32,7 +32,9 @@ const UserProfile = () => {
 
   return (
     <Fragment>
-      <S.button.Avatar onClick={handleOpen} ref={buttonRef} />
+      <S.button.Button ref={buttonRef} onClick={handleOpen} $colors="primary">
+        MY
+      </S.button.Button>
 
       {isOpen && (
         <RelativeModal relativeModal={relativeModal}>

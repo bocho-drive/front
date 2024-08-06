@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { getChallenge, getChallengeList } from './api';
 
 export const useChallengeSuspenseQuery = (id: number) => {
@@ -9,7 +9,7 @@ export const useChallengeSuspenseQuery = (id: number) => {
 };
 
 export const useChallengeListSuspenseInfiniteQuery = () => {
-  return useInfiniteQuery({
+  return useSuspenseInfiniteQuery({
     queryKey: ['infinite', 'challengeList'],
     initialPageParam: 0,
     queryFn: ({ pageParam = 0 }) => getChallengeList({ page: pageParam, size: 10 }),

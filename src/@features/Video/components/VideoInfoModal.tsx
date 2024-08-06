@@ -12,7 +12,7 @@ interface Props {
 }
 
 const VideoInfoModal = ({ video }: Props) => {
-  const userId = useAuth((state) => state.userId);
+  const userId = useAuth((state) => state.loginInfo?.userId);
   const handleClose = useModal((state) => state.handleClose);
 
   const { data } = useVideoQuery(video.id);

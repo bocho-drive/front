@@ -15,7 +15,7 @@ const Comment = ({ comment, communityId }: Props) => {
   const { deleteMutation } = useCommentQuery(communityId);
 
   const [isEditable, setIsEditable] = useState(false);
-  const userId = useAuth((state) => state.userId);
+  const userId = useAuth((state) => state.loginInfo?.userId);
 
   const handleDelete = () => {
     if (isEditable && confirm('정말 삭제하시겠습니까?')) deleteMutation.mutate(comment.id);

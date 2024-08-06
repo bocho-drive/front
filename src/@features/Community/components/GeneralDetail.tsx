@@ -7,6 +7,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import { useCommunityDeleteMutation, useCommunityLikeMutation, useCommunitySuspenseQuery } from '../useCommunityQuery';
 import CommunityDetail from '@/components/organisms/Community/CommunityDetail';
+import { useAuth } from '@/@features/Auth/useAuth';
 
 interface Props {
   communityId: number;
@@ -15,6 +16,7 @@ interface Props {
 const GeneralDetail = ({ communityId }: Props) => {
   const navigate = useNavigate();
   const { search, pathname } = useLocation();
+  const isAuth = useAuth((state) => state.isAuth);
 
   const getDetailQuery = useCommunitySuspenseQuery(communityId);
   const mutationDelete = useCommunityDeleteMutation(communityId);
@@ -36,10 +38,12 @@ const GeneralDetail = ({ communityId }: Props) => {
       <CommunityDetail
         data={getDetailQuery.data}
         authorActionComp={
-          <Fragment>
-            <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
-            <S.button.Button onClick={handleToEdit}>수정</S.button.Button>
-          </Fragment>
+          isAuth && (
+            <Fragment>
+              <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
+              <S.button.Button onClick={handleToEdit}>수정</S.button.Button>
+            </Fragment>
+          )
         }
       />
 
@@ -52,11 +56,13 @@ const GeneralDetail = ({ communityId }: Props) => {
         </ErrorBoundary>
       )}
 
-      <S.div.Row $gap={10} $justify="center">
-        <S.button.Button $colors="secondary" onClick={handleLike}>
-          🎉 글 추천
-        </S.button.Button>
-      </S.div.Row>
+      {isAuth && (
+        <S.div.Row $gap={10} $justify="center">
+          <S.button.Button $colors="secondary" onClick={handleLike}>
+            🎉 글 추천
+          </S.button.Button>
+        </S.div.Row>
+      )}
 
       <S.div.Row $gap={10} $justify="flex-start">
         <S.button.Button onClick={handleToList}>목록으로</S.button.Button>

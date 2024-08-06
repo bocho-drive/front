@@ -7,7 +7,6 @@ const BASEURL = 'challenges';
 
 /** 챌린지 목록 조회 */
 export const getChallengeList = async (props: PaginationReq): Promise<ChallengeList> => {
-  console.log({ props });
   let url = BASEURL;
 
   const searchParams = new URLSearchParams();
