@@ -1,5 +1,5 @@
 import { useAuth } from '@/@features/Auth/useAuth';
-import ChallengeCardList from '@/@features/Challenge/components/ChallengeCardList';
+import { ChallengeInfiniteCardList } from '@/@features/Challenge/components/ChallengeCardList';
 import VerfiesCardList from '@/@features/ChallengeVerifies/components/VerfiesCardList';
 import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
@@ -20,7 +20,7 @@ const ChallengePage = () => {
         <S.p.P>차근차근 시도를 통해 운전고수에 도전해보세요.</S.p.P>
 
         <ErrorSuspenseLayout>
-          <Tab tabHeaders={['챌린지', '챌린지 인증']} tabBodys={[<ChallengeCardList />, <Verifies />]} />
+          <Tab tabHeaders={['챌린지', '챌린지 인증']} tabBodys={[<ChallengeInfiniteCardList />, <Verifies />]} />
         </ErrorSuspenseLayout>
       </S.div.Column>
     </DriveLayout>

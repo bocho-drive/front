@@ -1,17 +1,15 @@
-import * as S from '@/styles/index.style';
-import TipCard from '@/components/molecules/TipCard';
-import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
-import CommunityCommentCardList from '@/components/organisms/CommunityCommentCardList';
-import MoreLayout from '@/components/templates/MoreLayout';
-import ImagePlaceholder from '@/components/atoms/ImagePlaceholder';
-import { useAuth } from '@/@features/Auth/useAuth';
 import { useAuthModal } from '@/@features/Auth/components/AuthModal/useAuthModal';
-import { Suspense } from 'react';
-import Loading from '@/components/atoms/Loading';
-import { ErrorBoundary } from 'react-error-boundary';
-import ErrorFallbackUI from '@/components/templates/ErrorFallback';
-import MatchingCardList from '@/@features/Matching/components/MatchingCardList';
+import { useAuth } from '@/@features/Auth/useAuth';
+import { ChallengeCardList } from '@/@features/Challenge/components/ChallengeCardList';
+import { CommunityCardList } from '@/@features/Community/components/CommunityCardList';
+import { MatchingCardList } from '@/@features/Matching/components/MatchingCardList';
+import { VideoCardList } from '@/@features/Video/components/VideoCardList';
+import ImagePlaceholder from '@/components/atoms/ImagePlaceholder';
+import CommunityCommentCardList from '@/components/organisms/CommunityCommentCardList';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
+import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
+import MoreLayout from '@/components/templates/MoreLayout';
+import * as S from '@/styles/index.style';
 
 const GIFS = [
   'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXdxd290NmNtejNzb3QzbjN5Zms4MXVtbHZodXpndjRwanJybWRxciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mlqXcoNp0zpiyFRztL/giphy.gif',
@@ -64,61 +62,55 @@ const LandingPage = () => {
 
         <S.div.Column $gap={20}>
           <S.h.LayoutTitle>커뮤니티에서 만나요 💬</S.h.LayoutTitle>
-          <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
+          <ErrorSuspenseLayout>
             <MoreLayout to="/community">
-              <Suspense fallback={<Loading />}>
-                <CommunityCommentCardList />
-              </Suspense>
+              <CommunityCommentCardList />
             </MoreLayout>
-          </ErrorBoundary>
+          </ErrorSuspenseLayout>
         </S.div.Column>
 
         <S.div.Column $gap={20}>
           <S.h.LayoutTitle>운전고수가 되기 위해 도전해봐요 🏆</S.h.LayoutTitle>
-          <MoreLayout to="/challenge">
-            <S.div.Grid $repeat={3}>
-              {/* <ChallengeCard id={1} />
-              <ChallengeCard id={2} />
-              <ChallengeCard id={3} />
-              <ChallengeCard id={4} />
-              <ChallengeCard id={5} />
-              <ChallengeCard id={6} /> */}
-            </S.div.Grid>
-          </MoreLayout>
+          <ErrorSuspenseLayout>
+            <MoreLayout to="/challenge">
+              <S.div.Grid $repeat={3}>
+                <ChallengeCardList />
+              </S.div.Grid>
+            </MoreLayout>
+          </ErrorSuspenseLayout>
         </S.div.Column>
 
         <S.div.Column $gap={20}>
           <S.h.LayoutTitle>운전 메이트를 찾아봐요 🚘</S.h.LayoutTitle>
-          <MoreLayout to="/matching">
-            <S.div.Row $gap={20} $overflow="scroll" $itemMaxWidth={300}>
-              <ErrorSuspenseLayout>
+          <ErrorSuspenseLayout>
+            <MoreLayout to="/matching">
+              <S.div.Grid $repeat={3}>
                 <MatchingCardList />
-              </ErrorSuspenseLayout>
-            </S.div.Row>
-          </MoreLayout>
+              </S.div.Grid>
+            </MoreLayout>
+          </ErrorSuspenseLayout>
         </S.div.Column>
 
         <S.div.Column $gap={20}>
           <S.h.LayoutTitle>인증된 팁을 공유드려요 📌</S.h.LayoutTitle>
-
-          <S.div.Row $gap={10} $itemMaxWidth={600} $wrap>
-            <TipCard id={1} />
-            <TipCard id={1} />
-            <TipCard id={1} />
-            <TipCard id={1} />
-          </S.div.Row>
+          <ErrorSuspenseLayout>
+            <MoreLayout to="/tip">
+              <S.div.Grid $repeat={3}>
+                <CommunityCardList category="TIP" />
+              </S.div.Grid>
+            </MoreLayout>
+          </ErrorSuspenseLayout>
         </S.div.Column>
 
         <S.div.Column $gap={20}>
           <S.h.LayoutTitle>영상으로 운전을 배워봐요 🎥</S.h.LayoutTitle>
-          <S.div.Row $gap={20} $overflow="scroll" $itemMaxWidth={300}>
-            {/* <VideoCard id={11} />
-            <VideoCard id={12} />
-            <VideoCard id={13} />
-            <VideoCard id={14} />
-            <VideoCard id={15} />
-            <VideoCard id={16} /> */}
-          </S.div.Row>
+          <ErrorSuspenseLayout>
+            <MoreLayout to="/video">
+              <S.div.Grid $repeat={6}>
+                <VideoCardList />
+              </S.div.Grid>
+            </MoreLayout>
+          </ErrorSuspenseLayout>
         </S.div.Column>
       </S.div.Column>
     </HeaderFooterLayout>

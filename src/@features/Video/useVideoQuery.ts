@@ -1,10 +1,10 @@
-import { useMutation, useQuery, useQueryClient, useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient, useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { VideoPostReq } from './type';
 import { deleteVideo, getVideo, getVideos, postVideo } from './api';
 
-export const useVideoSuspenseInfiniteQuery = () => {
+export const useVideoListSuspenseInfiniteQuery = () => {
   return useSuspenseInfiniteQuery({
-    queryKey: ['videos'],
+    queryKey: ['infinite', 'videos'],
     initialPageParam: 0,
     queryFn: ({ pageParam = 0 }) => getVideos({ page: pageParam, size: 10 }),
     getNextPageParam: (lastPage) => {
@@ -12,6 +12,13 @@ export const useVideoSuspenseInfiniteQuery = () => {
       if (size * (number + 1) >= totalElements) return undefined;
       return lastPage.page.number + 1;
     },
+  });
+};
+
+export const useVideoListSuspenseQuery = () => {
+  return useSuspenseQuery({
+    queryKey: ['videos'],
+    queryFn: () => getVideos({ page: 0, size: 6 }),
   });
 };
 

@@ -1,5 +1,5 @@
 import * as S from '@/styles/index.style';
-import { useChallengeQuery } from '../useChallengeQuery';
+import { useChallengeSuspenseQuery } from '../useChallengeQuery';
 
 interface Props {
   challengeId: number;
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const ChallengeDetail = ({ challengeId, children }: Props) => {
-  const { challengeQuery } = useChallengeQuery(challengeId);
+  const challengeQuery = useChallengeSuspenseQuery(challengeId);
   return (
     <S.div.Column $gap={20}>
       <S.div.Card>

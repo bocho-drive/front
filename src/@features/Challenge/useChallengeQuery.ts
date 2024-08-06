@@ -1,13 +1,29 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { getChallenge } from './api';
+import { useInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { getChallenge, getChallengeList } from './api';
 
-export const useChallengeQuery = (id: number) => {
-  const challengeQuery = useSuspenseQuery({
-    queryKey: ['challenges', id],
+export const useChallengeSuspenseQuery = (id: number) => {
+  return useSuspenseQuery({
+    queryKey: ['challenge', id],
     queryFn: () => getChallenge(id),
   });
+};
 
-  return {
-    challengeQuery,
-  };
+export const useChallengeListSuspenseInfiniteQuery = () => {
+  return useInfiniteQuery({
+    queryKey: ['infinite', 'challengeList'],
+    initialPageParam: 0,
+    queryFn: ({ pageParam = 0 }) => getChallengeList({ page: pageParam, size: 10 }),
+    getNextPageParam: (lastPage) => {
+      const { size, number, totalElements } = lastPage.page;
+      if (size * (number + 1) >= totalElements) return undefined;
+      return lastPage.page.number + 1;
+    },
+  });
+};
+
+export const useChallengeListSuspenseQuery = () => {
+  return useSuspenseQuery({
+    queryKey: ['challengeList'],
+    queryFn: () => getChallengeList({ page: 0, size: 6 }),
+  });
 };

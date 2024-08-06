@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { deleteMatching, getMatching, getMatchingList, postMatching, putMatching } from './api';
 import { MatchingPostReq } from './type';
 
@@ -6,7 +6,7 @@ const baseKey = 'matching';
 
 export const useMatchingSuspenseInfiniteQuery = () => {
   return useSuspenseInfiniteQuery({
-    queryKey: [baseKey],
+    queryKey: ['infinite', baseKey],
     queryFn: ({ pageParam = 0 }) => getMatchingList({ page: pageParam, size: 10 }),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
@@ -14,6 +14,13 @@ export const useMatchingSuspenseInfiniteQuery = () => {
       if (size * (number + 1) >= totalElements) return undefined;
       return lastPage.page.number + 1;
     },
+  });
+};
+
+export const useMatchingSuspenseQuery = () => {
+  return useSuspenseQuery({
+    queryKey: [baseKey],
+    queryFn: () => getMatchingList({ page: 0, size: 6 }),
   });
 };
 

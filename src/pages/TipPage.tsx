@@ -1,5 +1,5 @@
 import { CATEGORY } from '@/@features/Community/type';
-import CommunityCardList from '@/components/organisms/CommunityCardList';
+import CommunityCardInfiniteList from '@/@features/Community/components/CommunityCardList';
 import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import * as S from '@/styles/index.style';
@@ -20,7 +20,7 @@ const TipPage = () => {
         </S.div.Row>
 
         <ErrorSuspenseLayout>
-          <CommunityCardList category={CATEGORY.TIP} />
+          <CommunityCardInfiniteList category={CATEGORY.TIP} />
         </ErrorSuspenseLayout>
       </S.div.Column>
     </DriveLayout>
