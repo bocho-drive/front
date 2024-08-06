@@ -1,4 +1,4 @@
-type UserRole = 'USER' | 'ADMIN' | 'TEACHER';
+export type UserRole = 'USER' | 'ADMIN' | 'TEACHER';
 
 export interface RegisterReq {
   email: string;
