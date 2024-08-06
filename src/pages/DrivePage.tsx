@@ -3,6 +3,7 @@ import { CommunityCardList } from '@/@features/Community/components/CommunityCar
 import { MatchingCardList } from '@/@features/Matching/components/MatchingCardList';
 import { VideoCardList } from '@/@features/Video/components/VideoCardList';
 import DriveLayout from '@/components/templates/DriveLayout';
+import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import * as S from '@/styles/index.style';
 
 const DrivePage = () => {
@@ -11,30 +12,38 @@ const DrivePage = () => {
       <S.div.Column $gap={50}>
         <S.div.Column $gap={10}>
           <S.h.LayoutTitle>운전 챌린지 🏆</S.h.LayoutTitle>
-          <S.div.Grid $repeat={2}>
-            <ChallengeCardList />
-          </S.div.Grid>
+          <ErrorSuspenseLayout>
+            <S.div.Grid $repeat={2}>
+              <ChallengeCardList />
+            </S.div.Grid>
+          </ErrorSuspenseLayout>
         </S.div.Column>
 
         <S.div.Column $gap={10}>
           <S.h.LayoutTitle>운전 메이트 매칭 🚘</S.h.LayoutTitle>
-          <S.div.Grid $repeat={3}>
-            <MatchingCardList />
-          </S.div.Grid>
+          <ErrorSuspenseLayout>
+            <S.div.Grid $repeat={3}>
+              <MatchingCardList />
+            </S.div.Grid>
+          </ErrorSuspenseLayout>
         </S.div.Column>
 
         <S.div.Column $gap={10}>
           <S.h.LayoutTitle>운전 팁 공유 📌</S.h.LayoutTitle>
-          <S.div.Grid $repeat={1}>
-            <CommunityCardList category="TIP" />
-          </S.div.Grid>
+          <ErrorSuspenseLayout>
+            <S.div.Grid $repeat={1}>
+              <CommunityCardList category="TIP" />
+            </S.div.Grid>
+          </ErrorSuspenseLayout>
         </S.div.Column>
 
         <S.div.Column $gap={10}>
           <S.h.LayoutTitle>운전 Shorts 🎥</S.h.LayoutTitle>
-          <S.div.Grid $repeat={3}>
-            <VideoCardList />
-          </S.div.Grid>
+          <ErrorSuspenseLayout>
+            <S.div.Grid $repeat={3}>
+              <VideoCardList />
+            </S.div.Grid>
+          </ErrorSuspenseLayout>
         </S.div.Column>
       </S.div.Column>
     </DriveLayout>

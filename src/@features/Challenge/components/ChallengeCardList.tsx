@@ -1,37 +1,31 @@
-import Loading from '@/components/atoms/Loading';
 import useScroll from '@/hooks/useScroll';
 import { ReactNode } from 'react';
-import { Fragment } from 'react/jsx-runtime';
 import ChallengeCard from './ChallengeCard';
 import { useChallengeListSuspenseInfiniteQuery, useChallengeListSuspenseQuery } from '../useChallengeQuery';
-import NotExists from '@/components/atoms/NotExists';
+import NotExistsLayout from '@/components/templates/NotExistsLayout';
 
 export const ChallengeInfiniteCardList = (): ReactNode => {
-  const { fetchNextPage, hasNextPage, data, isLoading } = useChallengeListSuspenseInfiniteQuery();
-  useScroll({ fetchNextPage, hasNextPage, length: data?.pages.length ?? 0 });
+  const { fetchNextPage, hasNextPage, data } = useChallengeListSuspenseInfiniteQuery();
+  useScroll({ fetchNextPage, hasNextPage, length: data.pages.length });
 
-  if (isLoading) return <Loading />;
-  if (data && data.pages.length === 0) return <NotExists />;
   return (
-    <Fragment>
-      {data &&
-        data.pages.map((page) =>
-          page.content.map((challenge) => {
-            return <ChallengeCard key={challenge.id} challenge={challenge} />;
-          })
-        )}
-    </Fragment>
+    <NotExistsLayout isExists={data.pages.length > 0}>
+      {data.pages.map((page) =>
+        page.content.map((challenge) => {
+          return <ChallengeCard key={challenge.id} challenge={challenge} />;
+        })
+      )}
+    </NotExistsLayout>
   );
 };
 
 export const ChallengeCardList = (): ReactNode => {
   const { data } = useChallengeListSuspenseQuery();
-  if (data.content.length == 0) return <NotExists />;
   return (
-    <Fragment>
+    <NotExistsLayout isExists={data.content.length > 0}>
       {data.content.map((challenge) => {
         return <ChallengeCard key={challenge.id} challenge={challenge} />;
       })}
-    </Fragment>
+    </NotExistsLayout>
   );
 };
