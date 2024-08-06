@@ -5,12 +5,22 @@ import KakaoShareButton from '../../../components/atoms/KakaoShareButton';
 import { getModalShareUrl } from '@/util/util';
 import { Challenge } from '@/@features/Challenge/type';
 import { URLS } from '@/App';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/@features/Auth/useAuth';
 
 interface Props {
   challenge: Challenge;
 }
 
 const ChallengeModal = ({ challenge }: Props) => {
+  const confirmAuth = useAuth((state) => state.confirmAuth);
+  const navigate = useNavigate();
+
+  const handleToNewVerify = () => {
+    if (confirmAuth()) {
+      navigate(`${URLS.CHALLENGE_VERIFIES}/new/${challenge.id}`);
+    }
+  };
   return (
     <Modal type="challenge" id={Number(challenge.id)}>
       <S.div.FixedModal $width={500}>
@@ -20,7 +30,7 @@ const ChallengeModal = ({ challenge }: Props) => {
             <S.h.H1>{challenge.title}</S.h.H1>
             <S.p.P>{challenge.content}</S.p.P>
 
-            <S.a.Link to={`${URLS.CHALLENGE_VERIFIES}/new/${challenge.id}`}>인증하기</S.a.Link>
+            <S.button.Button onClick={handleToNewVerify}>인증하기</S.button.Button>
             {/* {status === 'CLEAR' && <S.button.Button>내 인증글 보기</S.button.Button>} */}
             <KakaoShareButton title={challenge.title} displayIcon={true} url={getModalShareUrl('challenge', Number(challenge.id))} />
           </S.div.Column>
