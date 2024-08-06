@@ -3,8 +3,7 @@ import useScroll from '@/hooks/useScroll';
 import { Category } from '@/@features/Community/type';
 import { Link } from 'react-router-dom';
 import { useCommunityListSuspenseInfiniteQuery, useCommunityListSuspenseQuery } from '../useCommunityQuery';
-import { Fragment } from 'react/jsx-runtime';
-import NotExists from '@/components/atoms/NotExists';
+import NotExistsLayout from '@/components/templates/NotExistsLayout';
 
 interface Props {
   category: Category;
@@ -27,9 +26,8 @@ export const CommunityCardInfiniteList = ({ category }: Props) => {
   const { data, fetchNextPage, hasNextPage } = useCommunityListSuspenseInfiniteQuery(category);
   useScroll({ length: data.pages.length, fetchNextPage, hasNextPage });
 
-  if (data.pages.length === 0) return <NotExists />;
   return (
-    <Fragment>
+    <NotExistsLayout isExists={data.pages.length > 0}>
       {data.pages.map((page) =>
         page.content.map((community) => {
           return (
@@ -39,7 +37,7 @@ export const CommunityCardInfiniteList = ({ category }: Props) => {
           );
         })
       )}
-    </Fragment>
+    </NotExistsLayout>
   );
 };
 
@@ -48,9 +46,8 @@ export default CommunityCardInfiniteList;
 export const CommunityCardList = ({ category, size = 6 }: Props) => {
   const { data } = useCommunityListSuspenseQuery(category, size);
 
-  if (data.content.length === 0) return <NotExists />;
   return (
-    <Fragment>
+    <NotExistsLayout isExists={data.content.length > 0}>
       {data.content.map((community) => {
         return (
           <Link to={`${getCategoryLink(category)}/${community.id}`} key={community.id}>
@@ -58,6 +55,6 @@ export const CommunityCardList = ({ category, size = 6 }: Props) => {
           </Link>
         );
       })}
-    </Fragment>
+    </NotExistsLayout>
   );
 };

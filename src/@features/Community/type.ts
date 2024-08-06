@@ -1,4 +1,4 @@
-import { PaginationReq, PaginationRes } from '@/config/type';
+import { Pagination, PaginationReq } from '@/config/type';
 
 export const CATEGORY = {
   GENERAL: 'GENERAL',
@@ -13,7 +13,10 @@ export interface CommunityListReq extends PaginationReq {
   sortBy?: 'createdAt' | 'viewCount';
 }
 
-export type CommunityListRes = PaginationRes<CommunityRes[]>;
+export interface CommunityListRes {
+  content: CommunityRes[];
+  page: Pagination;
+}
 
 export interface CommunityRes {
   id: number;

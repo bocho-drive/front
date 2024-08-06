@@ -1,4 +1,5 @@
 import { ModalType } from '@/components/templates/Modal/useModal';
+import { Pagination } from '@/config/type';
 
 /** 카카오톡 공유하기용, modal url 만들기 */
 export const getModalShareUrl = (type: ModalType, id: number) => {
@@ -47,4 +48,11 @@ export const getYoutubeThumbnailUrl = (url: string) => {
 export const getYoutubeId = (url: string) => {
   const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
   return videoIdMatch ? videoIdMatch[1] : '';
+};
+
+/** 인피니티 스크롤 페이지 next param */
+export const nextPageParam = (page: Pagination) => {
+  const { number, size, totalElements } = page;
+  if (size * (number + 1) >= totalElements) return undefined;
+  return page.number + 1;
 };
