@@ -1,5 +1,4 @@
 import * as S from '@/styles/index.style';
-import CommunityLayout from '@/components/templates/CommunityLayout/CommunityLayout';
 import CommunityForm, { PostReturnType } from '@/components/organisms/Community/CommunityForm';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -9,6 +8,7 @@ import ChallengeDetail from '@/@features/Challenge/components/ChallengeDetail';
 
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import { ChallengeVerifiesPostReq } from '@/@features/ChallengeVerifies/type';
+import DriveLayout from '@/components/templates/DriveLayout';
 
 const ChallengeVerifiesNewPage = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const ChallengeVerifiesNewPage = () => {
   };
 
   return (
-    <CommunityLayout>
+    <DriveLayout>
       <S.div.Column $gap={20}>
         <ErrorSuspenseLayout>
           <ChallengeDetail challengeId={Number(challengeId)}>
@@ -37,7 +37,7 @@ const ChallengeVerifiesNewPage = () => {
           </ChallengeDetail>
         </ErrorSuspenseLayout>
       </S.div.Column>
-    </CommunityLayout>
+    </DriveLayout>
   );
 };
 
