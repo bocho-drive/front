@@ -1,29 +1,25 @@
 import * as S from '@/styles/index.style';
 import SimpleComment from '../molecules/SimpleComment';
 import { Link } from 'react-router-dom';
-import { useSuspenseQueries, useSuspenseQuery } from '@tanstack/react-query';
-import { getCommunityList } from '@/@features/Community/api';
+import { useSuspenseQueries } from '@tanstack/react-query';
 import { getCommentList } from '@/@features/Comment/api';
 import CommunityCard from '../molecules/CommunityCard';
 import { Fragment } from 'react/jsx-runtime';
+import { useCommunityListSuspenseQuery } from '@/@features/Community/useCommunityQuery';
 
 const CommunityCommentCardList = () => {
-  const { data: communityListlimitTwo } = useSuspenseQuery({
-    queryKey: ['communityList'],
-    queryFn: () => getCommunityList({ category: 'GENERAL', page: 0, size: 2 }),
-    retry: 1,
-  });
+  const { data } = useCommunityListSuspenseQuery('GENERAL', 2);
 
   const commentList = useSuspenseQueries({
     queries: [0, 1].map((index) => ({
       queryKey: ['commentList', index],
-      queryFn: () => getCommentList(communityListlimitTwo.content[index].id),
+      queryFn: () => getCommentList(data.content[index].id),
     })),
   });
 
   return (
     <S.div.Grid $repeat={2}>
-      {communityListlimitTwo.content.map((community, index) => (
+      {data.content.map((community, index) => (
         <Link to={`/community/${community.id}`} key={community.id}>
           <S.div.Column $gap={10}>
             <S.div.Column $gap={20}>

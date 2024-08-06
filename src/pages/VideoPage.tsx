@@ -1,4 +1,4 @@
-import VideoCardList from '@/@features/Video/components/VideoCardList';
+import VideoCardInfiniteList from '@/@features/Video/components/VideoCardList';
 import VideoNewModal from '@/@features/Video/components/VideoNewModal';
 import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
@@ -22,7 +22,7 @@ const VideoPage = () => {
         </S.div.Row>
 
         <ErrorSuspenseLayout>
-          <VideoCardList />
+          <VideoCardInfiniteList />
         </ErrorSuspenseLayout>
       </S.div.Column>
 

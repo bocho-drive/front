@@ -1,6 +1,7 @@
-import MatchingCardList from '@/@features/Matching/components/MatchingCardList';
+import { MatchingCardList } from '@/@features/Matching/components/MatchingCardList';
 import TipCard from '@/components/molecules/TipCard';
 import DriveLayout from '@/components/templates/DriveLayout';
+import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import * as S from '@/styles/index.style';
 
 const DrivePage = () => {
@@ -15,7 +16,9 @@ const DrivePage = () => {
         <S.div.Column $gap={10}>
           <S.h.LayoutTitle>운전 메이트 매칭 🚘</S.h.LayoutTitle>
           <S.div.Row $gap={20} $overflow="scroll">
-            <MatchingCardList />
+            <ErrorSuspenseLayout>
+              <MatchingCardList />
+            </ErrorSuspenseLayout>
           </S.div.Row>
         </S.div.Column>
 

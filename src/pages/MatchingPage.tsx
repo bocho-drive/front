@@ -1,5 +1,5 @@
 import { useAuth } from '@/@features/Auth/useAuth';
-import MatchingCardList from '@/@features/Matching/components/MatchingCardList';
+import { MatchingCardInfiniteList } from '@/@features/Matching/components/MatchingCardList';
 import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import * as S from '@/styles/index.style';
@@ -24,7 +24,7 @@ const MatchingPage = () => {
 
         <S.div.Column $gap={20}>
           <ErrorSuspenseLayout>
-            <MatchingCardList />
+            <MatchingCardInfiniteList />
           </ErrorSuspenseLayout>
         </S.div.Column>
       </S.div.Column>

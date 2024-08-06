@@ -3,14 +3,14 @@ import { getChallenge, getChallengeList } from './api';
 
 export const useChallengeSuspenseQuery = (id: number) => {
   return useSuspenseQuery({
-    queryKey: ['challenges', id],
+    queryKey: ['challenge', id],
     queryFn: () => getChallenge(id),
   });
 };
 
 export const useChallengeListSuspenseInfiniteQuery = () => {
   return useInfiniteQuery({
-    queryKey: ['challengeList'],
+    queryKey: ['infinite', 'challengeList'],
     initialPageParam: 0,
     queryFn: ({ pageParam = 0 }) => getChallengeList({ page: pageParam, size: 10 }),
     getNextPageParam: (lastPage) => {
@@ -21,7 +21,7 @@ export const useChallengeListSuspenseInfiniteQuery = () => {
   });
 };
 
-export const useChallngeListSuspenseQuery = () => {
+export const useChallengeListSuspenseQuery = () => {
   return useSuspenseQuery({
     queryKey: ['challengeList'],
     queryFn: () => getChallengeList({ page: 0, size: 6 }),
