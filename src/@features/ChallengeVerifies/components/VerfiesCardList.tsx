@@ -4,6 +4,7 @@ import { getChallengeVerifiesList } from '../api';
 import useScroll from '@/hooks/useScroll';
 import CommunityCard from '@/components/molecules/CommunityCard';
 import { Link } from 'react-router-dom';
+import { nextPageParam } from '@/util/util';
 
 const VerfiesCardList = () => {
   const { data, fetchNextPage, hasNextPage } = useSuspenseInfiniteQuery({
@@ -11,12 +12,7 @@ const VerfiesCardList = () => {
     initialPageParam: 0,
     queryFn: ({ pageParam = 0 }) => getChallengeVerifiesList({ page: pageParam, size: 10 }),
 
-    getNextPageParam: (lastPage) => {
-      const { size, number, totalElements } = lastPage.page;
-      if (size * (number + 1) >= totalElements) return undefined;
-
-      return lastPage.page.number + 1;
-    },
+    getNextPageParam: (lastPage) => nextPageParam(lastPage.page),
   });
   useScroll({ length: data.pages.length, fetchNextPage, hasNextPage });
 
