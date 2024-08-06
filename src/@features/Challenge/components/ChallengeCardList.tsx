@@ -1,32 +1,39 @@
-import * as S from '@/styles/index.style';
-import ChallengeCard from './ChallengeCard';
+import Loading from '@/components/atoms/Loading';
 import useScroll from '@/hooks/useScroll';
-import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
-import { getChallengeList } from '../api';
+import * as S from '@/styles/index.style';
+import { ReactNode } from 'react';
+import { Fragment } from 'react/jsx-runtime';
+import ChallengeCard from './ChallengeCard';
+import { useChallengeListSuspenseInfiniteQuery, useChallngeListSuspenseQuery } from '../useChallengeQuery';
 
-const ChallengeCardList = () => {
-  const { data, hasNextPage, fetchNextPage } = useSuspenseInfiniteQuery({
-    queryKey: ['challengeList'],
-    initialPageParam: 0,
-    queryFn: ({ pageParam = 0 }) => getChallengeList({ page: pageParam, size: 6 }),
-    getNextPageParam: (lastPage) => {
-      const { size, number, totalElements } = lastPage.page;
-      if (size * (number + 1) >= totalElements) return undefined;
-      return lastPage.page.number + 1;
-    },
-  });
-  useScroll({ fetchNextPage, hasNextPage, length: data.pages.length });
+export const ChallengeInfiniteCardList = (): ReactNode => {
+  const { fetchNextPage, hasNextPage, data, isLoading } = useChallengeListSuspenseInfiniteQuery();
+  useScroll({ fetchNextPage, hasNextPage, length: data?.pages.length ?? 0 });
 
-  if (data.pages.length === 0) return <S.h.H3>게시글이 없어요.</S.h.H3>;
+  if (isLoading) return <Loading />;
+  if (data && data.pages.length === 0) return <S.h.H3>게시글이 없어요.</S.h.H3>;
   return (
-    <S.div.Column $gap={20}>
-      {data.pages.map((page) =>
-        page.content.map((challenge) => {
-          return <ChallengeCard key={challenge.id} challenge={challenge} />;
-        })
-      )}
-    </S.div.Column>
+    <Fragment>
+      {data &&
+        data.pages.map((page) =>
+          page.content.map((challenge) => {
+            return <ChallengeCard key={challenge.id} challenge={challenge} />;
+          })
+        )}
+    </Fragment>
   );
 };
 
-export default ChallengeCardList;
+export const ChallengeCardList = (): ReactNode => {
+  const { data, isLoading } = useChallngeListSuspenseQuery();
+
+  if (isLoading) return <Loading />;
+  if (!data) return null;
+  return (
+    <Fragment>
+      {data.content.map((challenge) => {
+        return <ChallengeCard key={challenge.id} challenge={challenge} />;
+      })}
+    </Fragment>
+  );
+};

@@ -6,12 +6,9 @@ import MoreLayout from '@/components/templates/MoreLayout';
 import ImagePlaceholder from '@/components/atoms/ImagePlaceholder';
 import { useAuth } from '@/@features/Auth/useAuth';
 import { useAuthModal } from '@/@features/Auth/components/AuthModal/useAuthModal';
-import { Suspense } from 'react';
-import Loading from '@/components/atoms/Loading';
-import { ErrorBoundary } from 'react-error-boundary';
-import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import MatchingCardList from '@/@features/Matching/components/MatchingCardList';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
+import ChallengeInfiniteCardList, { ChallengeCardList } from '@/@features/Challenge/components/ChallengeCardList';
 
 const GIFS = [
   'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXdxd290NmNtejNzb3QzbjN5Zms4MXVtbHZodXpndjRwanJybWRxciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mlqXcoNp0zpiyFRztL/giphy.gif',
@@ -64,27 +61,22 @@ const LandingPage = () => {
 
         <S.div.Column $gap={20}>
           <S.h.LayoutTitle>커뮤니티에서 만나요 💬</S.h.LayoutTitle>
-          <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
+          <ErrorSuspenseLayout>
             <MoreLayout to="/community">
-              <Suspense fallback={<Loading />}>
-                <CommunityCommentCardList />
-              </Suspense>
+              <CommunityCommentCardList />
             </MoreLayout>
-          </ErrorBoundary>
+          </ErrorSuspenseLayout>
         </S.div.Column>
 
         <S.div.Column $gap={20}>
           <S.h.LayoutTitle>운전고수가 되기 위해 도전해봐요 🏆</S.h.LayoutTitle>
-          <MoreLayout to="/challenge">
-            <S.div.Grid $repeat={3}>
-              {/* <ChallengeCard id={1} />
-              <ChallengeCard id={2} />
-              <ChallengeCard id={3} />
-              <ChallengeCard id={4} />
-              <ChallengeCard id={5} />
-              <ChallengeCard id={6} /> */}
-            </S.div.Grid>
-          </MoreLayout>
+          <ErrorSuspenseLayout>
+            <MoreLayout to="/challenge">
+              <S.div.Grid $repeat={3}>
+                <ChallengeCardList />
+              </S.div.Grid>
+            </MoreLayout>
+          </ErrorSuspenseLayout>
         </S.div.Column>
 
         <S.div.Column $gap={20}>
