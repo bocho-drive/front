@@ -1,17 +1,17 @@
 import Loading from '@/components/atoms/Loading';
 import useScroll from '@/hooks/useScroll';
-import * as S from '@/styles/index.style';
 import { ReactNode } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 import ChallengeCard from './ChallengeCard';
 import { useChallengeListSuspenseInfiniteQuery, useChallengeListSuspenseQuery } from '../useChallengeQuery';
+import NotExists from '@/components/atoms/NotExists';
 
 export const ChallengeInfiniteCardList = (): ReactNode => {
   const { fetchNextPage, hasNextPage, data, isLoading } = useChallengeListSuspenseInfiniteQuery();
   useScroll({ fetchNextPage, hasNextPage, length: data?.pages.length ?? 0 });
 
   if (isLoading) return <Loading />;
-  if (data && data.pages.length === 0) return <S.h.H3>게시글이 없어요.</S.h.H3>;
+  if (data && data.pages.length === 0) return <NotExists />;
   return (
     <Fragment>
       {data &&
@@ -26,13 +26,12 @@ export const ChallengeInfiniteCardList = (): ReactNode => {
 
 export const ChallengeCardList = (): ReactNode => {
   const { data } = useChallengeListSuspenseQuery();
-  if (data && data.content.length == 0) return <S.h.H3>게시글이 없어요.</S.h.H3>;
+  if (data.content.length == 0) return <NotExists />;
   return (
     <Fragment>
-      {data &&
-        data.content.map((challenge) => {
-          return <ChallengeCard key={challenge.id} challenge={challenge} />;
-        })}
+      {data.content.map((challenge) => {
+        return <ChallengeCard key={challenge.id} challenge={challenge} />;
+      })}
     </Fragment>
   );
 };
