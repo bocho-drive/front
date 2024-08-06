@@ -32,7 +32,7 @@ const Comment = ({ comment, communityId }: Props) => {
       <S.div.Column $gap={10} style={{ flex: 1 }}>
         <S.div.Row $between>
           <S.div.Row $gap={10} $align="center">
-            <S.h.H4>작성자</S.h.H4>
+            <S.h.H4>{comment.author}</S.h.H4>
             <S.small.Small>{getDateString(comment.createdAt)}</S.small.Small>
           </S.div.Row>
           <S.div.Row $gap={10}>

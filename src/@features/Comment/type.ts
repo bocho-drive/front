@@ -8,4 +8,5 @@ export interface CommentRes {
   content: string;
   createdAt: string;
   userId: number;
+  author: string;
 }
