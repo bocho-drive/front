@@ -1,5 +1,5 @@
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
-import { getMyChallengeList, getMyCommentList, getMyCommunityList } from './api';
+import { getMyChallengeVerifyList, getMyCommentList, getMyCommunityList } from './api';
 import { nextPageParam } from '@/util/util';
 
 export const useMyCommunityListInfiniteQuery = (userId: number) => {
@@ -20,11 +20,11 @@ export const useMyCommentListInfiniteQuery = (userId: number) => {
   });
 };
 
-export const useMyChallengeListInfiniteQuery = (userId: number) => {
+export const useMyChallengeVerifyListInfiniteQuery = (userId: number) => {
   return useSuspenseInfiniteQuery({
     queryKey: ['my', 'challenge'],
     initialPageParam: 0,
-    queryFn: ({ pageParam = 0 }) => getMyChallengeList(userId, { page: pageParam }),
+    queryFn: ({ pageParam = 0 }) => getMyChallengeVerifyList(userId, { page: pageParam }),
     getNextPageParam: (lastPage) => nextPageParam(lastPage.page),
   });
 };

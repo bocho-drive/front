@@ -1,4 +1,4 @@
-import MyChallengeCardList from '@/@features/My/components/MyChallengeCardList';
+import MyChallengeVerifyCardList from '@/@features/My/components/MyChallengeCardList';
 import MyCommentCardList from '@/@features/My/components/MyCommentCardList';
 import MyCommunityCardList from '@/@features/My/components/MyCommunityCardList';
 import ProfileModal from '@/components/organisms/ProfileModal';
@@ -30,7 +30,7 @@ const MyPage = () => {
               <MyCommentCardList />
             </ErrorSuspenseLayout>,
             <ErrorSuspenseLayout>
-              <MyChallengeCardList />
+              <MyChallengeVerifyCardList />
             </ErrorSuspenseLayout>,
           ]}
         />
