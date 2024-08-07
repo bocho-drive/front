@@ -5,10 +5,10 @@ import Loading from '@/components/atoms/Loading';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import Sidebar from '@/components/atoms/Sidebar';
-import PostDetail from '@/components/organisms/Post/PostDetail';
 import { CommunityDetailRes } from '@/@features/Community/type';
 import { deleteCommunity, getCommunityDetail } from '@/@features/Community/api';
 import CommentList from '@/@features/Comment/components/CommentList';
+import CommunityDetail from '@/components/organisms/Community/CommunityDetail';
 
 const AdminTipDetail = () => {
   const { id } = useParams();
@@ -59,7 +59,7 @@ const AdminTipDetail = () => {
         <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
           <Suspense fallback={<Loading />}>
             <S.div.Column $gap={40}>
-              {communityData !== undefined ? <PostDetail data={communityData} /> : null}
+              {communityData !== undefined ? <CommunityDetail data={communityData} /> : null}
 
               <S.div.Row $gap={10} $justify="flex-start">
                 <S.button.Button onClick={handleToList}>목록으로</S.button.Button>

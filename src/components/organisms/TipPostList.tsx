@@ -21,7 +21,7 @@ const TipPostList = () => {
       page: currentPage - 1,
     });
     if (data) {
-      setTotalPages(data.totalPages);
+      setTotalPages(data.page.totalPages);
       const posts = data.content.map((post) => ({
         id: post.id,
         title: post.title,
