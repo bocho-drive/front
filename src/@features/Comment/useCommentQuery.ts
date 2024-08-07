@@ -8,7 +8,7 @@ export const useCommentQuery = (communityId: number) => {
     queryFn: () => getCommentList(communityId),
   });
 
-  const { mutate: deleteMutate } = useMutation({
+  const deleteMutation = useMutation({
     mutationKey: ['deleteComment'],
     mutationFn: (id: number) => deleteComment(id),
     onSuccess: () => {
@@ -34,7 +34,7 @@ export const useCommentQuery = (communityId: number) => {
 
   return {
     data,
-    deleteMutate,
+    deleteMutation,
     postMutate,
     putMutate,
   };

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 
 import * as S from '@/styles/index.style';
 import { useAuthModal } from './useAuthModal';
-import LoginForm from '@/components/molecules/LoginForm';
-import RegisterForm from '@/components/molecules/RegisterForm';
+import LoginForm from '@/@features/Auth/components/LoginForm';
+import RegisterForm from '@/@features/Auth/components/RegisterForm';
 
 const docId = 'login-modal-target';
 

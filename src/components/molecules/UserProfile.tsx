@@ -1,9 +1,9 @@
-import * as S from '@/styles/index.style';
-import { Fragment } from 'react/jsx-runtime';
-import { useRelativeModal } from '../templates/RelativeModal/useRelativeModal';
-import RelativeModal from '../templates/RelativeModal/RelativeModal';
-import { useEffect, useRef } from 'react';
 import { useAuth } from '@/@features/Auth/useAuth';
+import * as S from '@/styles/index.style';
+import { useEffect, useRef } from 'react';
+import { Fragment } from 'react/jsx-runtime';
+import RelativeModal from '../templates/RelativeModal/RelativeModal';
+import { useRelativeModal } from '../templates/RelativeModal/useRelativeModal';
 
 const UserProfile = () => {
   const handleLogout = useAuth((state) => state.handleLogout);
@@ -32,7 +32,9 @@ const UserProfile = () => {
 
   return (
     <Fragment>
-      <S.button.Avatar onClick={handleOpen} ref={buttonRef} />
+      <S.button.Button ref={buttonRef} onClick={handleOpen} $colors="primary">
+        MY
+      </S.button.Button>
 
       {isOpen && (
         <RelativeModal relativeModal={relativeModal}>

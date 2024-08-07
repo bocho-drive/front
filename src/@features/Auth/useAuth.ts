@@ -6,8 +6,7 @@ import { LoginRes } from './type';
 interface Props {
   /** 인가 유효 여부 */
   isAuth: boolean;
-  token: string | null;
-  userId: number | null;
+  loginInfo: LoginRes | null;
 }
 
 interface Actions {
@@ -20,14 +19,13 @@ export const useAuth = create(
   persist<Props & Actions>(
     (set, get) => ({
       isAuth: false,
-      token: null,
-      userId: null,
+      loginInfo: null,
 
       handleLogin: (loginInfo) => {
-        set({ isAuth: true, token: loginInfo.accessToken, userId: loginInfo.userId });
+        set({ isAuth: true, loginInfo });
       },
       handleLogout: () => {
-        set({ isAuth: false, token: null, userId: null });
+        set({ isAuth: false, loginInfo: null });
         logoutToast();
       },
 

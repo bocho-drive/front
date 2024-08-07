@@ -1,45 +1,29 @@
-type Category = 'GENERAL' | 'VOTE' | 'TIP' | 'CHALLENGE_CERTIFICATION';
+import { Pagination, PaginationReq } from '@/config/type';
 
-export interface CommunityListReq {
-  category?: string | null;
-  page?: number;
-  size?: number;
+export const CATEGORY = {
+  GENERAL: 'GENERAL',
+  VOTE: 'VOTE',
+  TIP: 'TIP',
+  CHALLENGE_VERIFY: 'CHALLENGE_VERIFY',
+} as const;
+export type Category = (typeof CATEGORY)[keyof typeof CATEGORY];
+
+export interface CommunityListReq extends PaginationReq {
+  category?: Category | null;
   sortBy?: 'createdAt' | 'viewCount';
-  isAsc?: boolean;
 }
 
 export interface CommunityListRes {
-  totalPages: number;
-  totalElements: number;
-  number: number;
-  size: number;
   content: CommunityRes[];
-  sort: {
-    empty: boolean;
-    unsorted: boolean;
-    sorted: boolean;
-  };
-  first: boolean;
-  last: boolean;
-  numberOfElements: number;
-  pageable: {
-    pageNumber: number;
-    pageSize: number;
-    sort: {
-      empty: boolean;
-      unsorted: boolean;
-      sorted: boolean;
-    };
-    offset: number;
-    unpaged: boolean;
-    paged: boolean;
-  };
+  page: Pagination;
 }
 
 export interface CommunityRes {
   id: number;
   title: string;
+  author: string;
   viewCount: number;
+  likeCount: number;
   verifiedYN: boolean;
   createdAt: string;
 }
@@ -47,17 +31,19 @@ export interface CommunityRes {
 export interface CommunityDetailRes {
   id: number;
   title: string;
+  category: Category;
   content: string;
   author: string;
-  category: Category;
   viewCount: number;
-  likesCount: number;
-  createdAt: string;
+  likeCount: number;
   isAuthor: boolean;
+  imgUrls: string[];
+  createdAt: string;
 }
 
 export interface CommunityPostReq {
   title: string;
   content: string;
   category: Category;
+  image: File[];
 }

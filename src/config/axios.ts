@@ -1,3 +1,4 @@
+import { LoginRes } from '@/@features/Auth/type';
 import { errorToast, successToast } from '@/components/atoms/Toast/useToast';
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
@@ -18,7 +19,8 @@ const ReqFulfilled = (config: InternalAxiosRequestConfig) => {
   if (!ls) return config;
 
   const json = JSON.parse(ls);
-  const token = json?.state?.token;
+  const loginState = json?.state?.loginInfo as LoginRes | null;
+  const token = loginState?.accessToken;
   if (token) {
     config.headers.Authorization = token;
   }
@@ -77,3 +79,16 @@ export const apiWithToken = axios.create({
 
 apiWithToken.interceptors.request.use(ReqFulfilled, ReqRejected);
 apiWithToken.interceptors.response.use(ResFulfilled, ResRejected);
+
+// * 인가 필요 api(FormData)
+export const apiWithTokenFormData = axios.create({
+  baseURL: import.meta.env.VITE_API_TOKEN_URL as string,
+  headers: {
+    'content-type': 'multipart/form-data',
+    accept: 'application/json,',
+  },
+  withCredentials: true, // cors
+});
+
+apiWithTokenFormData.interceptors.request.use(ReqFulfilled, ReqRejected);
+apiWithTokenFormData.interceptors.response.use(ResFulfilled, ResRejected);

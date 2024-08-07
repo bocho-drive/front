@@ -1,5 +1,9 @@
-import ChallengeCard from '@/components/molecules/ChallengeCard';
+import { useAuth } from '@/@features/Auth/useAuth';
+import { ChallengeInfiniteCardList } from '@/@features/Challenge/components/ChallengeCardList';
+import VerfiesCardList from '@/@features/ChallengeVerifies/components/VerfiesCardList';
 import DriveLayout from '@/components/templates/DriveLayout';
+import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
+import Tab from '@/components/templates/Tab/Tab';
 import * as S from '@/styles/index.style';
 
 const ChallengePage = () => {
@@ -9,34 +13,17 @@ const ChallengePage = () => {
         <S.h.LayoutTitle>운전 챌린지 🏆</S.h.LayoutTitle>
         <S.p.P>차근차근 시도를 통해 운전고수에 도전해보세요.</S.p.P>
 
-        <S.div.Row $gap={5}>
-          <input id="checkClear" type="checkbox" />
-          <label htmlFor="checkClear">클리어한 도전</label>
-        </S.div.Row>
-
-        <S.div.Column $gap={10}>
-          <S.h.H2>1️⃣ 초급</S.h.H2>
-          <S.p.P>✅ 5개 중 2개 완료</S.p.P>
-        </S.div.Column>
-        <ChallengeCard id={1} status="CHALLENGING" />
-        <ChallengeCard id={2} status="CLEAR" />
-
-        <S.div.Column $gap={10}>
-          <S.h.H2>2️⃣ 중급</S.h.H2>
-          <S.p.P>✅ 5개 중 2개 완료</S.p.P>
-        </S.div.Column>
-        <ChallengeCard id={3} />
-        <ChallengeCard id={4} />
-
-        <S.div.Column $gap={10}>
-          <S.h.H2>3️⃣ 고급</S.h.H2>
-          <S.p.P>✅ 5개 중 2개 완료</S.p.P>
-        </S.div.Column>
-        <ChallengeCard id={5} />
-        <ChallengeCard id={6} />
+        <ErrorSuspenseLayout>
+          <Tab tabHeaders={['챌린지', '챌린지 인증']} tabBodys={[<ChallengeInfiniteCardList />, <Verifies />]} />
+        </ErrorSuspenseLayout>
       </S.div.Column>
     </DriveLayout>
   );
 };
-
 export default ChallengePage;
+
+const Verifies = () => {
+  const isAuth = useAuth((state) => state.isAuth);
+  if (!isAuth) return <S.h.H3>로그인이 필요한 페이지입니다.</S.h.H3>;
+  return <VerfiesCardList />;
+};

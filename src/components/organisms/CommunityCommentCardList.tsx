@@ -1,57 +1,45 @@
-import * as S from '@/styles/index.style';
-import SimpleComment from '../molecules/SimpleComment';
-import LineText from '../atoms/LineText';
-import { Link } from 'react-router-dom';
-import { useSuspenseQueries, useSuspenseQuery } from '@tanstack/react-query';
-import { getCommunityList } from '@/@features/Community/api';
 import { getCommentList } from '@/@features/Comment/api';
+import { useCommunityListSuspenseQuery } from '@/@features/Community/useCommunityQuery';
+import * as S from '@/styles/index.style';
+import { useSuspenseQueries } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
+import { Fragment } from 'react/jsx-runtime';
+import CommunityCard from '../molecules/CommunityCard';
+import SimpleComment from '../molecules/SimpleComment';
 
 const CommunityCommentCardList = () => {
-  const { data: communityListlimitTwo } = useSuspenseQuery({
-    queryKey: ['communityList'],
-    queryFn: () => getCommunityList({ category: 'GENERAL', page: 0, size: 2, sortBy: 'viewCount', isAsc: false }),
-    retry: 1,
-  });
+  const { data } = useCommunityListSuspenseQuery('GENERAL', 2);
 
   const commentList = useSuspenseQueries({
-    queries: [0, 1].map((_, index) => ({
+    queries: [0, 1].map((index) => ({
       queryKey: ['commentList', index],
-      queryFn: () => getCommentList(communityListlimitTwo.content[index].id),
-      retry: 1,
+      queryFn: () => getCommentList(data.content[index].id),
     })),
   });
 
   return (
     <S.div.Grid $repeat={2}>
-      {communityListlimitTwo.content.map((community, index) => (
+      {data.content.map((community, index) => (
         <Link to={`/community/${community.id}`} key={community.id}>
           <S.div.Column $gap={10}>
-            <S.div.Card>
-              <S.div.Column $gap={20}>
-                <S.span.Badge>조회수 TOP</S.span.Badge>
-                <S.h.H2>{community.title}</S.h.H2>
-                {/* <S.p.P $maxLines={3}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, justo a aliquet lacinia, velit nunc tincidunt nunc, vitae efficitur nunc nunc at nunc. Sed auctor, mauris id
-                  aliquam tincidunt, nunc nunc aliquam nunc, vitae efficitur nunc nunc at nunc.
-                </S.p.P> */}
-
-                <S.div.Row $gap={10}>
-                  <S.div.Row $gap={5} $align="center"></S.div.Row>
-                  <S.div.Row $gap={5} $align="center">
-                    <S.h.H5>조회수 {community.viewCount}</S.h.H5>
-                  </S.div.Row>
-                </S.div.Row>
-
-                <LineText />
-
-                <S.div.Column $gap={20}>
-                  {/* FIXME 댓글 limit추가 필요 */}
-                  {commentList[index].data?.slice(0, 2).map((comment) => (
-                    <SimpleComment key={comment.id} data={comment} />
-                  ))}
-                </S.div.Column>
-              </S.div.Column>
-            </S.div.Card>
+            <S.div.Column $gap={20}>
+              <CommunityCard
+                data={community}
+                topComponent={<S.span.Badge>최신 글</S.span.Badge>}
+                bottomComponent={
+                  commentList[index].data.length > 0 && (
+                    <Fragment>
+                      <S.hr.Hr />
+                      <S.div.Column $gap={20}>
+                        {commentList[index].data?.slice(0, 2).map((comment) => (
+                          <SimpleComment key={comment.id} data={comment} />
+                        ))}
+                      </S.div.Column>
+                    </Fragment>
+                  )
+                }
+              />
+            </S.div.Column>
           </S.div.Column>
         </Link>
       ))}

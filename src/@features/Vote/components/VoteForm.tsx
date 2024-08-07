@@ -1,88 +1,55 @@
-import * as S from '@/styles/index.style';
-import { Vote } from '../type';
-import VoteButton from './VoteButton';
-import styled from 'styled-components';
-import { useReducer } from 'react';
 import { useAuth } from '@/@features/Auth/useAuth';
-import { errorToast } from '@/components/atoms/Toast/useToast';
-import { postVote } from '../api';
+import * as S from '@/styles/index.style';
+import styled from 'styled-components';
+import { useVoteForm } from '../useVoteForm';
+import { useVoteSuspenseQuery } from '../useVoteQuery';
+import VoteButton from './VoteButton';
 
 interface Props {
-  voteList: Vote[];
+  communityId: number;
 }
 
-const VoteForm = ({ voteList }: Props) => {
-  const up = voteList.filter((vote) => vote.agreeYn).length;
-  const down = voteList.length - up;
+const VoteForm = ({ communityId }: Props) => {
+  const voteQuery = useVoteSuspenseQuery(communityId);
+
+  const up = voteQuery.data.filter((vote) => vote.agreeYn).length;
+  const down = voteQuery.data.length - up;
 
   const isAuth = useAuth((state) => state.isAuth);
 
-  const [voteState, voteDispatch] = useReducer(voteReducer, {
-    isVoteAble: isAuth,
-    isUp: false,
-    isDown: false,
-  });
-
-  const handleVote = () => {
-    if (!voteState.isUp && !voteState.isDown) {
-      errorToast('투표를 선택해주세요.');
-      return;
-    }
-    postVote({ communityId: 1, agreeYn: voteState.isUp });
-  };
+  const { handleCancelVote, handleVote, handleVoteSelect, voteState } = useVoteForm({ communityId, voteQuery });
 
   return (
     <S.div.Card>
       <S.div.Column $gap={20} $align="center">
         <S.div.Column $align="center">
           <S.h.H3>투표</S.h.H3>
-          <S.p.P>{voteList.length}명 참여</S.p.P>
+          <S.p.P>{voteQuery.data.length}명 참여</S.p.P>
         </S.div.Column>
         <S.div.Row $gap={20}>
-          <VoteCard $isActive={voteState.isUp} onClick={() => voteDispatch({ type: 'UP' })}>
+          <VoteCard $isActive={voteState.isUp} onClick={() => handleVoteSelect(true)}>
             <VoteButton type="up" count={up} />
           </VoteCard>
-          <VoteCard $isActive={voteState.isDown} onClick={() => voteDispatch({ type: 'DOWN' })}>
+          <VoteCard $isActive={voteState.isDown} onClick={() => handleVoteSelect(false)}>
             <VoteButton type="down" count={down} />
           </VoteCard>
         </S.div.Row>
-        <S.button.Button $size="small" $colors="primary" onClick={handleVote}>
-          투표하기
-        </S.button.Button>
+        {isAuth && voteState.isVoteAble && (
+          <S.button.Button $size="small" $colors="primary" onClick={handleVote}>
+            투표하기
+          </S.button.Button>
+        )}
+        {isAuth && !voteState.isVoteAble && (
+          <S.button.Button $size="small" $colors="primary" onClick={handleCancelVote}>
+            투표취소하기
+          </S.button.Button>
+        )}
       </S.div.Column>
     </S.div.Card>
   );
 };
 
 export default VoteForm;
-
-interface VoteState {
-  isVoteAble: boolean;
-  isUp: boolean;
-  isDown: boolean;
-}
-interface VoteAction {
-  type: 'UP' | 'DOWN';
-}
-
-const voteReducer = (state: VoteState, action: VoteAction) => {
-  switch (action.type) {
-    case 'UP':
-      if (!state.isVoteAble) {
-        errorToast('투표 권한이 없습니다.');
-        return state;
-      }
-      return { ...state, isUp: !state.isUp, isDown: false };
-    case 'DOWN':
-      if (!state.isVoteAble) {
-        errorToast('투표 권한이 없습니다.');
-        return state;
-      }
-      return { ...state, isUp: false, isDown: !state.isDown };
-    default:
-      return state;
-  }
-};
 
 interface VoteCardProps {
   $isActive: boolean;
