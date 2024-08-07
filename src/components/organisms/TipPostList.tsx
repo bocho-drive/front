@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { getCommunityList } from '@/@features/Community/api';
 import { useEffect } from 'react';
 
-const PostList = () => {
+const TipPostList = () => {
   const { posts, setPosts, currentPage, handleToggle, setCurrentPage, totalPages, setTotalPages } = usePost();
   const navigate = useNavigate();
 
@@ -13,10 +13,11 @@ const PostList = () => {
     setCurrentPage(page);
   };
 
-  const handleToAdminDetail = (id: number) => navigate(`/admin/${id}`);
+  const handleToAdminDetail = (id: number) => navigate(`/admin/tip/${id}`);
 
   const fetchPosts = async () => {
     const data = await getCommunityList({
+      category: 'TIP',
       page: currentPage - 1,
     });
     if (data) {
@@ -65,4 +66,4 @@ const PostList = () => {
   );
 };
 
-export default PostList;
+export default TipPostList;

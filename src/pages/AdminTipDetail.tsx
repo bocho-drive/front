@@ -1,24 +1,57 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-// import PostDetail from '@/components/molecules/Post/PostDetail';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as S from '@/styles/index.style';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import Loading from '@/components/atoms/Loading';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackUI from '@/components/templates/ErrorFallback';
-// import { deleteCommunity, getCommunityDetail, putCommunity } from '@/@features/Communities/api';
-// import { useTipPost } from '@/@features/Admin/Challenge/useTipPost'; //파일 아직 없음
-// import AdminCommentList from '@/components/organisms/AdminCommentList';
 import Sidebar from '@/components/atoms/Sidebar';
+import PostDetail from '@/components/organisms/Post/PostDetail';
+import { CommunityDetailRes } from '@/@features/Community/type';
+import { deleteCommunity, getCommunityDetail } from '@/@features/Community/api';
+import CommentList from '@/@features/Comment/components/CommentList';
 
 const AdminTipDetail = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
-  //  const { id } = useParams();
-  const { search } = useLocation();
+  const [communityData, setCommunityData] = useState<CommunityDetailRes>();
 
-  const handleToList = () => navigate('/admin' + search);
-  // const isEditMode = useChallengePost((state) => state.isEditMode);
+  const handleToList = () => navigate('/admin/tip');
 
-  console.log('AdminTipDetail render');
+  const fetchData = async () => {
+    // api 호출
+    const data = await getCommunityDetail(Number(id));
+    console.log({ data });
+    setCommunityData(data);
+
+    // if(data.category === "GENERAL") {}
+  };
+
+  // id  : category
+  // 10번 : 일반
+  // 11번 : 일반
+  // 12번 : 일반
+
+  // 22번 : TIP
+  // 23번 : TIP
+  // 24번 : TIP
+
+  // 33번 : 챌린지인증
+  // 34번 : 챌린지인증
+  // 35번 : 챌린지인증
+
+  useEffect(() => {
+    if (id === undefined || !Number(id)) {
+      handleToList();
+    }
+    fetchData();
+  }, []);
+
+  const handleDelete = () => {
+    deleteCommunity(Number(id));
+  };
+
+  if (id === undefined || !Number(id)) return null;
+
   return (
     <S.div.Container $width={100}>
       <S.div.Row $width={90} $gap={40} $justify="center">
@@ -26,15 +59,14 @@ const AdminTipDetail = () => {
         <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
           <Suspense fallback={<Loading />}>
             <S.div.Column $gap={40}>
-              {/* <PostDetail id={Number(id)} queryFn={getCommunityDetail} deleteFn={deleteCommunity} updateFn={putCommunity}> */}
+              {communityData !== undefined ? <PostDetail data={communityData} /> : null}
 
               <S.div.Row $gap={10} $justify="flex-start">
                 <S.button.Button onClick={handleToList}>목록으로</S.button.Button>
-                <S.button.Button onClick={handleToList}>삭제</S.button.Button>
+                <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
               </S.div.Row>
 
-              <S.hr.Hr />
-              {/* </PostDetail> */}
+              <CommentList communityId={Number(id)} />
             </S.div.Column>
           </Suspense>
         </ErrorBoundary>

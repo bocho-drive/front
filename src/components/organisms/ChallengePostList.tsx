@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { getCommunityList } from '@/@features/Community/api';
 import { useEffect } from 'react';
 
-const PostList = () => {
+const ChallengePostList = () => {
   const { posts, setPosts, currentPage, handleToggle, setCurrentPage, totalPages, setTotalPages } = usePost();
   const navigate = useNavigate();
 
@@ -13,10 +13,11 @@ const PostList = () => {
     setCurrentPage(page);
   };
 
-  const handleToAdminDetail = (id: number) => navigate(`/admin/${id}`);
+  const handleToChallengeDetail = (id: number) => navigate(`/admin/challenge/${id}`);
 
   const fetchPosts = async () => {
     const data = await getCommunityList({
+      category: 'CHALLENGE_CERTIFICATION',
       page: currentPage - 1,
     });
     if (data) {
@@ -46,7 +47,7 @@ const PostList = () => {
         <S.div.PostItem key={post.id}>
           <div>
             <S.input.Checkbox id={`post-${post.id}`} type="checkbox" checked={post.isChecked} onChange={() => handleToggle(post.id)} />
-            <label onClick={() => handleToAdminDetail(post.id)} style={{ cursor: 'pointer' }}>
+            <label onClick={() => handleToChallengeDetail(post.id)} style={{ cursor: 'pointer' }}>
               {post.title}
             </label>
           </div>
@@ -65,4 +66,4 @@ const PostList = () => {
   );
 };
 
-export default PostList;
+export default ChallengePostList;

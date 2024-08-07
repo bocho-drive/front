@@ -12,10 +12,14 @@ import Provider from './config/Provider';
 import MatchingPage from './pages/MatchingPage';
 import AdminPage from './pages/AdminPage';
 import AdminLogin from './pages/AdminLogin';
-import AdminDetail from './pages/AdminDetailPage';
+import AdminGeneral from './pages/AdminGeneral';
+import AdminGeneralDetail from './pages/AdminDetailPage';
 import AdminChallengeNew from './pages/AdminChallengeNew';
+import AdminChallenge from './pages/AdminChallenge';
 import AdminChallengeDetail from './pages/AdminChallengeDetail';
+import AdminTip from './pages/AdminTip';
 import AdminTipDetail from './pages/AdminTipDetail';
+import AdminChallengeVerified from './pages/AdminChallengeVerified';
 import AdminChallengeVerifiedDetail from './pages/AdminChallengeVerifiedDetail';
 import CommunityNewPage from './pages/CommunityNewPage';
 import MatchingDetailPage from './pages/MatchingDetailPage';
@@ -23,6 +27,7 @@ import PrivateRoute from './config/PrivateRoute';
 import NotFoundPage from './pages/NotFoundPage';
 import GlobalComponents from './config/GlobalComponents';
 import CommunityEditPage from './pages/CommunityEditPage';
+import AdminDetailPage from './pages/AdminDetailPage';
 
 function App() {
   return (
@@ -44,13 +49,18 @@ function App() {
 
           <Route path="/video" element={<VideoPage />} />
 
-          <Route path="/admin" element={<AdminPage />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
-          <Route path="/admin/detail/:id" element={<AdminDetail />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/:id" element={<AdminDetailPage />} />
+          <Route path="/admin/community" element={<AdminGeneral />} />
+          <Route path="/admin/community/:id" element={<AdminGeneralDetail />} />
+          <Route path="/admin/challenge" element={<AdminChallenge />} />
           <Route path="/admin/challenge/new" element={<AdminChallengeNew />} />
-          <Route path="/admin/challenge/detail" element={<AdminChallengeDetail />} />
-          <Route path="/admin/challenge/verified" element={<AdminChallengeVerifiedDetail />} />
-          <Route path="/admin/tip/detail" element={<AdminTipDetail />} />
+          <Route path="/admin/challenge/:id" element={<AdminChallengeDetail />} />
+          <Route path="/admin/challenge/verified" element={<AdminChallengeVerified />} />
+          <Route path="/admin/challenge/verified/:id" element={<AdminChallengeVerifiedDetail />} />
+          <Route path="/admin/tip" element={<AdminTip />} />
+          <Route path="/admin/tip/:id" element={<AdminTipDetail />} />
 
           {/* 인증 필요 페이지 */}
           <Route element={<PrivateRoute isNeedAuth={true} />}>
