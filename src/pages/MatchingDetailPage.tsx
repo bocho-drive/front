@@ -1,14 +1,17 @@
 import { useAuth } from '@/@features/Auth/useAuth';
+import ChatContainer from '@/@features/Chat/components/ChatContainer';
 import { MatchingStatus, MatchingType } from '@/@features/Matching/components/MatchingCard';
 import { useMatchingDeleteMutation, useMatchingQuery } from '@/@features/Matching/useMatchingQuery';
 import ApplyButton from '@/@features/MatchingApply/components/ApplyButton';
 import ApplyList from '@/@features/MatchingApply/components/ApplyList';
+import { useApplyStore } from '@/@features/MatchingApply/useApplyStore';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import Loading from '@/components/atoms/Loading';
 import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import * as S from '@/styles/index.style';
 import { getDateString } from '@/util/util';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Fragment } from 'react/jsx-runtime';
 
@@ -19,7 +22,8 @@ const MatchingDetailPage = () => {
     loginInfo: state.loginInfo,
     isAuth: state.isAuth,
   }));
-  const isAuthor = loginInfo && data?.userId === loginInfo.userId;
+  const isAuthor = useApplyStore((state) => state.isAuthor);
+  const setIsAuthor = useApplyStore((state) => state.setIsAuthor);
 
   const navigate = useNavigate();
   const deleteMutation = useMatchingDeleteMutation();
@@ -36,6 +40,12 @@ const MatchingDetailPage = () => {
         },
       });
   };
+
+  useEffect(() => {
+    if (loginInfo && data?.userId === loginInfo.userId) {
+      setIsAuthor(true);
+    }
+  }, [data, setIsAuthor, loginInfo]);
 
   return (
     <DriveLayout>
@@ -91,6 +101,8 @@ const MatchingDetailPage = () => {
           )}
         </S.div.Column>
       )}
+
+      <ChatContainer />
     </DriveLayout>
   );
 };

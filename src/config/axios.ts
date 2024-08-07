@@ -39,6 +39,12 @@ const ResFulfilled = (response: AxiosResponse<Response<unknown>>) => {
 /** 공통 응답 실패 */
 const ResRejected = (error: AxiosError<ErrorResponse>) => {
   console.log({ error });
+  // 401 토큰 만료
+  // RT -> AT 재발급
+
+  // * RT - 몇번의 기회
+
+  // axios는 이전 요청을 기억하고 있대요.
 
   // * 서버 오류
   if (error.response) {

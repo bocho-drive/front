@@ -19,12 +19,12 @@ const GlobalStyle = createGlobalStyle`
         color: inherit;
     }
 
-    &::-webkit-scrollbar {
+    /* &::-webkit-scrollbar {
         display: none; // Webkit 브라우저용
     }
 
     scrollbar-width: none; // Firefox용
-    -ms-overflow-style: none;  // IE, Edge용
+    -ms-overflow-style: none;  // IE, Edge용 */
 
 
 

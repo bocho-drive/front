@@ -58,3 +58,14 @@ export const nextPageParam = (page: Pagination) => {
   if (size * (number + 1) >= totalElements) return undefined;
   return page.number + 1;
 };
+
+/** 오후/오전 00:00 */
+export const getAmPmTime = (date: Date): string => {
+  const hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+
+  const hour = hours > 12 ? hours - 12 : hours;
+  const ampm = hours >= 12 ? '오후' : '오전';
+
+  return `${ampm} ${hour}:${minutes}`;
+};
