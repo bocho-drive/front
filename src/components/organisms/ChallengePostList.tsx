@@ -1,6 +1,6 @@
 import PostListHeader from '../molecules/PostListHeader';
 import * as S from '@/styles/index.style';
-import { usePost } from '@/@features/Admin/Post/usePost';
+import { Post, usePost } from '@/@features/Admin/Post/usePost';
 import { useNavigate } from 'react-router-dom';
 import { getChallengeList } from '@/@features/Challenge/api';
 import { useEffect } from 'react';
@@ -21,9 +21,11 @@ const ChallengePostList = () => {
     });
     if (data) {
       setTotalPages(data.page.totalPages);
-      const posts = data.content.map((post) => ({
-        id: post.id,
+      const posts: Post[] = data.content.map((post) => ({
+        id: Number(post.id),
         title: post.title,
+        viewCount: 0,
+        verifiedYN: false,
         createdAt: post.createdAt,
         isChecked: false,
         likes: 0,

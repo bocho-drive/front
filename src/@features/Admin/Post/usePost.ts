@@ -8,7 +8,7 @@ import { create } from 'zustand';
 //     createdAt: string;
 //   }
 
-interface Post {
+export interface Post {
   // api
   id: number;
   title: string;
