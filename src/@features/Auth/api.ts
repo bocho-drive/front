@@ -6,7 +6,10 @@ export const signUp = async (data: RegisterReq): Promise<void> => {
   await apiWithoutToken.post<Response<void>>('signup', data);
 };
 
-/** 로그인 */
+/**
+ * 로그인
+ * 로그인시, cookie에 RT저장됨
+ */
 export const signIn = async (data: LoginReq): Promise<LoginRes> => {
   const res = await apiWithoutToken.post<Response<LoginRes>>('signin', data);
 

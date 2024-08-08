@@ -8,10 +8,12 @@ interface States {
 interface Actions {
   setUserInfo: (userInfo: UserInfo) => void;
   clearUserInfo: () => void;
+  isLogin: () => boolean;
 }
 
-export const useUserStore = create<States & Actions>((set) => ({
+export const useUserStore = create<States & Actions>((set, get) => ({
   userInfo: null,
   setUserInfo: (userInfo) => set({ userInfo }),
   clearUserInfo: () => set({ userInfo: null }),
+  isLogin: () => !!get().userInfo,
 }));

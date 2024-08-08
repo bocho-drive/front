@@ -8,9 +8,11 @@ import LineText from '@/components/atoms/LineText';
 import * as S from '@/styles/index.style';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useUserStore } from '../useUserStore';
+import { setAccessToken } from '@/util/tokenUtil';
 
 const LoginForm = () => {
-  const handleLoginState = useAuth((state) => state.handleLogin);
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
   const handleClose = useAuthModal((state) => state.handleClose);
 
   const {
@@ -23,7 +25,12 @@ const LoginForm = () => {
 
   const handleLogin = (data: LoginSchema) => {
     signIn(data).then((res) => {
-      handleLoginState(res);
+      setAccessToken(res.accessToken);
+      setUserInfo({
+        nickname: res.nickname,
+        userId: res.userId,
+        userRole: res.userRole,
+      });
       handleClose();
     });
   };
