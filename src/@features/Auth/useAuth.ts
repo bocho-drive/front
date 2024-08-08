@@ -15,6 +15,7 @@ interface Actions {
   confirmAuth: () => boolean;
 }
 
+/** @deprecated */
 export const useAuth = create(
   persist<Props & Actions>(
     (set, get) => ({
