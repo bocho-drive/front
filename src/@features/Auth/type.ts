@@ -12,8 +12,16 @@ export interface LoginReq {
   password: string;
 }
 
+/**@deprecated */
 export interface LoginRes {
   accessToken: string;
   userId: number;
   userRole: UserRole;
+  nickname: string;
+}
+
+export interface UserInfo {
+  userId: number;
+  userRole: UserRole;
+  nickname: string;
 }

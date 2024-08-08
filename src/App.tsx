@@ -30,6 +30,7 @@ import Provider from './config/Provider';
 import ChallengeVerifiesEditPage from './pages/ChallengeVerifiesEditPage';
 import MatchingNewPage from './pages/MatchingNewPage';
 import MatchingEditPage from './pages/MatchingEditPage';
+import OauthRedirectPage from './pages/OauthRedirectPage';
 
 export const URLS = {
   LANDING: '/',
@@ -72,6 +73,8 @@ function App() {
 
           <Route path={URLS.VIDEO} element={<VideoPage />} />
 
+          <Route path="/oauth/redirect" element={<OauthRedirectPage />} />
+
           {/* 어드민 */}
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
@@ -94,6 +97,7 @@ function App() {
             <Route path={`${URLS.CHALLENGE_VERIFIES}/edit/:id`} element={<ChallengeVerifiesEditPage />} />
             <Route path={`${URLS.CHALLENGE_VERIFIES}/new/:challengeId`} element={<ChallengeVerifiesNewPage />} />
 
+            {/* 매칭 */}
             <Route path={`${URLS.MATCHING}/new`} element={<MatchingNewPage />} />
             <Route path={`${URLS.MATCHING}/edit/:id`} element={<MatchingEditPage />} />
 

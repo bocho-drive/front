@@ -1,14 +1,14 @@
 import * as S from '@/styles/index.style';
 import { useMatchingApplyDeleteMutation, useMatchingApplySuspenseQuery } from '../useMatchingApplyQuery';
 import { MatchingApply } from '../type';
-import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
   matchingId: number;
 }
 
 const ApplyList = ({ matchingId }: Props) => {
-  const userId = useAuth((state) => state.userId);
+  const userId = useAuthStore((state) => state.userInfo?.userId);
 
   const { data } = useMatchingApplySuspenseQuery(matchingId);
 
@@ -22,7 +22,7 @@ const ApplyList = ({ matchingId }: Props) => {
 
   return (
     <S.div.Column $gap={10}>
-      {data && data.length === 0 && <S.h.H5>신청자가 없습니다.</S.h.H5>}
+      {data.length === 0 && <S.h.H5>신청자가 없습니다.</S.h.H5>}
       {data.map((apply: MatchingApply) => {
         return (
           <S.div.Card>

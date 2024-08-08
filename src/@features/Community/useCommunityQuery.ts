@@ -1,41 +1,39 @@
 import { useMutation, useQuery, useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query';
-import { deleteCommunity, getCommunityDetail, getCommunityList, putCommunity } from './api';
+import { deleteCommunity, getCommunityDetail, getCommunityList, postCommunity, putCommunity } from './api';
 import { Category, CommunityPostReq } from './type';
 import { postLike } from '../Like/api';
 import { deleteImage } from './ImageS3/api';
+import { nextPageParam } from '@/util/util';
+
+const keyList = 'communityList';
+const key = 'community';
 
 export const useCommunityListSuspenseInfiniteQuery = (category: Category) => {
   return useSuspenseInfiniteQuery({
-    queryKey: ['infinite', 'communityList', category],
+    queryKey: ['infinite', keyList, category],
     initialPageParam: 0,
     queryFn: ({ pageParam = 0 }) => getCommunityList({ category, page: pageParam, size: 10 }),
-
-    getNextPageParam: (lastPage) => {
-      const { size, number, totalElements } = lastPage.page;
-      if (size * (number + 1) >= totalElements) return undefined;
-
-      return lastPage.page.number + 1;
-    },
+    getNextPageParam: (lastPage) => nextPageParam(lastPage.page),
   });
 };
 
 export const useCommunityListSuspenseQuery = (category: Category, size: number) => {
   return useSuspenseQuery({
-    queryKey: ['communityList', category],
+    queryKey: [keyList, category],
     queryFn: () => getCommunityList({ category, page: 0, size }),
   });
 };
 
 export const useCommunityQuery = (id: number) => {
   return useQuery({
-    queryKey: ['community', id],
+    queryKey: [key, id],
     queryFn: () => getCommunityDetail(id),
   });
 };
 
 export const useCommunitySuspenseQuery = (id: number) => {
   return useSuspenseQuery({
-    queryKey: ['community', id],
+    queryKey: [key, id],
     queryFn: () => getCommunityDetail(id),
   });
 };
@@ -68,53 +66,9 @@ export const useCommunityDeleteImageMutation = () => {
   });
 };
 
-// export const useCommunityQueryWithId = (communityId: number) => {
-//   const navigate = useNavigate();
-
-//   const getDetailSuspenseQuery = useSuspenseQuery({
-//     queryKey: ['postDetail', communityId],
-//     queryFn: () => getCommunityDetail(communityId),
-//     retry: 1,
-//   });
-
-//   const mutationDelete = useMutation({
-//     mutationKey: ['deletePost', communityId],
-//     mutationFn: () => deleteCommunity(communityId),
-//     onSuccess: () => {
-//       navigate(-1);
-//     },
-//   });
-
-//   const mutationPut = useMutation({
-//     mutationKey: ['putPost', communityId],
-//     mutationFn: (data: CommunityPostReq) => putCommunity(communityId, data),
-//     onSuccess: () => {
-//       navigate(`/community/${communityId}`);
-//       // getDetailSuspenseQuery.refetch();
-//     },
-//   });
-
-//   const mutationLike = useMutation({
-//     mutationKey: ['likePost', communityId],
-//     mutationFn: () => postLike({ communityId }),
-//     onSuccess: () => {
-//       getDetailSuspenseQuery.refetch();
-//     },
-//   });
-
-//   const mutationDeleteImage = useMutation({
-//     mutationKey: ['deleteImage'],
-//     mutationFn: (url: string) => deleteImage(url),
-//     onSuccess: () => {
-//       getDetailSuspenseQuery.refetch();
-//     },
-//   });
-
-//   return {
-//     getDetailSuspenseQuery,
-//     mutationDelete,
-//     mutationPut,
-//     mutationLike,
-//     mutationDeleteImage,
-//   };
-// };
+export const useCommunityPostMutation = () => {
+  return useMutation({
+    mutationKey: ['postCommunity'],
+    mutationFn: (data: CommunityPostReq) => postCommunity(data),
+  });
+};

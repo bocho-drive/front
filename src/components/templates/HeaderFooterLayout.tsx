@@ -1,6 +1,6 @@
 import * as S from '@/styles/index.style';
 import Header from '@/components/organisms/Header';
-import Footer from '@/components/organisms/Footer';
+import Footer from '@/components/atoms/Footer';
 import { Fragment } from 'react/jsx-runtime';
 
 interface Props {

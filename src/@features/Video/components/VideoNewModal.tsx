@@ -1,14 +1,14 @@
 import * as S from '@/styles/index.style';
 
-import Modal from '../../../components/templates/Modal/Modal';
-import { FormEvent, useRef } from 'react';
 import { errorToast, successToast } from '@/components/atoms/Toast/useToast';
+import Modal from '@/components/templates/Modal/Modal';
 import { useModal } from '@/components/templates/Modal/useModal';
+import { FormEvent, useRef } from 'react';
 import { useVideoPostMutation } from '../useVideoQuery';
-import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 const VideoNewModal = () => {
-  const userId = useAuth((state) => state.userId);
+  const userId = useAuthStore((state) => state.userInfo?.userId);
   const handleClose = useModal((state) => state.handleClose);
 
   const postMutation = useVideoPostMutation();
@@ -16,7 +16,7 @@ const VideoNewModal = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const linkRef = useRef<HTMLInputElement>(null);
 
-  const handleNewVideo = async (e: FormEvent) => {
+  const handleNewVideo = (e: FormEvent) => {
     e.preventDefault();
 
     const title = titleRef.current?.value;
@@ -26,11 +26,17 @@ const VideoNewModal = () => {
       return;
     }
 
-    if (userId === null) return;
+    if (userId === undefined) return;
 
-    await postMutation.mutateAsync({ title, url: link, userId });
-    successToast('영상이 등록되었습니다');
-    handleClose();
+    postMutation.mutate(
+      { title, url: link, userId },
+      {
+        onSuccess: () => {
+          successToast('영상이 등록되었습니다');
+          handleClose();
+        },
+      }
+    );
   };
   return (
     <Modal type="video" id={0}>

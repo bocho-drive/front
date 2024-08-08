@@ -1,31 +1,30 @@
-import * as S from '@/styles/index.style';
-import KakaoShareButton from '../../../components/atoms/KakaoShareButton';
-import { getModalShareUrl, getYoutubeId } from '@/util/util';
-import { Video } from '../type';
-import { useAuth } from '@/@features/Auth/useAuth';
-import { useVideoDeleteMutation, useVideoQuery } from '../useVideoQuery';
+import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import Loading from '@/components/atoms/Loading';
 import { useModal } from '@/components/templates/Modal/useModal';
+import * as S from '@/styles/index.style';
+import { getModalShareUrl, getYoutubeId } from '@/util/util';
+import { Video } from '../type';
+import { useVideoDeleteMutation, useVideoQuery } from '../useVideoQuery';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
   video: Video;
 }
 
 const VideoInfoModal = ({ video }: Props) => {
-  const userId = useAuth((state) => state.userId);
+  const userId = useAuthStore((state) => state.userInfo?.userId);
   const handleClose = useModal((state) => state.handleClose);
 
-  const { data } = useVideoQuery(video.id);
+  const { data, isLoading } = useVideoQuery(video.id);
   const deleteMutation = useVideoDeleteMutation();
 
-  const handleDelete = async () => {
-    await deleteMutation.mutateAsync(video.id);
-    handleClose();
+  const handleDelete = () => {
+    deleteMutation.mutate(video.id, { onSuccess: () => handleClose() });
   };
 
   return (
     <S.div.FixedModal style={{ padding: '20px' }} $width={500}>
-      {data === undefined && <Loading />}
+      {isLoading && <Loading />}
       {data && (
         <S.div.Column $gap={20}>
           <S.h.H2 $maxLines={2}>{data.title}</S.h.H2>

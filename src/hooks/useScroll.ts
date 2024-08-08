@@ -9,7 +9,7 @@ interface Props {
   marginBottom?: number;
 }
 
-const useScroll = ({ length, fetchNextPage, hasNextPage, marginBottom = 0 }: Props) => {
+const useScroll = ({ length, fetchNextPage, hasNextPage, marginBottom = 0 }: Props): void => {
   /**
    * 스크롤이 생길때까지 계속 fetch
    *  - length를 받는 이유는 데이터를 계속해서 fetch하기 위함

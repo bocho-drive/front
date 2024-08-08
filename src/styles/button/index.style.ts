@@ -1,6 +1,8 @@
 export * from './avatar.style';
 export * from './text.style';
 export * from './tab.style';
+export * from './page.style';
+export * from './icon.style';
 
 import styled, { css } from 'styled-components';
 
@@ -60,13 +62,6 @@ export const Button = styled.button<ButtonProps & SizeProps>`
     `}
 `;
 
-export const IconButton = styled.button`
-  width: 100%;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-`;
-
 const smallStyle = css<SizeProps>`
   ${({ $circle }) =>
     $circle &&
@@ -98,14 +93,4 @@ const largeStyle = css<SizeProps>`
     `}
   font-size: 1.2rem;
   padding: 15px 30px;
-`;
-
-export const PageButton = styled.button<{ active: boolean }>`
-  padding: 5px 10px;
-  margin: 0 5px;
-  background-color: ${({ active }) => (active ? '#F0F0F0' : '#ffffff')};
-  color: #000000;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 `;

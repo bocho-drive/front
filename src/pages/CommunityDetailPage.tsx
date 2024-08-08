@@ -1,9 +1,9 @@
-import { useParams } from 'react-router-dom';
-import CommunityLayout from '@/components/templates/CommunityLayout/CommunityLayout';
-import * as S from '@/styles/index.style';
 import CommentList from '@/@features/Comment/components/CommentList';
 import GeneralDetail from '@/@features/Community/components/GeneralDetail';
+import CommunityLayout from '@/components/templates/CommunityLayout/CommunityLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
+import * as S from '@/styles/index.style';
+import { useParams } from 'react-router-dom';
 
 const CommunityDetailPage = () => {
   const { id } = useParams();

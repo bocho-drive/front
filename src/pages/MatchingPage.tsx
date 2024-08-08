@@ -1,4 +1,4 @@
-import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import { MatchingCardInfiniteList } from '@/@features/Matching/components/MatchingCardList';
 import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
@@ -6,7 +6,7 @@ import * as S from '@/styles/index.style';
 import { Link } from 'react-router-dom';
 
 const MatchingPage = () => {
-  const userRole = useAuth((state) => state.userRole);
+  const userRole = useAuthStore((state) => state.userInfo?.userRole);
   return (
     <DriveLayout>
       <S.div.Column $gap={20}>

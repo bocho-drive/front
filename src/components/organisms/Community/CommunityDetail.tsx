@@ -1,8 +1,10 @@
-import * as S from '@/styles/index.style';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import { CommunityDetailRes } from '@/@features/Community/type';
-import { ReactNode } from 'react';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
+import ToastViewer from '@/components/atoms/ToastViewer';
+import * as S from '@/styles/index.style';
 import { getDateString } from '@/util/util';
+import { ReactNode } from 'react';
 
 interface Props {
   data: CommunityDetailRes;
@@ -10,10 +12,11 @@ interface Props {
 }
 
 const CommunityDetail = ({ data, authorActionComp }: Props) => {
+  const isLogin = useAuthStore((state) => state.isLogin());
   return (
     <S.div.Column $gap={20}>
       <S.div.Row $between>
-        <S.div.Row $gap={10}>{data.isAuthor && authorActionComp}</S.div.Row>
+        <S.div.Row $gap={10}>{isLogin && data.isAuthor && authorActionComp}</S.div.Row>
         <KakaoShareButton title={data.title} />
       </S.div.Row>
       <S.h.H1>{data.title}</S.h.H1>
@@ -30,7 +33,7 @@ const CommunityDetail = ({ data, authorActionComp }: Props) => {
       </S.div.Row>
       <S.hr.Hr />
 
-      <S.span.Span>{data.content}</S.span.Span>
+      <ToastViewer initialValue={data.content} />
 
       <S.div.Row $gap={10} $wrap>
         {data.imgUrls.map((url, idx) => (

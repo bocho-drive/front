@@ -4,7 +4,7 @@ import { getDateString } from '@/util/util';
 import { Fragment, useEffect, useState } from 'react';
 import { useCommentQuery } from '@/@features/Comment/useCommentQuery';
 import CommentEdit from './CommentEdit';
-import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
   comment: CommentRes;
@@ -12,10 +12,10 @@ interface Props {
 }
 const Comment = ({ comment, communityId }: Props) => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const { deleteMutation } = useCommentQuery(communityId);
-
   const [isEditable, setIsEditable] = useState(false);
-  const userId = useAuth((state) => state.userId);
+
+  const { deleteMutation } = useCommentQuery(communityId);
+  const userId = useAuthStore((state) => state.userInfo?.userId);
 
   const handleDelete = () => {
     if (isEditable && confirm('정말 삭제하시겠습니까?')) deleteMutation.mutate(comment.id);
@@ -54,12 +54,13 @@ const Comment = ({ comment, communityId }: Props) => {
           </S.div.Row>
         </S.div.Row>
 
-        {!isEditMode && (
+        {!isEditMode ? (
           <S.div.Card>
             <S.p.P>{comment.content}</S.p.P>
           </S.div.Card>
+        ) : (
+          <CommentEdit comment={comment} communityId={communityId} setIsEditMode={setIsEditMode} />
         )}
-        {isEditMode && <CommentEdit comment={comment} communityId={communityId} setIsEditMode={setIsEditMode} />}
       </S.div.Column>
     </S.div.Row>
   );
