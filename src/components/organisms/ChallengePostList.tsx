@@ -1,6 +1,6 @@
 import PostListHeader from '../molecules/PostListHeader';
 import * as S from '@/styles/index.style';
-import { Post, usePost } from '@/@features/Admin/Post/usePost';
+import { Post, usePost } from '@/@features/Admin/Post/useChallengePost';
 import { useNavigate } from 'react-router-dom';
 import { getChallengeList } from '@/@features/Challenge/api';
 import { useEffect } from 'react';
@@ -24,8 +24,6 @@ const ChallengePostList = () => {
       const posts: Post[] = data.content.map((post) => ({
         id: Number(post.id),
         title: post.title,
-        viewCount: 0,
-        verifiedYN: false,
         createdAt: post.createdAt,
         isChecked: false,
         likes: 0,
@@ -50,7 +48,6 @@ const ChallengePostList = () => {
               {post.title}
             </label>
           </div>
-          <div>조회: {post.viewCount}</div>
           <div>댓글: {post.comments}</div>
         </S.div.PostItem>
       ))}

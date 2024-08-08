@@ -58,7 +58,7 @@ const AdminChallengeVerifiedDetail = () => {
         <Sidebar />
         <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
           <Suspense fallback={<Loading />}>
-            <S.div.Column $gap={40}>
+            <S.div.Column $padding={40} $gap={40}>
               {communityData !== undefined ? <CommunityDetail data={communityData} /> : null}
 
               <S.div.Row $gap={10} $justify="flex-start">

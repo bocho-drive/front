@@ -7,7 +7,7 @@ import * as S from '@/styles/index.style';
 const AdminTip = () => {
   return (
     <S.div.Container $width={100}>
-      <S.div.Row $width={90} $justify="center">
+      <S.div.Row $gap={20} $width={90} $justify="center">
         <Sidebar />
         <S.div.MainContent>
           <S.div.Column $gap={20}>

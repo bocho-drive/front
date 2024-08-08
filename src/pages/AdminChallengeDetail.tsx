@@ -5,49 +5,58 @@ import Loading from '@/components/atoms/Loading';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import Sidebar from '@/components/atoms/Sidebar';
-import { CommunityDetailRes } from '@/@features/Community/type';
-import { deleteCommunity, getCommunityDetail } from '@/@features/Community/api';
-import CommentList from '@/@features/Comment/components/CommentList';
-import CommunityDetail from '@/components/organisms/Community/CommunityDetail';
+import { Challenge, ChallengePostReq } from '@/@features/Challenge/type';
+import { getChallenge, putChallenge, deleteChallenge } from '@/@features/Challenge/api';
+import ChallengeDetail from '@/components/organisms/Challenge/ChallengeDetail';
 
-const AdminTipDetail = () => {
+const AdminChallengeDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [communityData, setCommunityData] = useState<CommunityDetailRes>();
+  const [challengeData, setChallengeData] = useState<Challenge>();
 
-  const handleToList = () => navigate('/admin/tip');
+  const [challengePostData, setChallengePostData] = useState<ChallengePostReq>({
+    title: '',
+    content: '',
+    // 필요한 다른 필드들을 추가하세요
+  });
 
-  const fetchData = async () => {
-    // api 호출
-    const data = await getCommunityDetail(Number(id));
-    console.log({ data });
-    setCommunityData(data);
+  // 챌린지 데이터를 가져와서 `challengePostData`를 초기화하는 useEffect
+  useEffect(() => {
+    if (challengeData) {
+      setChallengePostData({
+        title: challengeData.title,
+        content: challengeData.content,
+        // 필요한 다른 필드들을 설정하세요
+      });
+    }
+  }, [challengeData]);
 
-    // if(data.category === "GENERAL") {}
+  // 챌린지 수정 API 호출
+  const handleModify = async () => {
+    await putChallenge(Number(id), challengePostData);
+    fetchData(); // 수정 후 데이터를 다시 불러옵니다
   };
 
-  // id  : category
-  // 10번 : 일반
-  // 11번 : 일반
-  // 12번 : 일반
+  const handleToList = () => navigate('/admin/challenge');
 
-  // 22번 : TIP
-  // 23번 : TIP
-  // 24번 : TIP
-
-  // 33번 : 챌린지인증
-  // 34번 : 챌린지인증
-  // 35번 : 챌린지인증
+  const fetchData = async () => {
+    // API를 호출하여 챌린지 데이터를 가져옴
+    const data = await getChallenge(Number(id));
+    console.log({ data });
+    setChallengeData(data);
+  };
 
   useEffect(() => {
     if (id === undefined || !Number(id)) {
       handleToList();
     }
     fetchData();
-  }, []);
+  }, [id]);
 
-  const handleDelete = () => {
-    deleteCommunity(Number(id));
+  // 챌린지 삭제 API 호출
+  const handleDelete = async () => {
+    await deleteChallenge(Number(id));
+    handleToList(); // 삭제 후 목록으로 이동
   };
 
   if (id === undefined || !Number(id)) return null;
@@ -58,15 +67,14 @@ const AdminTipDetail = () => {
         <Sidebar />
         <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
           <Suspense fallback={<Loading />}>
-            <S.div.Column $gap={40}>
-              {communityData !== undefined ? <CommunityDetail data={communityData} /> : null}
+            <S.div.Column $padding={40} $gap={40}>
+              {challengeData !== undefined ? <ChallengeDetail data={challengeData} /> : null}
 
               <S.div.Row $gap={10} $justify="flex-start">
                 <S.button.Button onClick={handleToList}>목록으로</S.button.Button>
+                <S.button.Button onClick={handleModify}>수정</S.button.Button>
                 <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
               </S.div.Row>
-
-              <CommentList communityId={Number(id)} />
             </S.div.Column>
           </Suspense>
         </ErrorBoundary>
@@ -75,4 +83,4 @@ const AdminTipDetail = () => {
   );
 };
 
-export default AdminTipDetail;
+export default AdminChallengeDetail;

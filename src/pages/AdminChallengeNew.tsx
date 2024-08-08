@@ -45,9 +45,9 @@ const AdminChallengeNew = () => {
 
   return (
     <S.div.Container $width={100}>
-      <S.div.Row $width={90} $justify="center">
+      <S.div.Row $gap={40} $width={90} $justify="center">
         <Sidebar />
-        <S.div.Column $gap={20}>
+        <S.div.Column $padding={40} $gap={20}>
           <S.input.Input $size="large" placeholder="제목을 입력해주세요." value={title} onChange={(e) => setTitle(e.target.value)} />
           <ToastEditor initialValue=" " ref={editorRef} />
           <S.button.Button $size="large" onClick={handleSubmit}>
