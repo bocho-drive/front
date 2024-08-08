@@ -2,7 +2,7 @@ import PostListHeader from '../molecules/PostListHeader';
 import * as S from '@/styles/index.style';
 import { usePost } from '@/@features/Admin/Post/usePost';
 import { useNavigate } from 'react-router-dom';
-import { getCommunityList } from '@/@features/Community/api';
+import { getChallengeList } from '@/@features/Challenge/api';
 import { useEffect } from 'react';
 
 const ChallengePostList = () => {
@@ -16,8 +16,7 @@ const ChallengePostList = () => {
   const handleToChallengeDetail = (id: number) => navigate(`/admin/challenge/${id}`);
 
   const fetchPosts = async () => {
-    const data = await getCommunityList({
-      category: 'CHALLENGE_VERIFY',
+    const data = await getChallengeList({
       page: currentPage - 1,
     });
     if (data) {
@@ -25,8 +24,6 @@ const ChallengePostList = () => {
       const posts = data.content.map((post) => ({
         id: post.id,
         title: post.title,
-        viewCount: post.viewCount,
-        verifiedYN: post.verifiedYN,
         createdAt: post.createdAt,
         isChecked: false,
         likes: 0,

@@ -11,6 +11,7 @@ import MyPage from './pages/MyPage';
 import MatchingPage from './pages/MatchingPage';
 import AdminPage from './pages/AdminPage';
 import AdminLogin from './pages/AdminLogin';
+import AdminRegister from './pages/AdminRegister';
 import AdminGeneral from './pages/AdminGeneral';
 import AdminGeneralDetail from './pages/AdminDetailPage';
 import AdminChallengeNew from './pages/AdminChallengeNew';
@@ -79,7 +80,8 @@ function App() {
 
           {/* 어드민 */}
           <Route path="/admin" element={<AdminPage />} />
-          <Route path="/adminlogin" element={<AdminLogin />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/register" element={<AdminRegister />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/:id" element={<AdminDetailPage />} />
           <Route path="/admin/community" element={<AdminGeneral />} />
