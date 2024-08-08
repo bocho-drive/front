@@ -9,7 +9,7 @@ import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 const Header = () => {
   const handleOpenAuthModal = useAuthModal((state) => state.handleOpen);
-  const isLogin = useAuthStore((state) => state.isLogin);
+  const isLogin = useAuthStore((state) => state.isLogin());
 
   return (
     <S.div.Container style={{ height: '100px', justifyContent: 'center' }}>
@@ -25,7 +25,7 @@ const Header = () => {
           <HeaderMenu />
         </S.div.Row>
 
-        {isLogin() ? <UserProfile /> : <S.button.Button onClick={handleOpenAuthModal}>로그인</S.button.Button>}
+        {isLogin ? <UserProfile /> : <S.button.Button onClick={handleOpenAuthModal}>로그인</S.button.Button>}
         <AuthModal />
       </S.div.Row>
     </S.div.Container>

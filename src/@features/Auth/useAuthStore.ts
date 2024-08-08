@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { UserInfo } from './type';
 import { persist } from 'zustand/middleware';
 import { needLoginToast } from '@/components/atoms/Toast/useToast';
+import { clearToken, setAccessToken } from '@/util/tokenUtil';
 
 interface States {
   userInfo: UserInfo | null;
@@ -28,7 +29,10 @@ export const useAuthStore = create(
         return isLogin();
       },
       // TODO 추가 구현 필요
-      handleLogout: () => set({ userInfo: null }),
+      handleLogout: () => {
+        set({ userInfo: null });
+        clearToken();
+      },
     }),
     { name: 'auth_store' }
   )
