@@ -26,6 +26,7 @@ export interface CommunityRes {
   likeCount: number;
   verifiedYN: boolean;
   createdAt: string;
+  category: Category;
 }
 
 export interface CommunityDetailRes {
