@@ -4,16 +4,16 @@ import { getModalShareUrl } from '@/util/util';
 import { Challenge } from '@/@features/Challenge/type';
 import { URLS } from '@/App';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/@features/Auth/useAuth';
 import Modal from '@/components/templates/Modal/Modal';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
   challenge: Challenge;
 }
 
 const ChallengeModal = ({ challenge }: Props) => {
-  const confirmAuth = useAuth((state) => state.confirmAuth);
+  const confirmAuth = useAuthStore((state) => state.confirmAuth);
   const navigate = useNavigate();
 
   const handleToNewVerify = () => {

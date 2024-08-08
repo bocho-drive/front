@@ -4,7 +4,7 @@ import { getDateString } from '@/util/util';
 import { Fragment, useEffect, useState } from 'react';
 import { useCommentQuery } from '@/@features/Comment/useCommentQuery';
 import CommentEdit from './CommentEdit';
-import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
   comment: CommentRes;
@@ -15,7 +15,7 @@ const Comment = ({ comment, communityId }: Props) => {
   const [isEditable, setIsEditable] = useState(false);
 
   const { deleteMutation } = useCommentQuery(communityId);
-  const userId = useAuth((state) => state.loginInfo?.userId);
+  const userId = useAuthStore((state) => state.userInfo?.userId);
 
   const handleDelete = () => {
     if (isEditable && confirm('정말 삭제하시겠습니까?')) deleteMutation.mutate(comment.id);

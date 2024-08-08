@@ -1,15 +1,15 @@
-import { useAuth } from '@/@features/Auth/useAuth';
 import HeaderFooterLayout from './HeaderFooterLayout';
 import * as S from '@/styles/index.style';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
   children: React.ReactNode;
 }
 
 const DriveLayout = ({ children }: Props) => {
-  const { isAuth, loginInfo } = useAuth((state) => ({
-    isAuth: state.isAuth,
-    loginInfo: state.loginInfo,
+  const { isLogin, userInfo } = useAuthStore((state) => ({
+    isLogin: state.isLogin(),
+    userInfo: state.userInfo,
   }));
 
   return (
@@ -20,9 +20,9 @@ const DriveLayout = ({ children }: Props) => {
         <S.div.Column $gap={10} style={{ flex: 1 }}>
           <S.div.Card>
             <S.div.Column $gap={20}>
-              {isAuth && (
+              {isLogin && (
                 <S.div.Column $align="center" $gap={10}>
-                  <S.h.H4>👋 안녕하세요, {loginInfo?.nickname}님</S.h.H4>
+                  <S.h.H4>👋 안녕하세요, {userInfo?.nickname}님</S.h.H4>
                   <S.small.Small>오늘도 안전운전하세요.</S.small.Small>
                 </S.div.Column>
               )}

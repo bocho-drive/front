@@ -1,5 +1,5 @@
 import { useAuthModal } from '@/@features/Auth/components/AuthModal/useAuthModal';
-import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import { ChallengeCardList } from '@/@features/Challenge/components/ChallengeCardList';
 import { CommunityCardList } from '@/@features/Community/components/CommunityCardList';
 import { MatchingCardList } from '@/@features/Matching/components/MatchingCardList';
@@ -23,7 +23,7 @@ const GIFS = [
 const LandingPage = () => {
   const randomGif = GIFS[Math.floor(Math.random() * GIFS.length)];
 
-  const isAuth = useAuth((state) => state.isAuth);
+  const isLogin = useAuthStore((state) => state.isLogin);
   const handleOpenAuthModal = useAuthModal((state) => state.handleOpen);
 
   return (
@@ -49,7 +49,7 @@ const LandingPage = () => {
               </S.a.Link>
             </S.div.Row>
 
-            {!isAuth && (
+            {!isLogin() && (
               <S.button.TextButton $outline $align="left" style={{ width: 'fit-content' }} onClick={handleOpenAuthModal}>
                 🛞 로그인하고 시작하기
               </S.button.TextButton>

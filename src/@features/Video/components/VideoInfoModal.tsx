@@ -1,4 +1,3 @@
-import { useAuth } from '@/@features/Auth/useAuth';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import Loading from '@/components/atoms/Loading';
 import { useModal } from '@/components/templates/Modal/useModal';
@@ -6,13 +5,14 @@ import * as S from '@/styles/index.style';
 import { getModalShareUrl, getYoutubeId } from '@/util/util';
 import { Video } from '../type';
 import { useVideoDeleteMutation, useVideoQuery } from '../useVideoQuery';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
   video: Video;
 }
 
 const VideoInfoModal = ({ video }: Props) => {
-  const userId = useAuth((state) => state.loginInfo?.userId);
+  const userId = useAuthStore((state) => state.userInfo?.userId);
   const handleClose = useModal((state) => state.handleClose);
 
   const { data, isLoading } = useVideoQuery(video.id);

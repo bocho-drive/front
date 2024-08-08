@@ -1,6 +1,5 @@
 import { signIn } from '@/@features/Auth/api';
 import { useAuthModal } from '@/@features/Auth/components/AuthModal/useAuthModal';
-import { useAuth } from '@/@features/Auth/useAuth';
 import { LoginSchema, loginSchema } from '@/@features/Auth/yup';
 import GoogleButton from '@/@features/Auth/components/GoogleButton';
 import KakaoButton from '@/@features/Auth/components/KakaoButton';
@@ -8,11 +7,11 @@ import LineText from '@/components/atoms/LineText';
 import * as S from '@/styles/index.style';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { useUserStore } from '../useUserStore';
+import { useAuthStore } from '../useAuthStore';
 import { setAccessToken } from '@/util/tokenUtil';
 
 const LoginForm = () => {
-  const setUserInfo = useUserStore((state) => state.setUserInfo);
+  const setUserInfo = useAuthStore((state) => state.setUserInfo);
   const handleClose = useAuthModal((state) => state.handleClose);
 
   const {

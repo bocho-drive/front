@@ -2,16 +2,16 @@ import * as S from '@/styles/index.style';
 import HeaderFooterLayout from '../HeaderFooterLayout';
 import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/@features/Auth/useAuth';
 import { useCommunityCategory } from './useCommunityCategory';
 import { CATEGORY, Category } from '@/@features/Community/type';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface CommunityProps {
   children: ReactNode;
 }
 
 const CommunityLayout = ({ children }: CommunityProps) => {
-  const confirmAuth = useAuth((state) => state.confirmAuth);
+  const confirmAuth = useAuthStore((state) => state.confirmAuth);
   const navigate = useNavigate();
 
   const { category, setCategory } = useCommunityCategory();

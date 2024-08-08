@@ -1,14 +1,14 @@
 import * as S from '@/styles/index.style';
 import { useMatchingApplyDeleteMutation, useMatchingApplySuspenseQuery } from '../useMatchingApplyQuery';
 import { MatchingApply } from '../type';
-import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
   matchingId: number;
 }
 
 const ApplyList = ({ matchingId }: Props) => {
-  const userId = useAuth((state) => state.loginInfo?.userId);
+  const userId = useAuthStore((state) => state.userInfo?.userId);
 
   const { data } = useMatchingApplySuspenseQuery(matchingId);
 

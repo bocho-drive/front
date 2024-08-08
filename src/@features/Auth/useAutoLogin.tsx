@@ -1,4 +1,4 @@
-import { useUserStore } from './useUserStore';
+import { useAuthStore } from './useAuthStore';
 import { getRefreshToken } from '@/util/tokenUtil';
 
 /**
@@ -12,7 +12,7 @@ import { getRefreshToken } from '@/util/tokenUtil';
  */
 
 const useAutoLogin = (): void => {
-  const { userInfo, setUserInfo } = useUserStore((state) => ({
+  const { userInfo, setUserInfo } = useAuthStore((state) => ({
     userInfo: state.userInfo,
     setUserInfo: state.setUserInfo,
   }));

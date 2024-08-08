@@ -1,14 +1,13 @@
-import { useAuth } from '@/@features/Auth/useAuth';
-
 import * as S from '@/styles/index.style';
 import useScroll from '@/hooks/useScroll';
 import { useMyCommentListInfiniteQuery } from '../useMyQuery';
 import NotExistsLayout from '@/components/templates/NotExistsLayout';
 import { getDateString } from '@/util/util';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 // TODO : 댓글의 게시글 링크 연결 필요
 const MyCommentCardList = () => {
-  const userId = useAuth((state) => state.loginInfo?.userId);
+  const userId = useAuthStore((state) => state.userInfo?.userId);
   const { data, fetchNextPage, hasNextPage } = useMyCommentListInfiniteQuery(userId!);
   useScroll({ length: data.pages.length, fetchNextPage, hasNextPage });
 
