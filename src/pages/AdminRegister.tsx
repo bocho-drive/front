@@ -7,6 +7,7 @@ import { signUp } from '@/@features/Auth/api';
 interface RegisterFormProps {
   email: string;
   password: string;
+  nickname: string;
 }
 
 const AdminRegister = () => {
@@ -18,6 +19,7 @@ const AdminRegister = () => {
     defaultValues: {
       email: '',
       password: '',
+      nickname: '',
     },
   });
   const [rememberMe, setRememberMe] = useState(false);
@@ -25,7 +27,12 @@ const AdminRegister = () => {
 
   const onSubmit = async (data: RegisterFormProps) => {
     try {
-      await signUp(data);
+      await signUp({
+        email: data.email,
+        password: data.password,
+        nickname: 'admin123123123',
+        userRole: 'ADMIN',
+      });
       console.log('회원가입 성공');
     } catch (error) {
       console.log('회원가입 실패:', error);
