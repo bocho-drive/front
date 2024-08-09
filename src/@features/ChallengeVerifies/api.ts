@@ -1,15 +1,13 @@
-import { apiWithToken, apiWithTokenFormData, Response } from '@/config/axios';
-import { ChallengeVerifiesDetailRes, ChallengeVerifiesListReq, ChallengeVerifiesListRes, ChallengeVerifiesPostReq } from './type';
+import { apiWithToken, formDataHeader, Response } from '@/config/axios';
+import { ChallengeVerifiesDetailRes, ChallengeVerifiesListRes, ChallengeVerifiesPostReq } from './type';
 import { CATEGORY } from '../Community/type';
+import { PaginationReq } from '@/config/type';
 
 const BASEURL = 'challenge_verifies';
 
 /** 챌린지 인증 목록 조회 */
-export const getChallengeVerifiesList = async (props: ChallengeVerifiesListReq): Promise<ChallengeVerifiesListRes> => {
-  const searchParams = new URLSearchParams();
-  if (props.page !== undefined) searchParams.append('page', String(props.page));
-  if (props.size) searchParams.append('size', String(props.size));
-  const res = await apiWithToken.get<Response<ChallengeVerifiesListRes>>(BASEURL);
+export const getChallengeVerifiesList = async (params: PaginationReq): Promise<ChallengeVerifiesListRes> => {
+  const res = await apiWithToken.get<Response<ChallengeVerifiesListRes>>(BASEURL, { params });
   return res.data.data;
 };
 
@@ -21,8 +19,6 @@ export const getChallengeVerifiesDetail = async (id: number): Promise<ChallengeV
 
 /** 챌린지 인증 글 등록 */
 export const postChallengeVerifies = async (challengeId: number, data: ChallengeVerifiesPostReq): Promise<number> => {
-  const url = `${BASEURL}?challengeId=${challengeId}`;
-
   const formData = new FormData();
   formData.append('title', data.title);
   formData.append('content', data.content);
@@ -31,7 +27,10 @@ export const postChallengeVerifies = async (challengeId: number, data: Challenge
     formData.append('image', img);
   });
 
-  const res = await apiWithTokenFormData.post<Response<number>>(url, formData);
+  const res = await apiWithToken.post<Response<number>>(BASEURL, formData, {
+    headers: formDataHeader,
+    params: { challengeId },
+  });
   return res.data.data;
 };
 
@@ -45,7 +44,9 @@ export const putChallengeVerifies = async (id: number, data: ChallengeVerifiesPo
     formData.append('image', img);
   });
 
-  const res = await apiWithTokenFormData.put<Response<number>>(`${BASEURL}/${id}`, formData);
+  const res = await apiWithToken.put<Response<number>>(`${BASEURL}/${id}`, formData, {
+    headers: formDataHeader,
+  });
   return res.data.data;
 };
 

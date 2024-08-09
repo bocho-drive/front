@@ -1,10 +1,10 @@
 import SearchBar from '@/components/atoms/SearchBar';
 import Sidebar from '@/components/atoms/Sidebar';
-import PostList from '@/components/organisms/PostList';
+import TipPostList from '@/components/organisms/TipPostList';
 
 import * as S from '@/styles/index.style';
 
-const AdminPage = () => {
+const AdminTip = () => {
   return (
     <S.div.Container $width={100}>
       <S.div.Row $gap={20} $width={90} $justify="center">
@@ -12,7 +12,7 @@ const AdminPage = () => {
         <S.div.MainContent>
           <S.div.Column $gap={20}>
             <SearchBar />
-            <PostList />
+            <TipPostList />
           </S.div.Column>
         </S.div.MainContent>
       </S.div.Row>
@@ -20,4 +20,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default AdminTip;

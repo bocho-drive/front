@@ -1,25 +1,25 @@
-import * as S from '@/styles/index.style';
-import DriveLayout from '@/components/templates/DriveLayout';
-import { useNavigate, useParams } from 'react-router-dom';
-import KakaoShareButton from '@/components/atoms/KakaoShareButton';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
+import { MatchingStatus, MatchingType } from '@/@features/Matching/components/MatchingCard';
 import { useMatchingDeleteMutation, useMatchingQuery } from '@/@features/Matching/useMatchingQuery';
-import Loading from '@/components/atoms/Loading';
-import { getDateString } from '@/util/util';
-import { useAuth } from '@/@features/Auth/useAuth';
-import { Fragment } from 'react/jsx-runtime';
 import ApplyButton from '@/@features/MatchingApply/components/ApplyButton';
 import ApplyList from '@/@features/MatchingApply/components/ApplyList';
+import KakaoShareButton from '@/components/atoms/KakaoShareButton';
+import Loading from '@/components/atoms/Loading';
+import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
-import { MatchingStatus, MatchingType } from '@/@features/Matching/components/MatchingCard';
+import * as S from '@/styles/index.style';
+import { getDateString } from '@/util/util';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Fragment } from 'react/jsx-runtime';
 
 const MatchingDetailPage = () => {
   const { id } = useParams();
   const { data, isLoading } = useMatchingQuery(Number(id));
-  const { loginInfo, isAuth } = useAuth((state) => ({
-    loginInfo: state.loginInfo,
-    isAuth: state.isAuth,
+  const { userInfo, isLogin } = useAuthStore((state) => ({
+    userInfo: state.userInfo,
+    isLogin: state.isLogin(),
   }));
-  const isAuthor = loginInfo && data?.userId === loginInfo.userId;
+  const isAuthor = userInfo && data?.userId === userInfo.userId;
 
   const navigate = useNavigate();
   const deleteMutation = useMatchingDeleteMutation();
@@ -72,7 +72,7 @@ const MatchingDetailPage = () => {
             <S.span.Span>{data.content}</S.span.Span>
           </S.div.Column>
 
-          {loginInfo?.userRole === 'TEACHER' && <ApplyButton matchingId={Number(id)} />}
+          {userInfo?.userRole === 'TEACHER' && <ApplyButton matchingId={Number(id)} />}
 
           <S.div.Gap $height={20} />
 
@@ -80,7 +80,7 @@ const MatchingDetailPage = () => {
             <S.button.Button onClick={handleToList}>목록으로</S.button.Button>
           </S.div.Row>
 
-          {isAuth && (
+          {isLogin && (
             <Fragment>
               <S.hr.Hr />
               <S.h.H4>신청 목록</S.h.H4>

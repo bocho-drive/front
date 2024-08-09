@@ -12,3 +12,8 @@ export interface ChallengeList {
   content: Challenge[];
   page: Pagination;
 }
+
+export interface ChallengePostReq {
+  title: string;
+  content: string;
+}

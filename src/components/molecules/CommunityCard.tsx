@@ -1,5 +1,6 @@
-import { CommunityRes } from '@/@features/Community/type';
+import { Category, CommunityRes } from '@/@features/Community/type';
 import * as S from '@/styles/index.style';
+import { ReactNode } from 'react';
 
 interface Props {
   data: CommunityRes;
@@ -27,3 +28,22 @@ const CommunityCard = ({ data, topComponent, bottomComponent }: Props) => {
 };
 
 export default CommunityCard;
+
+export const CommunityCategoryBadge = ({ category }: { category: Category }): ReactNode => {
+  let text = '';
+  switch (category) {
+    case 'GENERAL':
+      text = '일반';
+      break;
+    case 'VOTE':
+      text = '투표';
+      break;
+    case 'TIP':
+      text = '팁';
+      break;
+    case 'CHALLENGE_VERIFY':
+      text = '챌린지 인증';
+      break;
+  }
+  return <S.span.Badge $color="primary">{text}</S.span.Badge>;
+};

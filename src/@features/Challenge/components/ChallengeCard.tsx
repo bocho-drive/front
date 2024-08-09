@@ -21,7 +21,7 @@ const ChallengeCard = ({ challenge }: Props) => {
         </S.div.Column>
       </S.div.Row>
 
-      <ChallengeModal challenge={challenge} />
+      <ChallengeModal challengeId={Number(challenge.id)} modalId={Number(challenge.id)} />
     </S.div.Card>
   );
 };

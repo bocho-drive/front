@@ -3,9 +3,9 @@ import * as S from '@/styles/index.style';
 import { usePost } from '@/@features/Admin/Post/usePost';
 import { useNavigate } from 'react-router-dom';
 import { getCommunityList } from '@/@features/Community/api';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
-const PostList = () => {
+const ChallengeVerifiedPostList = () => {
   const { posts, setPosts, currentPage, handleToggle, setCurrentPage, totalPages, setTotalPages } = usePost();
   const navigate = useNavigate();
 
@@ -13,10 +13,11 @@ const PostList = () => {
     setCurrentPage(page);
   };
 
-  const handleToAdminDetail = (id: number) => navigate(`/admin/${id}`);
+  const handleToChallengeVerifiedDetail = (id: number) => navigate(`/admin/challenge/verified/${id}`);
 
-  const fetchPosts = useCallback(async () => {
+  const fetchPosts = async () => {
     const data = await getCommunityList({
+      category: 'CHALLENGE_VERIFY',
       page: currentPage - 1,
     });
     if (data) {
@@ -33,11 +34,11 @@ const PostList = () => {
       }));
       setPosts(posts);
     }
-  }, [currentPage, setPosts, setTotalPages]);
+  };
 
   useEffect(() => {
     fetchPosts();
-  }, [currentPage, fetchPosts]);
+  }, [currentPage]);
 
   return (
     <S.div.PostListContainer>
@@ -46,7 +47,7 @@ const PostList = () => {
         <S.div.PostItem key={post.id}>
           <div>
             <S.input.Checkbox id={`post-${post.id}`} type="checkbox" checked={post.isChecked} onChange={() => handleToggle(post.id)} />
-            <label onClick={() => handleToAdminDetail(post.id)} style={{ cursor: 'pointer' }}>
+            <label onClick={() => handleToChallengeVerifiedDetail(post.id)} style={{ cursor: 'pointer' }}>
               {post.title}
             </label>
           </div>
@@ -65,4 +66,4 @@ const PostList = () => {
   );
 };
 
-export default PostList;
+export default ChallengeVerifiedPostList;

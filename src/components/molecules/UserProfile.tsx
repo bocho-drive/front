@@ -1,12 +1,12 @@
 import * as S from '@/styles/index.style';
-import { Fragment } from 'react/jsx-runtime';
-import { useRelativeModal } from '../templates/RelativeModal/useRelativeModal';
-import RelativeModal from '../templates/RelativeModal/RelativeModal';
 import { useEffect, useRef } from 'react';
-import { useAuth } from '@/@features/Auth/useAuth';
+import { Fragment } from 'react/jsx-runtime';
+import RelativeModal from '../templates/RelativeModal/RelativeModal';
+import { useRelativeModal } from '../templates/RelativeModal/useRelativeModal';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 const UserProfile = () => {
-  const handleLogout = useAuth((state) => state.handleLogout);
+  const handleLogout = useAuthStore((state) => state.handleLogout);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 

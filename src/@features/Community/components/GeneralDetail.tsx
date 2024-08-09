@@ -1,13 +1,13 @@
-import { Fragment, Suspense } from 'react';
-import * as S from '@/styles/index.style';
-import { useLocation, useNavigate } from 'react-router-dom';
 import VoteForm from '@/@features/Vote/components/VoteForm';
 import Loading from '@/components/atoms/Loading';
-import { ErrorBoundary } from 'react-error-boundary';
-import ErrorFallbackUI from '@/components/templates/ErrorFallback';
-import { useCommunityDeleteMutation, useCommunityLikeMutation, useCommunitySuspenseQuery } from '../useCommunityQuery';
 import CommunityDetail from '@/components/organisms/Community/CommunityDetail';
-import { useAuth } from '@/@features/Auth/useAuth';
+import ErrorFallbackUI from '@/components/templates/ErrorFallback';
+import * as S from '@/styles/index.style';
+import { Fragment, Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useCommunityDeleteMutation, useCommunityLikeMutation, useCommunitySuspenseQuery } from '../useCommunityQuery';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
   communityId: number;
@@ -16,7 +16,7 @@ interface Props {
 const GeneralDetail = ({ communityId }: Props) => {
   const navigate = useNavigate();
   const { search, pathname } = useLocation();
-  const isAuth = useAuth((state) => state.isAuth);
+  const isLogin = useAuthStore((state) => state.isLogin());
 
   const getDetailQuery = useCommunitySuspenseQuery(communityId);
   const mutationDelete = useCommunityDeleteMutation(communityId);
@@ -29,16 +29,18 @@ const GeneralDetail = ({ communityId }: Props) => {
     }
   };
 
+  const basePath = pathname.split('/')[1];
+
   const handleLike = () => mutationLike.mutateAsync().then(() => getDetailQuery.refetch());
-  const handleToList = () => navigate('/' + pathname.split('/')[1] + search);
-  const handleToEdit = () => navigate(`/${pathname.split('/')[1]}/edit/${communityId}`);
+  const handleToList = () => navigate(`/${basePath}${search}`);
+  const handleToEdit = () => navigate(`/${basePath}/edit/${communityId}`);
 
   return (
     <S.div.Column $gap={20}>
       <CommunityDetail
         data={getDetailQuery.data}
         authorActionComp={
-          isAuth && (
+          isLogin && (
             <Fragment>
               <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
               <S.button.Button onClick={handleToEdit}>수정</S.button.Button>
@@ -56,7 +58,7 @@ const GeneralDetail = ({ communityId }: Props) => {
         </ErrorBoundary>
       )}
 
-      {isAuth && (
+      {isLogin && (
         <S.div.Row $gap={10} $justify="center">
           <S.button.Button $colors="secondary" onClick={handleLike}>
             🎉 글 추천

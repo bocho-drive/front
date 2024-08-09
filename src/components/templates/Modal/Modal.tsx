@@ -14,8 +14,11 @@ interface Props {
 }
 
 const Modal = ({ children, type, id }: Props) => {
-  // 렌더링이 의도되도록 selector state 미사용
-  const { isShow, handleClose, handleOpen } = useModal((state) => state);
+  const { isShow, handleClose, handleOpen } = useModal((state) => ({
+    isShow: state.isShow(id, type),
+    handleClose: state.handleClose,
+    handleOpen: state.handleOpen,
+  }));
 
   const modalRoot = document.getElementById(docId) as HTMLElement;
   const modalRef = useRef<HTMLDivElement>(null);
@@ -50,7 +53,7 @@ const Modal = ({ children, type, id }: Props) => {
     // console.log(new Date().getTime());
    */
 
-  if (!isShow(id, type)) return null;
+  if (!isShow) return null;
   return ReactDOM.createPortal(
     <S.div.Overlay>
       <div ref={modalRef}>{children}</div>
