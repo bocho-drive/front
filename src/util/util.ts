@@ -59,6 +59,18 @@ export const nextPageParam = (page: Pagination) => {
   return page.number + 1;
 };
 
+/** 오후/오전 00:00 */
+export const getAmPmTime = (date: Date): string => {
+  if (date instanceof Date === false) return '';
+  const hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+
+  const hour = hours > 12 ? hours - 12 : hours;
+  const ampm = hours >= 12 ? '오후' : '오전';
+
+  return `${ampm} ${hour}:${minutes}`;
+};
+
 /** 커뮤니티 카테고리와 ID값을 받아, 화면 URL생성 */
 export const getCommunityLink = (category: Category, id?: number): string => {
   let link = '';

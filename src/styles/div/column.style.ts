@@ -12,9 +12,11 @@ export const Column = styled.div<ColumnProps>`
   display: flex;
   flex-direction: column;
 
-  ${({ $align }) => $align && `align-items: ${$align};`}
-  ${({ $justify }) => $justify && `justify-content: ${$justify};`}
   ${({ $width = 100 }) => $width && `width: ${$width}%;`}
   ${({ $gap = 0 }) => $gap && `gap: ${$gap}px;`}
+
+  ${({ $align }) => $align && `align-items: ${$align};`}
+  ${({ $justify }) => $justify && `justify-content: ${$justify};`}
+
   ${({ $padding = 0 }) => $padding && `padding: ${$padding}px;`}
 `;
