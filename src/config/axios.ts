@@ -114,5 +114,17 @@ export const formDataHeader = {
 //   withCredentials: true, // cors
 // });
 
+// * 어드민용 API
+export const apiWithAdmin = axios.create({
+  baseURL: import.meta.env.VITE_API_ADMIN_URL as string,
+  headers: {
+    'content-type': 'application/json;charset=UTF-8',
+    accept: 'application/json,',
+  },
+  withCredentials: true, // cors
+});
+
+apiWithAdmin.interceptors.request.use(ReqFulfilled, ReqRejected);
+apiWithAdmin.interceptors.response.use(ResFulfilled, ResRejected);
 // apiWithTokenFormData.interceptors.request.use(ReqFulfilled, ReqRejected);
 // apiWithTokenFormData.interceptors.response.use(ResFulfilled, ResRejected);

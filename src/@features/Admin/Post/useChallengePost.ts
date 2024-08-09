@@ -12,8 +12,6 @@ export interface Post {
   // api
   id: number;
   title: string;
-  viewCount: number;
-  verifiedYN: boolean;
   createdAt: string;
 
   // 클라이언트

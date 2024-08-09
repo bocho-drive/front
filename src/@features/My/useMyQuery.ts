@@ -4,29 +4,29 @@ import { nextPageParam } from '@/util/util';
 
 const key = 'my';
 
-export const useMyCommunityListInfiniteQuery = (userId: number) => {
+export const useMyCommunityListInfiniteQuery = () => {
   return useSuspenseInfiniteQuery({
     queryKey: [key, 'community'],
     initialPageParam: 0,
-    queryFn: ({ pageParam = 0 }) => getMyCommunityList(userId, { page: pageParam }),
+    queryFn: ({ pageParam = 0 }) => getMyCommunityList({ page: pageParam }),
     getNextPageParam: (lastPage) => nextPageParam(lastPage.page),
   });
 };
 
-export const useMyCommentListInfiniteQuery = (userId: number) => {
+export const useMyCommentListInfiniteQuery = () => {
   return useSuspenseInfiniteQuery({
     queryKey: [key, 'comment'],
     initialPageParam: 0,
-    queryFn: ({ pageParam = 0 }) => getMyCommentList(userId, { page: pageParam }),
+    queryFn: ({ pageParam = 0 }) => getMyCommentList({ page: pageParam }),
     getNextPageParam: (lastPage) => nextPageParam(lastPage.page),
   });
 };
 
-export const useMyChallengeVerifyListInfiniteQuery = (userId: number) => {
+export const useMyChallengeVerifyListInfiniteQuery = () => {
   return useSuspenseInfiniteQuery({
     queryKey: [key, 'challenge'],
     initialPageParam: 0,
-    queryFn: ({ pageParam = 0 }) => getMyChallengeVerifyList(userId, { page: pageParam }),
+    queryFn: ({ pageParam = 0 }) => getMyChallengeVerifyList({ page: pageParam }),
     getNextPageParam: (lastPage) => nextPageParam(lastPage.page),
   });
 };

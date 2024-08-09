@@ -1,10 +1,15 @@
 import SearchBar from '@/components/atoms/SearchBar';
 import Sidebar from '@/components/atoms/Sidebar';
-import PostList from '@/components/organisms/PostList';
+import ChallengePostList from '@/components/organisms/ChallengePostList';
+import { useNavigate } from 'react-router-dom';
 
 import * as S from '@/styles/index.style';
 
-const AdminPage = () => {
+const AdminChallenge = () => {
+
+  const navigate = useNavigate();
+  const handleToNew = () => navigate('/admin/challenge/new');
+
   return (
     <S.div.Container $width={100}>
       <S.div.Row $gap={20} $width={90} $justify="center">
@@ -12,7 +17,8 @@ const AdminPage = () => {
         <S.div.MainContent>
           <S.div.Column $gap={20}>
             <SearchBar />
-            <PostList />
+            <S.button.Button onClick={handleToNew}>작성하기</S.button.Button>
+            <ChallengePostList />
           </S.div.Column>
         </S.div.MainContent>
       </S.div.Row>
@@ -20,4 +26,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default AdminChallenge;
