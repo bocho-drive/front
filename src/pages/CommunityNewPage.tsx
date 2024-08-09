@@ -1,32 +1,35 @@
-import { useCommunityPostMutation } from '@/@features/Community/useCommunityQuery';
-import CommunityForm, { PostReturnType } from '@/components/organisms/Community/CommunityForm';
-import CommunityLayout from '@/components/templates/CommunityLayout/CommunityLayout';
-import { useCommunityCategory } from '@/components/templates/CommunityLayout/useCommunityCategory';
 import * as S from '@/styles/index.style';
+import CommunityLayout from '@/components/templates/CommunityLayout/CommunityLayout';
+import CommunityForm, { PostReturnType } from '@/components/organisms/Community/CommunityForm';
 import { useRef } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { CommunityPostReq } from '@/@features/Community/type';
+import { postCommunity } from '@/@features/Community/api';
 import { useNavigate } from 'react-router-dom';
+import { useCommunityCategory } from '@/components/templates/CommunityLayout/useCommunityCategory';
 
 const CommunityNewPage = () => {
   const navigate = useNavigate();
   const category = useCommunityCategory((state) => state.category);
 
   const isVoteRef = useRef<HTMLInputElement>(null);
-  const mutationPost = useCommunityPostMutation();
+  const mutationPost = useMutation({
+    mutationKey: ['postCommunity'],
+    mutationFn: (data: CommunityPostReq) => postCommunity(data),
+    onSuccess: (id) => {
+      navigate(`/community/${id}`);
+    },
+  });
 
-  const handleNewPost = (data: PostReturnType) => {
+  const handleNewPost = async (data: PostReturnType) => {
     const category = isVoteRef.current?.checked ? 'VOTE' : 'GENERAL';
 
-    mutationPost.mutate(
-      {
-        title: data.title,
-        content: data.content,
-        category,
-        image: data.image,
-      },
-      {
-        onSuccess: (id) => navigate(`/community/${id}`),
-      }
-    );
+    mutationPost.mutate({
+      title: data.title,
+      content: data.content,
+      category,
+      image: data.image,
+    });
   };
 
   return (

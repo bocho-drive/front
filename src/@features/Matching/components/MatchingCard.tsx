@@ -7,7 +7,8 @@ interface Props {
   matching: Matching;
 }
 
-const MatchingCard = ({ matching }: Props) => {
+const MatchingCard = (props: Props) => {
+  const { matching } = props;
   return (
     <S.div.Card>
       <Link to={`/matching/${matching.id}`}>

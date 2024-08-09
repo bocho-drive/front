@@ -11,7 +11,6 @@ const DriveLayout = ({ children }: Props) => {
     isLogin: state.isLogin(),
     userInfo: state.userInfo,
   }));
-
   return (
     <HeaderFooterLayout>
       <S.div.Row $gap={50} $width={100}>

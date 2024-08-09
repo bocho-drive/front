@@ -110,7 +110,6 @@ function App() {
             <Route path={`${URLS.CHALLENGE_VERIFIES}/edit/:id`} element={<ChallengeVerifiesEditPage />} />
             <Route path={`${URLS.CHALLENGE_VERIFIES}/new/:challengeId`} element={<ChallengeVerifiesNewPage />} />
 
-            {/* 매칭 */}
             <Route path={`${URLS.MATCHING}/new`} element={<MatchingNewPage />} />
             <Route path={`${URLS.MATCHING}/edit/:id`} element={<MatchingEditPage />} />
 

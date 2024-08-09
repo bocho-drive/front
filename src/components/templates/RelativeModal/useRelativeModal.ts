@@ -14,15 +14,7 @@ interface RelativeModalProps {
   modalRef?: RefObject<HTMLElement>;
 }
 
-export interface RelativeModalType {
-  isOpen: boolean;
-  handleOpen: () => void;
-  handleClose: () => void;
-  setRelativePosition: (position: Position) => void;
-  position: Position;
-}
-
-export const useRelativeModal = ({ openType, closeType, targetRef, modalRef }: RelativeModalProps): RelativeModalType => {
+export const useRelativeModal = ({ openType, closeType, targetRef, modalRef }: RelativeModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState<Position>({ top: 0, left: 0, right: 0, bottom: 0 });
 
@@ -67,3 +59,4 @@ export const useRelativeModal = ({ openType, closeType, targetRef, modalRef }: R
     position,
   };
 };
+export type RelativeModalType = ReturnType<typeof useRelativeModal>;

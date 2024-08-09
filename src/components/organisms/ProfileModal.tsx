@@ -1,7 +1,6 @@
 import Modal from '../templates/Modal/Modal';
 import * as S from '@/styles/index.style';
 
-/** 미사용 : API 구현 필요 */
 const ProfileModal = () => {
   return (
     <Modal type="profile" id={0}>

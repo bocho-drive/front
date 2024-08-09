@@ -1,12 +1,10 @@
-import { Pagination } from '@/config/type';
-import { CATEGORY, CommunityDetailRes, CommunityRes } from '../Community/type';
+import { PaginationRes } from '@/config/type';
+import { CATEGORY, CommunityDetailRes, CommunityListReq, CommunityRes } from '../Community/type';
+
+export interface ChallengeVerifiesListReq extends CommunityListReq {}
 
 // 챌린지 인증 목록 조회
-export type ChallengeVerifiesListRes = {
-  content: ChallengeVerifiesRes[];
-  page: Pagination;
-};
-
+export type ChallengeVerifiesListRes = PaginationRes<ChallengeVerifiesRes[]>;
 export interface ChallengeVerifiesRes extends CommunityRes {
   challengeId: number;
   communityId: number;

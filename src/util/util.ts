@@ -42,19 +42,17 @@ export const getDateString = (dateString: string) => {
   }
 };
 
-// TODO : 검증로직 추가 필요
-export const getYoutubeThumbnailUrl = (url: string): string => {
+export const getYoutubeThumbnailUrl = (url: string) => {
   const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
   return videoIdMatch ? `https://img.youtube.com/vi/${videoIdMatch[1]}/hqdefault.jpg` : 'https://via.placeholder.com/300';
 };
 
-// TODO : 검증로직 추가 필요
 export const getYoutubeId = (url: string) => {
   const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
   return videoIdMatch ? videoIdMatch[1] : '';
 };
 
-/** @desc 인피니티 스크롤 페이지 next param */
+/** 인피니티 스크롤 페이지 next param */
 export const nextPageParam = (page: Pagination) => {
   const { number, size, totalElements } = page;
   if (size * (number + 1) >= totalElements) return undefined;
