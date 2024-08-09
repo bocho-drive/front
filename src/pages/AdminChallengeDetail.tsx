@@ -7,7 +7,7 @@ import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import Sidebar from '@/components/atoms/Sidebar';
 import { Challenge, ChallengePostReq } from '@/@features/Challenge/type';
 import { getChallenge, putChallenge, deleteChallenge } from '@/@features/Challenge/api';
-import ChallengeDetail from '@/components/organisms/Challenge/ChallengeDetail';
+// import ChallengeDetail from '@/components/organisms/Challenge/ChallengeDetail';
 
 const AdminChallengeDetail = () => {
   const { id } = useParams();
@@ -68,7 +68,7 @@ const AdminChallengeDetail = () => {
         <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
           <Suspense fallback={<Loading />}>
             <S.div.Column $padding={40} $gap={40}>
-              {challengeData !== undefined ? <ChallengeDetail data={challengeData} /> : null}
+              {/* {challengeData !== undefined ? <ChallengeDetail data={challengeData} /> : null} */}
 
               <S.div.Row $gap={10} $justify="flex-start">
                 <S.button.Button onClick={handleToList}>목록으로</S.button.Button>
