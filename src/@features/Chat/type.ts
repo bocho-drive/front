@@ -1,7 +1,11 @@
 export interface Chat {
   id: number;
-  matchingApplyId: number;
-  usersId: number;
-  content: string;
-  sendAt: Date;
+  userId: number;
+  sender: string;
+  message: string;
+  createAt: Date;
+}
+export interface SendChat {
+  approvalKey: string;
+  message: string;
 }

@@ -2,7 +2,7 @@ import * as S from '@/styles/index.style';
 import { useMatchingApplyDeleteMutation } from '../useMatchingApplyQuery';
 import { MatchingApply } from '../type';
 import { useApplyStore } from '../useApplyStore';
-import { useChatStore } from '@/@features/Chat/useChatStore';
+import { useChatContainerStore } from '@/@features/Chat/useChatContainerStore';
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 const ApplyCard = ({ apply }: Props) => {
   const isAuthor = useApplyStore((state) => state.isAuthor);
   const userId = useAuthStore((state) => state.userInfo?.userId);
-  const setIsOpen = useChatStore((state) => state.setIsOpen);
+  const handleChatContainerOpen = useChatContainerStore((state) => state.handleChatContainerOpen);
 
   const deleteApplyMutation = useMatchingApplyDeleteMutation();
 
@@ -22,7 +22,9 @@ const ApplyCard = ({ apply }: Props) => {
     }
   };
 
-  const handleOpenChat = () => setIsOpen(true);
+  const handleOpenChat = () => {
+    handleChatContainerOpen(true, apply.id);
+  };
 
   const isMyApply = apply.userId === userId;
 

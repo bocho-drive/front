@@ -4,7 +4,7 @@ interface Props {
 
 function usePressEnterFetch({ handleSubmit }: Props) {
   const handlePressEnterFetch = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey && e.nativeEvent.isComposing === false) {
       e.preventDefault();
       handleSubmit(e);
     }

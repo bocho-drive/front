@@ -12,14 +12,14 @@ interface Props {
 
 const ChatCard = ({ chat }: Props) => {
   const userId = useAuthStore((state) => state.userInfo?.userId);
-  const isMyChat = userId === chat.usersId;
+  const isMyChat = userId === chat.userId;
   return (
     <Fragment>
       <SChat $isMyChat={isMyChat}>
         <S.div.Card $padding={8}>
-          <S.p.P>{chat.content}</S.p.P>
+          <S.p.P>{chat.message}</S.p.P>
         </S.div.Card>
-        <S.small.Small style={{ marginBottom: '4px' }}>{getAmPmTime(chat.sendAt)}</S.small.Small>
+        <S.small.Small style={{ marginBottom: '4px' }}>{getAmPmTime(chat.createAt)}</S.small.Small>
       </SChat>
     </Fragment>
   );
