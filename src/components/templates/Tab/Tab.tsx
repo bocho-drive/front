@@ -5,9 +5,6 @@ import { create } from 'zustand';
 // const tabHeaders = ['게시글', '댓글', '챌린지'] as const;
 // const tabBodys = [<CommunityCardList category="GENERAL" />, <Fragment />, <Fragment />];
 
-// const tabHeaders = ['게시글', '댓글', '챌린지'] as const;
-// const tabBodys = [<CommunityCardList category="GENERAL" />, <Fragment />, <Fragment />];
-
 interface Props {
   tabHeaders: string[];
   tabBodys: React.ReactNode[];
