@@ -4,10 +4,10 @@ import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import * as S from '@/styles/index.style';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 const TipPage = () => {
-  const confirmAuth = useAuth((state) => state.confirmAuth);
+  const confirmAuth = useAuthStore((state) => state.confirmAuth);
   const navigate = useNavigate();
 
   const handleToNew = () => {

@@ -1,11 +1,11 @@
-import { getCommentList } from '@/@features/Comment/api';
-import { useCommunityListSuspenseQuery } from '@/@features/Community/useCommunityQuery';
 import * as S from '@/styles/index.style';
-import { useSuspenseQueries } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
-import { Fragment } from 'react/jsx-runtime';
-import CommunityCard from '../molecules/CommunityCard';
 import SimpleComment from '../molecules/SimpleComment';
+import { Link } from 'react-router-dom';
+import { useSuspenseQueries } from '@tanstack/react-query';
+import { getCommentList } from '@/@features/Comment/api';
+import CommunityCard from '../molecules/CommunityCard';
+import { Fragment } from 'react/jsx-runtime';
+import { useCommunityListSuspenseQuery } from '@/@features/Community/useCommunityQuery';
 
 const CommunityCommentCardList = () => {
   const { data } = useCommunityListSuspenseQuery('GENERAL', 2);

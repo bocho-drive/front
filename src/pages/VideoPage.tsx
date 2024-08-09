@@ -1,4 +1,4 @@
-import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import VideoCardInfiniteList from '@/@features/Video/components/VideoCardList';
 import VideoNewModal from '@/@features/Video/components/VideoNewModal';
 import DriveLayout from '@/components/templates/DriveLayout';
@@ -8,7 +8,7 @@ import * as S from '@/styles/index.style';
 
 const VideoPage = () => {
   const handleOpen = useModal((state) => state.handleOpen);
-  const confirmAuth = useAuth((state) => state.confirmAuth);
+  const confirmAuth = useAuthStore((state) => state.confirmAuth);
 
   const handleNew = () => {
     if (confirmAuth()) {

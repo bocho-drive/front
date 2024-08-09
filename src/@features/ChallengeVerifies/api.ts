@@ -1,4 +1,4 @@
-import { apiWithToken, apiWithTokenFormData, Response } from '@/config/axios';
+import { apiWithToken, formDataHeader, Response } from '@/config/axios';
 import { ChallengeVerifiesDetailRes, ChallengeVerifiesListRes, ChallengeVerifiesPostReq } from './type';
 import { CATEGORY } from '../Community/type';
 import { PaginationReq } from '@/config/type';
@@ -27,7 +27,8 @@ export const postChallengeVerifies = async (challengeId: number, data: Challenge
     formData.append('image', img);
   });
 
-  const res = await apiWithTokenFormData.post<Response<number>>(BASEURL, formData, {
+  const res = await apiWithToken.post<Response<number>>(BASEURL, formData, {
+    headers: formDataHeader,
     params: { challengeId },
   });
   return res.data.data;
@@ -43,7 +44,9 @@ export const putChallengeVerifies = async (id: number, data: ChallengeVerifiesPo
     formData.append('image', img);
   });
 
-  const res = await apiWithTokenFormData.put<Response<number>>(`${BASEURL}/${id}`, formData);
+  const res = await apiWithToken.put<Response<number>>(`${BASEURL}/${id}`, formData, {
+    headers: formDataHeader,
+  });
   return res.data.data;
 };
 

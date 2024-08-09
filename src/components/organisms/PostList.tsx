@@ -13,11 +13,10 @@ const PostList = () => {
     setCurrentPage(page);
   };
 
-  const handleToAdminDetail = (id: number) => navigate(`/admin/detail/${id}`);
+  const handleToAdminDetail = (id: number) => navigate(`/admin/${id}`);
 
   const fetchPosts = useCallback(async () => {
     const data = await getCommunityList({
-      category: 'GENERAL',
       page: currentPage - 1,
     });
     if (data) {

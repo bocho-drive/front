@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as S from '@/styles/index.style';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { signIn } from '@/@features/Auth/api';
 
 interface LoginFormProps {
   email: string;
   password: string;
 }
 
-const LoginForm = () => {
+const AdminLogin = () => {
   const {
     register,
     handleSubmit,
@@ -19,11 +21,22 @@ const LoginForm = () => {
     },
   });
   const [rememberMe, setRememberMe] = useState(false);
+  const [loginError, setLoginError] = useState<string | null>(null);
 
-  const onSubmit = (data: LoginFormProps) => {
-    console.log(data);
-    // 로그인 연결할 위치
+  const onSubmit = async (data: LoginFormProps) => {
+    try {
+      const response = await signIn(data);
+      console.log(response);
+    } catch (error) {
+      console.error('로그인 실패:', error);
+      setLoginError('로그인에 실패했습니다. 다시 시도해주세요.');
+    }
   };
+
+  const navigate = useNavigate();
+  const { search } = useLocation();
+
+  const handleToRegister = () => navigate('/admin/register' + search);
 
   return (
     <S.div.PageContainer>
@@ -44,6 +57,7 @@ const LoginForm = () => {
         {errors.email && <p>{errors.email.message}</p>}
         <S.input.Input type="password" placeholder="비밀번호" $size="medium" {...register('password', { required: '비밀번호를 입력하세요' })} />
         {errors.password && <p>{errors.password.message}</p>}
+        {loginError && <p>{loginError}</p>}
         <S.div.CheckboxContainer>
           <input type="checkbox" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
           <label>Remember me</label>
@@ -51,9 +65,11 @@ const LoginForm = () => {
         <S.button.Button $colors="primary" $height={50} type="submit">
           <S.h.H5>로그인</S.h.H5>
         </S.button.Button>
+        <S.div.Gap $height={10}></S.div.Gap>
+        <S.h.H5 onClick={handleToRegister} style={{ cursor: 'pointer' }}>회원가입</S.h.H5>
       </S.div.FormContainer>
     </S.div.PageContainer>
   );
 };
 
-export default LoginForm;
+export default AdminLogin;

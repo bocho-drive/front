@@ -1,14 +1,14 @@
 import * as S from '@/styles/index.style';
 
-import { useAuth } from '@/@features/Auth/useAuth';
 import { errorToast, successToast } from '@/components/atoms/Toast/useToast';
 import Modal from '@/components/templates/Modal/Modal';
 import { useModal } from '@/components/templates/Modal/useModal';
 import { FormEvent, useRef } from 'react';
 import { useVideoPostMutation } from '../useVideoQuery';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 const VideoNewModal = () => {
-  const userId = useAuth((state) => state.loginInfo?.userId);
+  const userId = useAuthStore((state) => state.userInfo?.userId);
   const handleClose = useModal((state) => state.handleClose);
 
   const postMutation = useVideoPostMutation();

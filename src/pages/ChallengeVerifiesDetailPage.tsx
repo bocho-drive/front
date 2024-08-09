@@ -1,13 +1,13 @@
-import { useVerifiesDeleteMutation, useVerifiesLikeMutation, useVerifiesQuery } from '@/@features/ChallengeVerifies/useVerifiesQuery';
-import CommentList from '@/@features/Comment/components/CommentList';
-import { URLS } from '@/App';
-import Loading from '@/components/atoms/Loading';
-import CommunityDetail from '@/components/organisms/Community/CommunityDetail';
-import DriveLayout from '@/components/templates/DriveLayout';
-import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import * as S from '@/styles/index.style';
 import { Fragment } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import DriveLayout from '@/components/templates/DriveLayout';
+import CommentList from '@/@features/Comment/components/CommentList';
+import CommunityDetail from '@/components/organisms/Community/CommunityDetail';
+import { useVerifiesDeleteMutation, useVerifiesLikeMutation, useVerifiesQuery } from '@/@features/ChallengeVerifies/useVerifiesQuery';
+import { URLS } from '@/App';
+import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
+import Loading from '@/components/atoms/Loading';
 
 const ChallengeVerifiesDetailPage = () => {
   const { id } = useParams();

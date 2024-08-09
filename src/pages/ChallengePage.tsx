@@ -1,4 +1,4 @@
-import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import { ChallengeInfiniteCardList } from '@/@features/Challenge/components/ChallengeCardList';
 import VerfiesCardList from '@/@features/ChallengeVerifies/components/VerfiesCardList';
 import DriveLayout from '@/components/templates/DriveLayout';
@@ -23,7 +23,7 @@ const ChallengePage = () => {
 export default ChallengePage;
 
 const Verifies = () => {
-  const isAuth = useAuth((state) => state.isAuth);
-  if (!isAuth) return <S.h.H3>로그인이 필요한 페이지입니다.</S.h.H3>;
+  const isLogin = useAuthStore((state) => state.isLogin());
+  if (!isLogin) return <S.h.H3>로그인이 필요한 페이지입니다.</S.h.H3>;
   return <VerfiesCardList />;
 };

@@ -6,7 +6,7 @@ export const TextButtonStyle = css<TextButtonProps>`
   cursor: pointer;
   font-size: 1rem;
   font-weight: 500;
-  padding: 10px;
+  ${({ $padding = 10 }) => $padding && `padding: ${$padding}px;`}
 
   &:hover {
     background-color: #f0f0f0;
@@ -26,6 +26,7 @@ export const TextButtonStyle = css<TextButtonProps>`
 export interface TextButtonProps {
   $outline?: boolean;
   $align?: 'left' | 'center' | 'right';
+  $padding?: number;
 }
 
 export const TextButton = styled.button<TextButtonProps>`

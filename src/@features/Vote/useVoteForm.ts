@@ -4,7 +4,7 @@ import { useEffect, useReducer } from 'react';
 import { voteInitialState, voteReducer } from './reducer';
 import { UseSuspenseQueryResult } from '@tanstack/react-query';
 import { Vote } from './type';
-import { useAuth } from '../Auth/useAuth';
+import { useAuthStore } from '../Auth/useAuthStore';
 
 interface Props {
   communityId: number;
@@ -24,9 +24,9 @@ export const useVoteForm = ({ communityId, voteQuery }: Props): Return => {
   const postVoteMutation = useVotePostMutation();
   const deleteVoteMutation = useVoteDeleteMutation();
 
-  const { isAuth, userId } = useAuth((state) => ({
-    isAuth: state.isAuth,
-    userId: state.loginInfo?.userId,
+  const { isLogin, userId } = useAuthStore((state) => ({
+    isLogin: state.isLogin(),
+    userId: state.userInfo?.userId,
   }));
 
   const handleVote = () => {
@@ -49,7 +49,7 @@ export const useVoteForm = ({ communityId, voteQuery }: Props): Return => {
   };
 
   const handleVoteSelect = (agreeYn: boolean) => {
-    if (!isAuth) {
+    if (!isLogin) {
       errorToast('투표 권한이 없습니다.');
       return;
     }

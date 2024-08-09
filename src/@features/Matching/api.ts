@@ -1,4 +1,4 @@
-import { apiWithToken, Response } from '@/config/axios';
+import { apiWithoutToken, apiWithToken, Response } from '@/config/axios';
 import { PaginationReq } from '@/config/type';
 import { Matching, MatchingCardList, MatchingDetail, MatchingPostReq } from './type';
 
@@ -6,13 +6,13 @@ const BASEURL = 'drive_matchings';
 
 /** 매칭 글 목록 조회 */
 export const getMatchingList = async (params: PaginationReq): Promise<MatchingCardList> => {
-  const res = apiWithToken.get<Response<MatchingCardList>>(BASEURL, { params });
-  return (await res).data.data;
+  const res = await apiWithoutToken.get<Response<MatchingCardList>>(BASEURL, { params });
+  return res.data.data;
 };
 
 /** 매칭 글 상세 조회 */
 export const getMatching = async (id: number): Promise<MatchingDetail> => {
-  const res = await apiWithToken.get<Response<MatchingDetail>>(`${BASEURL}/${id}`);
+  const res = await apiWithoutToken.get<Response<MatchingDetail>>(`${BASEURL}/${id}`);
   return res.data.data;
 };
 

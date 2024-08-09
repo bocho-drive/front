@@ -11,10 +11,15 @@ import MyPage from './pages/MyPage';
 import MatchingPage from './pages/MatchingPage';
 import AdminPage from './pages/AdminPage';
 import AdminLogin from './pages/AdminLogin';
-import AdminDetail from './pages/AdminDetailPage';
+import AdminRegister from './pages/AdminRegister';
+import AdminGeneral from './pages/AdminGeneral';
+import AdminGeneralDetail from './pages/AdminDetailPage';
 import AdminChallengeNew from './pages/AdminChallengeNew';
+import AdminChallenge from './pages/AdminChallenge';
 import AdminChallengeDetail from './pages/AdminChallengeDetail';
+import AdminTip from './pages/AdminTip';
 import AdminTipDetail from './pages/AdminTipDetail';
+import AdminChallengeVerified from './pages/AdminChallengeVerified';
 import AdminChallengeVerifiedDetail from './pages/AdminChallengeVerifiedDetail';
 import CommunityNewPage from './pages/CommunityNewPage';
 import MatchingDetailPage from './pages/MatchingDetailPage';
@@ -22,6 +27,7 @@ import PrivateRoute from './config/PrivateRoute';
 import NotFoundPage from './pages/NotFoundPage';
 import GlobalComponents from './config/GlobalComponents';
 import CommunityEditPage from './pages/CommunityEditPage';
+import AdminDetailPage from './pages/AdminDetailPage';
 import ChallengeVerifiesDetailPage from './pages/ChallengeVerifiesDetailPage';
 import ChallengeVerifiesNewPage from './pages/ChallengeVerifiesNewPage';
 import TipNewPage from './pages/TipNewPage';
@@ -30,6 +36,7 @@ import Provider from './config/Provider';
 import ChallengeVerifiesEditPage from './pages/ChallengeVerifiesEditPage';
 import MatchingNewPage from './pages/MatchingNewPage';
 import MatchingEditPage from './pages/MatchingEditPage';
+import OauthRedirectPage from './pages/OauthRedirectPage';
 
 export const URLS = {
   LANDING: '/',
@@ -72,14 +79,23 @@ function App() {
 
           <Route path={URLS.VIDEO} element={<VideoPage />} />
 
+          <Route path="/oauth/redirect" element={<OauthRedirectPage />} />
+
           {/* 어드민 */}
           <Route path="/admin" element={<AdminPage />} />
-          <Route path="/adminlogin" element={<AdminLogin />} />
-          <Route path="/admin/detail/:id" element={<AdminDetail />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/register" element={<AdminRegister />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/:id" element={<AdminDetailPage />} />
+          <Route path="/admin/community" element={<AdminGeneral />} />
+          <Route path="/admin/community/:id" element={<AdminGeneralDetail />} />
+          <Route path="/admin/challenge" element={<AdminChallenge />} />
           <Route path="/admin/challenge/new" element={<AdminChallengeNew />} />
-          <Route path="/admin/challenge/detail" element={<AdminChallengeDetail />} />
-          <Route path="/admin/challenge/verified" element={<AdminChallengeVerifiedDetail />} />
-          <Route path="/admin/tip/detail" element={<AdminTipDetail />} />
+          <Route path="/admin/challenge/:id" element={<AdminChallengeDetail />} />
+          <Route path="/admin/challenge/verified" element={<AdminChallengeVerified />} />
+          <Route path="/admin/challenge/verified/:id" element={<AdminChallengeVerifiedDetail />} />
+          <Route path="/admin/tip" element={<AdminTip />} />
+          <Route path="/admin/tip/:id" element={<AdminTipDetail />} />
 
           {/* 인증 필요 페이지 */}
           <Route element={<PrivateRoute isNeedAuth={true} />}>
@@ -94,7 +110,6 @@ function App() {
             <Route path={`${URLS.CHALLENGE_VERIFIES}/edit/:id`} element={<ChallengeVerifiesEditPage />} />
             <Route path={`${URLS.CHALLENGE_VERIFIES}/new/:challengeId`} element={<ChallengeVerifiesNewPage />} />
 
-            {/* 매칭 */}
             <Route path={`${URLS.MATCHING}/new`} element={<MatchingNewPage />} />
             <Route path={`${URLS.MATCHING}/edit/:id`} element={<MatchingEditPage />} />
 

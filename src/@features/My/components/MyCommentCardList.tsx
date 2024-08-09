@@ -1,23 +1,20 @@
-import { useAuth } from '@/@features/Auth/useAuth';
-
-import * as S from '@/styles/index.style';
-import useScroll from '@/hooks/useScroll';
-import { useMyCommentListInfiniteQuery } from '../useMyQuery';
+import { CommentRes } from '@/@features/Comment/type';
 import NotExistsLayout from '@/components/templates/NotExistsLayout';
-import { getDateString } from '@/util/util';
+import useScroll from '@/hooks/useScroll';
+import * as S from '@/styles/index.style';
+import { getCommunityLink, getDateString } from '@/util/util';
+import { useMyCommentListInfiniteQuery } from '../useMyQuery';
 
-// TODO : 댓글의 게시글 링크 연결 필요
 const MyCommentCardList = () => {
-  const userId = useAuth((state) => state.loginInfo?.userId);
-  const { data, fetchNextPage, hasNextPage } = useMyCommentListInfiniteQuery(userId!);
+  const { data, fetchNextPage, hasNextPage } = useMyCommentListInfiniteQuery();
   useScroll({ length: data.pages.length, fetchNextPage, hasNextPage });
 
   return (
-    <NotExistsLayout isExists={data.pages.length > 0}>
+    <NotExistsLayout isExists={data.pages[0].content.length > 0}>
       {data.pages.map((page) =>
-        page.content.map((comment) => {
+        page.content.map((comment: CommentRes) => {
           return (
-            <S.div.Column $gap={10}>
+            <S.div.Column $gap={10} key={comment.id}>
               <S.div.Row $gap={10} $align="center">
                 <S.h.H4>{comment.author}</S.h.H4>
                 <S.small.Small>{getDateString(comment.createdAt)}</S.small.Small>
@@ -25,6 +22,9 @@ const MyCommentCardList = () => {
               <S.div.Card>
                 <S.p.P>{comment.content}</S.p.P>
               </S.div.Card>
+              <S.a.Link $outline $padding={5} to={getCommunityLink(comment.category, comment.communityId)}>
+                <S.small.Small>게시글 보기 🔗</S.small.Small>
+              </S.a.Link>
             </S.div.Column>
           );
         })

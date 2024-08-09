@@ -5,13 +5,24 @@ const BASEURL = 'comments';
 
 /** 댓글 목록조회 */
 export const getCommentList = async (communityId?: number): Promise<CommentRes[]> => {
-  const res = await apiWithoutToken.get<Response<CommentRes[]>>(BASEURL, { params: { communityId } });
+  let url = BASEURL;
+
+  if (communityId) {
+    const searchParams = new URLSearchParams();
+    searchParams.append('communityId', String(communityId));
+
+    url += `?${searchParams.toString()}`;
+  }
+
+  const res = await apiWithoutToken.get<Response<CommentRes[]>>(url);
+
   return res.data.data;
 };
 
 /** 댓글 작성 */
 export const postComment = async (data: CommentPostReq): Promise<CommentRes> => {
   const res = await apiWithToken.post<Response<CommentRes>>(BASEURL, data);
+
   return res.data.data;
 };
 
