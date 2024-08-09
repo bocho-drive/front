@@ -1,5 +1,7 @@
 import { LoginRes } from '@/@features/Auth/type';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import { errorToast, successToast } from '@/components/atoms/Toast/useToast';
+import { getAccessToken, setAccessToken } from '@/util/tokenUtil';
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
 export interface Response<T> {
@@ -8,24 +10,21 @@ export interface Response<T> {
   data: T;
 }
 
-export interface ErrorResponse {
+export interface ErrorResponse<T> {
   statusCode: 400 | 401 | 404 | 500;
-  msg: string;
+  message: string;
+  data?: T;
 }
 
-/** 공통 요청 성공 */
+/** /api/* 요청 interceptor */
 const ReqFulfilled = (config: InternalAxiosRequestConfig) => {
-  const ls = localStorage.getItem('auth');
-  if (!ls) return config;
-
-  const json = JSON.parse(ls);
-  const loginState = json?.state?.loginInfo as LoginRes | null;
-  const token = loginState?.accessToken;
+  const token = getAccessToken();
   if (token) {
-    config.headers.Authorization = token;
+    config.headers.Authorization = 'Bearer ' + token;
   }
   return config;
 };
+
 /** 공통 요청 실패 */
 const ReqRejected = (error: AxiosError) => {
   return Promise.reject(error);
@@ -37,12 +36,33 @@ const ResFulfilled = (response: AxiosResponse<Response<unknown>>) => {
   return response;
 };
 /** 공통 응답 실패 */
-const ResRejected = (error: AxiosError<ErrorResponse>) => {
-  console.log({ error });
+const ResRejected = (error: AxiosError<ErrorResponse<unknown>>) => {
+  const { config } = error;
+  const { handleLogout } = useAuthStore.getState();
+
+  // * 인가 오류
+  if (error.response?.status === 401) {
+    try {
+      const err = error.response.data as ErrorResponse<LoginRes>;
+      if (err.data === undefined) throw err;
+
+      // data항목이 있는 경우, AT토큰 갱신처리
+      setAccessToken(err.data.accessToken);
+      successToast('토큰 갱신 완료');
+
+      return apiWithToken.request(config!);
+    } catch (error) {
+      errorToast('회원정보가 만료되었어요.');
+      errorToast('다시 로그인 해주세요.');
+      handleLogout();
+    }
+
+    return Promise.reject(error.response.data);
+  }
 
   // * 서버 오류
   if (error.response) {
-    errorToast(error.response.data.msg);
+    errorToast(error.response.data.message);
     return Promise.reject(error.response.data);
   }
 
@@ -64,7 +84,7 @@ export const apiWithoutToken = axios.create({
   },
   withCredentials: true, // cors
 });
-apiWithoutToken.interceptors.request.use(ReqFulfilled, ReqRejected);
+apiWithoutToken.interceptors.request.use((config) => config, ReqRejected);
 apiWithoutToken.interceptors.response.use(ResFulfilled, ResRejected);
 
 // * 인가 필요 api
@@ -80,15 +100,19 @@ export const apiWithToken = axios.create({
 apiWithToken.interceptors.request.use(ReqFulfilled, ReqRejected);
 apiWithToken.interceptors.response.use(ResFulfilled, ResRejected);
 
+export const formDataHeader = {
+  'content-type': 'multipart/form-data',
+  accept: 'application/json,',
+};
 // * 인가 필요 api(FormData)
-export const apiWithTokenFormData = axios.create({
-  baseURL: import.meta.env.VITE_API_TOKEN_URL as string,
-  headers: {
-    'content-type': 'multipart/form-data',
-    accept: 'application/json,',
-  },
-  withCredentials: true, // cors
-});
+// export const apiWithTokenFormData = axios.create({
+//   baseURL: import.meta.env.VITE_API_TOKEN_URL as string,
+//   headers: {
+//     'content-type': 'multipart/form-data',
+//     accept: 'application/json,',
+//   },
+//   withCredentials: true, // cors
+// });
 
-apiWithTokenFormData.interceptors.request.use(ReqFulfilled, ReqRejected);
-apiWithTokenFormData.interceptors.response.use(ResFulfilled, ResRejected);
+// apiWithTokenFormData.interceptors.request.use(ReqFulfilled, ReqRejected);
+// apiWithTokenFormData.interceptors.response.use(ResFulfilled, ResRejected);

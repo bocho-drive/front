@@ -1,9 +1,6 @@
 import { signUp } from '@/@features/Auth/api';
 import { useAuthModal } from '@/@features/Auth/components/AuthModal/useAuthModal';
 import { RegisterSchema, registerSchema } from '@/@features/Auth/yup';
-import GoogleButton from '@/components/atoms/GoogleButton';
-import KakaoButton from '@/components/atoms/KakaoButton';
-import LineText from '@/components/atoms/LineText';
 import * as S from '@/styles/index.style';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -50,14 +47,9 @@ const RegisterForm = () => {
           <S.label.Label htmlFor="is-teacher">선생님 계정으로 가입하기</S.label.Label>
         </S.div.Row>
 
-        <S.button.Button $colors="primary" $height={50}>
+        <S.button.Button $colors="primary" $height={50} type="submit">
           <S.h.H5>이메일로 회원가입</S.h.H5>
         </S.button.Button>
-
-        <LineText text="또는" />
-
-        <GoogleButton text="구글로 회원가입하기" />
-        <KakaoButton text="카카오로 회원가입하기" />
       </S.div.Column>
     </form>
   );

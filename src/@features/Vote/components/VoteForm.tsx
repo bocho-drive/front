@@ -1,9 +1,9 @@
-import { useAuth } from '@/@features/Auth/useAuth';
 import * as S from '@/styles/index.style';
 import styled from 'styled-components';
 import { useVoteForm } from '../useVoteForm';
 import { useVoteSuspenseQuery } from '../useVoteQuery';
 import VoteButton from './VoteButton';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
   communityId: number;
@@ -15,7 +15,7 @@ const VoteForm = ({ communityId }: Props) => {
   const up = voteQuery.data.filter((vote) => vote.agreeYn).length;
   const down = voteQuery.data.length - up;
 
-  const isAuth = useAuth((state) => state.isAuth);
+  const isLogin = useAuthStore((state) => state.isLogin());
 
   const { handleCancelVote, handleVote, handleVoteSelect, voteState } = useVoteForm({ communityId, voteQuery });
 
@@ -34,12 +34,12 @@ const VoteForm = ({ communityId }: Props) => {
             <VoteButton type="down" count={down} />
           </VoteCard>
         </S.div.Row>
-        {isAuth && voteState.isVoteAble && (
+        {isLogin && voteState.isVoteAble && (
           <S.button.Button $size="small" $colors="primary" onClick={handleVote}>
             투표하기
           </S.button.Button>
         )}
-        {isAuth && !voteState.isVoteAble && (
+        {isLogin && !voteState.isVoteAble && (
           <S.button.Button $size="small" $colors="primary" onClick={handleCancelVote}>
             투표취소하기
           </S.button.Button>

@@ -1,3 +1,5 @@
+import { Category } from '../Community/type';
+
 export interface CommentPostReq {
   content: string;
   communityId: number;
@@ -9,4 +11,6 @@ export interface CommentRes {
   createdAt: string;
   userId: number;
   author: string;
+  category: Category;
+  communityId: number;
 }

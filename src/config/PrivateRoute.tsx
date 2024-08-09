@@ -1,4 +1,4 @@
-import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import { Navigate, Outlet } from 'react-router-dom';
 
 interface Props {
@@ -8,15 +8,15 @@ interface Props {
 
 /** 페이지 직접접근 시, 막는 용도로 사용 */
 const PrivateRoute = ({ isNeedAuth }: Props) => {
-  const isAuth = useAuth((state) => state.isAuth);
+  const isLogin = useAuthStore((state) => state.isLogin());
 
   //* 인증 불필요 페이지
   if (!isNeedAuth) {
-    return isAuth ? <PrevNavigate /> : <Outlet />;
+    return isLogin ? <PrevNavigate /> : <Outlet />;
   }
 
   //* 인증 필요 페이지
-  return isAuth ? <Outlet /> : <PrevNavigate />;
+  return isLogin ? <Outlet /> : <PrevNavigate />;
 };
 
 export default PrivateRoute;

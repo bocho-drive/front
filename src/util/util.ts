@@ -1,3 +1,5 @@
+import { Category } from '@/@features/Community/type';
+import { URLS } from '@/App';
 import { ModalType } from '@/components/templates/Modal/useModal';
 import { Pagination } from '@/config/type';
 
@@ -57,4 +59,23 @@ export const nextPageParam = (page: Pagination) => {
   const { number, size, totalElements } = page;
   if (size * (number + 1) >= totalElements) return undefined;
   return page.number + 1;
+};
+
+/** 커뮤니티 카테고리와 ID값을 받아, 화면 URL생성 */
+export const getCommunityLink = (category: Category, id?: number): string => {
+  let link = '';
+  switch (category) {
+    case 'GENERAL':
+    case 'VOTE':
+      link = URLS.COMMUNITY;
+      break;
+    case 'TIP':
+      link = URLS.TIP;
+      break;
+    case 'CHALLENGE_VERIFY':
+      link = URLS.CHALLENGE_VERIFIES;
+      break;
+  }
+
+  return id ? `${link}/${id}` : link;
 };
