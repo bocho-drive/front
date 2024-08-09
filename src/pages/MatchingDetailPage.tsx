@@ -1,28 +1,32 @@
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
+import ChatContainer from '@/@features/Chat/components/ChatContainer';
 import { MatchingStatus, MatchingType } from '@/@features/Matching/components/MatchingCard';
 import { useMatchingDeleteMutation, useMatchingQuery } from '@/@features/Matching/useMatchingQuery';
 import ApplyButton from '@/@features/MatchingApply/components/ApplyButton';
 import ApplyList from '@/@features/MatchingApply/components/ApplyList';
+import { useApplyStore } from '@/@features/MatchingApply/useApplyStore';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import Loading from '@/components/atoms/Loading';
 import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import * as S from '@/styles/index.style';
 import { getDateString } from '@/util/util';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Fragment } from 'react/jsx-runtime';
 
 const MatchingDetailPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const { data, isLoading } = useMatchingQuery(Number(id));
+  const deleteMutation = useMatchingDeleteMutation();
+
   const { userInfo, isLogin } = useAuthStore((state) => ({
     userInfo: state.userInfo,
     isLogin: state.isLogin(),
   }));
-  const isAuthor = userInfo && data?.userId === userInfo.userId;
-
-  const navigate = useNavigate();
-  const deleteMutation = useMatchingDeleteMutation();
+  const [isAuthor, setIsAuthor] = useApplyStore((state) => [state.isAuthor, state.setIsAuthor]);
 
   const handleToList = () => {
     navigate('/matching');
@@ -36,6 +40,12 @@ const MatchingDetailPage = () => {
         },
       });
   };
+
+  useEffect(() => {
+    if (userInfo && data) {
+      setIsAuthor(data.userId === userInfo.userId);
+    }
+  }, [data, userInfo, setIsAuthor]);
 
   return (
     <DriveLayout>
@@ -91,6 +101,8 @@ const MatchingDetailPage = () => {
           )}
         </S.div.Column>
       )}
+
+      <ChatContainer />
     </DriveLayout>
   );
 };
