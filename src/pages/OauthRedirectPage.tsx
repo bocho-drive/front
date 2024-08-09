@@ -1,5 +1,5 @@
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
-import { getMyInfo } from '@/@features/My/api';
+import { getMyProfile } from '@/@features/My/api';
 import { MyProfileRes } from '@/@features/My/type';
 import Loading from '@/components/atoms/Loading';
 import { setAccessToken } from '@/util/tokenUtil';
@@ -17,7 +17,7 @@ const OauthRedirectPage = () => {
 
     // 사용자 정보 저장
     (async () => {
-      const res: MyProfileRes = await getMyInfo();
+      const res: MyProfileRes = await getMyProfile();
       setUserInfo({
         nickname: res.nickname,
         userId: res.id,

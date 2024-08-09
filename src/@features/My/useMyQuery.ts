@@ -1,8 +1,16 @@
-import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
-import { getMyChallengeVerifyList, getMyCommentList, getMyCommunityList } from './api';
+import { useQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { getMyChallengeVerifyList, getMyCommentList, getMyCommunityList, getMyProfile } from './api';
 import { nextPageParam } from '@/util/util';
 
 const key = 'my';
+
+export const useMyProfileQuery = () => {
+  return useQuery({
+    queryKey: [key, 'profile'],
+    queryFn: getMyProfile,
+    staleTime: Infinity,
+  });
+};
 
 export const useMyCommunityListInfiniteQuery = () => {
   return useSuspenseInfiniteQuery({

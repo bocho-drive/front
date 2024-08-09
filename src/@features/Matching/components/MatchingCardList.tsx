@@ -8,7 +8,7 @@ export const MatchingCardInfiniteList = () => {
   useScroll({ hasNextPage, fetchNextPage, length: data.pages.length });
 
   return (
-    <NotExistsLayout isExists={data.pages.length > 0}>
+    <NotExistsLayout isExists={data.pages[0].content.length > 0}>
       {data.pages.map((page) =>
         page.content.map((matching) => {
           return <MatchingCard key={matching.id} matching={matching} />;
