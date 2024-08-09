@@ -3,11 +3,12 @@ import { getChallenge, getChallengeList } from './api';
 
 const staleTime = 1000 * 60; // 1분
 
-export const useChallengeQuery = (id: number) => {
+export const useChallengeQuery = (id: number, enabled: boolean) => {
   return useQuery({
     queryKey: ['challenge', id],
     queryFn: () => getChallenge(id),
     staleTime,
+    enabled,
   });
 };
 
