@@ -1,9 +1,9 @@
 import * as S from '@/styles/index.style';
 import { useMatchingApplyDeleteMutation } from '../useMatchingApplyQuery';
 import { MatchingApply } from '../type';
-import { useAuth } from '@/@features/Auth/useAuth';
 import { useApplyStore } from '../useApplyStore';
 import { useChatStore } from '@/@features/Chat/useChatStore';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
   apply: MatchingApply;
@@ -11,7 +11,7 @@ interface Props {
 
 const ApplyCard = ({ apply }: Props) => {
   const isAuthor = useApplyStore((state) => state.isAuthor);
-  const userId = useAuth((state) => state.loginInfo?.userId);
+  const userId = useAuthStore((state) => state.userInfo?.userId);
   const setIsOpen = useChatStore((state) => state.setIsOpen);
 
   const deleteApplyMutation = useMatchingApplyDeleteMutation();

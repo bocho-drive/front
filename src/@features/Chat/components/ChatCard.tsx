@@ -1,17 +1,17 @@
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import * as S from '@/styles/index.style';
-import styled from 'styled-components';
-import { Chat } from '../type';
-import { useAuth } from '@/@features/Auth/useAuth';
-import { Fragment } from 'react/jsx-runtime';
 import { getAmPmTime } from '@/util/util';
 import React from 'react';
+import { Fragment } from 'react/jsx-runtime';
+import styled from 'styled-components';
+import { Chat } from '../type';
 
 interface Props {
   chat: Chat;
 }
 
 const ChatCard = ({ chat }: Props) => {
-  const userId = useAuth((state) => state.loginInfo?.userId);
+  const userId = useAuthStore((state) => state.userInfo?.userId);
   const isMyChat = userId === chat.usersId;
   return (
     <Fragment>
