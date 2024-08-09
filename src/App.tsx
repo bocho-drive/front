@@ -36,6 +36,7 @@ import Provider from './config/Provider';
 import ChallengeVerifiesEditPage from './pages/ChallengeVerifiesEditPage';
 import MatchingNewPage from './pages/MatchingNewPage';
 import MatchingEditPage from './pages/MatchingEditPage';
+import OauthRedirectPage from './pages/OauthRedirectPage';
 
 export const URLS = {
   LANDING: '/',
@@ -77,6 +78,8 @@ function App() {
           <Route path={`${URLS.TIP}/:id`} element={<TipDetailPage />} />
 
           <Route path={URLS.VIDEO} element={<VideoPage />} />
+
+          <Route path="/oauth/redirect" element={<OauthRedirectPage />} />
 
           {/* 어드민 */}
           <Route path="/admin" element={<AdminPage />} />

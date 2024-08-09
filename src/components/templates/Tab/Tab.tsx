@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import * as S from '@/styles/index.style';
+import { create } from 'zustand';
 
 interface Props {
   tabHeaders: string[];
@@ -7,7 +8,14 @@ interface Props {
 }
 
 const Tab = ({ tabBodys, tabHeaders }: Props) => {
-  const [tabIndex, setTabIndex] = React.useState(0);
+  const { tabIndex, setTabIndex } = useTabStore((state) => ({
+    tabIndex: state.tabIndex,
+    setTabIndex: state.setTabIndex,
+  }));
+
+  useLayoutEffect(() => {
+    if (tabIndex > tabHeaders.length - 1) setTabIndex(0);
+  }, [setTabIndex, tabIndex, tabHeaders]);
 
   return (
     <S.div.Column $gap={20}>
@@ -25,3 +33,14 @@ const Tab = ({ tabBodys, tabHeaders }: Props) => {
 };
 
 export default Tab;
+
+interface Store {
+  tabIndex: number;
+  setTabIndex: (index: number) => void;
+  clearTabIndex: () => void;
+}
+const useTabStore = create<Store>((set) => ({
+  tabIndex: 0,
+  setTabIndex: (index) => set({ tabIndex: index }),
+  clearTabIndex: () => set({ tabIndex: 0 }),
+}));

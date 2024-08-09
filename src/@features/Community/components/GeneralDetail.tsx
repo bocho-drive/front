@@ -1,4 +1,3 @@
-import { useAuth } from '@/@features/Auth/useAuth';
 import VoteForm from '@/@features/Vote/components/VoteForm';
 import Loading from '@/components/atoms/Loading';
 import CommunityDetail from '@/components/organisms/Community/CommunityDetail';
@@ -8,6 +7,7 @@ import { Fragment, Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCommunityDeleteMutation, useCommunityLikeMutation, useCommunitySuspenseQuery } from '../useCommunityQuery';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface Props {
   communityId: number;
@@ -16,7 +16,7 @@ interface Props {
 const GeneralDetail = ({ communityId }: Props) => {
   const navigate = useNavigate();
   const { search, pathname } = useLocation();
-  const isAuth = useAuth((state) => state.isAuth);
+  const isLogin = useAuthStore((state) => state.isLogin());
 
   const getDetailQuery = useCommunitySuspenseQuery(communityId);
   const mutationDelete = useCommunityDeleteMutation(communityId);
@@ -40,7 +40,7 @@ const GeneralDetail = ({ communityId }: Props) => {
       <CommunityDetail
         data={getDetailQuery.data}
         authorActionComp={
-          isAuth && (
+          isLogin && (
             <Fragment>
               <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
               <S.button.Button onClick={handleToEdit}>수정</S.button.Button>
@@ -58,7 +58,7 @@ const GeneralDetail = ({ communityId }: Props) => {
         </ErrorBoundary>
       )}
 
-      {isAuth && (
+      {isLogin && (
         <S.div.Row $gap={10} $justify="center">
           <S.button.Button $colors="secondary" onClick={handleLike}>
             🎉 글 추천

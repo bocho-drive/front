@@ -1,4 +1,4 @@
-import { useAuth } from '@/@features/Auth/useAuth';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import { CommunityDetailRes } from '@/@features/Community/type';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import ToastViewer from '@/components/atoms/ToastViewer';
@@ -12,11 +12,11 @@ interface Props {
 }
 
 const CommunityDetail = ({ data, authorActionComp }: Props) => {
-  const isAuth = useAuth((state) => state.isAuth);
+  const isLogin = useAuthStore((state) => state.isLogin());
   return (
     <S.div.Column $gap={20}>
       <S.div.Row $between>
-        <S.div.Row $gap={10}>{isAuth && data.isAuthor && authorActionComp}</S.div.Row>
+        <S.div.Row $gap={10}>{isLogin && data.isAuthor && authorActionComp}</S.div.Row>
         <KakaoShareButton title={data.title} />
       </S.div.Row>
       <S.h.H1>{data.title}</S.h.H1>

@@ -9,6 +9,7 @@ export type ChallengeVerifiesListRes = {
 
 export interface ChallengeVerifiesRes extends CommunityRes {
   challengeId: number;
+  communityId: number;
 }
 
 // 챌린지 인증 상세 조회
