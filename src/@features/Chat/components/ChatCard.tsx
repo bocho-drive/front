@@ -13,7 +13,6 @@ interface Props {
 const ChatCard = ({ chat }: Props) => {
   const userId = useAuthStore((state) => state.userInfo?.userId);
   const isMyChat = userId === chat.userId;
-
   return (
     <Fragment>
       <SChat $isMyChat={isMyChat}>
