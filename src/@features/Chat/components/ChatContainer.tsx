@@ -7,13 +7,17 @@ import ChatCard from './ChatCard';
 import { Chat } from '../type';
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import usePressEnterFetch from '@/hooks/usePressEnterFetch';
-import { getChatApporvalKey } from '../api';
+import { getChatApporvalKey, getChatMessages } from '../api';
 import { useChattingHook } from '../useChattingHook';
+import { useMatchingStore } from '@/@features/Matching/useMatchingStore';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 const modalRoot = document.getElementById('modal-target') as HTMLElement;
 
 const ChatContainer = () => {
-  const { isOpen, handleChatContainerClose, applyId } = useChatContainerStore();
+  const { isOpen, handleChatContainerClose, apply } = useChatContainerStore();
+  const matching = useMatchingStore((state) => state.matching);
+  const userId = useAuthStore((state) => state.userInfo?.userId);
   const [chatList, setChatList] = useState<Chat[]>([]);
 
   const textRef = useRef<HTMLTextAreaElement>(null);
@@ -39,16 +43,20 @@ const ChatContainer = () => {
 
   // * 채팅권한키 발급 & 소켓 초기화
   useEffect(() => {
-    if (isOpen && applyId) {
-      getChatApporvalKey(applyId).then((key) => {
-        initWebSocket(applyId, key);
+    if (isOpen && apply?.id) {
+      getChatApporvalKey(apply.id).then((key) => {
+        initWebSocket(apply.id, key);
+      });
+
+      getChatMessages(apply.id).then((res) => {
+        setChatList(res.data);
       });
     }
 
     if (!isOpen) {
       closeWebSocket();
     }
-  }, [isOpen, applyId, initWebSocket, closeWebSocket]);
+  }, [isOpen, apply, initWebSocket, closeWebSocket]);
 
   if (!isOpen) return null;
   return ReactDOM.createPortal(
@@ -56,7 +64,7 @@ const ChatContainer = () => {
       <S.div.Column $width={90} $padding={40} $justify="space-between" $gap={20}>
         <S.div.Card style={{ textAlign: 'center' }}>
           <S.div.Row $gap={10} $align="center" $between>
-            <S.h.H4>누구누구님과의 대화</S.h.H4>
+            <S.h.H4>{userId === apply?.userId ? matching?.studentName : apply?.nickname} 님과의 대화</S.h.H4>
             <S.button.Button $colors="warning" onClick={handleChatContainerClose}>
               나가기
             </S.button.Button>

@@ -19,7 +19,7 @@ const ChatCard = ({ chat }: Props) => {
         <S.div.Card $padding={8}>
           <S.p.P>{chat.message}</S.p.P>
         </S.div.Card>
-        <S.small.Small style={{ marginBottom: '4px' }}>{getAmPmTime(chat.createAt)}</S.small.Small>
+        <S.small.Small style={{ marginBottom: '4px' }}>{getAmPmTime(chat.createdAt)}</S.small.Small>
       </SChat>
     </Fragment>
   );

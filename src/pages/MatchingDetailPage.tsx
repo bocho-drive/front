@@ -4,7 +4,7 @@ import { MatchingStatus, MatchingType } from '@/@features/Matching/components/Ma
 import { useMatchingDeleteMutation, useMatchingQuery } from '@/@features/Matching/useMatchingQuery';
 import ApplyButton from '@/@features/MatchingApply/components/ApplyButton';
 import ApplyList from '@/@features/MatchingApply/components/ApplyList';
-import { useApplyStore } from '@/@features/MatchingApply/useApplyStore';
+import { useMatchingStore } from '@/@features/Matching/useMatchingStore';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import Loading from '@/components/atoms/Loading';
 import DriveLayout from '@/components/templates/DriveLayout';
@@ -26,7 +26,7 @@ const MatchingDetailPage = () => {
     userInfo: state.userInfo,
     isLogin: state.isLogin(),
   }));
-  const [isAuthor, setIsAuthor] = useApplyStore((state) => [state.isAuthor, state.setIsAuthor]);
+  const setMatching = useMatchingStore((state) => state.setMatching);
 
   const handleToList = () => {
     navigate('/matching');
@@ -42,10 +42,10 @@ const MatchingDetailPage = () => {
   };
 
   useEffect(() => {
-    if (userInfo && data) {
-      setIsAuthor(data.userId === userInfo.userId);
+    if (data) {
+      setMatching(data);
     }
-  }, [data, userInfo, setIsAuthor]);
+  }, [data, setMatching]);
 
   return (
     <DriveLayout>
@@ -55,7 +55,7 @@ const MatchingDetailPage = () => {
           <S.div.Column $gap={20}>
             <S.div.Row $between>
               <S.div.Row $gap={10}>
-                {isAuthor && (
+                {data.studentId === userInfo?.userId && (
                   <Fragment>
                     <S.button.Button onClick={handleToEditPage}>수정</S.button.Button>
                     <S.button.Button onClick={handleToDelete}>삭제</S.button.Button>

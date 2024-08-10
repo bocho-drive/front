@@ -2,6 +2,7 @@ import * as S from '@/styles/index.style';
 import { useMatchingApplySuspenseQuery } from '../useMatchingApplyQuery';
 import { MatchingApply } from '../type';
 import ApplyCard from './ApplyCard';
+import ChatContainer from '@/@features/Chat/components/ChatContainer';
 
 interface Props {
   matchingId: number;
@@ -16,6 +17,7 @@ const ApplyList = ({ matchingId }: Props) => {
       {data.map((apply: MatchingApply) => (
         <ApplyCard key={apply.id} apply={apply} />
       ))}
+      <ChatContainer />
     </S.div.Column>
   );
 };
