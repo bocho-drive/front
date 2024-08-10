@@ -1,26 +1,27 @@
 import { create } from 'zustand';
+import { MatchingApply } from '../MatchingApply/type';
 
 interface Store {
   isOpen: boolean;
 
   /** 매칭신청 ID */
-  applyId: number | null;
+  apply: MatchingApply | null;
 }
 
 interface Actions {
-  handleChatContainerOpen: (isOpen: boolean, applyId: number) => void;
+  handleChatContainerOpen: (isOpen: boolean, apply: MatchingApply) => void;
   handleChatContainerClose: () => void;
 }
 
 export const useChatContainerStore = create<Store & Actions>((set) => ({
   isOpen: false,
-  applyId: null,
+  apply: null,
   approvalKey: null,
 
-  handleChatContainerOpen: (isOpen, applyId) => {
-    set({ isOpen, applyId });
+  handleChatContainerOpen: (isOpen, apply) => {
+    set({ isOpen, apply });
   },
   handleChatContainerClose: () => {
-    set({ isOpen: false, applyId: null });
+    set({ isOpen: false, apply: null });
   },
 }));

@@ -3,7 +3,7 @@ export interface Chat {
   userId: number;
   sender: string;
   message: string;
-  createAt: Date;
+  createdAt: Date;
 }
 export interface SendChat {
   approvalKey: string;

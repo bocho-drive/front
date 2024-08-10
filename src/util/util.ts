@@ -60,7 +60,8 @@ export const nextPageParam = (page: Pagination) => {
 };
 
 /** 오후/오전 00:00 */
-export const getAmPmTime = (date: Date): string => {
+export const getAmPmTime = (date: Date | string): string => {
+  if (typeof date === 'string') date = new Date(date);
   if (date instanceof Date === false) return '';
   const hours = date.getHours();
   const minutes = date.getMinutes().toString().padStart(2, '0');
