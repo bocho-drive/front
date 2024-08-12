@@ -14,11 +14,11 @@ interface Props {
  */
 const CommentList = ({ communityId, isNeedNewForm }: Props) => {
   const { data: commentList } = useCommentQuery(communityId);
-  const isLogin = useAuthStore((state) => state.isLogin);
+  const isLogin = useAuthStore((state) => state.isLogin());
 
   return (
     <S.div.Column $gap={20}>
-      {isNeedNewForm && isLogin() && <CommentNew communityId={communityId} />}
+      {isNeedNewForm && isLogin && <CommentNew communityId={communityId} />}
       {commentList.length === 0 && <S.h.H3>댓글이 없어요.</S.h.H3>}
       {commentList?.map((comment) => (
         <Comment key={comment.id} comment={comment} communityId={communityId} />

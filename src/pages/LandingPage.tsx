@@ -23,7 +23,7 @@ const GIFS = [
 const LandingPage = () => {
   const randomGif = GIFS[Math.floor(Math.random() * GIFS.length)];
 
-  const isLogin = useAuthStore((state) => state.isLogin);
+  const isLogin = useAuthStore((state) => state.isLogin());
   const handleOpenAuthModal = useAuthModal((state) => state.handleOpen);
 
   return (
@@ -49,7 +49,7 @@ const LandingPage = () => {
               </S.a.Link>
             </S.div.Row>
 
-            {!isLogin() && (
+            {!isLogin && (
               <S.button.TextButton $outline $align="left" style={{ width: 'fit-content' }} onClick={handleOpenAuthModal}>
                 🛞 로그인하고 시작하기
               </S.button.TextButton>
