@@ -4,10 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import DriveLayout from '@/components/templates/DriveLayout';
 import CommentList from '@/@features/Comment/components/CommentList';
 import CommunityDetail from '@/components/organisms/Community/CommunityDetail';
-import { useVerifiesDeleteMutation, useVerifiesLikeMutation, useVerifiesQuery } from '@/@features/ChallengeVerifies/useVerifiesQuery';
+import { useVerifiesDeleteMutation, useVerifiesQuery } from '@/@features/ChallengeVerifies/useVerifiesQuery';
 import { URLS } from '@/App';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import Loading from '@/components/atoms/Loading';
+import LikeButton from '@/@features/Like/components/LikeButton';
 
 const ChallengeVerifiesDetailPage = () => {
   const { id } = useParams();
@@ -16,7 +17,6 @@ const ChallengeVerifiesDetailPage = () => {
 
   const verifyQuery = useVerifiesQuery(commnuityId);
   const deleteMutation = useVerifiesDeleteMutation();
-  const likeMutation = useVerifiesLikeMutation();
 
   const handleDelete = () => {
     if (verifyQuery.data?.isAuthor && window.confirm('정말 삭제하시겠습니까?')) {
@@ -25,7 +25,6 @@ const ChallengeVerifiesDetailPage = () => {
     }
   };
 
-  const handleLike = () => likeMutation.mutate(commnuityId);
   const handleToList = () => navigate(URLS.CHALLENGE);
   const handleToEdit = () => navigate(`${URLS.CHALLENGE_VERIFIES}/edit/${commnuityId}`);
 
@@ -44,11 +43,7 @@ const ChallengeVerifiesDetailPage = () => {
             }
           />
 
-          <S.div.Row $gap={10} $justify="center">
-            <S.button.Button $colors="secondary" onClick={handleLike}>
-              🎉 글 추천
-            </S.button.Button>
-          </S.div.Row>
+          <LikeButton communityId={commnuityId} onSuccessFn={verifyQuery.refetch} />
 
           <S.div.Row $gap={10} $justify="flex-start">
             <S.button.Button onClick={handleToList}>목록으로</S.button.Button>
