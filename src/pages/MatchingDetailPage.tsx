@@ -14,6 +14,7 @@ import { getDateString } from '@/util/util';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Fragment } from 'react/jsx-runtime';
+import MatchingStatusCard from '@/@features/Matching/components/MatchingStatusCard';
 
 const MatchingDetailPage = () => {
   const { id } = useParams();
@@ -57,8 +58,12 @@ const MatchingDetailPage = () => {
               <S.div.Row $gap={10}>
                 {data.studentId === userInfo?.userId && (
                   <Fragment>
-                    <S.button.Button onClick={handleToEditPage}>수정</S.button.Button>
-                    <S.button.Button onClick={handleToDelete}>삭제</S.button.Button>
+                    <S.button.Button $size="small" onClick={handleToEditPage}>
+                      수정
+                    </S.button.Button>
+                    <S.button.Button $size="small" onClick={handleToDelete}>
+                      삭제
+                    </S.button.Button>
                   </Fragment>
                 )}
               </S.div.Row>
@@ -84,7 +89,7 @@ const MatchingDetailPage = () => {
 
           {userInfo?.userRole === 'TEACHER' && <ApplyButton matchingId={Number(id)} />}
 
-          <S.div.Gap $height={20} />
+          {data.studentId === userInfo?.userId && <MatchingStatusCard matching={data} />}
 
           <S.div.Row $gap={10} $justify="flex-start">
             <S.button.Button onClick={handleToList}>목록으로</S.button.Button>

@@ -22,12 +22,16 @@ export interface MatchingDetail extends Matching {
   studentId: number;
   studentName: string;
   teacherId: number;
+  teacherUserId: number;
 }
 
 export interface MatchingPostReq {
   title: string;
   content: string;
   type: MatchingType;
-  // status: MatchingStatus;
-  // deleteYN: boolean;
+}
+
+export interface MatchingUpdateStatusReq {
+  status: MatchingStatus;
+  applyUserId?: number;
 }
