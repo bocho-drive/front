@@ -9,10 +9,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useAuthStore } from '../useAuthStore';
 import { setAccessToken } from '@/util/tokenUtil';
+import { useQueryClient } from '@tanstack/react-query';
 
 const LoginForm = () => {
   const setUserInfo = useAuthStore((state) => state.setUserInfo);
   const handleClose = useAuthModal((state) => state.handleClose);
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -30,6 +32,7 @@ const LoginForm = () => {
         userId: res.userId,
         userRole: res.userRole,
       });
+      queryClient.resetQueries();
       handleClose();
     });
   };

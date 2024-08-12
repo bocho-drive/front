@@ -40,12 +40,10 @@ const GeneralDetail = ({ communityId }: Props) => {
       <CommunityDetail
         data={getDetailQuery.data}
         authorActionComp={
-          isLogin && (
-            <Fragment>
-              <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
-              <S.button.Button onClick={handleToEdit}>수정</S.button.Button>
-            </Fragment>
-          )
+          <Fragment>
+            <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
+            <S.button.Button onClick={handleToEdit}>수정</S.button.Button>
+          </Fragment>
         }
       />
 
