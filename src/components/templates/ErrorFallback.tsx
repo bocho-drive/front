@@ -9,7 +9,7 @@ interface Props {
 const ErrorFallbackUI = ({ error, resetErrorBoundary }: Props) => {
   return (
     <S.div.Column $gap={20}>
-      <S.h.H1>{error.message}</S.h.H1>
+      <S.h.H1>{error.msg}</S.h.H1>
       <S.a.Link to="/" $outline>
         Go to Home
       </S.a.Link>

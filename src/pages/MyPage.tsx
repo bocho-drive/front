@@ -19,8 +19,14 @@ const MyPage = () => {
           {data && (
             <S.div.Card>
               <S.div.Column $align="center" $gap={20}>
-                <S.h.H3>👋 안녕하세요, {data.nickname}님</S.h.H3>
-                {/* <S.small.Small>{data.email}</S.small.Small> */}
+                <S.h.H3>👋 안녕하세요, {data.nickname} 님</S.h.H3>
+                <S.small.Small>
+                  <S.span.Badge>
+                    {data.userRole === 'USER' && '일반 사용자'}
+                    {data.userRole === 'ADMIN' && '관리자'}
+                    {data.userRole === 'TEACHER' && '선생님'}
+                  </S.span.Badge>
+                </S.small.Small>
               </S.div.Column>
             </S.div.Card>
           )}

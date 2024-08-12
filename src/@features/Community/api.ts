@@ -23,7 +23,7 @@ export const getCommunityList = async (props: CommunityListReq): Promise<Communi
 export const getCommunityDetail = async (id: number): Promise<CommunityDetailRes> => {
   const url = `${BASEURL}/${id}`;
 
-  const res = await apiWithoutToken.get<Response<CommunityDetailRes>>(url);
+  const res = await apiWithToken.get<Response<CommunityDetailRes>>(url);
 
   return res.data.data;
 };
