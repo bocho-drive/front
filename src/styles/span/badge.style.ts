@@ -18,7 +18,13 @@ export const Badge = styled.span<BadgeProps & MaxLineStyleProps>`
   color: white;
 
   ${maxLineStyle}
-  background-color: ${({ theme, $color }) => theme.colors[$color || 'primary']};
+
+  ${({ $color = 'primary', theme }) =>
+    $color &&
+    css`
+      background-color: ${theme.colors[$color]};
+    `}
+
   ${({ $size = 'medium' }) => {
     switch ($size) {
       case 'small':

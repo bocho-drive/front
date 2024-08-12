@@ -1,6 +1,6 @@
 import { apiWithoutToken, apiWithToken, Response } from '@/config/axios';
 import { PaginationReq } from '@/config/type';
-import { Matching, MatchingCardList, MatchingDetail, MatchingPostReq } from './type';
+import { Matching, MatchingCardList, MatchingDetail, MatchingPostReq, MatchingUpdateStatusReq } from './type';
 
 const BASEURL = 'drive_matchings';
 
@@ -31,4 +31,9 @@ export const putMatching = async (data: MatchingPostReq, id: number): Promise<Ma
 /** 매칭 글 삭제 */
 export const deleteMatching = async (id: number): Promise<void> => {
   await apiWithToken.delete(`${BASEURL}/${id}`);
+};
+
+/** 매칭 상태 변경 */
+export const putMatchingStatus = async (id: number, req: MatchingUpdateStatusReq): Promise<void> => {
+  await apiWithToken.put(`${BASEURL}/status/${id}`, req);
 };
