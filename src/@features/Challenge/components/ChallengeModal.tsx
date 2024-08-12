@@ -16,7 +16,7 @@ interface Props {
 }
 
 const ChallengeModal = ({ challengeId, modalId }: Props) => {
-  const isShow = useModal((state) => state.isShow(challengeId, 'challenge'));
+  const isShow = useModal((state) => state.isShow(modalId, 'challenge'));
   const confirmAuth = useAuthStore((state) => state.confirmAuth);
   const navigate = useNavigate();
 
