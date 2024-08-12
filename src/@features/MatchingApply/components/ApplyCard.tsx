@@ -11,7 +11,7 @@ interface Props {
 
 const ApplyCard = ({ apply }: Props) => {
   const userId = useAuthStore((state) => state.userInfo?.userId);
-  const [isAuthor] = useMatchingStore((state) => [state.isAuthor]);
+  const matching = useMatchingStore((state) => state.matching);
   const handleChatContainerOpen = useChatContainerStore((state) => state.handleChatContainerOpen);
 
   const deleteApplyMutation = useMatchingApplyDeleteMutation();
@@ -26,6 +26,7 @@ const ApplyCard = ({ apply }: Props) => {
     handleChatContainerOpen(true, apply);
   };
 
+  const isAuthor = matching?.studentId === userId;
   const isMyApply = apply.userId === userId;
 
   return (
