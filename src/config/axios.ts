@@ -12,7 +12,7 @@ export interface Response<T> {
 
 export interface ErrorResponse<T> {
   statusCode: 400 | 401 | 404 | 500;
-  message: string;
+  msg: string;
   data?: T;
 }
 
@@ -62,7 +62,7 @@ const ResRejected = (error: AxiosError<ErrorResponse<unknown>>) => {
 
   // * 서버 오류
   if (error.response) {
-    errorToast(error.response.data.message);
+    errorToast(error.response.data.msg);
     return Promise.reject(error.response.data);
   }
 
