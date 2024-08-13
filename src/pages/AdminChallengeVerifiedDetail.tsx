@@ -8,7 +8,7 @@ import Sidebar from '@/components/atoms/Sidebar';
 import { CommunityDetailRes } from '@/@features/Community/type';
 import { deleteCommunity, getCommunityDetail } from '@/@features/Community/api';
 import CommentList from '@/@features/Comment/components/CommentList';
-import CommunityDetail from '@/components/organisms/Community/CommunityDetail';
+import AdminCommunityDetail from '@/components/organisms/Community/AdminCommunityDetail';
 
 const AdminChallengeVerifiedDetail = () => {
   const { id } = useParams();
@@ -59,7 +59,7 @@ const AdminChallengeVerifiedDetail = () => {
         <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
           <Suspense fallback={<Loading />}>
             <S.div.Column $padding={40} $gap={40}>
-              {communityData !== undefined ? <CommunityDetail data={communityData} /> : null}
+              {communityData !== undefined ? <AdminCommunityDetail data={communityData} /> : null}
 
               <S.div.Row $gap={10} $justify="flex-start">
                 <S.button.Button onClick={handleToList}>목록으로</S.button.Button>

@@ -38,7 +38,10 @@ const AdminLogin = () => {
       } else {
         setLoginError('로그인에 실패했습니다. 다시 시도해주세요.');
       }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     } catch (error) {
       console.error('로그인 실패:', error);
       setLoginError('로그인에 실패했습니다. 다시 시도해주세요.');
@@ -75,7 +78,9 @@ const AdminLogin = () => {
           <S.h.H5>로그인</S.h.H5>
         </S.button.Button>
         <S.div.Gap $height={10}></S.div.Gap>
-        <S.h.H5 onClick={handleToRegister} style={{ cursor: 'pointer' }}>회원가입</S.h.H5>
+        <S.h.H5 onClick={handleToRegister} style={{ cursor: 'pointer' }}>
+          회원가입
+        </S.h.H5>
       </S.div.FormContainer>
     </S.div.PageContainer>
   );
