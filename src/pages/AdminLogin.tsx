@@ -38,10 +38,6 @@ const AdminLogin = () => {
       } else {
         setLoginError('로그인에 실패했습니다. 다시 시도해주세요.');
       }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     } catch (error) {
       console.error('로그인 실패:', error);
       setLoginError('로그인에 실패했습니다. 다시 시도해주세요.');
