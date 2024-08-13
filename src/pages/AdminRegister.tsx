@@ -30,7 +30,7 @@ const AdminRegister = () => {
       await signUp({
         email: data.email,
         password: data.password,
-        nickname: 'admin123123123',
+        nickname: data.nickname,
         userRole: 'ADMIN',
       });
       console.log('회원가입 성공');
@@ -64,6 +64,7 @@ const AdminRegister = () => {
         {errors.email && <p>{errors.email.message}</p>}
         <S.input.Input type="password" placeholder="비밀번호" $size="medium" {...register('password', { required: '비밀번호를 입력하세요' })} />
         {errors.password && <p>{errors.password.message}</p>}
+        <S.input.Input type="text" placeholder="닉네임" $size="medium" {...register('nickname', { required: '닉네임을 입력하세요' })} />
         {registerError && <p>{registerError}</p>}
         <S.div.CheckboxContainer>
           <input type="checkbox" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import * as S from '@/styles/index.style';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { signIn } from '@/@features/Auth/api';
+import { useAuthStore } from '@/@features/Auth/useAuthStore';
 
 interface LoginFormProps {
   email: string;
@@ -23,18 +24,25 @@ const AdminLogin = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
 
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const { isLogin } = useAuthStore();
+
   const onSubmit = async (data: LoginFormProps) => {
     try {
       const response = await signIn(data);
       console.log(response);
+
+      if (isLogin()) {
+        navigate('/admin');
+      } else {
+        setLoginError('로그인에 실패했습니다. 다시 시도해주세요.');
+      }
     } catch (error) {
       console.error('로그인 실패:', error);
       setLoginError('로그인에 실패했습니다. 다시 시도해주세요.');
     }
   };
-
-  const navigate = useNavigate();
-  const { search } = useLocation();
 
   const handleToRegister = () => navigate('/admin/register' + search);
 
@@ -66,7 +74,9 @@ const AdminLogin = () => {
           <S.h.H5>로그인</S.h.H5>
         </S.button.Button>
         <S.div.Gap $height={10}></S.div.Gap>
-        <S.h.H5 onClick={handleToRegister} style={{ cursor: 'pointer' }}>회원가입</S.h.H5>
+        <S.h.H5 onClick={handleToRegister} style={{ cursor: 'pointer' }}>
+          회원가입
+        </S.h.H5>
       </S.div.FormContainer>
     </S.div.PageContainer>
   );
