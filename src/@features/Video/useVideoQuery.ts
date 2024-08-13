@@ -2,9 +2,12 @@ import { useMutation, useQuery, useQueryClient, useSuspenseInfiniteQuery, useSus
 import { VideoPostReq } from './type';
 import { deleteVideo, getVideo, getVideos, postVideo } from './api';
 
+const key = 'videos';
+
+/** 비디오 목록 조회 */
 export const useVideoListSuspenseInfiniteQuery = () => {
   return useSuspenseInfiniteQuery({
-    queryKey: ['infinite', 'videos'],
+    queryKey: [key, 'infinite'],
     initialPageParam: 0,
     queryFn: ({ pageParam = 0 }) => getVideos({ page: pageParam, size: 10 }),
     getNextPageParam: (lastPage) => {
@@ -15,13 +18,15 @@ export const useVideoListSuspenseInfiniteQuery = () => {
   });
 };
 
+/** 비디오 목록 조회 */
 export const useVideoListSuspenseQuery = () => {
   return useSuspenseQuery({
-    queryKey: ['videos'],
+    queryKey: [key],
     queryFn: () => getVideos({ page: 0, size: 6 }),
   });
 };
 
+/** 비디오 상세 조회 */
 export const useVideoQuery = (id: number) => {
   return useQuery({
     queryKey: ['video', id],
@@ -29,24 +34,26 @@ export const useVideoQuery = (id: number) => {
   });
 };
 
+/** 비디오 등록 */
 export const useVideoPostMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ['postVideo'],
     mutationFn: (data: VideoPostReq) => postVideo(data),
     onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: ['videos'] });
+      queryClient.invalidateQueries({ queryKey: [key] });
     },
   });
 };
 
+/** 비디오 삭제 */
 export const useVideoDeleteMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ['deleteVideo'],
     mutationFn: (id: number) => deleteVideo(id),
     onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: ['videos'] });
+      queryClient.invalidateQueries({ queryKey: [key] });
     },
   });
 };
