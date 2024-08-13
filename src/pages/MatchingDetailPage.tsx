@@ -1,5 +1,4 @@
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
-import ChatContainer from '@/@features/Chat/components/ChatContainer';
 import { MatchingStatus, MatchingType } from '@/@features/Matching/components/MatchingCard';
 import { useMatchingDeleteMutation, useMatchingQuery } from '@/@features/Matching/useMatchingQuery';
 import ApplyButton from '@/@features/MatchingApply/components/ApplyButton';
@@ -106,8 +105,6 @@ const MatchingDetailPage = () => {
           )}
         </S.div.Column>
       )}
-
-      <ChatContainer />
     </DriveLayout>
   );
 };
