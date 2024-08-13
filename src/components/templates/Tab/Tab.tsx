@@ -2,6 +2,9 @@ import React, { useLayoutEffect } from 'react';
 import * as S from '@/styles/index.style';
 import { create } from 'zustand';
 
+// const tabHeaders = ['게시글', '댓글', '챌린지'] as const;
+// const tabBodys = [<CommunityCardList category="GENERAL" />, <Fragment />, <Fragment />];
+
 interface Props {
   tabHeaders: string[];
   tabBodys: React.ReactNode[];

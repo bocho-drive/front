@@ -1,7 +1,7 @@
-import { useModal } from '@/components/templates/Modal/useModal';
 import * as S from '@/styles/index.style';
-import { Challenge } from '../type';
 import ChallengeModal from './ChallengeModal';
+import { useModal } from '../../../components/templates/Modal/useModal';
+import { Challenge } from '../type';
 
 interface Props {
   challenge: Challenge;

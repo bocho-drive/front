@@ -10,7 +10,7 @@ export const VideoCardInfiniteList = () => {
 
   return (
     <S.div.Grid $repeat={3}>
-      <NotExistsLayout isExists={data.pages.length > 0}>
+      <NotExistsLayout isExists={data.pages[0].content.length > 0}>
         {data.pages.map((page) =>
           page.content.map((video) => {
             return <VideoCard key={video.id} video={video} />;

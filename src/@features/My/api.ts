@@ -7,7 +7,7 @@ import { ChallengeVerifiesListRes } from '../ChallengeVerifies/type';
 const BASEURL = 'my';
 
 /** 내 정보 조회 */
-export const getMyInfo = async (): Promise<MyProfileRes> => {
+export const getMyProfile = async (): Promise<MyProfileRes> => {
   const res = await apiWithToken.get<Response<MyProfileRes>>(`${BASEURL}/profile`);
   return res.data.data;
 };

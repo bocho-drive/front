@@ -1,28 +1,33 @@
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
+import ChatContainer from '@/@features/Chat/components/ChatContainer';
 import { MatchingStatus, MatchingType } from '@/@features/Matching/components/MatchingCard';
 import { useMatchingDeleteMutation, useMatchingQuery } from '@/@features/Matching/useMatchingQuery';
 import ApplyButton from '@/@features/MatchingApply/components/ApplyButton';
 import ApplyList from '@/@features/MatchingApply/components/ApplyList';
+import { useMatchingStore } from '@/@features/Matching/useMatchingStore';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import Loading from '@/components/atoms/Loading';
 import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import * as S from '@/styles/index.style';
 import { getDateString } from '@/util/util';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Fragment } from 'react/jsx-runtime';
+import MatchingStatusCard from '@/@features/Matching/components/MatchingStatusCard';
 
 const MatchingDetailPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const { data, isLoading } = useMatchingQuery(Number(id));
+  const deleteMutation = useMatchingDeleteMutation();
+
   const { userInfo, isLogin } = useAuthStore((state) => ({
     userInfo: state.userInfo,
     isLogin: state.isLogin(),
   }));
-  const isAuthor = userInfo && data?.userId === userInfo.userId;
-
-  const navigate = useNavigate();
-  const deleteMutation = useMatchingDeleteMutation();
+  const setMatching = useMatchingStore((state) => state.setMatching);
 
   const handleToList = () => {
     navigate('/matching');
@@ -37,6 +42,12 @@ const MatchingDetailPage = () => {
       });
   };
 
+  useEffect(() => {
+    if (data) {
+      setMatching(data);
+    }
+  }, [data, setMatching]);
+
   return (
     <DriveLayout>
       {isLoading && <Loading />}
@@ -45,10 +56,14 @@ const MatchingDetailPage = () => {
           <S.div.Column $gap={20}>
             <S.div.Row $between>
               <S.div.Row $gap={10}>
-                {isAuthor && (
+                {data.studentId === userInfo?.userId && (
                   <Fragment>
-                    <S.button.Button onClick={handleToEditPage}>수정</S.button.Button>
-                    <S.button.Button onClick={handleToDelete}>삭제</S.button.Button>
+                    <S.button.Button $size="small" onClick={handleToEditPage}>
+                      수정
+                    </S.button.Button>
+                    <S.button.Button $size="small" onClick={handleToDelete}>
+                      삭제
+                    </S.button.Button>
                   </Fragment>
                 )}
               </S.div.Row>
@@ -74,7 +89,7 @@ const MatchingDetailPage = () => {
 
           {userInfo?.userRole === 'TEACHER' && <ApplyButton matchingId={Number(id)} />}
 
-          <S.div.Gap $height={20} />
+          {data.studentId === userInfo?.userId && <MatchingStatusCard matching={data} />}
 
           <S.div.Row $gap={10} $justify="flex-start">
             <S.button.Button onClick={handleToList}>목록으로</S.button.Button>
@@ -91,6 +106,8 @@ const MatchingDetailPage = () => {
           )}
         </S.div.Column>
       )}
+
+      <ChatContainer />
     </DriveLayout>
   );
 };

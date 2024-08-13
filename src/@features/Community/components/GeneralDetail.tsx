@@ -6,8 +6,9 @@ import * as S from '@/styles/index.style';
 import { Fragment, Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useCommunityDeleteMutation, useCommunityLikeMutation, useCommunitySuspenseQuery } from '../useCommunityQuery';
+import { useCommunityDeleteMutation, useCommunitySuspenseQuery } from '../useCommunityQuery';
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
+import LikeButton from '@/@features/Like/components/LikeButton';
 
 interface Props {
   communityId: number;
@@ -20,7 +21,6 @@ const GeneralDetail = ({ communityId }: Props) => {
 
   const getDetailQuery = useCommunitySuspenseQuery(communityId);
   const mutationDelete = useCommunityDeleteMutation(communityId);
-  const mutationLike = useCommunityLikeMutation(communityId);
 
   const handleDelete = async () => {
     if (getDetailQuery.data.isAuthor && window.confirm('정말 삭제하시겠습니까?')) {
@@ -31,7 +31,6 @@ const GeneralDetail = ({ communityId }: Props) => {
 
   const basePath = pathname.split('/')[1];
 
-  const handleLike = () => mutationLike.mutateAsync().then(() => getDetailQuery.refetch());
   const handleToList = () => navigate(`/${basePath}${search}`);
   const handleToEdit = () => navigate(`/${basePath}/edit/${communityId}`);
 
@@ -40,12 +39,10 @@ const GeneralDetail = ({ communityId }: Props) => {
       <CommunityDetail
         data={getDetailQuery.data}
         authorActionComp={
-          isLogin && (
-            <Fragment>
-              <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
-              <S.button.Button onClick={handleToEdit}>수정</S.button.Button>
-            </Fragment>
-          )
+          <Fragment>
+            <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
+            <S.button.Button onClick={handleToEdit}>수정</S.button.Button>
+          </Fragment>
         }
       />
 
@@ -58,13 +55,7 @@ const GeneralDetail = ({ communityId }: Props) => {
         </ErrorBoundary>
       )}
 
-      {isLogin && (
-        <S.div.Row $gap={10} $justify="center">
-          <S.button.Button $colors="secondary" onClick={handleLike}>
-            🎉 글 추천
-          </S.button.Button>
-        </S.div.Row>
-      )}
+      {isLogin && <LikeButton communityId={communityId} onSuccessFn={() => getDetailQuery.refetch()} />}
 
       <S.div.Row $gap={10} $justify="flex-start">
         <S.button.Button onClick={handleToList}>목록으로</S.button.Button>

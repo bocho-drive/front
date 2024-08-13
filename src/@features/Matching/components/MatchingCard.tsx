@@ -7,7 +7,8 @@ interface Props {
   matching: Matching;
 }
 
-const MatchingCard = ({ matching }: Props) => {
+const MatchingCard = (props: Props) => {
+  const { matching } = props;
   return (
     <S.div.Card>
       <Link to={`/matching/${matching.id}`}>
@@ -28,13 +29,10 @@ const MatchingCard = ({ matching }: Props) => {
 export default MatchingCard;
 
 export const MatchingStatus = ({ status }: { status: Matching['status'] }): ReactNode => {
-  let text = '';
-  if (status === 'WAITING') text = '대기중';
-  if (status === 'PROGRESS') text = '진행중';
-  if (status === 'CLEAR') text = '완료';
-  if (status === 'CANCEL') text = '취소';
-
-  return <S.span.Badge>{text}</S.span.Badge>;
+  if (status === 'WAITING') return <S.span.Badge $color="primary">대기중</S.span.Badge>;
+  if (status === 'PROGRESS') return <S.span.Badge $color="primary">진행중</S.span.Badge>;
+  if (status === 'CLEAR') return <S.span.Badge $color="secondary">완료</S.span.Badge>;
+  if (status === 'CANCEL') return <S.span.Badge $color="warning">취소</S.span.Badge>;
 };
 
 export const MatchingType = ({ type }: { type: Matching['type'] }): ReactNode => {
@@ -42,5 +40,5 @@ export const MatchingType = ({ type }: { type: Matching['type'] }): ReactNode =>
   if (type === 'TEACHER') text = '도와드려요';
   if (type === 'STUDENT') text = '도와주세요';
 
-  return <S.span.Badge>{text}</S.span.Badge>;
+  return <S.span.Badge $color="primary">{text}</S.span.Badge>;
 };

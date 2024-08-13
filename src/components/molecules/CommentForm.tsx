@@ -2,6 +2,8 @@ import { commentSchema, CommentSchema } from '@/@features/Comment/yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as S from '@/styles/index.style';
+import usePressEnterFetch from '@/hooks/usePressEnterFetch';
+import { FormEvent } from 'react';
 
 export interface CommentReturnType {
   content: string;
@@ -25,25 +27,25 @@ const CommentForm = ({ handlePost, defaultValues }: Props) => {
     resolver: yupResolver(commentSchema),
   });
 
+  const handleForm = (e: FormEvent) => {
+    e.preventDefault();
+    handleSubmit(handlePost)(e);
+    reset();
+  };
+  const { handlePressEnterFetch } = usePressEnterFetch({ handleSubmit: handleForm });
+
   return (
-    <form
-      onSubmit={(e) => {
-        handleSubmit(handlePost)(e);
-        reset();
-      }}
-    >
-      <S.div.Column $gap={10}>
+    <form onSubmit={handleForm}>
+      <S.div.Row $gap={10}>
         <S.div.Column>
-          <S.textarea.Textarea placeholder="댓글을 입력해주세요" {...register('content')} />
+          <S.textarea.Textarea placeholder="댓글을 입력해주세요" {...register('content')} onKeyDown={handlePressEnterFetch} />
           <S.span.ErrorSpan>{errors.content?.message}</S.span.ErrorSpan>
         </S.div.Column>
 
-        <S.div.Row $justify="flex-end">
-          <S.button.Button type="submit" $size="small" $colors="primary">
-            저장
-          </S.button.Button>
-        </S.div.Row>
-      </S.div.Column>
+        <S.button.Button type="submit" $size="small" $colors="primary">
+          저장
+        </S.button.Button>
+      </S.div.Row>
     </form>
   );
 };

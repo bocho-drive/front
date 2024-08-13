@@ -27,7 +27,7 @@ export const CommunityCardInfiniteList = ({ category }: Props) => {
   useScroll({ length: data.pages.length, fetchNextPage, hasNextPage });
 
   return (
-    <NotExistsLayout isExists={data.pages.length > 0}>
+    <NotExistsLayout isExists={data.pages[0].content.length > 0}>
       {data.pages.map((page) =>
         page.content.map((community) => {
           return (
