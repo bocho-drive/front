@@ -7,10 +7,7 @@ import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import Sidebar from '@/components/atoms/Sidebar';
 import { Challenge, ChallengePostReq } from '@/@features/Challenge/type';
 import { getChallenge, putChallenge, deleteChallenge } from '@/@features/Challenge/api';
-<<<<<<< Updated upstream
-=======
 import ChallengeDetail from '@/@features/Challenge/components/ChallengeDetail';
->>>>>>> Stashed changes
 
 const AdminChallengeDetail = () => {
   const { id } = useParams();
