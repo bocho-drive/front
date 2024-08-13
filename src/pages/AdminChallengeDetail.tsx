@@ -7,7 +7,7 @@ import ErrorFallbackUI from '@/components/templates/ErrorFallback';
 import Sidebar from '@/components/atoms/Sidebar';
 import { Challenge, ChallengePostReq } from '@/@features/Challenge/type';
 import { getChallenge, putChallenge, deleteChallenge } from '@/@features/Challenge/api';
-import ChallengeDetail from '@/@features/Challenge/components/ChallengeDetail';
+import ChallengeDetail from '@/@features/Admin/Challenge/ChallengeDetail';
 
 const AdminChallengeDetail = () => {
   const { id } = useParams();
