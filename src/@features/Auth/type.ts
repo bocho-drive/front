@@ -12,7 +12,6 @@ export interface LoginReq {
   password: string;
 }
 
-/**@deprecated */
 export interface LoginRes {
   accessToken: string;
   userId: number;

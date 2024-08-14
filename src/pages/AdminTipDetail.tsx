@@ -48,6 +48,7 @@ const AdminTipDetail = () => {
 
   const handleDelete = () => {
     deleteCommunity(Number(id));
+    handleToList();
   };
 
   if (id === undefined || !Number(id)) return null;
