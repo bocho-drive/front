@@ -3,7 +3,6 @@ import { UserInfo } from './type';
 import { persist } from 'zustand/middleware';
 import { needLoginToast } from '@/components/atoms/Toast/useToast';
 import { clearToken } from '@/util/tokenUtil';
-import { signOut } from './api';
 
 interface States {
   userInfo: UserInfo | null;
@@ -29,8 +28,7 @@ export const useAuthStore = create(
         if (!isLogin()) needLoginToast();
         return isLogin();
       },
-      handleLogout: async () => {
-        await signOut();
+      handleLogout: () => {
         set({ userInfo: null });
         clearToken();
       },
