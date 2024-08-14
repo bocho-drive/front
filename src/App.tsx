@@ -90,7 +90,7 @@ function App() {
           <Route element={<PrivateRoute isNeedAuth={true} />}>
             {/* 어드민 */}
             <Route element={<AdminRoute />}>
-              <Route path="/admin" element={<AdminPage />} />
+              <Route path="/admin" element={<AdminGeneral />} />
               <Route path="/admin/:id" element={<AdminDetailPage />} />
               <Route path="/admin/community" element={<AdminGeneral />} />
               <Route path="/admin/community/:id" element={<AdminGeneralDetail />} />
