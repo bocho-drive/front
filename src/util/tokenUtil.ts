@@ -1,8 +1,3 @@
-import { Cookies } from 'react-cookie';
-
-const cookies = new Cookies();
-
-
 export const getAccessToken = (): string | null => {
   return localStorage.getItem('accessToken');
 };
@@ -13,5 +8,4 @@ export const setAccessToken = (accessToken: string): void => {
 
 export const clearToken = (): void => {
   localStorage.removeItem('accessToken');
-  cookies.remove('refreshToken');
 };

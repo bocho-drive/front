@@ -1,5 +1,6 @@
 import { LoginRes } from '@/@features/Auth/type';
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
+import { useRefreshStore } from '@/@features/Auth/useRefreshStore';
 import { errorToast, successToast } from '@/components/atoms/Toast/useToast';
 import { getAccessToken, setAccessToken } from '@/util/tokenUtil';
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
@@ -39,6 +40,7 @@ const ResFulfilled = (response: AxiosResponse<Response<unknown>>) => {
 const ResRejected = (error: AxiosError<ErrorResponse<unknown>>) => {
   const { config } = error;
   const { handleLogout } = useAuthStore.getState();
+  const { refreshIssueCount, increaseRefreshIssueCount, resetRefreshIssueCount } = useRefreshStore.getState();
 
   // * 인가 오류
   if (error.response?.status === 401) {
@@ -52,9 +54,17 @@ const ResRejected = (error: AxiosError<ErrorResponse<unknown>>) => {
 
       return apiWithToken.request(config!);
     } catch (error) {
-      errorToast('회원정보가 만료되었어요.');
-      errorToast('다시 로그인 해주세요.');
-      handleLogout();
+      // 토큰 갱신 실패시, 최대 3번까지 재시도
+      if (refreshIssueCount < 3) {
+        increaseRefreshIssueCount();
+        errorToast('토큰 갱신에 실패했어요.');
+        return apiWithToken.request(config!);
+      } else {
+        errorToast('회원정보가 만료되었어요.');
+        errorToast('다시 로그인 해주세요.');
+        resetRefreshIssueCount();
+        handleLogout();
+      }
     }
 
     return Promise.reject(error.response.data);

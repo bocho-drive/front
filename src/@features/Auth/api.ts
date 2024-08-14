@@ -1,4 +1,4 @@
-import { apiWithoutToken, Response } from '@/config/axios';
+import { apiWithoutToken, apiWithToken, Response } from '@/config/axios';
 import { LoginReq, LoginRes, RegisterReq } from './type';
 
 /** 회원가입 */
@@ -14,4 +14,9 @@ export const signIn = async (data: LoginReq): Promise<LoginRes> => {
   const res = await apiWithoutToken.post<Response<LoginRes>>('signin', data);
 
   return res.data.data;
+};
+
+/** 로그아웃 */
+export const signOut = async (): Promise<void> => {
+  await apiWithToken.delete<Response<void>>('logout');
 };
