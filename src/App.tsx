@@ -9,7 +9,6 @@ import TipDetailPage from './pages/TipDetailPage';
 import VideoPage from './pages/VideoPage';
 import MyPage from './pages/MyPage';
 import MatchingPage from './pages/MatchingPage';
-import AdminPage from './pages/AdminPage';
 import AdminLogin from './pages/AdminLogin';
 import AdminRegister from './pages/AdminRegister';
 import AdminGeneral from './pages/AdminGeneral';
