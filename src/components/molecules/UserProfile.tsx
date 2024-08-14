@@ -4,6 +4,7 @@ import { Fragment } from 'react/jsx-runtime';
 import RelativeModal from '../templates/RelativeModal/RelativeModal';
 import { useRelativeModal } from '../templates/RelativeModal/useRelativeModal';
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
+import { signOut } from '@/@features/Auth/api';
 
 const UserProfile = () => {
   const handleLogout = useAuthStore((state) => state.handleLogout);
@@ -30,6 +31,11 @@ const UserProfile = () => {
     }
   }, [setRelativePosition]);
 
+  const _handleLogout = async () => {
+    await signOut();
+    handleLogout();
+  };
+
   return (
     <Fragment>
       <S.button.Button ref={buttonRef} onClick={handleOpen} $colors="primary">
@@ -41,7 +47,7 @@ const UserProfile = () => {
           <S.div.Card $padding={10} style={{ backgroundColor: 'white' }} ref={modalRef}>
             <S.div.Column style={{ width: '200px' }}>
               <S.a.Link to="/my">마이페이지</S.a.Link>
-              <S.button.TextButton onClick={handleLogout}>로그아웃</S.button.TextButton>
+              <S.button.TextButton onClick={_handleLogout}>로그아웃</S.button.TextButton>
             </S.div.Column>
           </S.div.Card>
         </RelativeModal>
