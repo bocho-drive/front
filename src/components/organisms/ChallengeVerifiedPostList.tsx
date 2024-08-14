@@ -51,8 +51,10 @@ const ChallengeVerifiedPostList = () => {
               {post.title}
             </label>
           </div>
-          <div>조회: {post.viewCount}</div>
-          <div>댓글: {post.comments}</div>
+          <S.div.Row $gap={10}>
+            <div>조회: {post.viewCount}</div>
+            <div>댓글: {post.comments}</div>
+          </S.div.Row>
         </S.div.PostItem>
       ))}
       <S.div.Pagination>

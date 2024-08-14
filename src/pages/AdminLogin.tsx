@@ -4,6 +4,8 @@ import * as S from '@/styles/index.style';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { signIn } from '@/@features/Auth/api';
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
+import { setAccessToken } from '@/util/tokenUtil';
+import { LoginRes } from '@/@features/Auth/type';
 
 interface LoginFormProps {
   email: string;
@@ -26,19 +28,16 @@ const AdminLogin = () => {
 
   const navigate = useNavigate();
   const { search } = useLocation();
-  const [isLogin, setUserInfo] = useAuthStore((state) => [state.isLogin(), state.setUserInfo]);
+  const [setUserInfo] = useAuthStore((state) => [state.setUserInfo]);
 
   const onSubmit = async (data: LoginFormProps) => {
     try {
-      const response = await signIn(data);
+      const response: LoginRes = await signIn(data);
+      setAccessToken(response.accessToken);
       setUserInfo(response);
       console.log(response);
 
-      if (isLogin) {
-        navigate('/admin');
-      } else {
-        setLoginError('로그인에 실패했습니다. 다시 시도해주세요.');
-      }
+      navigate('/admin');
     } catch (error) {
       console.error('로그인 실패:', error);
       setLoginError('로그인에 실패했습니다. 다시 시도해주세요.');
