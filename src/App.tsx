@@ -23,7 +23,7 @@ import AdminChallengeVerified from './pages/AdminChallengeVerified';
 import AdminChallengeVerifiedDetail from './pages/AdminChallengeVerifiedDetail';
 import CommunityNewPage from './pages/CommunityNewPage';
 import MatchingDetailPage from './pages/MatchingDetailPage';
-import PrivateRoute from './config/PrivateRoute';
+import PrivateRoute from './routes/PrivateRoute';
 import NotFoundPage from './pages/NotFoundPage';
 import GlobalComponents from './config/GlobalComponents';
 import CommunityEditPage from './pages/CommunityEditPage';
@@ -37,6 +37,7 @@ import ChallengeVerifiesEditPage from './pages/ChallengeVerifiesEditPage';
 import MatchingNewPage from './pages/MatchingNewPage';
 import MatchingEditPage from './pages/MatchingEditPage';
 import OauthRedirectPage from './pages/OauthRedirectPage';
+import AdminRoute from './routes/AdminRoute';
 
 export const URLS = {
   LANDING: '/',
@@ -82,23 +83,26 @@ function App() {
           <Route path="/oauth/redirect" element={<OauthRedirectPage />} />
 
           {/* 어드민 */}
-          <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/register" element={<AdminRegister />} />
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/admin/:id" element={<AdminDetailPage />} />
-          <Route path="/admin/community" element={<AdminGeneral />} />
-          <Route path="/admin/community/:id" element={<AdminGeneralDetail />} />
-          <Route path="/admin/challenge" element={<AdminChallenge />} />
-          <Route path="/admin/challenge/new" element={<AdminChallengeNew />} />
-          <Route path="/admin/challenge/:id" element={<AdminChallengeDetail />} />
-          <Route path="/admin/challenge/verified" element={<AdminChallengeVerified />} />
-          <Route path="/admin/challenge/verified/:id" element={<AdminChallengeVerifiedDetail />} />
-          <Route path="/admin/tip" element={<AdminTip />} />
-          <Route path="/admin/tip/:id" element={<AdminTipDetail />} />
 
           {/* 인증 필요 페이지 */}
           <Route element={<PrivateRoute isNeedAuth={true} />}>
+            {/* 어드민 */}
+            <Route element={<AdminRoute />}>
+              <Route path="/admin" element={<AdminPage />} />
+              <Route path="/admin/:id" element={<AdminDetailPage />} />
+              <Route path="/admin/community" element={<AdminGeneral />} />
+              <Route path="/admin/community/:id" element={<AdminGeneralDetail />} />
+              <Route path="/admin/challenge" element={<AdminChallenge />} />
+              <Route path="/admin/challenge/new" element={<AdminChallengeNew />} />
+              <Route path="/admin/challenge/:id" element={<AdminChallengeDetail />} />
+              <Route path="/admin/challenge/verified" element={<AdminChallengeVerified />} />
+              <Route path="/admin/challenge/verified/:id" element={<AdminChallengeVerifiedDetail />} />
+              <Route path="/admin/tip" element={<AdminTip />} />
+              <Route path="/admin/tip/:id" element={<AdminTipDetail />} />
+            </Route>
+
             <Route path={`${URLS.COMMUNITY}/new`} element={<CommunityNewPage />} />
             <Route path={`${URLS.COMMUNITY}/edit/:id`} element={<CommunityEditPage />} />
 

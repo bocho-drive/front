@@ -26,14 +26,15 @@ const AdminLogin = () => {
 
   const navigate = useNavigate();
   const { search } = useLocation();
-  const { isLogin } = useAuthStore();
+  const [isLogin, setUserInfo] = useAuthStore((state) => [state.isLogin(), state.setUserInfo]);
 
   const onSubmit = async (data: LoginFormProps) => {
     try {
       const response = await signIn(data);
+      setUserInfo(response);
       console.log(response);
 
-      if (isLogin()) {
+      if (isLogin) {
         navigate('/admin');
       } else {
         setLoginError('로그인에 실패했습니다. 다시 시도해주세요.');
