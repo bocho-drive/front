@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { UserInfo } from './type';
 import { persist } from 'zustand/middleware';
 import { needLoginToast } from '@/components/atoms/Toast/useToast';
-import { clearToken } from '@/util/tokenUtil';
+import { clearToken } from '@/utils/tokenUtil';
 
 interface States {
   userInfo: UserInfo | null;

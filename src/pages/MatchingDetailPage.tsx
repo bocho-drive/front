@@ -9,7 +9,7 @@ import Loading from '@/components/atoms/Loading';
 import DriveLayout from '@/components/templates/DriveLayout';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import * as S from '@/styles/index.style';
-import { getDateString } from '@/util/util';
+import { getDateString } from '@/utils/stringUtil';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Fragment } from 'react/jsx-runtime';

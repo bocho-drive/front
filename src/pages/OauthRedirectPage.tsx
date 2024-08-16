@@ -2,7 +2,7 @@ import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import { getMyProfile } from '@/@features/My/api';
 import { MyProfileRes } from '@/@features/My/type';
 import Loading from '@/components/atoms/Loading';
-import { setAccessToken } from '@/util/tokenUtil';
+import { setAccessToken } from '@/utils/tokenUtil';
 import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 

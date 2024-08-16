@@ -3,7 +3,7 @@ import { CommunityDetailRes } from '@/@features/Community/type';
 import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import ToastViewer from '@/components/atoms/ToastViewer';
 import * as S from '@/styles/index.style';
-import { getDateString } from '@/util/util';
+import { getDateString } from '@/utils/stringUtil';
 import { ReactNode } from 'react';
 
 interface Props {

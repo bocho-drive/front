@@ -4,7 +4,7 @@ import NotExistsLayout from '@/components/templates/NotExistsLayout';
 import useScroll from '@/hooks/useScroll';
 import { Link } from 'react-router-dom';
 import { useMyCommunityListInfiniteQuery } from '../useMyQuery';
-import { getCommunityLink } from '@/util/util';
+import { getCommunityLink } from '@/utils/stringUtil';
 
 const MyCommunityCardList = () => {
   const { data, fetchNextPage, hasNextPage } = useMyCommunityListInfiniteQuery();

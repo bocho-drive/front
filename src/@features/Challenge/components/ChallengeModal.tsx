@@ -1,6 +1,5 @@
 import * as S from '@/styles/index.style';
 
-import { getModalShareUrl } from '@/util/util';
 import { URLS } from '@/App';
 import { useNavigate } from 'react-router-dom';
 import Modal from '@/components/templates/Modal/Modal';
@@ -9,6 +8,7 @@ import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import { useChallengeQuery } from '../useChallengeQuery';
 import { useModal } from '@/components/templates/Modal/useModal';
 import Loading from '@/components/atoms/Loading';
+import { getModalShareUrl } from '@/utils/kakaoUtil';
 
 interface Props {
   challengeId: number;

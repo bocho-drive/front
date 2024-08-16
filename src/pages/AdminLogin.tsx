@@ -4,7 +4,7 @@ import * as S from '@/styles/index.style';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { signIn } from '@/@features/Auth/api';
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
-import { setAccessToken } from '@/util/tokenUtil';
+import { setAccessToken } from '@/utils/tokenUtil';
 import { LoginRes } from '@/@features/Auth/type';
 
 interface LoginFormProps {

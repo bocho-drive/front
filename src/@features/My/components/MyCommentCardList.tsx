@@ -2,7 +2,8 @@ import { CommentRes } from '@/@features/Comment/type';
 import NotExistsLayout from '@/components/templates/NotExistsLayout';
 import useScroll from '@/hooks/useScroll';
 import * as S from '@/styles/index.style';
-import { getCommunityLink, getDateString } from '@/util/util';
+import { getCommunityLink } from '@/utils/stringUtil';
+import { getDateString } from '@/utils/stringUtil';
 import { useMyCommentListInfiniteQuery } from '../useMyQuery';
 
 const MyCommentCardList = () => {

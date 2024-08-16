@@ -2,7 +2,6 @@ import MyChallengeVerifyCardList from '@/@features/My/components/MyChallengeCard
 import MyCommentCardList from '@/@features/My/components/MyCommentCardList';
 import MyCommunityCardList from '@/@features/My/components/MyCommunityCardList';
 import { useMyProfileQuery } from '@/@features/My/useMyQuery';
-import ProfileModal from '@/components/organisms/ProfileModal';
 import ErrorSuspenseLayout from '@/components/templates/ErrorSuspenseLayout';
 import HeaderFooterLayout from '@/components/templates/HeaderFooterLayout';
 import LoadingLayout from '@/components/templates/LoadingLayout';
@@ -47,8 +46,6 @@ const MyPage = () => {
           ]}
         />
       </S.div.Column>
-
-      <ProfileModal />
     </HeaderFooterLayout>
   );
 };
