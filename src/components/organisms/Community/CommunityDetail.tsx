@@ -35,11 +35,11 @@ const CommunityDetail = ({ data, authorActionComp }: Props) => {
 
       <ToastViewer initialValue={data.content} />
 
-      <S.div.Grid $repeat={5}>
+      <S.div.Row $wrap $gap={10}>
         {data.imgUrls.map((url, idx) => (
           <S.img.Img key={idx} src={url} style={{ maxHeight: 400 }} />
         ))}
-      </S.div.Grid>
+      </S.div.Row>
     </S.div.Column>
   );
 };
