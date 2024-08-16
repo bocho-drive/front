@@ -36,15 +36,17 @@ const GeneralDetail = ({ communityId }: Props) => {
 
   return (
     <S.div.Column $gap={20}>
-      <CommunityDetail
-        data={getDetailQuery.data}
-        authorActionComp={
-          <Fragment>
-            <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
-            <S.button.Button onClick={handleToEdit}>수정</S.button.Button>
-          </Fragment>
-        }
-      />
+      {!getDetailQuery.isFetching && (
+        <CommunityDetail
+          data={getDetailQuery.data}
+          authorActionComp={
+            <Fragment>
+              <S.button.Button onClick={handleDelete}>삭제</S.button.Button>
+              <S.button.Button onClick={handleToEdit}>수정</S.button.Button>
+            </Fragment>
+          }
+        />
+      )}
 
       {getDetailQuery.data.category === 'VOTE' && (
         <ErrorBoundary FallbackComponent={ErrorFallbackUI}>
