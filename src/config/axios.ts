@@ -2,7 +2,7 @@ import { LoginRes } from '@/@features/Auth/type';
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import { useRefreshStore } from '@/@features/Auth/useRefreshStore';
 import { errorToast, successToast } from '@/components/atoms/Toast/useToast';
-import { getAccessToken, setAccessToken } from '@/util/tokenUtil';
+import { getAccessToken, setAccessToken } from '@/utils/tokenUtil';
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
 export interface Response<T> {

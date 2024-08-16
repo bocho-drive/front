@@ -3,7 +3,7 @@ import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import { Challenge } from '@/@features/Challenge/type';
 import ToastViewer from '@/components/atoms/ToastViewer';
 import * as S from '@/styles/index.style';
-import { getDateString } from '@/util/util';
+import { getDateString } from '@/utils/stringUtil';
 
 import { ReactNode } from 'react';
 
@@ -23,12 +23,10 @@ const ChallengeDetail = ({ data, authorActionComp }: Props) => {
 
       <S.div.Row $between>
         <S.small.Small>{getDateString(data.createdAt)}</S.small.Small>
-
       </S.div.Row>
       <S.hr.Hr />
 
       <ToastViewer initialValue={data.content} />
-
     </S.div.Column>
   );
 };

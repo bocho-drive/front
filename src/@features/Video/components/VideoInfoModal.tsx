@@ -2,10 +2,11 @@ import KakaoShareButton from '@/components/atoms/KakaoShareButton';
 import Loading from '@/components/atoms/Loading';
 import { useModal } from '@/components/templates/Modal/useModal';
 import * as S from '@/styles/index.style';
-import { getModalShareUrl, getYoutubeId } from '@/util/util';
+import { getYoutubeId } from '@/utils/stringUtil';
 import { Video } from '../type';
 import { useVideoDeleteMutation, useVideoQuery } from '../useVideoQuery';
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
+import { getModalShareUrl } from '@/utils/kakaoUtil';
 
 interface Props {
   video: Video;

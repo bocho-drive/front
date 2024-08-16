@@ -5,7 +5,7 @@ import { useModal } from '@/components/templates/Modal/useModal';
 import NotExistsLayout from '@/components/templates/NotExistsLayout';
 import useScroll from '@/hooks/useScroll';
 import * as S from '@/styles/index.style';
-import { getCommunityLink } from '@/util/util';
+import { getCommunityLink } from '@/utils/stringUtil';
 import { Link } from 'react-router-dom';
 import { Fragment } from 'react/jsx-runtime';
 import { useMyChallengeVerifyListInfiniteQuery } from '../useMyQuery';

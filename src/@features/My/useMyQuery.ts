@@ -1,6 +1,6 @@
 import { useQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { getMyChallengeVerifyList, getMyCommentList, getMyCommunityList, getMyProfile } from './api';
-import { nextPageParam } from '@/util/util';
+import { nextPageParam } from '@/utils/pageUtil';
 
 const key = 'my';
 

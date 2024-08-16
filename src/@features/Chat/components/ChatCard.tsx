@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/@features/Auth/useAuthStore';
 import * as S from '@/styles/index.style';
-import { getAmPmTime } from '@/util/util';
+import { getAmPmTime } from '@/utils/stringUtil';
 import React from 'react';
 import { Fragment } from 'react/jsx-runtime';
 import styled from 'styled-components';

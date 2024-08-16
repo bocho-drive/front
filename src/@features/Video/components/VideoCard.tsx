@@ -1,7 +1,7 @@
 import * as S from '@/styles/index.style';
 import { useModal } from '../../../components/templates/Modal/useModal';
 import VideoInfoModal from './VideoInfoModal';
-import { getYoutubeThumbnailUrl } from '@/util/util';
+import { getYoutubeThumbnailUrl } from '@/utils/stringUtil';
 import Modal from '@/components/templates/Modal/Modal';
 import { Video } from '../type';
 

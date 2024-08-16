@@ -8,7 +8,7 @@ import * as S from '@/styles/index.style';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useAuthStore } from '../useAuthStore';
-import { setAccessToken } from '@/util/tokenUtil';
+import { setAccessToken } from '@/utils/tokenUtil';
 import { useQueryClient } from '@tanstack/react-query';
 
 const LoginForm = () => {

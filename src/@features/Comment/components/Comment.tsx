@@ -1,6 +1,6 @@
 import { CommentRes } from '@/@features/Comment/type';
 import * as S from '@/styles/index.style';
-import { getDateString } from '@/util/util';
+import { getDateString } from '@/utils/stringUtil';
 import { Fragment, useEffect, useState } from 'react';
 import { useCommentQuery } from '@/@features/Comment/useCommentQuery';
 import CommentEdit from './CommentEdit';

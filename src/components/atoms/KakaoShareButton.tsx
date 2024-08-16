@@ -1,4 +1,4 @@
-import { shareKakao } from '@/util/shareKakaoLink';
+import { shareKakao } from '@/utils/kakaoUtil';
 import * as S from '@/styles/index.style';
 import KakaoIcon from '@/assets/icons/kakao.svg?react';
 

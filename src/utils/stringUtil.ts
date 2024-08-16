@@ -1,26 +1,11 @@
 import { Category } from '@/@features/Community/type';
 import { URLS } from '@/App';
-import { ModalType } from '@/components/templates/Modal/useModal';
-import { Pagination } from '@/config/type';
-
-/** 카카오톡 공유하기용, modal url 만들기 */
-export const getModalShareUrl = (type: ModalType, id: number) => {
-  let { origin } = window.location;
-
-  origin += '/' + type;
-
-  const url = new URL(origin);
-  url.searchParams.append('modalId', id.toString());
-  url.searchParams.append('modalType', type);
-
-  return url.href;
-};
 
 /**
  * date string => 오늘 오후 2시 30분 or 어제 오후 2시 30분 or 2021-01-01 오후 2시 30분
  * 현재 시간과 비교해서 오늘인지 어제인지 표시하고, 그 외에는 날짜만 표시
  */
-export const getDateString = (dateString: string) => {
+export const getDateString = (dateString: string): string => {
   const date = new Date(dateString);
   const now = new Date();
 
@@ -42,21 +27,16 @@ export const getDateString = (dateString: string) => {
   }
 };
 
-export const getYoutubeThumbnailUrl = (url: string) => {
+/** 유튜브 썸네일 url */
+export const getYoutubeThumbnailUrl = (url: string): string => {
   const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
   return videoIdMatch ? `https://img.youtube.com/vi/${videoIdMatch[1]}/hqdefault.jpg` : 'https://via.placeholder.com/300';
 };
 
-export const getYoutubeId = (url: string) => {
+/** 유튜브 ID 추출 */
+export const getYoutubeId = (url: string): string => {
   const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
   return videoIdMatch ? videoIdMatch[1] : '';
-};
-
-/** 인피니티 스크롤 페이지 next param */
-export const nextPageParam = (page: Pagination) => {
-  const { number, size, totalElements } = page;
-  if (size * (number + 1) >= totalElements) return undefined;
-  return page.number + 1;
 };
 
 /** 오후/오전 00:00 */

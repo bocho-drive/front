@@ -4,7 +4,7 @@ import { getChallengeVerifiesList } from '../api';
 import useScroll from '@/hooks/useScroll';
 import CommunityCard from '@/components/molecules/CommunityCard';
 import { Link } from 'react-router-dom';
-import { nextPageParam } from '@/util/util';
+import { nextPageParam } from '@/utils/pageUtil';
 
 const VerfiesCardList = () => {
   const { data, fetchNextPage, hasNextPage } = useSuspenseInfiniteQuery({
