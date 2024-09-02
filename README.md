@@ -8,7 +8,7 @@
 
 - **Service Link : https://www.bocho.p-e.kr**
 - **GitHub Link : https://github.com/bocho-drive**
-- **Project Notion Link : https://www.notion.so/e4ebb89570f24cdab88acbaf40f86f81?pvs=21**
+- **Project Notion Link : https://dolphin-pc.notion.site/e4ebb89570f24cdab88acbaf40f86f81?v=aad47b31de7b4ad0814f1604b1a6972d&pvs=4**
 - 📆 프로젝트 기간 : 2024.07.19 ~ 2024.08.15
 
 ### 🚜 개발 팀원
