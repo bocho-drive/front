@@ -39,24 +39,18 @@
 
 ## 🏆 기술적인 도전
 
-<details>
-  <summary>1. Spring Security OAuth + SNS 소셜로그인</summary>
+### 1. Spring Security OAuth + SNS 소셜로그인
 
 - 간편한 로그인을 통해 서비스를 이용할 수 있도록 SNS서비스를 도입했습니다.
 - SNS로그인을 통해 AT토큰과 RT토큰을 발급받아, 서비스 로그인을 처리합니다.
   ![image](https://github.com/user-attachments/assets/4470233e-b4ea-43a3-bfcb-7d8ae62027a2)
   ▶️ 자세한 설명은‣ https://dolphin-pc.notion.site/7379f6ae257940bc8e14d408a3386446?pvs=4
 
-</details>
-
-<details>
-  <summary>2. Refresh Token을 이용한 Silent Refresh</summary>
-
-## 📌 도입배경
+### 2. Refresh Token을 이용한 Silent Refresh
 
 - JWT토큰은 **stateless**하기에, 토큰이 탈취되어도 서버는 이를 알지 못합니다. 이를 위해 토큰의 만료시간을 짧게 가져가는 것이 보안적으로 안전하다고 판단이 들었습니다. 하지만, 토큰의 만료시간이 짧다면 정상적인 사용자들은 **로그인을 자주 시도**해야 하는 번거로움이 생깁니다.
 
-### 그래서, Refresh Token을 도입하기로 했습니다.
+#### 그래서, Refresh Token을 도입하기로 했습니다.
 
 - **Refresh Token**은 Access Token을 재발급하기 위한 용도로 사용되며, **1달의 만료시간**을 가집니다.
   - 프론트에서 조작할 필요가 없기에 http요청시 자동으로 전송되는 **Cookie**에 담아 저장합니다.
@@ -99,10 +93,7 @@
 
   ▶️ 자세한 설명은 ‣ https://dolphin-pc.notion.site/7ee13671e7024962b6abde78a903661b?pvs=4
 
-</details>
-
-<details>
-  <summary>3. 카카오톡 공유, URL로 모달열기</summary>
+### 3. 카카오톡 공유, URL로 모달열기
 
 - **Kakao SDK 설치** 및 **Kakao객체를 초기화**한 다음, `sendDefault`메소드를 통해 현재 URL을 공유합니다.
 - 하지만, Modal의 경우 내부 State로 관리가 되고 있기에 URL만으로는, 모달이 열리지 않습니다.
@@ -127,10 +118,7 @@
 
     ![image](https://github.com/user-attachments/assets/7e5312d5-7f2e-453d-831c-51b845d3967a)
 
-</details>
-
-<details>
-  <summary>4. ImagePlaceholder</summary>
+### 4. ImagePlaceholder
 
 - Loading 시간이 긴 이미지를 대체하는 **PlaceHolder**컴포넌트를 만들어, 사용자에게 **로딩중** 이라는 메시지를 전달합니다.
   ![image](https://github.com/user-attachments/assets/4b4e33a4-712f-4a40-9a43-7d25b26e7224)
@@ -166,10 +154,7 @@ const ImagePlaceholder = ({ children }: Props) => {
 };
 ```
 
-</details>
-
-<details>
-  <summary>5. 인피니티 스크롤</summary>
+### 5. 인피니티 스크롤
 
 ![image](https://github.com/user-attachments/assets/f5a70fae-bdd7-4135-baaf-591a922a5e82)
 
@@ -243,18 +228,15 @@ const ImagePlaceholder = ({ children }: Props) => {
       ```
   ````
 
-</details>
-
 ## 💥 트러블 슈팅
 
-<details>
-  <summary>1. 웹소켓, Authorization검증</summary>
+### 1. 웹소켓, Authorization검증
 
-## 📌 배경, Spring Security Context
+#### 📌 배경, Spring Security Context
 
 - 웹소켓 연결 후, 사용자 정보를 불러오기 위해, `SecurityContextHolder.getContext().getAuthentication()` 를 사용했지만, null로 처리가 되고 있었습니다. 관련된 글을 참고해보니, Spring의 멀티 Thread환경으로 인해 **SecurityContextHolder의 context**가 공유되지 않다는 것을 알 수 있었습니다.
 
-## 🎉 해결, WebSocketSession
+#### 🎉 해결, WebSocketSession
 
 - 다른 방식으로 사용자 정보를 불러오고자, WebSocketSession객체 안을 Debug해보니, 유저정보가 담겨있었습니다.
   ![image](https://github.com/user-attachments/assets/181adbcd-0adc-4e8b-8ea0-10286f7110cf)
@@ -273,7 +255,7 @@ const ImagePlaceholder = ({ children }: Props) => {
 - 이렇게 구현한 뒤, Postman으로 테스트를 해보니 잘 적용이 되었습니다.
   ![image](https://github.com/user-attachments/assets/1c37e7d8-d491-4716-9a25-565c9f0bffe8)
 
-## 💥 다시 문제발생, 웹소켓 헤더 사용 불가
+#### 💥 다시 문제발생, 웹소켓 헤더 사용 불가
 
 - 웹소켓 테스트 당시만 해도, **Postman으로 Header에 토큰값**을 담아줄 수 있어 WebSocketSession객체에서 사용자 정보를 가져올 수 있었습니다. 하지만, 웹소켓을 개발/구현하면서 **헤더에 값을 추가할 수 없다는 사실**을 알게 되었습니다.
 - 이를 해결하기 위해서는 2가지의 선택지가 있었습니다.
@@ -295,16 +277,13 @@ const ImagePlaceholder = ({ children }: Props) => {
 
   ```
 
-</details>
+### 2. React앱 Amplify 배포, 새로고침 시 오류
 
-<details>
-  <summary>2. React앱 Amplify 배포, 새로고침 시 오류</summary>
-
-## **📌 상황**
+#### 📌 상황
 
 - React App을 Amplify에 배포한 뒤, 페이지에서 새로고침을 진행하면 URL에 `/`가 따라붙었고, 콘솔에는 404에러가 출력되었습니다.
 
-## 🎉 해결
+#### 🎉 해결
 
 - Amplify의 [Redirection] 메뉴의 설정을 다음과 같이 설정해주었습니다.
   - `</^((?!\.(css\|gif\|ico\|jpg\|js\|png\|svg\|txt)).)*$/>` 추가
@@ -312,8 +291,6 @@ const ImagePlaceholder = ({ children }: Props) => {
 - 오류의 원인은 React앱의 **SPA라우팅**과 Amplify의 **라우팅**의 차이점으로 인해 발생했습니다.
   - React앱은 하나의 index(/)로부터 페이지가 시작되지만, Amplify는 정적페이지를 호스팅하기 위한 것으로 **MPA라우팅**에 적합합니다.
   - 이를 위해, `/` 경로 뒤에 붙는 것들에 200 rewrite가 되도록 설정해주지만, 위에 설정한 정규식 규칙에 따라 해당파일명은 Redirection에 걸리지 않도록 합니다.
-
-</details>
 
 ### ⚙️ Service Architecture
 
