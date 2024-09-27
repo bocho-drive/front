@@ -42,25 +42,14 @@
 ### 1. Spring Security OAuth + SNS 소셜로그인
 
 - 간편한 로그인을 통해 서비스를 이용할 수 있도록 SNS서비스를 도입했습니다.
-- SNS로그인을 통해 AT토큰과 RT토큰을 발급받아, 서비스 로그인을 처리합니다.
+- SNS로그인을 통해 Access Token과 Refresh Token을 발급받아, 서비스 로그인을 처리합니다.
+  <img src="./docs/1.gif" />
   ![image](https://github.com/user-attachments/assets/4470233e-b4ea-43a3-bfcb-7d8ae62027a2)
-  ▶️ 자세한 설명은‣ https://dolphin-pc.notion.site/7379f6ae257940bc8e14d408a3386446?pvs=4
 
 ### 2. Refresh Token을 이용한 Silent Refresh
 
-- JWT토큰은 **stateless**하기에, 토큰이 탈취되어도 서버는 이를 알지 못합니다. 이를 위해 토큰의 만료시간을 짧게 가져가는 것이 보안적으로 안전하다고 판단이 들었습니다. 하지만, 토큰의 만료시간이 짧다면 정상적인 사용자들은 **로그인을 자주 시도**해야 하는 번거로움이 생깁니다.
-
-#### 그래서, Refresh Token을 도입하기로 했습니다.
-
-- **Refresh Token**은 Access Token을 재발급하기 위한 용도로 사용되며, **1달의 만료시간**을 가집니다.
-  - 프론트에서 조작할 필요가 없기에 http요청시 자동으로 전송되는 **Cookie**에 담아 저장합니다.
-  - 또한, **Http-Only**를 적용하여, **XSS**공격에 안전하게 합니다.
-- **Access Token**은 **1시간의 만료시간**을 가지며, **Local Storage**에 저장했습니다.
-  - 백엔드 API에 따라 header에 토큰값이 담기지 않아야 하는 상황이 있기에, 조작이 용이한 Local Storage에 저장했습니다.
-- AT토큰과 RT토큰을 매 API요청마다 함께 전송하며, 서버에서 `401` 에러 발생 시 **토큰갱신** or **토큰만료** 여부를 결정짓습니다.
-
-  - error의 body에 토큰이 있는 경우 → AT토큰을 갱신하고, 원 요청을 다시 전송합니다.
-  - error의 body에 토큰이 없는 경우 → 3번의 재시도 요청 초과 시, 로그아웃 처리를 진행합니다.
+- 만료시간이 짧은 Access Token의 단점을 보완하기 위해, Refresh Token을 도입하여 Access Token의 재발급으로 로그인을 자동으로 연장합니다.
+  <img src="./docs/2.gif" />
 
   ```mermaid
   sequenceDiagram
